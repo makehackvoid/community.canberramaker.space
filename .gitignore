@@ -77,3 +77,9 @@ openapi/*
 
 # Cached License Data Files
 /.licenses
+
+
+/app/assets/javascripts/compiled-js-processor.js
+
+# direnv
+/.direnv/
