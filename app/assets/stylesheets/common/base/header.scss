@@ -101,6 +101,7 @@
     display: flex;
     align-items: center;
     margin-top: 0.2em;
+    white-space: nowrap;
   }
 
   .login-button,
@@ -290,6 +291,7 @@
       "categories extra";
     grid-template-columns: auto minmax(2em, 1fr); // min must be as wide as ellipsis
     align-items: baseline;
+    gap: 0 0.5em;
     .header-title {
       grid-area: title;
     }
@@ -322,22 +324,14 @@
   .categories-wrapper {
     display: inline-flex;
     flex: 0 1 auto;
+    gap: 0 0.5em;
     @include ellipsis;
-    .badge-wrapper {
-      @include ellipsis;
-    }
   }
-  .badge-wrapper {
-    margin-right: 0.7em;
+  .badge-category__wrapper {
     min-width: 2.75em; // min needed for ellipsis
-  }
-  .badge-wrapper {
-    &.bullet,
-    &.bar,
-    &.none {
-      span.badge-category {
-        color: var(--header_primary-high);
-      }
+    @include ellipsis;
+    .badge-category {
+      color: var(--header_primary-high);
     }
   }
   .topic-header-extra {
@@ -422,14 +416,21 @@ $mobile-avatar-height: 1.532em;
   }
 }
 
-.d-header-mode .bootstrap-mode {
-  color: var(--primary-medium);
-  font-size: var(--font-down-1);
-  margin-left: 1em;
-  padding: 0.15em 0.5em;
+.d-header-mode {
+  .bootstrap-mode {
+    color: var(--primary-medium);
+    font-size: var(--font-down-1);
+    margin-left: 1em;
+    padding: 0.15em 0.5em;
 
-  &:focus {
-    background-color: var(--primary-medium);
-    color: var(--secondary);
+    &:focus {
+      background-color: var(--primary-medium);
+      color: var(--secondary);
+    }
+  }
+
+  .fk-d-button-tooltip .fk-d-tooltip__trigger {
+    color: var(--header_primary-high);
+    background: transparent;
   }
 }

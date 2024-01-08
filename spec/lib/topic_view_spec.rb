@@ -3,13 +3,13 @@
 require "topic_view"
 
 RSpec.describe TopicView do
-  fab!(:user) { Fabricate(:user) }
-  fab!(:moderator) { Fabricate(:moderator) }
-  fab!(:admin) { Fabricate(:admin) }
-  fab!(:topic) { Fabricate(:topic) }
-  fab!(:evil_trout) { Fabricate(:evil_trout) }
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
+  fab!(:moderator)
+  fab!(:admin)
+  fab!(:topic)
+  fab!(:evil_trout)
   fab!(:first_poster) { topic.user }
-  fab!(:anonymous) { Fabricate(:anonymous) }
+  fab!(:anonymous)
 
   let(:topic_view) { TopicView.new(topic.id, evil_trout) }
 
@@ -235,7 +235,7 @@ RSpec.describe TopicView do
     end
 
     context "when log_check_personal_message is enabled" do
-      fab!(:group) { Fabricate(:group) }
+      fab!(:group)
       fab!(:private_message) { Fabricate(:private_message_topic, allowed_groups: [group]) }
 
       before do
@@ -285,7 +285,7 @@ RSpec.describe TopicView do
           1,
         )
 
-        freeze_time (2.hours.from_now)
+        freeze_time(2.hours.from_now)
 
         TopicView.new(private_message.id, evil_trout)
         expect(UserHistory.where(action: UserHistory.actions[:check_personal_message]).count).to eq(
@@ -312,7 +312,7 @@ RSpec.describe TopicView do
     end
 
     describe "#get_canonical_path" do
-      fab!(:topic) { Fabricate(:topic) }
+      fab!(:topic)
       let(:path) { "/1234" }
 
       before do
@@ -1004,6 +1004,7 @@ RSpec.describe TopicView do
 
   describe "#reviewable_counts" do
     it "exclude posts queued because the category needs approval" do
+      Group.refresh_automatic_groups!
       category =
         Fabricate.create(
           :category,

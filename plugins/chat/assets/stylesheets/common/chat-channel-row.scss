@@ -79,6 +79,7 @@
       padding: 0;
       font-size: var(--font-up-1);
       justify-content: center;
+      flex-shrink: 0;
     }
 
     &__avatar {
@@ -144,10 +145,6 @@
   .toggle-channel-membership-button.-leave {
     display: none;
     margin-left: auto;
-  }
-  .badge-wrapper {
-    align-items: center;
-    margin-right: 0;
   }
 
   .emoji {

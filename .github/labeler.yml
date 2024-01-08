@@ -1,2 +1,10 @@
 chat:
-  - plugins/chat/**/*
+  - changed_files:
+      - any-glob-to-any-file: plugins/chat/**/*
+
+migrations-tooling:
+  - changed_files:
+      - any-glob-to-any-file:
+        - migrations/**/*
+        - script/bulk_import/**/*
+        - script/import_scripts/**/*

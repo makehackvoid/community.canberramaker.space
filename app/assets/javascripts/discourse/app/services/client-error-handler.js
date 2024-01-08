@@ -1,16 +1,16 @@
+import { getOwner } from "@ember/application";
+import Service, { inject as service } from "@ember/service";
+import $ from "jquery";
 import { getAndClearUnhandledThemeErrors } from "discourse/app";
-import getURL from "discourse-common/lib/get-url";
-import I18n from "I18n";
-import { bind } from "discourse-common/utils/decorators";
-import { escape } from "pretty-text/sanitizer";
+import { disableImplicitInjections } from "discourse/lib/implicit-injections";
 import identifySource, {
   consolePrefix,
   getThemeInfo,
 } from "discourse/lib/source-identifier";
-import Ember from "ember";
-import { disableImplicitInjections } from "discourse/lib/implicit-injections";
-import Service, { inject as service } from "@ember/service";
-import { getOwner } from "@ember/application";
+import escape from "discourse-common/lib/escape";
+import getURL from "discourse-common/lib/get-url";
+import { bind } from "discourse-common/utils/decorators";
+import I18n from "discourse-i18n";
 
 const showingErrors = new Set();
 
@@ -83,10 +83,14 @@ export default class ClientErrorHandlerService extends Service {
 
     let html = `⚠️ ${escape(message)}`;
 
-    if (source && source.type === "theme") {
+    if (source?.type === "theme") {
       html += `<br/>${I18n.t("themes.error_caused_by", {
         name: escape(source.name),
         path: source.path,
+      })}`;
+    } else if (source?.type === "plugin") {
+      html += `<br/>${I18n.t("broken_plugin_alert", {
+        name: escape(source.name),
       })}`;
     }
 
@@ -108,7 +112,7 @@ function reportToLogster(name, error) {
   };
 
   // TODO: To be moved out into a logster-provided lib
-  Ember.$.ajax(getURL("/logs/report_js_error"), {
+  $.ajax(getURL("/logs/report_js_error"), {
     data,
     type: "POST",
   });

@@ -1,12 +1,12 @@
 import { computed, set } from "@ember/object";
-import Category from "discourse/models/category";
-import ComboBoxComponent from "select-kit/components/combo-box";
-import I18n from "I18n";
-import PermissionType from "discourse/models/permission-type";
-import { categoryBadgeHTML } from "discourse/helpers/category-link";
-import { isNone } from "@ember/utils";
-import { setting } from "discourse/lib/computed";
 import { htmlSafe } from "@ember/template";
+import { isNone } from "@ember/utils";
+import { categoryBadgeHTML } from "discourse/helpers/category-link";
+import { setting } from "discourse/lib/computed";
+import Category from "discourse/models/category";
+import PermissionType from "discourse/models/permission-type";
+import I18n from "discourse-i18n";
+import ComboBoxComponent from "select-kit/components/combo-box";
 
 export default ComboBoxComponent.extend({
   pluginApiIdentifiers: ["category-chooser"],
@@ -22,6 +22,21 @@ export default ComboBoxComponent.extend({
     excludeCategoryId: null,
     scopedCategoryId: null,
     prioritizedCategoryId: null,
+  },
+
+  init() {
+    this._super(...arguments);
+
+    if (
+      this.siteSettings.lazy_load_categories &&
+      !Category.hasAsyncFoundAll([this.value])
+    ) {
+      // eslint-disable-next-line no-console
+      console.warn("Category selected with category-chooser was not loaded");
+      Category.asyncFindByIds([this.value]).then(() => {
+        this.notifyPropertyChange("value");
+      });
+    }
   },
 
   modifyComponentForRow() {
@@ -76,6 +91,13 @@ export default ComboBoxComponent.extend({
   },
 
   search(filter) {
+    if (this.siteSettings.lazy_load_categories) {
+      return Category.asyncSearch(this._normalize(filter), {
+        scopedCategoryId: this.selectKit.options?.scopedCategoryId,
+        prioritizedCategoryId: this.selectKit.options?.prioritizedCategoryId,
+      });
+    }
+
     if (filter) {
       filter = this._normalize(filter);
       return this.content.filter((item) => {

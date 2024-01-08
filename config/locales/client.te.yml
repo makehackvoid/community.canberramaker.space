@@ -147,13 +147,9 @@ te:
       our_admins: "మా అధికారులు"
       our_moderators: "మా నిర్వాహకులు"
       moderators: "నిర్వాహకులు"
-      stat:
-        all_time: "ఆల్ టైమ్"
       like_count: "ఇష్టాలు"
       topic_count: "విషయాలు"
       post_count: "టపాలు"
-      active_user_count: "క్రియాశీల సభ్యులు"
-      contact: "మమ్ము సంప్రదించండి"
       contact_info: "ఈ సంధర్భంలో క్లిష్టమైన సమస్య లేదా అత్యవసర విషయం సైట్ ను ప్రభావితం చేస్తుంది, దయచేసి మమ్మల్ని సంప్రదించండి %{contact_info}."
     bookmarked:
       title: "పేజీక"
@@ -181,6 +177,8 @@ te:
     review:
       explain:
         total: "మొత్తం"
+      revise_and_reject_post:
+        reason: "కారణం"
       delete: "తొలగించు"
       settings:
         save_changes: "మార్పులను భద్రపరచు"
@@ -460,6 +458,8 @@ te:
         edit: "సవరించు"
         security_key:
           save: "భద్రపరచు"
+      passkeys:
+        save: "భద్రపరుచు"
       change_about:
         title: "నా గురించి మార్చు"
       change_username:
@@ -495,8 +495,6 @@ te:
         cancel: "రద్దుచేయి"
       name:
         title: "పేరు"
-        instructions: "మీ పూర్తి పేరు (ఐచ్ఛికం)"
-        instructions_required: "మీ పూర్తి పేరు"
         too_short: "మీ పేరు మరీ చిన్నది"
         ok: "మీ పేరు బాగుంది"
       username:
@@ -1103,9 +1101,6 @@ te:
       title: "మా కమ్యునిటీని నాగరికంగా ఉంచుటలో సహాయానికి ధన్యవాదములు"
       action: "టపాను కేతనించు"
       take_action_options:
-        default:
-          title: "చర్య తీసుకో"
-          details: "మరిన్ని కమ్యునిటీ కేతనాల కోసం ఎదురు చూడకుండా ఇప్పుడే కేతన గట్టు చేరు"
         suspend:
           title: "సభ్యుడిని సస్పెండు చేయి"
       delete_spammer: "స్పామరును తొలగించు"
@@ -1113,7 +1108,6 @@ te:
       ip_address_missing: "వర్తించదు"
       hidden_email_address: "(దాయబడింది)"
       submit_tooltip: "ఒక ప్రైవేటు కేతనం అందించు"
-      take_action_tooltip: "మరిన్ని కమ్యునిటీ కేతనాల కోసం ఎదురు చూడకుండా ఇప్పుడే కేతన గట్టు చేరు"
       cant: "క్షమించాలి. ఇప్పుడు ఈ టపాను కేతనిచంలేరు."
       formatted_name:
         off_topic: "ఇది విషయాంతరం"
@@ -1282,7 +1276,6 @@ te:
     tagging:
       tags: "ట్యాగులు"
       add_synonyms: "కలుపు"
-      description: "వివరణ"
       sort_by_name: "పేరు"
       filters:
         without_category: "%{filter} %{tag} విషయాలు"
@@ -1371,9 +1364,21 @@ te:
             my_posts:
               content: "నా టపాలు"
     form_templates:
+      upload_field:
+        upload: "ఎక్కించు"
+        uploading: "ఎగుమతవుతోంది"
       errors:
         typeMismatch:
           default: "దయచేసి చెల్లే విలువ రాయండి"
+    table_builder:
+      edit:
+        modal:
+          cancel: "రద్దు"
+          create: "భద్రపరుచు"
+          reason: "మీరెందుకు సవరిస్తున్నారు?"
+      spreadsheet:
+        show: "చూపు"
+        about: "గురించి"
   admin_js:
     admin:
       title: "డిస్కోర్సు అధికారి"
@@ -1394,6 +1399,8 @@ te:
         version_check_pending: "మీరు ఇటీవలే ఉన్నతీకరించినట్టున్నారు. అద్భుతం!"
         installed_version: "ప్రతిష్టించబడింది"
         latest_version: "తాజా"
+        new_features:
+          learn_more: "మరింత తెలుసుకోండి..."
         last_checked: "చివరగా సరిచూసినది"
         refresh_problems: "తాజాపరుచు"
         no_problems: "ఎటువంటి సమస్యలూ కనిపించలేదు"
@@ -1478,6 +1485,7 @@ te:
         enabled: "చేతమైందా?"
         change_settings_short: "అమరికలు"
         howto: "పొడిగింతలు నేను ఎలా ప్రతిష్టించగలను?"
+        author: " %{author} రాసిన"
       backups:
         title: "బ్యాకప్పులు"
         menu:
@@ -1552,6 +1560,7 @@ te:
           save: "భద్రపరుచు"
           edit: "సవరించు"
           settings: "అమరికలు"
+          cancel: "రద్దుచేయి"
           upload: "ఎక్కించు"
           installed: "ప్రతిష్టించబడింది"
           install_popular: "ప్రముఖ"
@@ -1964,6 +1973,8 @@ te:
           navigation: "నావిగేషను"
         default_categories:
           modal_yes: "అవును"
+        file_types_list:
+          add_image_types: "బొమ్మలు"
       badges:
         title: బ్యాడ్జీలు
         new_badge: కొత్త బ్యాడ్జీ

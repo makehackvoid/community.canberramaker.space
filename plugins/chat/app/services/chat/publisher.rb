@@ -55,6 +55,7 @@ module Chat
                 { scope: anonymous_guardian, root: false },
               ).as_json,
           },
+          permissions(chat_channel),
         )
       end
 
@@ -108,7 +109,7 @@ module Chat
       publish_to_targets!(
         message_bus_targets,
         chat_channel,
-        { type: :processed, chat_message: { id: chat_message.id, cooked: chat_message.cooked } },
+        serialize_message_with_type(chat_message, :processed),
       )
     end
 
@@ -463,8 +464,11 @@ module Chat
 
     private
 
-    def self.permissions(chat_channel)
-      { user_ids: chat_channel.allowed_user_ids, group_ids: chat_channel.allowed_group_ids }
+    def self.permissions(channel)
+      {
+        user_ids: channel.allowed_user_ids.presence,
+        group_ids: channel.allowed_group_ids.presence,
+      }.compact
     end
 
     def self.anonymous_guardian

@@ -3,6 +3,7 @@
 class Topic < ActiveRecord::Base
   class UserExists < StandardError
   end
+
   class NotAllowed < StandardError
   end
   include RateLimiter::OnCreateRecord
@@ -58,7 +59,7 @@ class Topic < ActiveRecord::Base
 
   def thumbnail_info(enqueue_if_missing: false, extra_sizes: [])
     return nil unless original = image_upload
-    return nil if original.filesize >= SiteSetting.max_image_size_kb.kilobytes
+    return nil if original.filesize >= SiteSetting.max_image_size_kb.to_i.kilobytes
     return nil unless original.read_attribute(:width) && original.read_attribute(:height)
 
     infos = []
@@ -295,7 +296,6 @@ class Topic < ActiveRecord::Base
   attr_accessor :participants
   attr_accessor :participant_groups
   attr_accessor :topic_list
-  attr_accessor :meta_data
   attr_accessor :include_last_poster
   attr_accessor :import_mode # set to true to optimize creation and save for imports
 
@@ -318,13 +318,13 @@ class Topic < ActiveRecord::Base
   SQL
 
   scope :private_messages_for_user,
-        ->(user) {
+        ->(user) do
           private_messages.where(
             "topics.id IN (#{PRIVATE_MESSAGES_SQL_USER})
       OR topics.id IN (#{PRIVATE_MESSAGES_SQL_GROUP})",
             user_id: user.id,
           )
-        }
+        end
 
   scope :listable_topics, -> { where("topics.archetype <> ?", Archetype.private_message) }
 
@@ -569,8 +569,7 @@ class Topic < ActiveRecord::Base
     topics = topics.limit(opts[:limit]) if opts[:limit]
 
     # Remove category topics
-    category_topic_ids = Category.pluck(:topic_id).compact!
-    topics = topics.where("topics.id NOT IN (?)", category_topic_ids) if category_topic_ids.present?
+    topics = topics.where.not(id: Category.select(:topic_id).where.not(topic_id: nil))
 
     # Remove muted and shared draft categories
     remove_category_ids =
@@ -586,11 +585,14 @@ class Topic < ActiveRecord::Base
         )
     end
     if SiteSetting.digest_suppress_tags.present?
-      topics =
-        topics.joins("LEFT JOIN topic_tags tg ON topics.id = tg.topic_id").where(
-          "tg.tag_id NOT IN (?) OR tg.tag_id IS NULL",
-          SiteSetting.digest_suppress_tags.split("|").map(&:to_i),
-        )
+      tag_ids = Tag.where_name(SiteSetting.digest_suppress_tags.split("|")).pluck(:id)
+      if tag_ids.present?
+        topics =
+          topics.joins("LEFT JOIN topic_tags tg ON topics.id = tg.topic_id").where(
+            "tg.tag_id NOT IN (?) OR tg.tag_id IS NULL",
+            tag_ids,
+          )
+      end
     end
     remove_category_ids << SiteSetting.shared_drafts_category if SiteSetting.shared_drafts_enabled?
     if remove_category_ids.present?
@@ -617,19 +619,6 @@ class Topic < ActiveRecord::Base
     end
 
     topics
-  end
-
-  def meta_data=(data)
-    custom_fields.replace(data)
-  end
-
-  def meta_data
-    custom_fields
-  end
-
-  def update_meta_data(data)
-    custom_fields.update(data)
-    save
   end
 
   def reload(options = nil)
@@ -2064,6 +2053,13 @@ class Topic < ActiveRecord::Base
 
   def visible_tags(guardian)
     tags.reject { |tag| guardian.hidden_tag_names.include?(tag[:name]) }
+  end
+
+  def self.editable_custom_fields(guardian)
+    fields = []
+    fields.push(*DiscoursePluginRegistry.public_editable_topic_custom_fields)
+    fields.push(*DiscoursePluginRegistry.staff_editable_topic_custom_fields) if guardian.is_staff?
+    fields
   end
 
   private

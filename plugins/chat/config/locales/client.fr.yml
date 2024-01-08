@@ -24,11 +24,8 @@ fr:
           descriptions:
             chat:
               create_message: "Créez un message instantané dans un canal spécifié."
-    about:
-      chat_messages_count: "Messages instantanés"
-      chat_channels_count: "Canaux de discussion"
-      chat_users_count: "Utilisateurs de la discussion"
     chat:
+      back_to_forum: "Forum"
       deleted_chat_username: supprimé
       dates:
         time_tiny: "h:mm"
@@ -111,6 +108,8 @@ fr:
         all_new: "Tous les nouveaux messages"
         dm_and_mentions: "Messages directs et mentions"
         never: "Jamais"
+      separate_sidebar_mode:
+        title: "Afficher des modes de barre latérale distincts pour le forum et le clavardag"
       enable: "Activer la discussion"
       flag: "Drapeau"
       emoji: "Insérer un émoji"
@@ -243,7 +242,6 @@ fr:
       save: "Enregistrer"
       select: "Sélectionner"
       return_to_list: "Retour à la liste des canaux"
-      return_to_threads_list: "Revenir aux discussions en cours"
       unread_threads_count:
         one: "Vous avez %{count} discussion non lue"
         other: "Vous avez %{count} discussions non lues"
@@ -300,7 +298,6 @@ fr:
         back_to_all_channels: "Tous les canaux"
         back_to_channel: "Retour"
         tabs:
-          about: À propos
           members: Membres
           settings: Paramètres
       new_message_modal:
@@ -311,9 +308,9 @@ fr:
         default_search_placeholder: "#a-channel, @somebody ou quoi que ce soit"
         default_channel_search_placeholder: "#a-channel"
         default_user_search_placeholder: "@somebody"
-        user_search_placeholder: "... ajouter d'autres utilisateurs"
         disabled_user: "a désactivé la discussion"
         no_items: "Aucun élément"
+        filter: "Filtrer"
       channel_edit_name_slug_modal:
         title: Modifier le canal
         input_placeholder: Ajouter un nom
@@ -381,18 +378,6 @@ fr:
           topic: "Sujet"
       reviewable:
         type: "Message de discussion"
-      reactions:
-        only_you: "Vous avez réagi avec :%{emoji}:"
-        you_and_single_user: "Vous et %{username} avez réagi avec :%{emoji}:"
-        you_and_multiple_users: "Vous, %{commaSeparatedUsernames} et %{username} avez réagi avec :%{emoji}:"
-        you_multiple_users_and_more:
-          one: "Vous, %{commaSeparatedUsernames} et %{count} autre utilisateur avez réagi avec :%{emoji}:"
-          other: "Vous, %{commaSeparatedUsernames} et %{count} autres utilisateurs avez réagi avec :%{emoji}:"
-        single_user: "%{username} a réagi avec :%{emoji}:"
-        multiple_users: "%{commaSeparatedUsernames} et %{username} ont réagi avec :%{emoji}:"
-        multiple_users_and_more:
-          one: "%{commaSeparatedUsernames} et %{count} autre utilisateur ont réagi avec :%{emoji}:"
-          other: "%{commaSeparatedUsernames} et %{count} autres utilisateurs ont réagi avec :%{emoji}:"
       composer:
         toggle_toolbar: "Basculer la barre d'outils"
         italic_text: "texte souligné"
@@ -402,6 +387,7 @@ fr:
       quote:
         original_channel: 'Envoyé à l''origine dans le canal <a href="%{channelLink}">%{channel}</a>'
         copy_success: "Citation de discussion copiée dans le presse-papiers"
+        default_thread_title: "Fil"
       notification_levels:
         never: "Jamais"
         mention: "Seulement pour les mentions"
@@ -430,6 +416,10 @@ fr:
         saved: "Enregistré"
         unfollow: "Quitter"
         admin_title: "Administrateur"
+        settings_title: "Paramètres"
+        category_label: "Catégorie"
+        history_label: "Historique"
+        members_label: "Membres"
       admin:
         title: "Discussion"
         export_messages:
@@ -499,14 +489,9 @@ fr:
           one: "%{commaSeparatedUsernames} et %{count} autre utilisateur sont en train d'écrire"
           other: "%{commaSeparatedUsernames} et %{count} autres utilisateurs sont en train d'écrire"
       retention_reminders:
-        public_none: "L'historique du canal est conservé indéfiniment."
-        public:
-          one: "L'historique du canal est conservé pendant %{count} jour."
-          other: "L'historique du canal est conservé pendant %{count} jours."
-        dm_none: "L'historique de discussion privée est conservé indéfiniment."
-        dm:
-          one: "L'historique des discussions privées est conservé pendant %{count} jour."
-          other: "L'historique des discussions privées est conservé pendant %{count} jours."
+        short:
+          one: "%{count} jour"
+          other: "%{count} jours"
       flags:
         off_topic: "Ce message n'est pas pertinent pour la discussion en cours telle que définie par le titre du canal et devrait probablement être déplacé ailleurs."
         inappropriate: "Ce message contient du contenu qu'une personne raisonnable considérerait comme offensant, abusif ou contraire à nos <a href=\"%{basePath}/guidelines\">consignes communautaires</a>."
@@ -552,7 +537,6 @@ fr:
           other: "+ %{count}"
       threads:
         open: "Ouvrir le fil"
-        list: "Discussions en cours"
         none: "Vous ne participez à aucun fil dans ce canal."
       draft_channel_screen:
         header: "Nouveau message"

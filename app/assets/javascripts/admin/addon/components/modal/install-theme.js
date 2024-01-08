@@ -1,12 +1,12 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
-import { COMPONENTS, THEMES } from "admin/models/theme";
-import { POPULAR_THEMES } from "discourse-common/lib/popular-themes";
-import { ajax } from "discourse/lib/ajax";
-import I18n from "I18n";
 import { inject as service } from "@ember/service";
+import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import { POPULAR_THEMES } from "discourse-common/lib/popular-themes";
+import I18n from "discourse-i18n";
+import { COMPONENTS, THEMES } from "admin/models/theme";
 
 const MIN_NAME_LENGTH = 4;
 
@@ -117,6 +117,7 @@ export default class InstallTheme extends Component {
   }
 
   willDestroy() {
+    super.willDestroy(...arguments);
     this.args.model.clearParams?.();
   }
 
@@ -163,8 +164,8 @@ export default class InstallTheme extends Component {
         await theme.save({ name: this.name, component: this.component });
         this.args.model.addTheme(theme);
         this.args.closeModal();
-      } catch {
-        popupAjaxError;
+      } catch (e) {
+        popupAjaxError(e);
       } finally {
         this.loading = false;
       }

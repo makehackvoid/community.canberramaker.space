@@ -24,11 +24,8 @@ fi:
           descriptions:
             chat:
               create_message: "Luo chat-viesti tietyllä kanavalla."
-    about:
-      chat_messages_count: "Chat-viestit"
-      chat_channels_count: "Chat-kanavat"
-      chat_users_count: "Chat-käyttäjät"
     chat:
+      back_to_forum: "Keskustelualuea"
       deleted_chat_username: poistettu
       dates:
         time_tiny: "t:mm"
@@ -190,7 +187,6 @@ fi:
       save: "Tallenna"
       select: "Valitse"
       return_to_list: "Palaa kanavaluetteloon"
-      return_to_threads_list: "Palaa aktiivisiin keskusteluihin"
       unread_threads_count:
         one: "Sinulla on %{count} lukematon keskustelu"
         other: "Sinulla on %{count} lukematonta keskustelua"
@@ -247,7 +243,6 @@ fi:
         back_to_all_channels: "Kaikki kanavat"
         back_to_channel: "Takaisin"
         tabs:
-          about: Tietoja
           members: Jäsenet
           settings: Asetukset
       new_message_modal:
@@ -258,9 +253,9 @@ fi:
         default_search_placeholder: "#a-kanava, @joku tai mitä tahansa"
         default_channel_search_placeholder: "#a-kanava"
         default_user_search_placeholder: "@joku"
-        user_search_placeholder: "...lisää käyttäjiä"
         disabled_user: "on poistanut chatin käytöstä"
         no_items: "Ei kohteita"
+        filter: "Suodatin"
       channel_edit_name_slug_modal:
         title: Muokkaa kanavaa
         input_placeholder: Lisää nimi
@@ -328,18 +323,6 @@ fi:
           topic: "Ketju"
       reviewable:
         type: "Chat-viesti"
-      reactions:
-        only_you: "Reagoit emojilla :%{emoji}:"
-        you_and_single_user: "Sinä ja %{username} reagoitte emojilla :%{emoji}:"
-        you_and_multiple_users: "Sinä, %{commaSeparatedUsernames} ja %{username} reagoitte emojilla :%{emoji}:"
-        you_multiple_users_and_more:
-          one: "Sinä, %{commaSeparatedUsernames} ja %{count} muu reagoitte emojilla :%{emoji}:"
-          other: "Sinä, %{commaSeparatedUsernames} ja %{count} muuta reagoitte emojilla :%{emoji}:"
-        single_user: "%{username} reagoivat emojilla :%{emoji}:"
-        multiple_users: "%{commaSeparatedUsernames} ja %{username} reagoivat emojilla :%{emoji}:"
-        multiple_users_and_more:
-          one: "%{commaSeparatedUsernames} ja %{count} muu reagoivat emojilla :%{emoji}:"
-          other: "%{commaSeparatedUsernames} ja %{count} muuta reagoivat emojilla :%{emoji}:"
       composer:
         toggle_toolbar: "Vaihda työkalupalkki"
         italic_text: "korostettu teksti"
@@ -349,6 +332,7 @@ fi:
       quote:
         original_channel: 'Lähetetty alun perin kanavalla <a href="%{channelLink}">%{channel}</a>'
         copy_success: "Chat-lainaus kopioitiin leikepöydälle"
+        default_thread_title: "Ketju"
       notification_levels:
         never: "Ei koskaan"
         mention: "Vain maininnoissa"
@@ -377,6 +361,11 @@ fi:
         saved: "Tallennettu"
         unfollow: "Poistu"
         admin_title: "Ylläpitäjä"
+        settings_title: "Asetukset"
+        info_title: "Kanavan tiedot"
+        category_label: "Kategoria"
+        history_label: "Historia"
+        members_label: "Jäsenet"
       admin:
         title: "Chat"
         export_messages:
@@ -446,14 +435,14 @@ fi:
           one: "%{commaSeparatedUsernames} ja %{count} muu kirjoittavat"
           other: "%{commaSeparatedUsernames} ja %{count} muuta kirjoittavat"
       retention_reminders:
-        public_none: "Kanavan historia säilytetään ikuisesti."
-        public:
-          one: "Kanavan historia säilytetään %{count} päivän ajan."
-          other: "Kanavan historia säilytetään %{count} päivän ajan."
-        dm_none: "Henkilökohtainen chat-historia säilytetään ikuisesti."
-        dm:
-          one: "Henkilökohtainen chat-historia säilytetään %{count} päivän ajan."
-          other: "Henkilökohtainen chat-historia säilytetään %{count} päivän ajan."
+        indefinitely_short: "toistaiseksi"
+        indefinitely_long: "Keskusteluasetukset on määritetty säilyttämään kanavien viestit pysyvästi."
+        short:
+          one: "%{count} päivä"
+          other: "%{count} päivää"
+        long:
+          one: "Keskusteluasetukset on määritetty säilyttämään kanavien viestit %{count} päivän ajan."
+          other: "Keskusteluasetukset on määritetty säilyttämään kanavien viestit %{count} päivän ajan."
       flags:
         off_topic: "Tämä viesti ei liity nykyiseen keskusteluun kanavan otsikon mukaan, ja se pitäisi todennäköisesti siirtää muualle."
         inappropriate: "Tämä viesti sisältää sisältöä, jota kohtuullinen henkilö pitäisi loukkaavana, herjaavana tai <a href=\"%{basePath}/guidelines\">yhteisömme ohjeiden vastaisena</a>."
@@ -499,7 +488,6 @@ fi:
           other: "+%{count}"
       threads:
         open: "Avaa ketju"
-        list: "Käynnissä olevat keskustelut"
         none: "Et osallistu mihinkään viestiketjuun tällä kanavalla."
       draft_channel_screen:
         header: "Uusi viesti"

@@ -282,16 +282,10 @@ bg:
       our_moderators: "Нашите модератори"
       moderators: "Модератори"
       stat:
-        all_time: "От началото"
-        last_day: "Последните 24 часа"
-        last_7_days: "Последните 7 дни"
-        last_30_days: "Последните 30 дни"
+        last_day: "24 часа"
       like_count: "Харесвания"
       topic_count: "Теми"
       post_count: "Публикации"
-      user_count: "Регистрирай се"
-      active_user_count: "Активни потребители"
-      contact: "Свържете се с нас"
       contact_info: "В случай на критичен или спешен въпрос засягащ този сайт, моля свържете се с нас на адрес %{contact_email}."
     bookmarked:
       title: "Отметка"
@@ -420,6 +414,9 @@ bg:
         type_bonus:
           name: "тип бонус"
           title: "Определени типове, подлежащи на преглед, могат да получат бонус от персонала, за да бъдат с по-висок приоритет."
+      revise_and_reject_post:
+        reason: "Причина"
+        optional: "по избор"
       stale_help: "Този преглед е разрешен от <b>%{username}</b>."
       claim_help:
         optional: "Можете да заявите този артикул, за да попречите на други да го преглеждат."
@@ -726,7 +723,6 @@ bg:
           imap_mailbox_not_selected: "Трябва да изберете пощенска кутия за тази IMAP конфигурация или пощенските кутии няма да се синхронизират!"
           prefill:
             title: "Предварително попълване с настройки за:"
-            gmail: "Gmail"
           credentials:
             title: "Данни за удостоверяване"
             smtp_server: "SMTP сървър"
@@ -1303,7 +1299,6 @@ bg:
         success: "(имейлът е изпратен)"
         in_progress: "(изпраща се имейл)"
         error: "(грешка)"
-        emoji: "заключване на емоджи"
         action: "Изпратете имейл за смяна на паролата"
         set_password: "Задайте парола"
         choose_new: "Избери нова парола"
@@ -1334,8 +1329,6 @@ bg:
         title: "Двуфакторна автентификация"
         enable: "Управление на двуфакторна автентификация"
         disable_all: "Деактивиране на всички"
-        forgot_password: "Забравена парола?"
-        confirm_password_description: "Моля, потвърдете паролата за да продължите"
         name: "Име"
         label: "Код"
         rate_limit: "Моля, изчакайте, преди да опитате друг код за удостоверяване."
@@ -1343,8 +1336,6 @@ bg:
           Сканирайте този QR код в поддържано приложение (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) и въведете своя код за удостоверяване.
         disable_description: "Моля, въведете кода за удостоверяване от вашето приложение"
         show_key_description: "Въведете ръчно"
-        short_description: |
-          Защитете акаунта си с кодове за сигурност за еднократна употреба.
         extended_description: |
           Двуфакторното удостоверяване добавя допълнителна сигурност към вашия акаунт, като изисква еднократен токен в допълнение към вашата парола. Токените могат да се генерират на <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>устройства с Android</a> и <a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a>.
         oauth_enabled_warning: "Моля, имайте предвид, че влизане чрез социална мрежа, ще бъдат деактивирани, след като двуфакторното удостоверяване е активирано във вашия акаунт."
@@ -1383,6 +1374,9 @@ bg:
           save: "Запази"
           edit_description: "Име на физическия ключ за сигурност"
           name_required_error: "Трябва да посочите име за вашия ключ за сигурност."
+      passkeys:
+        save: "Запази "
+        added_prefix: "Добавено"
       change_about:
         title: "Смяна на За мен"
         error: "Имаше грешка при промяна на тази стойност."
@@ -1462,14 +1456,13 @@ bg:
           generic: "Вашият %{provider} акаунт ще се използва за удостоверяване."
       name:
         title: "Име"
-        instructions: "вашето пълно име (опционално)"
-        instructions_required: "Вашето пълно име"
+        instructions: "Вашето пълно име (опционално)."
+        instructions_required: "Вашето пълно име."
         required: "Моля, въведете име"
         too_short: "Името е твърде кратко."
         ok: "Вашето име изглежда добре"
       username:
         title: "Потребителско име"
-        instructions: "уникално, без интервали"
         short_instructions: "Хора могат да Ви споменават като @%{username}"
         available: "Вашето потребителско име е свободно"
         not_available: "Не е налично. Пробвайте с %{suggestion}?"
@@ -1664,7 +1657,7 @@ bg:
         same_as_username: "Вашата парола е същата като вашето потребителско име."
         same_as_email: "Вашата парола е същата като вашия email."
         ok: "Вашата парола изглежда добре."
-        instructions: "поне %{count}знака"
+        instructions: "Поне %{count}знака."
         required: "Моля, въведете парола"
       summary:
         title: "Сумарно"
@@ -1900,7 +1893,6 @@ bg:
       link_label: "Изпратете ми имейл връзка за вход"
       button_label: "с имейл"
       login_link: "Пропуснете паролата; изпратете ми имейл връзка за вход"
-      emoji: "заключване на емоджи"
       complete_username: "Ако името <b>%{username}</b> съответства на регистриран профил, след малко трябва да получите имейл с линк за логин."
       complete_email: "Ако адресът <b>%{email}</b>съответства на регистриран профил, след малко трябва да получите имейл с линк за логин."
       complete_username_found: "Намерихме профил, който съвпада с  <b> %{username} </b>, трябва да получите имейл с линк за логин."
@@ -1989,7 +1981,6 @@ bg:
         security_key: "Вместо това използвайте ключ за сигурност"
     invites:
       accept_title: "Покана"
-      emoji: "емоджи за плик"
       welcome_to: "Добре дошли в %{site_name}!"
       invited_by: "Бяхте поканени от:"
       social_login_available: "Също така ще можете да влезете с всяка социална мрежа, като използвате този имейл."
@@ -2026,12 +2017,6 @@ bg:
       topic_count:
         one: "%{count} тема в тази категория"
         other: "%{count} теми в тази категория"
-      plus_subcategories_title:
-        one: "%{name} и една подкатегория"
-        other: "%{name} и %{count} подкатегории"
-      plus_subcategories:
-        one: "+ %{count} подкатегория"
-        other: "+ %{count} подкатегории"
     select_kit:
       delete_item: "Изтрий %{name}"
       filter_by: "Филтриране по: %{name}"
@@ -2091,14 +2076,10 @@ bg:
       drafts_offline: "чернови офлайн"
       edit_conflict: "редактиране на конфликта"
       esc: "esc"
-      esc_label: "Щракнете или натиснете Esc, за да отхвърлите"
       ok_proceed: "Добре, продължете"
       group_mentioned_limit:
         one: "<b>Внимание!</b> Споменахте <a href='%{group_link}'>%{group}</a>, но тази група има повече членове от ограничението за споменаване, конфигурирано от администратора, от %{count} потребители. Никой няма да бъде уведомен."
         other: "<b>Внимание!</b> Споменахте <a href='%{group_link}'>%{group}</a>, но тази група има повече членове от ограничението за споменаване, конфигурирано от администратора, от %{count} потребители. Никой няма да бъде уведомен."
-      group_mentioned:
-        one: "Споменавайки %{group}, вие ще уведомите <a href='%{group_link}'>%{count} човек</a> – сигурни ли сте?"
-        other: "Споменавайки %{group}, вие ще уведомите <a href='%{group_link}'>%{count} души</a> – сигурни ли сте?"
       cannot_see_mention:
         category: "Споменахте @%{username} , но те няма да бъдат уведомени, защото нямат достъп до тази категория. Ще трябва да ги добавите към група, която има достъп до тази категория."
         private: "Споменахте @%{username} , но те няма да бъдат уведомени, защото не могат да видят това лично съобщение. Ще трябва да ги поканите в това лично съобщение."
@@ -2253,6 +2234,7 @@ bg:
         posted: '%{username} публикува в "%{topic}" - %{site_title}'
         private_message: '%{username} ви изпрати лично съобщение в "%{topic}" - %{site_title}'
         linked: '%{username} прикачи вашата публикация от "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} публикува в "%{topic}" - %{site_title}'
         confirm_title: "Включени известявания - %{site_title}"
         confirm_body: "Успех! Известяването е включено."
       titles:
@@ -2753,9 +2735,7 @@ bg:
       deleted_by_author_simple: "(темата е изтрита от автора)"
     post:
       quote_reply: "Цитат"
-      quote_reply_shortcut: "Или натиснете q"
       quote_edit: "Редактирай"
-      quote_edit_shortcut: "Или натиснете e"
       quote_share: "Споделяне"
       edit_reason: "Причина: "
       post_number: "публикация %{number} "
@@ -3014,9 +2994,6 @@ bg:
       title: "Благодарим ви, че помагате да поддържаме дискусията цивилизована!"
       action: "Сигнализирай публикацията "
       take_action_options:
-        default:
-          title: "Предприеми действие "
-          details: "Достигнете границата от сигнали веднага, вместо да чакате за още сигнали от общността"
         suspend:
           title: "Отстрани потребител"
       notify_action: "Съобщение"
@@ -3026,7 +3003,6 @@ bg:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(скрит)"
       submit_tooltip: "Пусни скрит сигнал"
-      take_action_tooltip: "Достигнете границата от сигнали веднага, вместо да чакате за още сигнали от общността"
       cant: "Не може да сигнализирате за тази публикация в момента."
       notify_staff: "Съобщи лично на екипа"
       formatted_name:
@@ -3265,12 +3241,10 @@ bg:
       other_tags: "Други тагове"
       selector_all_tags: "всички тагове"
       selector_no_tags: "няма тагове"
-      changed: "променени тагове:"
       tags: "Тагове"
       choose_for_topic: "етикети по желание"
       add_synonyms: "Добави"
       delete_tag: "Изтрийте таг"
-      description: "Описание"
       sort_by: "Сортирай по:"
       sort_by_count: "брой"
       sort_by_name: "име"
@@ -3329,6 +3303,7 @@ bg:
         regular: "редовен"
         leader: "лидер"
     sidebar:
+      title: "Странична лента"
       unread_count:
         one: "%{count} непрочетен"
         other: "%{count} непрочетени"
@@ -3347,7 +3322,6 @@ bg:
           save: "Запази"
           delete: "Изтрий"
           delete_confirm: "Сигурни ли сте, че искате да изтриете този раздел?"
-          public: "Направете този раздел публичен и видим от всички"
           links:
             add: "Добавете друга връзка"
             delete: "Изтриване на връзката"
@@ -3403,10 +3377,25 @@ bg:
     form_template_chooser:
       select_template: "Изберете шаблони за формуляри"
     form_templates:
+      upload_field:
+        upload: "Качи"
+        uploading: "Качване "
       errors:
         typeMismatch:
           default: "Моля, въведете валидна стойност."
           email: "Моля, въведете валиден имейл адрес."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Въведете"
+      edit:
+        modal:
+          cancel: "прекрати"
+          create: "Запази "
+          reason: "защо редактирате ?"
+      spreadsheet:
+        show: "Покажи"
+        about: "Относно"
   admin_js:
     admin:
       title: "Discourse Админ"
@@ -3428,8 +3417,7 @@ bg:
         installed_version: "Инсталирани"
         latest_version: "Последни"
         new_features:
-          dismiss: "Отмени"
-          learn_more: "Научете повече"
+          learn_more: "Научете повече..."
         last_checked: "Последна проверка"
         refresh_problems: "Обнови"
         no_problems: "Не бяха открити проблеми."
@@ -3518,8 +3506,6 @@ bg:
         edit: "Редактирай"
         save: "Запази"
         active: "Активни"
-        post_event:
-          details: "Когато има нов отговор, редакция, изтриване или възстановяване."
         delivery_status:
           failed: "Провалени"
           disabled: "Деактивирани"
@@ -3540,6 +3526,8 @@ bg:
         not_enabled: "N "
         change_settings_short: "Настройки"
         howto: "Как да инсталирам софтуерни приставки?"
+        author: "От %{author}"
+        learn_more: "Научете повече"
       backups:
         title: "Бекъп"
         menu:
@@ -3628,6 +3616,7 @@ bg:
           edit: "Редактирай"
           mobile: "Мобилен"
           settings: "Настройки"
+          cancel: "Прекрати"
           collapse: Намали
           upload: "Качване"
           discard: "Отхвърляне"
@@ -4192,6 +4181,8 @@ bg:
           modal_description: "Искате ли да приложите тази промяна исторически? Това ще промени предпочитанията за %{count} съществуващи потребители."
           modal_yes: "Да"
           modal_no: "Не, промяната се прилага само занапред"
+        file_types_list:
+          add_image_types: "Изображения"
       badges:
         title: Значки
         new_badge: Нова значка

@@ -2,8 +2,8 @@
 
 RSpec.describe TopicCreator do
   fab!(:user) { Fabricate(:user, trust_level: TrustLevel[2]) }
-  fab!(:moderator) { Fabricate(:moderator) }
-  fab!(:admin) { Fabricate(:admin) }
+  fab!(:moderator)
+  fab!(:admin)
 
   let(:valid_attrs) { Fabricate.attributes_for(:topic) }
   let(:pm_valid_attrs) do
@@ -24,6 +24,8 @@ RSpec.describe TopicCreator do
     }
   end
 
+  before { Group.refresh_automatic_groups! }
+
   describe "#create" do
     context "with topic success cases" do
       before do
@@ -40,25 +42,16 @@ RSpec.describe TopicCreator do
         expect(TopicCreator.create(moderator, Guardian.new(moderator), valid_attrs)).to be_valid
       end
 
-      it "supports both meta_data and custom_fields" do
-        opts =
-          valid_attrs.merge(
-            meta_data: {
-              import_topic_id: "foo",
-            },
-            custom_fields: {
-              import_id: "bar",
-            },
-          )
+      it "supports custom_fields that has been registered to the DiscoursePluginRegistry" do
+        opts = valid_attrs.merge(custom_fields: { import_id: "bar" })
 
         topic = TopicCreator.create(admin, Guardian.new(admin), opts)
 
-        expect(topic.custom_fields["import_topic_id"]).to eq("foo")
         expect(topic.custom_fields["import_id"]).to eq("bar")
       end
 
       context "with regular user" do
-        before { SiteSetting.min_trust_to_create_topic = TrustLevel[0] }
+        before { SiteSetting.create_topic_allowed_groups = Group::AUTO_GROUPS[:trust_level_0] }
 
         it "should be possible for a regular user to create a topic" do
           expect(TopicCreator.create(user, Guardian.new(user), valid_attrs)).to be_valid
@@ -114,7 +107,7 @@ RSpec.describe TopicCreator do
 
       before do
         SiteSetting.tagging_enabled = true
-        SiteSetting.min_trust_to_create_tag = 0
+        SiteSetting.create_tag_allowed_groups = Group::AUTO_GROUPS[:trust_level_0]
         SiteSetting.min_trust_level_to_tag_topics = 0
       end
 
@@ -224,7 +217,7 @@ RSpec.describe TopicCreator do
 
         it "lets new user create a topic if they don't have sufficient trust level to tag topics" do
           SiteSetting.min_trust_level_to_tag_topics = 1
-          new_user = Fabricate(:newuser)
+          new_user = Fabricate(:newuser, refresh_auto_groups: true)
           topic =
             TopicCreator.create(
               new_user,
@@ -511,8 +504,8 @@ RSpec.describe TopicCreator do
           expect(TopicCreator.create(user, Guardian.new(user), pm_valid_attrs)).to be_valid
         end
 
-        it "min_trust_to_create_topic setting should not be checked when sending private message" do
-          SiteSetting.min_trust_to_create_topic = TrustLevel[4]
+        it "create_topic_allowed_groups setting should not be checked when sending private message" do
+          SiteSetting.create_topic_allowed_groups = Group::AUTO_GROUPS[:trust_level_4]
           expect(TopicCreator.create(user, Guardian.new(user), pm_valid_attrs)).to be_valid
         end
 
@@ -649,6 +642,18 @@ RSpec.describe TopicCreator do
 
       it "is valid for an admin" do
         expect(TopicCreator.new(admin, Guardian.new(admin), unlisted_attrs).valid?).to eq(true)
+      end
+
+      context "when embedded" do
+        let(:embedded_unlisted_attrs) do
+          unlisted_attrs.merge(embed_url: "http://eviltrout.com/stupid-url")
+        end
+
+        it "is valid for a non-staff user" do
+          expect(TopicCreator.new(user, Guardian.new(user), embedded_unlisted_attrs).valid?).to eq(
+            true,
+          )
+        end
       end
     end
   end

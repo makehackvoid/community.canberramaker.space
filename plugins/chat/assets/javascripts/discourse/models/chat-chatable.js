@@ -1,7 +1,8 @@
-import ChatChannel from "discourse/plugins/chat/discourse/models/chat-channel";
-import User from "discourse/models/user";
 import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
+import Category from "discourse/models/category";
+import User from "discourse/models/user";
+import ChatChannel from "discourse/plugins/chat/discourse/models/chat-channel";
 
 export default class ChatChatable {
   static create(args = {}) {
@@ -66,7 +67,7 @@ export default class ChatChatable {
     return this.type === "user";
   }
 
-  get isSingleUserChannel() {
-    return this.type === "channel" && this.model?.chatable?.users?.length === 1;
+  get isCategory() {
+    return this instanceof Category;
   }
 }

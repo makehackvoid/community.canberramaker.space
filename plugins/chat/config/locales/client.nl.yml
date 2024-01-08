@@ -24,11 +24,8 @@ nl:
           descriptions:
             chat:
               create_message: "Maak een chatbericht in een opgegeven kanaal."
-    about:
-      chat_messages_count: "Chatberichten"
-      chat_channels_count: "Chatkanalen"
-      chat_users_count: "Chatgebruikers"
     chat:
+      back_to_forum: "Forum"
       deleted_chat_username: verwijderd
       dates:
         time_tiny: "h:mm"
@@ -243,7 +240,6 @@ nl:
       save: "Opslaan"
       select: "Selecteren"
       return_to_list: "Terug naar kanalenlijst"
-      return_to_threads_list: "Terug naar lopende discussies"
       unread_threads_count:
         one: "Je hebt %{count} ongelezen discussie"
         other: "Je hebt %{count} ongelezen discussies"
@@ -300,7 +296,6 @@ nl:
         back_to_all_channels: "Alle kanalen"
         back_to_channel: "Vorige"
         tabs:
-          about: Over
           members: Leden
           settings: Instellingen
       new_message_modal:
@@ -311,9 +306,9 @@ nl:
         default_search_placeholder: "#een-kanaal, @iemand of iets anders"
         default_channel_search_placeholder: "#een-kanaal"
         default_user_search_placeholder: "@iemand"
-        user_search_placeholder: "... voeg meer gebruikers toe"
         disabled_user: "heeft de chat uitgeschakeld"
         no_items: "Geen items"
+        filter: "Filter"
       channel_edit_name_slug_modal:
         title: Kanaal bewerken
         input_placeholder: Voeg een naam toe
@@ -381,18 +376,6 @@ nl:
           topic: "Topic"
       reviewable:
         type: "Chatbericht"
-      reactions:
-        only_you: "Je hebt gereageerd met :%{emoji}:"
-        you_and_single_user: "Jij en %{username} hebben gereageerd met :%{emoji}:"
-        you_and_multiple_users: "Jij, %{commaSeparatedUsernames} en %{username} hebben gereageerd met :%{emoji}:"
-        you_multiple_users_and_more:
-          one: "Jij, %{commaSeparatedUsernames} en %{count} ander hebben gereageerd met :%{emoji}:"
-          other: "Jij, %{commaSeparatedUsernames} en %{count} anderen hebben gereageerd met :%{emoji}:"
-        single_user: "%{username} heeft gereageerd met :%{emoji}:"
-        multiple_users: "%{commaSeparatedUsernames} en %{username} hebben gereageerd met :%{emoji}:"
-        multiple_users_and_more:
-          one: "%{commaSeparatedUsernames} en %{count} ander hebben gereageerd met :%{emoji}:"
-          other: "%{commaSeparatedUsernames} en %{count} anderen hebben gereageerd met :%{emoji}:"
       composer:
         toggle_toolbar: "Werkbalk schakelen"
         italic_text: "Cursieve tekst"
@@ -402,6 +385,7 @@ nl:
       quote:
         original_channel: 'Oorspronkelijk gestuurd in <a href="%{channelLink}">%{channel}</a>'
         copy_success: "Chatcitaat gekopieerd naar klembord"
+        default_thread_title: "Thread"
       notification_levels:
         never: "Nooit"
         mention: "Alleen voor vermeldingen"
@@ -430,6 +414,10 @@ nl:
         saved: "Opgeslagen"
         unfollow: "Verlaten"
         admin_title: "Beheerder"
+        settings_title: "Instellingen"
+        category_label: "Categorie"
+        history_label: "Geschiedenis"
+        members_label: "Leden"
       admin:
         title: "Chat"
         export_messages:
@@ -499,14 +487,9 @@ nl:
           one: "%{commaSeparatedUsernames} en %{count} ander zijn aan het typen"
           other: "%{commaSeparatedUsernames} en %{count} anderen zijn aan het typen"
       retention_reminders:
-        public_none: "De kanaalgeschiedenis wordt voor onbepaalde tijd bewaard."
-        public:
-          one: "Kanaalgeschiedenis wordt %{count} dag bewaard."
-          other: "Kanaalgeschiedenis wordt %{count} dagen bewaard."
-        dm_none: "De persoonlijke chatgeschiedenis wordt voor onbepaalde tijd bewaard."
-        dm:
-          one: "Persoonlijke chatgeschiedenis wordt %{count} dag bewaard."
-          other: "Persoonlijke chatgeschiedenis wordt %{count} dagen bewaard."
+        short:
+          one: "%{count} dag"
+          other: "%{count} dagen"
       flags:
         off_topic: "Dit bericht is niet relevant voor de huidige discussie zoals gedefinieerd door de kanaaltitel en moet waarschijnlijk worden verplaats naar elders."
         inappropriate: "Dit bericht bevat inhoud die een redelijk persoon als aanstootgevend, kwetsend of een overtreding van <a href=\"%{basePath}/guidelines\">onze communityrichtlijnen</a> zou beschouwen."
@@ -552,7 +535,6 @@ nl:
           other: "+%{count}"
       threads:
         open: "Thread openen"
-        list: "Lopende discussies"
         none: "Je neemt niet deel aan discussies in dit kanaal."
       draft_channel_screen:
         header: "Nieuw bericht"

@@ -1,8 +1,8 @@
 import Component from "@glimmer/component";
-import { action } from "@ember/object";
-import { downloadGoogle, downloadIcs } from "discourse/lib/download-calendar";
 import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { downloadGoogle, downloadIcs } from "discourse/lib/download-calendar";
 
 export default class downloadCalendar extends Component {
   @service currentUser;
@@ -22,12 +22,14 @@ export default class downloadCalendar extends Component {
     if (this.selectedCalendar === "ics") {
       downloadIcs(
         this.args.model.calendar.title,
-        this.args.model.calendar.dates
+        this.args.model.calendar.dates,
+        this.args.model.calendar.recurrenceRule
       );
     } else {
       downloadGoogle(
         this.args.model.calendar.title,
-        this.args.model.calendar.dates
+        this.args.model.calendar.dates,
+        this.args.model.calendar.recurrenceRule
       );
     }
     this.args.closeModal();

@@ -73,7 +73,6 @@ sk:
       rebake_message: "Pregenerovať HTML"
       bookmark_message: "Záložka"
       save: "Uložiť"
-      return_to_threads_list: "Návrat k prebiehajúcim diskusiám"
       unread_threads_count:
         one: "Máte %{count} neprečítanú diskusiu"
         few: "Máte %{count} neprečítaných diskusií"
@@ -101,7 +100,6 @@ sk:
       channel_info:
         back_to_channel: "Späť"
         tabs:
-          about: O stránke
           members: Členovia
           settings: Nastavenia
       new_message_modal:
@@ -112,9 +110,9 @@ sk:
         default_search_placeholder: "#a-channel, @somebody alebo čokoľvek."
         default_channel_search_placeholder: "#a-channel"
         default_user_search_placeholder: "@niekto"
-        user_search_placeholder: "...pridať ďalších používateľov"
         disabled_user: "má vypnutý chat"
         no_items: "Žiadne položky"
+        filter: "Filter"
       channel_edit_name_slug_modal:
         title: Upraviť kanál
         input_placeholder: Pridať meno
@@ -131,14 +129,12 @@ sk:
         types:
           category: "Kategória"
           topic: "Témy"
-      reactions:
-        you_and_single_user: "Vy a %{username} ste reagovali s :%{emoji}:"
-        you_and_multiple_users: "Vy, %{commaSeparatedUsernames} a %{username} ste reagovali s :%{emoji}:"
-        single_user: "%{username} reagoval s :%{emoji}:"
       composer:
         italic_text: "zdôraznený text"
         bold_text: "výrazný text"
         send: "Odoslať"
+      quote:
+        default_thread_title: "Vlákno"
       notification_levels:
         never: "Nikdy"
       settings:
@@ -153,6 +149,10 @@ sk:
         saved: "Uložené"
         unfollow: "Opustiť"
         admin_title: "Admin"
+        settings_title: "Nastavenia"
+        category_label: "Kategória"
+        history_label: "História"
+        members_label: "Členovia"
       admin:
         export_messages:
           title: "Exportovať správy z chatu"
@@ -177,13 +177,11 @@ sk:
         existing_topic:
           title: "Presuň do existujúcej témy."
       retention_reminders:
-        public_none: "História kanálov sa uchováva na neurčito."
-        dm_none: "História osobných chatov sa uchováva na neurčito."
-        dm:
-          one: "História súkromných správ sa uchováva na %{count} deň."
-          few: "História súkromných správ sa uchováva počas %{count} dní."
-          many: "História súkromných správ sa uchováva počas %{count} dní."
-          other: "História súkromných správ sa uchováva počas %{count} dní."
+        short:
+          one: "%{count} deň"
+          few: "%{count} dni"
+          many: "%{count} dní"
+          other: "%{count} dní"
       emoji_picker:
         objects: "Objekty"
         flags: "Označenia"
@@ -215,7 +213,6 @@ sk:
           other: "+%{count}"
       threads:
         open: "Otvoriť vlákno"
-        list: "Prebiehajúca diskusia"
         none: "Nezúčastňujete sa na žiadnych vláknach v tomto kanáli."
       draft_channel_screen:
         header: "Nová správa"

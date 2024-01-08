@@ -1,14 +1,15 @@
-import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+import $ from "jquery";
 import { test } from "qunit";
-import { cookAsync } from "discourse/lib/text";
-import Post from "discourse/models/post";
-import { checklistSyntax } from "discourse/plugins/checklist/discourse/initializers/checklist";
 import { Promise } from "rsvp";
+import { cook } from "discourse/lib/text";
+import Post from "discourse/models/post";
+import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+import { checklistSyntax } from "discourse/plugins/checklist/discourse/initializers/checklist";
 
 let currentRaw;
 
 async function prepare(raw) {
-  const cooked = await cookAsync(raw, {
+  const cooked = await cook(raw, {
     siteSettings: { checklist_enabled: true },
   });
 

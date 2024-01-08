@@ -89,12 +89,15 @@ hu:
         is_already_in_use: "már használatban van"
     personal_chat: "személyes csevegés"
     onebox:
+      thread_title_connector: "ebben:"
       x_members:
         one: "%{count} tag"
         other: "%{count} tag"
       and_x_others:
         one: "és még %{count} fő"
         other: "és még %{count} fő"
+    transcript:
+      default_thread_title: "Szál"
   discourse_push_notifications:
     popup:
       chat_mention:

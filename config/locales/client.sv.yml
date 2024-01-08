@@ -287,16 +287,10 @@ sv:
       our_moderators: "Våra moderatorer"
       moderators: "Moderatorer"
       stat:
-        all_time: "Alla dagar"
-        last_day: "Senaste 24 timmarna"
-        last_7_days: "Senaste 7 dagarna"
-        last_30_days: "Senaste 30 dagarna"
+        last_day: "24 timmar"
       like_count: "Gillningar"
       topic_count: "Ämnen"
       post_count: "Inlägg"
-      user_count: "Registreringar"
-      active_user_count: "Aktiva användare"
-      contact: "Kontakta oss"
       contact_info: "Vid brådskande ärenden rörande webbplatsen, kontakta oss på %{contact_info}."
     bookmarked:
       title: "Bokmärke"
@@ -425,6 +419,9 @@ sv:
         type_bonus:
           name: "typ bonus"
           title: "Vissa granskningsärenden kan tilldelas en bonus av personal för att ge dem en högre prioritet."
+      revise_and_reject_post:
+        reason: "Anledning"
+        optional: "valfritt"
       stale_help: "Detta granskningsbara objekt har lösts av <b>%{username}</b>."
       claim_help:
         optional: "Du kan göra anspråk på detta för att förhindra andra från att granska det."
@@ -737,7 +734,6 @@ sv:
           imap_mailbox_not_selected: "Du måste välja en brevlåda för den här IMAP-konfigurationen, annars synkroniseras inga brevlådor!"
           prefill:
             title: "Förfyll med inställningar för:"
-            gmail: "GMail"
           credentials:
             title: "Kontouppgifter"
             smtp_server: "SMTP Server"
@@ -1312,7 +1308,6 @@ sv:
         success: "(e-post skickat)"
         in_progress: "(skickar e-post)"
         error: "(fel)"
-        emoji: "lås emoji"
         action: "Skicka e-post för att återställa lösenord"
         set_password: "Ange lösenord"
         choose_new: "Välj ett nytt lösenord"
@@ -1343,8 +1338,6 @@ sv:
         title: "Tvåfaktorsautentisering"
         enable: "Hantera tvåfaktorsautentisering"
         disable_all: "Inaktivera alla"
-        forgot_password: "Glömt lösenordet?"
-        confirm_password_description: "Bekräfta lösenordet för att fortsätta"
         name: "Namn"
         label: "Kod"
         rate_limit: "Vänta innan du provar en annan autentiseringskod."
@@ -1352,8 +1345,6 @@ sv:
           Skanna denna QR-kod i en app som stöds (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) och ange din autentiseringskod.
         disable_description: "Ange din autentiseringskod från din app"
         show_key_description: "Ange manuellt"
-        short_description: |
-          Skydda ditt konto med engångssäkerhetskoder.
         extended_description: |
           Tvåfaktorsautentisering lägger till extra säkerhet till ditt konto genom att begära ett engångsbevis utöver ditt lösenord.
           Bevis kan skapas på <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>Android</a>- och <a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a>-enheter.
@@ -1393,6 +1384,10 @@ sv:
           save: "Spara"
           edit_description: "Namn på fysisk säkerhetsnyckel"
           name_required_error: "Du måste ge din säkerhetsnyckel ett namn."
+      passkeys:
+        save: "Spara"
+        added_prefix: "Tillagd"
+        last_used_prefix: "Senast använd"
       change_about:
         title: "Ändra Om mig"
         error: "Ett fel inträffade vid ändringen av det här värdet."
@@ -1472,14 +1467,13 @@ sv:
           generic: "Ditt %{provider}-konto kommer att användas för autentisering."
       name:
         title: "Namn"
-        instructions: "ditt fullständiga namn (valfritt)"
-        instructions_required: "Ditt fullständiga namn"
+        instructions: "Ditt fullständiga namn (valfritt)."
+        instructions_required: "Ditt fullständiga namn."
         required: "Ange ett namn"
         too_short: "Ditt namn är för kort"
         ok: "Ditt namn ser bra ut"
       username:
         title: "Användarnamn"
-        instructions: "unikt, inga mellanrum, kort"
         short_instructions: "Du kan omnämnas som @%{username}"
         available: "Ditt användarnamn är tillgängligt"
         not_available: "Inte tillgängligt. Prova %{suggestion}?"
@@ -1667,6 +1661,10 @@ sv:
             <p>Det skickas en inbjudan till varje e-postadress i din uppladdade CSV-fil och du kommer att kunna hantera den senare.</p>
           success: "Filen laddades upp. Du kommer att aviseras via meddelande när processen är klar."
           error: "Tyvärr bör filen vara i CSV-format."
+      confirm_access:
+        title: "Bekräfta åtkomst"
+        incorrect_password: "Det angivna lösenordet är felaktigt."
+        incorrect_passkey: "Det lösenordet är felaktigt."
       password:
         title: "Lösenord"
         too_short: "Ditt lösenord är för kort."
@@ -1674,8 +1672,10 @@ sv:
         same_as_username: "Ditt lösenord är detsamma som ditt användarnamn."
         same_as_email: "Ditt lösenord är detsamma som din e-postadress."
         ok: "Ditt lösenord ser bra ut."
-        instructions: "minst %{count} tecken"
+        instructions: "Minst %{count} tecken."
         required: "Ange ett lösenord"
+        confirm: "Bekräfta"
+        incorrect_password: "Det angivna lösenordet är felaktigt."
       summary:
         title: "Sammanfattning"
         stats: "Statistik"
@@ -1875,6 +1875,9 @@ sv:
       disable: "Visa raderade inlägg"
     private_message_info:
       title: "Meddelande"
+      edit: "Lägg till eller ta bort…"
+      remove: "Ta bort…"
+      add: "Lägg till…"
       leave_message: "Vill du verkligen lämna detta meddelande?"
       remove_allowed_user: "Vill du verkligen ta bort %{name} från det här meddelandet?"
       remove_allowed_group: "Vill du verkligen ta bort %{name} från det här meddelandet?"
@@ -1895,6 +1898,7 @@ sv:
       title: "Skapa ditt konto"
       failed: "Något gick fel, kanske är denna e-postadress redan registrerad, prova länken Glömt lösenord"
       associate: "Har du redan ett konto? <a href='%{associate_link}'>Logga in</a> för att länka ditt %{provider}-konto."
+      activation_title: "Aktivera ditt konto"
     forgot_password:
       title: "Beställ nytt lösenord"
       action: "Jag har glömt mitt lösenord"
@@ -1914,7 +1918,6 @@ sv:
       link_label: "E-posta mig en inloggningslänk"
       button_label: "per e-post"
       login_link: "Hoppa över lösenordet; skicka en inloggningslänk till mig per e-post"
-      emoji: "lås emoji"
       complete_username: "Om ett konto matchar användarnamnet <b>%{username}</b>, bör du snart få ett e-postmeddelande med en inloggningslänk."
       complete_email: "Om ett konto matchar <b>%{email}</b>, bör du snart få ett e-postmeddelande med en inloggningslänk."
       complete_username_found: "Vi hittade ett konto som matchade användarnamnet <b> %{username} </b>, du kommer snart att få ett e-postmeddelande med länk för inloggning."
@@ -2003,7 +2006,6 @@ sv:
         security_key: "Använd en säkerhetsnyckel istället"
     invites:
       accept_title: "Inbjudan"
-      emoji: "kuvert-emoji"
       welcome_to: "Välkommen till %{site_name}!"
       invited_by: "Du bjöds in av:"
       social_login_available: "Du kommer också att kunna logga in med sociala medier-inloggningar som använder denna e-postadress."
@@ -2040,12 +2042,6 @@ sv:
       topic_count:
         one: "%{count} ämne i den här kategorin"
         other: "%{count} ämnen i den här kategorin"
-      plus_subcategories_title:
-        one: "%{name} och en underkategori"
-        other: "%{name} och %{count} underkategorier"
-      plus_subcategories:
-        one: "+ %{count} underkategori"
-        other: "+ %{count} underkategorier"
     select_kit:
       delete_item: "Radera %{name}"
       filter_by: "Filtrera efter: %{name}"
@@ -2105,14 +2101,10 @@ sv:
       drafts_offline: "utkast offline"
       edit_conflict: "redigera konflikt"
       esc: "esc"
-      esc_label: "Klicka eller tryck på Esc för att avfärda"
       ok_proceed: "Ok, fortsätt"
       group_mentioned_limit:
         one: "<b>Varning!</b> Du nämnde <a href='%{group_link}'>%{group}</a> och denna grupp har fler medlemmar än vad administratorn tillåter för omnämningar. Begränsningsregeln för omnämnanden är satt till %{count} användare. Ingen kommer därför att aviseras."
         other: "<b>Varning!</b> Du nämnde <a href='%{group_link}'>%{group}</a> och denna grupp har fler medlemmar än vad administratorn tillåter för omnämningar. Begränsningsregeln för omnämnanden är satt till %{count} användare. Ingen kommer därför att aviseras."
-      group_mentioned:
-        one: "Genom att nämna %{group}, så kommer du att avisera <a href='%{group_link}'>%{count} person</a> – är du säker?"
-        other: "Genom att nämna %{group}, så kommer du att avisera <a href='%{group_link}'>%{count} medlemmar</a> – är du säker?"
       cannot_see_mention:
         category: "Du nämnde @%{username} men de kommer inte att meddelas eftersom de inte har tillgång till denna kategori. Du måste lägga till dem i en grupp som har tillgång till denna kategori."
         private: "Du nämnde @%{username} men de kommer inte att meddelas eftersom de inte kan se detta personliga meddelande. Du måste bjuda in dem till detta personliga meddelande."
@@ -2337,6 +2329,7 @@ sv:
         private_message: '%{username} skickade dig ett privat meddelande i "%{topic}" - %{site_title}'
         linked: '%{username} länkade till ett inlägg du gjort från "%{topic}" - %{site_title}'
         watching_first_post: '%{username} skapade ett nytt ämne "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} skrev i "%{topic}" - %{site_title}'
         confirm_title: "Aviseringar aktiverade - %{site_title}"
         confirm_body: "Framgång! Meddelanden har aktiverats."
         custom: "Aviseringar från %{username} hos %{site_title}"
@@ -2367,6 +2360,7 @@ sv:
         reaction: "ny reaktion"
         votes_released: "Röstningen släpptes"
         new_features: "nya Discourse-funktioner har släppts!"
+        admin_problems: "nytt råd på din webbplats översiktspanel"
     upload_selector:
       uploading: "Laddar upp"
       processing: "Bearbetar uppladdning"
@@ -2718,9 +2712,7 @@ sv:
           false { eller <a href="{basePath}/latest">visa senaste ämnen</a>}
           other {}
         }
-      bumped_at_title: |
-        Första inlägget: %{createdAtDate}
-        Upplagt: %{bumpedAtDate}
+      bumped_at: "Senaste: %{date}"
       browse_all_categories_latest: "<a href='%{basePath}/categories'>Bläddra bland alla kategorier</a> eller <a href='%{basePath}/latest'>visa senaste ämnen</a>."
       browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Bläddra bland alla kategorier</a>, <a href='%{basePath}/latest'>visa senaste ämnen</a> eller se toppämnen:"
       browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Bläddra bland alla taggar</a> eller <a href='%{basePath}/latest'>visa senaste ämnen</a>."
@@ -3066,9 +3058,7 @@ sv:
     post:
       confirm_delete: "Är du säker på att du vill radera det här inlägget?"
       quote_reply: "Citat"
-      quote_reply_shortcut: "Eller tryck på q"
       quote_edit: "Redigera"
-      quote_edit_shortcut: "Eller tryck på e"
       quote_share: "Dela"
       edit_reason: "Anledning: "
       post_number: "inlägg %{number}"
@@ -3459,8 +3449,7 @@ sv:
       action: "Flagga inlägg"
       take_action_options:
         default:
-          title: "Åtgärda"
-          details: "Nå flaggtröskeln omedelbart, istället för att vänta på fler flaggor från forumets användare"
+          title: "Dölj inlägg"
         suspend:
           title: "Stäng av användaren"
           details: "Nå flaggtröskeln och stäng av användaren"
@@ -3477,7 +3466,6 @@ sv:
       ip_address_missing: "(---)"
       hidden_email_address: "(dold)"
       submit_tooltip: "Använd den privata flaggan"
-      take_action_tooltip: "Nå flaggränsen omedelbart, snarare än att vänta på mer flaggor från användarna"
       cant: "Tyvärr, du kan inte flagga detta inlägg just nu."
       notify_staff: "Avisera personal privat"
       formatted_name:
@@ -3826,7 +3814,6 @@ sv:
       other_tags: "Övriga taggar"
       selector_all_tags: "alla taggar"
       selector_no_tags: "inga taggar"
-      changed: "taggar ändrade:"
       tags: "Taggar"
       choose_for_topic: "alternativa taggar"
       info: "Info"
@@ -3860,7 +3847,6 @@ sv:
         one: "Dess synonym kommer också att raderas."
         other: "Dess %{count} synonymer kommer också att raderas."
       edit_tag: "Redigera taggnamn och beskrivning"
-      description: "Beskrivning"
       sort_by: "Sortera efter:"
       sort_by_count: "summa"
       sort_by_name: "namn"
@@ -3995,8 +3981,7 @@ sv:
     second_factor_auth:
       redirect_after_success: "Andra faktorautentiseringen lyckades. Omdirigerar till föregående sida…"
     sidebar:
-      show_sidebar: "Visa sidofältet"
-      hide_sidebar: "Dölj sidofältet"
+      title: "Sidofält"
       unread_count:
         one: "%{count} oläst"
         other: "%{count} olästa"
@@ -4034,7 +4019,6 @@ sv:
           delete: "Radera"
           delete_confirm: "Är du säker på att du vill radera det här avsnittet?"
           reset_confirm: "Är du säker på att du vill återställa den här sektionen till standardvärdet?"
-          public: "Gör denna sektion offentligt och synligt för alla"
           always_public: "Innehållet i det här avsnittet är alltid offentligt"
           more_menu: "Menyn Mer"
           links:
@@ -4139,10 +4123,12 @@ sv:
     form_template_chooser:
       select_template: "Välj formulärmallar"
     form_templates:
+      upload_field:
+        upload: "Bild"
+        uploading: "Laddar upp"
       errors:
         valueMissing:
           default: "Fyll i detta fält."
-          text: "Fyll i detta fält."
           select-one: "Välj ett objekt i listan."
           select-multiple: "Välj minst ett objekt i listan."
           checkbox: "Markera den här rutan om du vill fortsätta."
@@ -4164,6 +4150,18 @@ sv:
           other: "Inmatningen måste vara mer än %{count}."
         patternMismatch: "Matcha det begärda formatet."
         badInput: "Ange en giltig inmatning."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Retur"
+      edit:
+        modal:
+          cancel: "avbryt"
+          create: "Spara"
+          reason: "varför redigerar du?"
+      spreadsheet:
+        show: "Visa"
+        about: "Om"
   admin_js:
     type_to_filter: "skriv för att filtrera…"
     admin:
@@ -4192,9 +4190,7 @@ sv:
         latest_version: "Senaste"
         problems_found: "Några förslag baserat på dina nuvarande webbplatsinställningar"
         new_features:
-          title: "\U0001F381 Nya funktioner"
-          dismiss: "Avfärda"
-          learn_more: "Läs mer"
+          learn_more: "Läs mer..."
         last_checked: "Senast kollad"
         refresh_problems: "Uppdatera"
         no_problems: "Inga problem upptäcktes."
@@ -4480,42 +4476,8 @@ sv:
         groups_filter_instructions: "Relevanta webhookar kommer endast att utlösas om händelsen är relaterad till specifierade grupper. Lämna blankt för att utlösa webhookar för alla grupper."
         groups_filter: "Utlösta grupper"
         delete_confirm: "Vill du ta bort den här webhooken?"
-        topic_event:
-          name: "Ämneshändelse"
-          details: "När det finns ett nytt, granskat, ändrat eller borttaget ämne."
-        post_event:
-          name: "Inläggshändelse"
-          details: "När det finns ett nytt, redigerat, borttaget eller återskapat svar."
-        user_event:
-          name: "Användarhändelse"
-          details: "När en användare loggar in, loggar ut, bekräftar sin e-postadress, skapas, godkänns eller uppdateras."
-        group_event:
-          name: "Grupphändelse"
-          details: "När en grupp skapas, uppdateras eller förstörs."
-        category_event:
-          name: "Kategorihändelse"
-          details: "När en kategori skapas, uppdateras eller förstörs."
-        tag_event:
-          name: "Tagghändelse"
-          details: "När en tagg skapas, uppdateras eller förstörs."
-        reviewable_event:
-          name: "Granskningshändelse"
-          details: "När ett föremål är redo för granskning och när dess status är uppdaterad."
-        notification_event:
-          name: "Aviseringshändelse"
-          details: "När en användare får en avisering i sitt flöde."
-        user_promoted_event:
-          name: "Användarfrämjande händelse"
-          details: "När en användare befordras från en förtroendenivå till en annan."
-        user_badge_event:
-          name: "Utmärkelsehändelse"
-          details: "När en utmärkelse beviljas eller återkallas."
-        group_user_event:
-          name: "Gruppanvändarhändelse"
-          details: "När en användare läggs till i, eller tas bort från, en grupp."
         like_event:
-          name: "Gilla händelse"
-          details: "När en användare gillar ett inlägg."
+          post_liked: "När en användare gillar ett inlägg."
         delivery_status:
           title: "Leveransstatus"
           inactive: "Inaktiv"
@@ -4554,8 +4516,9 @@ sv:
         not_enabled: "N"
         change_settings_short: "Inställningar"
         howto: "Hur installerar jag tillägg?"
-        official: "Officiellt tillägg"
         broken_route: "Det går inte att konfigurera länken till '%{name}'. Se till att annonsblockerare är inaktiverade och försök ladda om sidan."
+        author: "Av %{author}"
+        learn_more: "Läs mer"
       navigation_menu:
         sidebar: "Sidofält"
         header_dropdown: "Rullgardinsmeny för rubrik"
@@ -4664,7 +4627,6 @@ sv:
           theme_name: "Temanamn"
           component_name: "Komponentnamn"
           themes_intro: "Välj ett befintligt tema eller installera ett nytt för att komma igång"
-          themes_intro_emoji: "kvinnlig artist emoji"
           beginners_guide_title: "Nybörjarguide för användning av Discourse-teman"
           developers_guide_title: "Utvecklarguide för Discourse-teman"
           browse_themes: "Visa gemenskapens teman"
@@ -4712,6 +4674,7 @@ sv:
           convert_theme_tooltip: "Konvertera detta tema till komponent"
           inactive_themes: "Inaktiva teman:"
           inactive_components: "Oanvända komponenter:"
+          cancel: "Avbryt"
           broken_theme_tooltip: "Detta tema har fel i sin CSS, HTML eller YAML"
           disabled_component_tooltip: "Den här komponenten har inaktiverats"
           default_theme_tooltip: "Detta tema är webbplatsens standardtema"
@@ -5692,6 +5655,9 @@ sv:
         json_schema:
           edit: Öppna redigerare
           modal_title: "Redigera %{name}"
+        file_types_list:
+          add_image_types: "Bilder"
+          add_audio_types: "Audio"
       badges:
         title: Utmärkelser
         new_badge: Ny utmärkelse
@@ -5767,7 +5733,6 @@ sv:
             with_time: <span class="username">%{username}</span> kl. <span class="time">%{time}</span>
         badge_intro:
           title: "Välj en befintlig utmärkelse eller skapa en ny för att komma igång"
-          emoji: "kvinnlig student emoji"
           what_are_badges_title: "Vad är utmärkelser?"
           badge_query_examples_title: "Exempel på utmärkelsefråga"
         mass_award:

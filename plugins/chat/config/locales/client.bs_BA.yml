@@ -58,11 +58,11 @@ bs_BA:
       channel_info:
         back_to_channel: "Prethodno"
         tabs:
-          about: O nama
           members: Članovi
           settings: Postavke
       new_message_modal:
         no_items: "Nema stavki"
+        filter: "Filter"
       direct_message_creator:
         title: Nova poruka
         prefix: "Za:"
@@ -88,6 +88,10 @@ bs_BA:
         saved: "Spašeno"
         unfollow: "Napusti"
         admin_title: "Admin"
+        settings_title: "Postavke"
+        category_label: "Kategorija"
+        history_label: "Historija"
+        members_label: "Članovi"
       incoming_webhooks:
         back: "Prethodno"
         description: "Opis"

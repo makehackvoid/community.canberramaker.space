@@ -9,7 +9,7 @@ module Chat
   class CreateThread
     include Service::Base
 
-    # @!method call(thread_id:, channel_id:, guardian:, **params_to_edit)
+    # @!method call(thread_id:, channel_id:, guardian:, **params_to_create)
     #   @param [Integer] original_message_id
     #   @param [Integer] channel_id
     #   @param [Guardian] guardian
@@ -22,10 +22,11 @@ module Chat
     policy :threading_enabled_for_channel
     model :original_message
     transaction do
-      step :create_thread
+      step :find_or_create_thread
       step :associate_thread_to_message
       step :fetch_membership
       step :publish_new_thread
+      step :trigger_chat_thread_created_event
     end
 
     # @!visibility private
@@ -59,7 +60,11 @@ module Chat
       channel.threading_enabled
     end
 
-    def create_thread(channel:, original_message:, contract:, **)
+    def find_or_create_thread(channel:, original_message:, contract:, **)
+      if original_message.thread_id.present?
+        return context.thread = ::Chat::Thread.find_by(id: original_message.thread_id)
+      end
+
       context.thread =
         channel.threads.create(
           title: contract.title,
@@ -79,6 +84,10 @@ module Chat
 
     def publish_new_thread(channel:, original_message:, **)
       ::Chat::Publisher.publish_thread_created!(channel, original_message, context.thread.id)
+    end
+
+    def trigger_chat_thread_created_event
+      ::DiscourseEvent.trigger(:chat_thread_created, context.thread)
     end
   end
 end

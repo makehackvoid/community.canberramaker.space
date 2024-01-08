@@ -306,21 +306,37 @@
     color: var(--primary-low-mid);
     transition: color 0.25s;
   }
-  @include hover {
-    background: transparent;
-    color: var(--primary);
-    .d-icon {
+  .discourse-no-touch & {
+    &:hover,
+    &:focus {
       color: var(--primary);
+      .d-icon {
+        color: var(--primary);
+      }
+    }
+    &:hover {
+      background: transparent;
+    }
+    &:focus {
+      background: var(--primary-low);
     }
   }
   &.close {
-    padding: 0;
     background: transparent;
-    font-size: var(--font-up-3);
+    font-size: var(--font-up-2);
     .d-icon {
       color: var(--primary-high);
     }
-    @include hover {
+    .discourse-no-touch & {
+      &:hover,
+      &:focus {
+        background: transparent;
+        .d-icon {
+          color: var(--primary);
+        }
+      }
+    }
+    &:focus {
       background: transparent;
       .d-icon {
         color: var(--primary);
@@ -378,6 +394,58 @@
     color: var(--tertiary);
     background: transparent;
     @include default-focus;
+  }
+}
+
+@mixin btn-colors($btn-color) {
+  color: var(--#{$btn-color});
+  .d-icon {
+    color: currentColor;
+  }
+  &:focus,
+  &:focus-visible {
+    color: var(--#{$btn-color}-hover);
+  }
+  .discourse-no-touch & {
+    &:hover {
+      color: var(--#{$btn-color}-hover);
+    }
+  }
+}
+
+.btn-transparent {
+  &,
+  &.btn-default {
+    background: transparent !important;
+    border: 0;
+    color: var(--primary);
+    .d-icon {
+      color: var(--primary-high);
+    }
+    &:focus,
+    &:focus-visible {
+      color: var(--tertiary-hover);
+      .d-icon {
+        color: currentColor;
+      }
+    }
+    .discourse-no-touch & {
+      &:hover {
+        color: var(--tertiary-hover);
+        .d-icon {
+          color: currentColor;
+        }
+      }
+    }
+  }
+  &.btn-primary {
+    @include btn-colors("tertiary");
+  }
+  &.btn-danger {
+    @include btn-colors("danger");
+  }
+  &.btn-success {
+    @include btn-colors("success");
   }
 }
 

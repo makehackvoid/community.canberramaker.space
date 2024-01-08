@@ -249,16 +249,10 @@ zh_TW:
       our_moderators: "我們的版主"
       moderators: "板主"
       stat:
-        all_time: "所有時間"
-        last_day: "過去 24 小時"
-        last_7_days: "過去 7 天"
-        last_30_days: "過去 30 天"
+        last_day: "24 小時"
       like_count: "讚"
       topic_count: "話題"
       post_count: "貼文"
-      user_count: "註冊"
-      active_user_count: "活躍使用者"
-      contact: "聯絡我們"
       contact_info: "若有重大問題或關係到網站的緊急時間，請透過 %{contact_info} 聯絡我們"
     bookmarked:
       title: "書籤"
@@ -372,6 +366,9 @@ zh_TW:
           title: "由信任等級較高的使用者建立的可審閱項目的分數較高。"
         type_bonus:
           name: "類型獎金"
+      revise_and_reject_post:
+        reason: "原因"
+        optional: "選擇性"
       claim_help:
         optional: "您可以聲明此項目以防止其他人審核。"
         required: "您必須先審核項目才能查看它們。"
@@ -629,8 +626,6 @@ zh_TW:
           imap_title: "IMAP"
           imap_additional_settings: "其他設定"
           imap_settings_valid: "IMAP 設定有效。"
-          prefill:
-            gmail: "Gmail"
           credentials:
             smtp_server: "SMTP 伺服器"
             smtp_port: "SMTP 通訊埠"
@@ -1060,7 +1055,6 @@ zh_TW:
       second_factor:
         title: "兩步驟驗證"
         enable: "管理兩步驟驗證"
-        confirm_password_description: "請確認你的密碼以繼續"
         name: "名稱"
         label: "代碼"
         rate_limit: "嘗試其他驗證代碼前請稍後"
@@ -1068,8 +1062,6 @@ zh_TW:
           使用可支援的 app 掃描此 QR Code（<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">安卓</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>）並輸入您的認證碼。
         disable_description: "請從您的應用程式輸入驗證碼"
         show_key_description: "手動輸入"
-        short_description: |
-          以一次性安全碼保護您的帳號
         disable: "禁用"
         delete: "刪除"
         save: "儲存"
@@ -1080,6 +1072,9 @@ zh_TW:
           android_default_name: "安卓"
           save: "儲存"
           name_required_error: "您必須提供安全金鑰名稱"
+      passkeys:
+        save: "保存"
+        added_prefix: "已新增"
       change_about:
         title: "修改關於我"
         error: "修改設定值時發生錯誤"
@@ -1137,14 +1132,13 @@ zh_TW:
         not_connected: "（無任何連結）"
       name:
         title: "名稱"
-        instructions: "您的全名 (選填)"
-        instructions_required: "您的暱稱"
+        instructions: "您的全名 (選填)."
+        instructions_required: "您的暱稱."
         required: "請輸入名稱"
         too_short: "你的暱稱太短。"
         ok: "你的暱稱符合要求。"
       username:
         title: "使用者名稱"
-        instructions: "獨一、無空格、短的"
         short_instructions: "其他人可以輸入 @%{username} 提及你。"
         available: "你的使用者名稱可以使用。"
         not_available: "無法使用，請試試看 %{suggestion}？"
@@ -1297,7 +1291,7 @@ zh_TW:
         same_as_username: "密碼與使用者名稱相同"
         same_as_email: "你的密碼與電郵相同。"
         ok: "你的密碼符合要求。"
-        instructions: "至少 %{count} 個字元"
+        instructions: "至少 %{count} 個字元."
       summary:
         title: "摘要"
         stats: "統計"
@@ -1595,8 +1589,6 @@ zh_TW:
       ok_proceed: "好的，繼續"
       group_mentioned_limit:
         other: "<b>提醒</b>你提及了<a href='%{group_link}'>%{group}</a>，但此群組的人數多於管理員配置的提及人數上限（%{count}位），因此不會有任何人收到通知。"
-      group_mentioned:
-        other: "提及 %{group} 時，你將通知 <a href='%{group_link}'>%{count} 人</a> － 確定嗎？"
       duplicate_link: "您連到<b>%{domain}</b>的連結已被<b>@%{username}</b><a href='%{post_url}'>於%{ago}前發在其他話題下的回覆</a>，確定要再次發佈嗎？"
       error:
         title_missing: "標題為必填欄位"
@@ -1741,6 +1733,7 @@ zh_TW:
         private_message: '%{username} 在 "%{topic}" 中私訊了你- %{site_title}'
         linked: '%{username}在“%{topic}”中連結了你的貼文 - %{site_title}'
         watching_first_post: '%{username} 在 "%{topic}"中開啟了新話題 - %{site_title}'
+        watching_category_or_tag: '%{username} 在"%{topic}" 中發文 - %{site_title}'
         confirm_title: "通知已啟用-%{site_title}"
         confirm_body: "成功! 通知已啟用"
         custom: "新的通知由%{username}在%{site_title}"
@@ -1750,6 +1743,7 @@ zh_TW:
         watching_first_post: "新話題"
         liked_consolidated: "新的讚"
         post_approved: "貼文已通過審核"
+        admin_problems: "有新的建議出現在後台儀表板"
     upload_selector:
       uploading: "正在上傳"
       select_file: "選取檔案"
@@ -1939,6 +1933,7 @@ zh_TW:
       back_to_list: "回到話題列表"
       options: "話題選項"
       show_links: "在話題裡顯示連結"
+      bumped_at: "最新：%{date}"
       suggest_create_topic: 準備好 <a href>開始新的對話了嗎？</a>
       deleted: "此話題已被刪除"
       slow_mode_update:
@@ -2216,9 +2211,7 @@ zh_TW:
           other: "你已選擇了 <b>%{count}</b> 篇貼文。"
     post:
       quote_reply: "引用"
-      quote_reply_shortcut: "或按 q 鍵"
       quote_edit: "編輯"
-      quote_edit_shortcut: "或按 e 鍵"
       quote_share: "分享"
       edit_reason: "原因: "
       post_number: "貼文 %{number}"
@@ -2489,8 +2482,7 @@ zh_TW:
       action: "檢舉貼文"
       take_action_options:
         default:
-          title: "執行動作"
-          details: "使其立刻達到檢舉門檻，不用等待更多人檢舉"
+          title: "隱藏貼文"
         suspend:
           title: "將使用者停權"
         silence:
@@ -2502,7 +2494,6 @@ zh_TW:
       ip_address_missing: "(N/A)"
       hidden_email_address: "( 隱藏) "
       submit_tooltip: "送出私人檢舉"
-      take_action_tooltip: "使其立刻達到檢舉門檻，不用等待更多人檢舉"
       cant: "抱歉，你目前無法檢舉此貼文。"
       notify_staff: "私下通知管理人員"
       formatted_name:
@@ -2755,7 +2746,6 @@ zh_TW:
       other_tags: "其他標記"
       selector_all_tags: "所有標籤"
       selector_no_tags: "無標記"
-      changed: "標籤被修改："
       tags: "標記"
       choose_for_topic: "可選標籤"
       info: "資訊"
@@ -2765,7 +2755,6 @@ zh_TW:
       delete_confirm:
         other: "您確定要刪除此標籤並將它從%{count}個話題中移除嗎？"
       delete_confirm_no_topics: "您是否確定要刪除這個標籤？"
-      description: "描述"
       sort_by: "排序方式："
       sort_by_count: "總數"
       sort_by_name: "名稱"
@@ -2865,6 +2854,7 @@ zh_TW:
     second_factor_auth:
       redirect_after_success: "兩步驟驗證成功。重新導向至之前的頁面..."
     sidebar:
+      title: "側選單"
       unread_count:
         other: "%{count} 個未讀"
       new_count:
@@ -2945,9 +2935,21 @@ zh_TW:
       button_title: "開始編輯"
     until: "直到："
     form_templates:
+      upload_field:
+        upload: "上傳"
+        uploading: "上傳中"
       errors:
         typeMismatch:
           default: "請輸入一個有效的值。"
+    table_builder:
+      edit:
+        modal:
+          cancel: "取消"
+          create: "保存"
+          reason: "你為什麼做編輯?"
+      spreadsheet:
+        show: "顯示"
+        about: "關於"
   admin_js:
     admin:
       title: "論壇管理員"
@@ -2972,9 +2974,7 @@ zh_TW:
         latest_version: "最新版本"
         problems_found: "根據您現在網站設定的建議"
         new_features:
-          title: "\U0001F381 新功能"
-          dismiss: "忽略"
-          learn_more: "了解更多"
+          learn_more: "了解更多..."
         last_checked: "上次檢查的時間"
         refresh_problems: "重新整理"
         no_problems: "未發現任何問題。"
@@ -3143,26 +3143,6 @@ zh_TW:
         groups_filter_instructions: "相關 Webhook 事件將在滿足特定群組的情況下才發送。留空忽略群組限制。"
         groups_filter: "觸發的群組"
         delete_confirm: "刪除這個 webhook？"
-        topic_event:
-          name: "話題事件"
-          details: "當有新話題、話題被修訂、修改或者刪除時。"
-        post_event:
-          name: "貼文事件"
-          details: "當有新回覆、編輯、貼文被刪除或者恢復時。"
-        user_event:
-          name: "使用者事件"
-        group_event:
-          name: "群組活動"
-          details: "當群組被建立、更新或刪除時"
-        category_event:
-          name: "分類事件"
-          details: "當分類被建立、更新或刪除時"
-        tag_event:
-          name: "標籤事件"
-          details: "當標籤被建立、更新或刪除。"
-        reviewable_event:
-          name: "可審核的事件"
-          details: "當新項目已經準備好審核並狀態已更好時"
         delivery_status:
           title: "分髮狀態"
           inactive: "不活躍"
@@ -3199,7 +3179,8 @@ zh_TW:
         not_enabled: "否"
         change_settings_short: "設定"
         howto: "如何安裝外掛?"
-        official: "官方套件"
+        author: "作者 %{author}"
+        learn_more: "了解更多"
       navigation_menu:
         sidebar: "側選單"
         legacy: "舊版"
@@ -3338,6 +3319,7 @@ zh_TW:
           convert_theme_tooltip: "轉換此佈景主題為元件"
           inactive_themes: "未啟用的佈景主題"
           inactive_components: "未使用的元件："
+          cancel: "取消"
           broken_theme_tooltip: "此佈景主題的 CSS、HTML 或 YAML 中有錯誤。"
           default_theme_tooltip: "此佈景主題是網站的預設佈景主題"
           updates_available_tooltip: "此佈景主題可更新"
@@ -4063,6 +4045,8 @@ zh_TW:
           invalid_input: "輸入欄位不能為空或包含垂直字元"
         default_categories:
           modal_yes: "是"
+        file_types_list:
+          add_image_types: "圖片"
       badges:
         title: 徽章
         new_badge: 新徽章

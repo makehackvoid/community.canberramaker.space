@@ -1,7 +1,7 @@
-import DiscourseTemplateMap from "discourse-common/lib/discourse-template-map";
 import * as GlimmerManager from "@glimmer/manager";
 import ClassicComponent from "@ember/component";
 import { isTesting } from "discourse-common/config/environment";
+import DiscourseTemplateMap from "discourse-common/lib/discourse-template-map";
 
 const COLOCATED_TEMPLATE_OVERRIDES = new Map();
 
@@ -15,6 +15,7 @@ export function overrideThrowGjsError(value) {
 // This patch is not ideal, but Ember does not allow us to change a component template after initial association
 // https://github.com/glimmerjs/glimmer-vm/blob/03a4b55c03/packages/%40glimmer/manager/lib/public/template.ts#L14-L20
 const originalGetTemplate = GlimmerManager.getComponentTemplate;
+// eslint-disable-next-line no-import-assign
 GlimmerManager.getComponentTemplate = (component) => {
   return (
     COLOCATED_TEMPLATE_OVERRIDES.get(component) ??
@@ -54,7 +55,9 @@ export default {
       const finalOverrideModuleName = moduleNames[moduleNames.length - 1];
 
       if (isStrictMode) {
-        const message = `[${finalOverrideModuleName}] ${componentName} was authored using gjs and its template cannot be overridden. Ignoring override.`;
+        const message =
+          `[${finalOverrideModuleName}] ${componentName} was authored using gjs and its template cannot be overridden. ` +
+          `Ignoring override. For more information on the future of template overrides, see https://meta.discourse.org/t/247487`;
         if (THROW_GJS_ERROR) {
           throw new Error(message);
         } else {

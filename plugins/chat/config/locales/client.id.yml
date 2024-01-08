@@ -23,11 +23,9 @@ id:
           descriptions:
             chat:
               create_message: "Buat pesan obrolan di kanal tertentu"
-    about:
-      chat_messages_count: "Pesan Obrolan"
-      chat_channels_count: "Kanal Obrolan"
-      chat_users_count: "Pengguna Obrolan"
     chat:
+      text_copied: Teks disalin ke papan klip
+      link_copied: Tautan disalin ke papan klip
       deleted_chat_username: dihapus
       dates:
         time_tiny: "h:mm"
@@ -72,10 +70,10 @@ id:
         channel_wide_mentions_disallowed: "Penyebutan @here dan @all dinonaktifkan di kanal ini."
       reply: "Balas"
       edit: "Ubah"
+      copy_text: "Salin teks"
       bookmark_message: "Penandaan"
       bookmark_message_edit: "Edit Bookmark"
       save: "Simpan"
-      return_to_threads_list: "Kembali ke diskusi yang sedang berlangsung"
       sounds:
         none: "Tidak ada"
       channel_status:
@@ -90,7 +88,6 @@ id:
         name: Nama
       channel_info:
         tabs:
-          about: Tentang
           members: Anggota
           settings: Pengaturan
       new_message_modal:
@@ -101,9 +98,9 @@ id:
         default_search_placeholder: "#a-channel, @somebody atau apapun"
         default_channel_search_placeholder: "#a-channel"
         default_user_search_placeholder: "@somebody"
-        user_search_placeholder: "...menambahkan lebih banyak pengguna"
         disabled_user: "telah menonaktifkan obrolan"
         no_items: "Tidak ada item"
+        filter: "Filter"
       direct_message_creator:
         title: Pesan Baru
         prefix: "Kepada:"
@@ -114,6 +111,8 @@ id:
         types:
           category: "Kategori"
           topic: "Topik"
+      quote:
+        default_thread_title: "Utas"
       notification_levels:
         never: "Tidak pernah"
       settings:
@@ -128,6 +127,9 @@ id:
         saved: "Tersimpan"
         unfollow: "Keluar"
         admin_title: "Admin"
+        settings_title: "Pengaturan"
+        category_label: "Kategori"
+        members_label: "Anggota"
       admin:
         export_messages:
           title: "Ekspor pesan obrolan"
@@ -145,6 +147,9 @@ id:
         cancel: "Batal"
         new_topic:
           title: "Pindahkan sebagai Topik Baru"
+      retention_reminders:
+        short:
+          other: "%{count} hari"
       emoji_picker:
         objects: "Objek"
         flags: "Flags"
@@ -167,7 +172,6 @@ id:
         participants_other_count:
           other: "+%{count}"
       threads:
-        list: "Diskusi yang sedang berlangsung"
         none: "Anda tidak berpartisipasi dalam utas apa pun di kanal ini."
       draft_channel_screen:
         header: "Pesan Baru"

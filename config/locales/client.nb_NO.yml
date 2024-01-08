@@ -250,15 +250,10 @@ nb_NO:
       our_moderators: "Våre moderatorer"
       moderators: "Moderatorer"
       stat:
-        all_time: "Gjennom tidene"
-        last_day: "Siste 24 timer"
-        last_7_days: "Siste 7 dager"
-        last_30_days: "Siste 30 dager"
+        last_day: "24 timer"
       like_count: "Likes"
       topic_count: "Emner"
       post_count: "Innlegg"
-      active_user_count: "Aktive brukere"
-      contact: "Kontakt oss"
       contact_info: "I tilfelle en kritisk hendelse skulle inntreffe eller det er en hastesak som påvirker siden, ta kontakt på %{contact_info}."
     bookmarked:
       title: "Bokmerke"
@@ -371,6 +366,9 @@ nb_NO:
         type_bonus:
           name: "type bonus"
           title: "Visse typer som kan gjennomgås, kan tildeles en bonus av personalet for å gjøre dem til en høyere prioritet."
+      revise_and_reject_post:
+        reason: "Begrunnelse"
+        optional: "valgfritt"
       stale_help: "Denne vurderingen har blitt løst av <b>%{username}</b>."
       claim_help:
         optional: "Du kan gjøre krav på dette elementet for å hindre andre i å gjennomgå det."
@@ -659,7 +657,6 @@ nb_NO:
           imap_mailbox_not_selected: "Du må velge en Mailbox for denne IMAP-konfigurasjonen, eller ingen e-postbokser vil bli synkronisert!"
           prefill:
             title: "Forhåndsfyll med innstillinger for:"
-            gmail: "GMail"
           credentials:
             title: "Legitimasjon"
             smtp_server: "SMTP Server"
@@ -1108,7 +1105,6 @@ nb_NO:
         success: "(e-post sendt)"
         in_progress: "(sender e-post)"
         error: "(feil)"
-        emoji: "lås emoji"
         action: "Send e-post for nullstilling av passord"
         set_password: "Sett passord"
         choose_new: "Velg et nytt passord"
@@ -1130,8 +1126,6 @@ nb_NO:
         title: "To-faktor autentisering"
         enable: "deaktiver totrinnsverifisering"
         disable_all: "Deaktiver Alle"
-        forgot_password: "Glemt passord?"
-        confirm_password_description: "Bekreft passordet ditt for å fortsette"
         name: "Navn"
         label: "Kode"
         rate_limit: "Vennligst vent før du prøver en annen autentiseringskode."
@@ -1139,8 +1133,6 @@ nb_NO:
           Skann denne QR-koden i en støttet app (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> - <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) og skriv inn autentiseringskoden.
         disable_description: "Vennligst oppgi autentiseringskoden fra appen"
         show_key_description: "Skriv inn manuelt"
-        short_description: |
-          Beskytt kontoen din med engangs sikkerhetskoder.
         extended_description: |
           To-faktor autentisering legger til ekstra sikkerhet på kontoen din ved å kreve en engangstoken i tillegg til passordet ditt. Tokens kan genereres på <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>Android</a> og <a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a> enheter.
         oauth_enabled_warning: "Vær oppmerksom på at sosiale login-metoder deaktiveres når tofaktor autentisering er aktivert på kontoen din."
@@ -1164,6 +1156,9 @@ nb_NO:
           already_added_error: "Du har allerede registrert denne sikkerhetsnøkkelen. Du trenger ikke å registrere den igjen."
           save: "Lagre"
           name_required_error: "Du må angi et navn for sikkerhetsnøkkelen."
+      passkeys:
+        save: "Lagre"
+        added_prefix: "La til"
       change_about:
         title: "Rediger om meg"
         error: "Det oppstod en feil ved endring av denne verdien."
@@ -1240,14 +1235,13 @@ nb_NO:
           generic: "Kontoen din på %{provider} vil bli brukt i autentisering."
       name:
         title: "Navn"
-        instructions: "ditt fulle navn (valgfritt)"
-        instructions_required: "Ditt fulle navn"
+        instructions: "Ditt fulle navn (valgfritt)."
+        instructions_required: "Ditt fulle navn."
         required: "Vennligst skriv inn et navn"
         too_short: "Navnet ditt er for kort."
         ok: "Navnet ditt ser bra ut."
       username:
         title: "Brukernavn"
-        instructions: "unikt, ingen mellomrom, kort"
         short_instructions: "Folk kan nevne deg som @%{username}."
         available: "Ditt brukernavn er tilgjengelig."
         not_available: "Ikke tilgjengelig. Prøv %{suggestion}?"
@@ -1432,7 +1426,7 @@ nb_NO:
         same_as_username: "Ditt passord er det samme som ditt brukernavn."
         same_as_email: "Ditt passord er det samme som din e-post."
         ok: "Passordet ditt ser bra ut"
-        instructions: "minst %{count} tegn"
+        instructions: "Minst %{count} tegn."
         required: "Skriv inn et passord"
       summary:
         title: "Oppsummering"
@@ -1614,7 +1608,6 @@ nb_NO:
       link_label: "Send meg lenke til innlogging via e-post"
       button_label: "med e-post"
       login_link: "Hopp over passordet; send meg en innloggingslenke"
-      emoji: "lås emoji"
       complete_username: "Hvis en konto matcher brukernavnet <b>%{username}</b>, vil du snart motta en e-post med en lenke som logger deg inn."
       complete_email: "Hvis en konto matcher <b>%{email}</b>, vil du snart motta en e-post med en lenke som logger deg inn."
       complete_username_found: "Vi fant en konto som matcher brukernavnet <b>%{username}</b>, du vil snart motta en e-post med lenke for innlogging."
@@ -1685,7 +1678,6 @@ nb_NO:
         backup_code: "Bruk en sikkerhetskode i stedet"
     invites:
       accept_title: "Invitasjon"
-      emoji: "konvolutt emoji"
       welcome_to: "Velkommen til %{site_name}!"
       invited_by: "Du ble invitert av:"
       social_login_available: "Du vil også kunne logge inn med hvilken som helst annen sosial innloggingstjeneste ved bruk av den e-posten."
@@ -1719,12 +1711,6 @@ nb_NO:
       topic_count:
         one: "%{count} emne i denne kategori"
         other: "%{count} emner i denne kategorien"
-      plus_subcategories_title:
-        one: "%{name} og en underkategori"
-        other: "%{name} og %{count} underkategorier"
-      plus_subcategories:
-        one: "+ %{count} underkategori"
-        other: "+ %{count} underkategorier"
     select_kit:
       delete_item: "Slett %{name}"
       filter_by: "Filtrer etter %{name}"
@@ -1780,9 +1766,6 @@ nb_NO:
       saved_local_draft_tip: "lagret lokalt"
       drafts_offline: "utkast offline"
       edit_conflict: "rediger konflikt"
-      group_mentioned:
-        one: "Ved å nevne %{group}, er du i ferd med å henvende deg til <a href='%{group_link}'>%{count} én person</a> – er du sikker?"
-        other: "Ved å nevne %{group}, er du i ferd med å henvende deg til <a href='%{group_link}'>%{count} folk</a> – er du sikker?"
       duplicate_link: "Det ser ut til at lenken din til <b>%{domain}</b> allerede ble publisert i emnet av <b>@%{username}</b> i <a href='%{post_url}'>et svar %{ago}</a>. Er du sikker på at du vil publisere den igjen?"
       reference_topic_title: "RE: %{title}"
       error:
@@ -1944,6 +1927,7 @@ nb_NO:
         private_message: '%{username} sendte deg en personlig melding i "%{topic}" - %{site_title}'
         linked: '%{username} lenket til innlegget ditt i "%{topic}" - %{site_title}'
         watching_first_post: '%{username} opprettet et nytt emne "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} skrev noe i "%{topic}" - %{site_title}'
         confirm_title: "Varslinger aktivert - %{site_title}"
         confirm_body: "Suksess! Varslinger er nå aktivert."
         custom: "Varsling fra %{username} på %{site_title}"
@@ -2188,6 +2172,7 @@ nb_NO:
       collapse_details: "vis/skjul detaljer for emnet"
       expand_details: "utvid emnebeskrivelse"
       unread_indicator: "Ingen medlem har lest den siste posten i dette emnet ennå."
+      bumped_at: "Siste: %{date}"
       suggest_create_topic: Klar til å <a href>starte en ny samtale?</a>
       deleted: "Emnet ble slettet"
       slow_mode_update:
@@ -2855,8 +2840,7 @@ nb_NO:
       action: "Rapporter innlegg"
       take_action_options:
         default:
-          title: "Ta handling"
-          details: "Oppnå rapporteringsterskel umiddelbart, i stedet for å vente på flere rapporteringer."
+          title: "Skjul innlegg"
         suspend:
           title: "Steng ute bruker"
           details: "Nå flaggterskelen, og suspendere brukeren"
@@ -2873,7 +2857,6 @@ nb_NO:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(skjult)"
       submit_tooltip: "Rapporter privat"
-      take_action_tooltip: "Oppnå rapporteringsterskel umiddelbart, i stedet for å vente på flere rapporteringer."
       cant: "Beklager, du kan ikke rapportere dette innlegget nå."
       notify_staff: "Gjør stab oppmerksom på dette privat"
       formatted_name:
@@ -3176,7 +3159,6 @@ nb_NO:
       other_tags: "Andre stikkord"
       selector_all_tags: "alle stikkord"
       selector_no_tags: "ingen stikkord"
-      changed: "stikkord endret:"
       tags: "Stikkord"
       choose_for_topic: "valgfrie stikkord"
       info: "Informasjon"
@@ -3205,7 +3187,6 @@ nb_NO:
       delete_confirm_synonyms:
         one: "Synonymen vil også bli slettet."
         other: "Dets %{count} synonymer vil også bli slettet."
-      description: "Beskrivelse"
       sort_by: "Sorter etter:"
       sort_by_count: "antall"
       sort_by_name: "navn"
@@ -3376,10 +3357,25 @@ nb_NO:
               content: "Gjennomgang"
     until: "Inntil:"
     form_templates:
+      upload_field:
+        upload: "Bilde"
+        uploading: "Laster opp bilde"
       errors:
         typeMismatch:
           default: "Skriv inn en gyldig verdi."
           email: "Oppgi en gyldig e-postadresse."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Angi"
+      edit:
+        modal:
+          cancel: "avbryt"
+          create: "Lagre"
+          reason: "hvorfor endrer du?"
+      spreadsheet:
+        show: "Vis"
+        about: "Om"
   admin_js:
     type_to_filter: "skriv for å filtrere…"
     admin:
@@ -3408,9 +3404,7 @@ nb_NO:
         latest_version: "Siste"
         problems_found: "Noen råd basert på gjeldende sideinnstillinger"
         new_features:
-          title: "\U0001F381 Nye funksjoner"
-          dismiss: "Avslå"
-          learn_more: "Finn ut mer"
+          learn_more: "Finn ut mer..."
         last_checked: "Sist sjekket"
         refresh_problems: "Last inn siden på nytt"
         no_problems: "Ingen problemer ble funnet."
@@ -3584,36 +3578,8 @@ nb_NO:
         groups_filter_instructions: "Relevante webhooker vil bare bli utløst hvis hendelsene er relatert til valgte grupper. La være blank for å utløse webhooker for alle grupper."
         groups_filter: "Utløse grupper"
         delete_confirm: "Slette denne webhooken?"
-        topic_event:
-          name: "Hendelse for emne"
-          details: "Når det finnes et nytt, revidert, endret eller slettet emne."
-        post_event:
-          name: "Innleggshendelse"
-          details: "Når det er et nytt, redigert, slettet eller gjenopprettet innlegg."
-        user_event:
-          name: "Brukerhendelse"
-          details: "Når en bruker logger inn, logger ut, bekrefter e-posten, blir opprettet, godkjent eller oppdatert."
-        group_event:
-          name: "Gruppehandling"
-          details: "Når en gruppe lages, oppdateres eller slettes."
-        category_event:
-          name: "Kategorihandling"
-          details: "Når en kategori lages, oppdateres eller slettes."
-        tag_event:
-          name: "Stikkordshandling"
-          details: "Når et stikkord lages, oppdateres eller slettes."
-        reviewable_event:
-          name: "Visbar hendelse"
-          details: "Når et nytt element er klar for gjennomgang og når dets status oppdateres."
-        notification_event:
-          name: "Varslingshendelse"
-          details: "Når en bruker mottar et varsel i feeden."
-        group_user_event:
-          name: "Gruppebrukerhendelse"
-          details: "Når en bruker er lagt til eller fjernet i en gruppe."
         like_event:
-          name: "Lik hendelsen"
-          details: "Når en bruker liker et innlegg."
+          post_liked: "Når en bruker liker et innlegg."
         delivery_status:
           title: "Sendingsstatus"
           inactive: "Inaktiv"
@@ -3652,7 +3618,8 @@ nb_NO:
         not_enabled: "N"
         change_settings_short: "Innstillinger"
         howto: "Hvordan installerer jeg utvidelser?"
-        official: "Offisiell Plugin"
+        author: "Av %{author}"
+        learn_more: "Finn ut mer"
       backups:
         title: "Sikkerhetskopier"
         menu:
@@ -3751,7 +3718,6 @@ nb_NO:
           theme_name: "Navn på tema"
           component_name: "Komponent navn"
           themes_intro: "Velg et eksisterende tema eller installer et nytt for å komme i gang"
-          themes_intro_emoji: "kvinne artist emoji"
           beginners_guide_title: "Begynner guide til å bruke Discourse tema"
           developers_guide_title: "Utviklers guide til Discourse tema"
           browse_themes: "Bla gjennom samfunnstemaer"
@@ -3798,6 +3764,7 @@ nb_NO:
           convert_theme_tooltip: "Konverter dette temaet til komponenten"
           inactive_themes: "Inaktive temaer:"
           inactive_components: "Ubrukte komponenter:"
+          cancel: "Avbryt"
           broken_theme_tooltip: "Dette temaet har feil i CSS, HTML eller YAML"
           disabled_component_tooltip: "Denne komponenten har blitt deaktivert"
           default_theme_tooltip: "Dette temaet er nettstedets standardtema"
@@ -4502,6 +4469,8 @@ nb_NO:
           modal_description: "Ønsker du å bruke denne endringens historikk? Dette vil endre innstillinger for %{count} eksisterende brukere."
           modal_yes: "Ja"
           modal_no: "Nei, bare gjelder endring fremover"
+        file_types_list:
+          add_image_types: "Bilder"
       badges:
         title: Merker
         new_badge: Nytt merke

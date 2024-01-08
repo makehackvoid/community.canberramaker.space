@@ -1,13 +1,13 @@
+import Component from "@ember/component";
 import EmberObject, { action } from "@ember/object";
 import { alias, and, equal, readOnly } from "@ember/object/computed";
-import Component from "@ember/component";
-import Group from "discourse/models/group";
-import I18n from "I18n";
-import discourseComputed from "discourse-common/utils/decorators";
-import { emailValid } from "discourse/lib/utilities";
-import { getNativeContact } from "discourse/lib/pwa-utils";
-import { i18n } from "discourse/lib/computed";
 import { isEmpty } from "@ember/utils";
+import { i18n } from "discourse/lib/computed";
+import { getNativeContact } from "discourse/lib/pwa-utils";
+import { emailValid } from "discourse/lib/utilities";
+import Group from "discourse/models/group";
+import discourseComputed from "discourse-common/utils/decorators";
+import I18n from "discourse-i18n";
 
 export default Component.extend({
   tagName: null,
@@ -267,8 +267,11 @@ export default Component.extend({
     }
   },
 
-  @discourseComputed("isPM")
-  errorMessage(isPM) {
+  @discourseComputed("isPM", "ajaxError")
+  errorMessage(isPM, ajaxError) {
+    if (ajaxError) {
+      return ajaxError;
+    }
     return isPM
       ? I18n.t("topic.invite_private.error")
       : I18n.t("topic.invite_reply.error");
@@ -326,14 +329,9 @@ export default Component.extend({
 
     const onerror = (e) => {
       if (e.jqXHR.responseJSON && e.jqXHR.responseJSON.errors) {
-        this.set("errorMessage", e.jqXHR.responseJSON.errors[0]);
+        this.set("ajaxError", e.jqXHR.responseJSON.errors[0]);
       } else {
-        this.set(
-          "errorMessage",
-          this.isPM
-            ? I18n.t("topic.invite_private.error")
-            : I18n.t("topic.invite_reply.error")
-        );
+        this.set("ajaxError", null);
       }
       model.setProperties({ saving: false, error: true });
     };
@@ -397,14 +395,9 @@ export default Component.extend({
       })
       .catch((e) => {
         if (e.jqXHR.responseJSON && e.jqXHR.responseJSON.errors) {
-          this.set("errorMessage", e.jqXHR.responseJSON.errors[0]);
+          this.set("ajaxError", e.jqXHR.responseJSON.errors[0]);
         } else {
-          this.set(
-            "errorMessage",
-            this.isPM
-              ? I18n.t("topic.invite_private.error")
-              : I18n.t("topic.invite_reply.error")
-          );
+          this.set("ajaxError", null);
         }
         model.setProperties({ saving: false, error: true });
       });

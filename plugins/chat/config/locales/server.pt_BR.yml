@@ -169,6 +169,7 @@ pt_BR:
       inline_to_message: "Mensagem #%{message_id} por %{username} – #%{chat_channel}"
       inline_to_channel: "Chat #%{chat_channel}"
       inline_to_topic_channel: "Chat do Tópico %{topic_title}"
+      thread_title_connector: "em"
       x_members:
         one: "%{count} membro"
         other: "%{count} membros"
@@ -177,6 +178,9 @@ pt_BR:
         other: "e %{count} outros"
     summaries:
       no_targets: "Não houve mensagens durante o período selecionado."
+    transcript:
+      default_thread_title: "Tópico"
+      split_thread_range: "mensagens %{start} a %{end} de %{total}"
   discourse_push_notifications:
     popup:
       chat_mention:

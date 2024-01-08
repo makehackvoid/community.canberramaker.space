@@ -12,19 +12,34 @@
     @navItems={{this.navItems}}
     @filterMode={{this.filterMode}}
     @category={{this.category}}
+    @tag={{this.tag}}
   />
 {{/unless}}
 
 <div class="navigation-controls">
-  {{#if (and this.notCategoriesRoute this.site.mobileView this.canBulk)}}
-    <BulkSelectToggle @parentController="discovery/topics" />
+  {{#if (and this.notCategoriesRoute this.site.mobileView @canBulkSelect)}}
+    <BulkSelectToggle @bulkSelectHelper={{@bulkSelectHelper}} />
   {{/if}}
 
   {{#if this.showCategoryAdmin}}
-    <CategoriesAdminDropdown
-      @onChange={{action "selectCategoryAdminDropdownAction"}}
-      @options={{hash triggerOnChangeOnTab=false}}
-    />
+    {{#if this.fixedCategoryPositions}}
+      <CategoriesAdminDropdown
+        @onChange={{action "selectCategoryAdminDropdownAction"}}
+        @options={{hash triggerOnChangeOnTab=false}}
+      />
+    {{else}}
+      <DButton
+        @action={{this.createCategory}}
+        @icon="plus"
+        @label={{if
+          this.site.mobileView
+          "categories.category"
+          "category.create"
+        }}
+        class="btn-default"
+        id="create-category"
+      />
+    {{/if}}
   {{/if}}
 
   {{#if (and this.category this.showCategoryEdit)}}
@@ -50,7 +65,6 @@
 
   <PluginOutlet
     @name="before-create-topic-button"
-    @connectorTagName="div"
     @outletArgs={{hash
       canCreateTopic=this.canCreateTopic
       createTopicDisabled=this.createTopicDisabled
@@ -68,15 +82,10 @@
     @label={{this.createTopicLabel}}
     @btnClass={{this.createTopicClass}}
     @canCreateTopicOnTag={{this.canCreateTopicOnTag}}
-  >
-    {{#if this.createTopicButtonDisabled}}
-      <DTooltip>{{i18n "topic.create_disabled_category"}}</DTooltip>
-    {{/if}}
-  </CreateTopicButton>
+  />
 
   <PluginOutlet
     @name="after-create-topic-button"
-    @connectorTagName="div"
     @outletArgs={{hash
       canCreateTopic=this.canCreateTopic
       createTopicDisabled=this.createTopicDisabled

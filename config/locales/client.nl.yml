@@ -287,16 +287,10 @@ nl:
       our_moderators: "Onze moderators"
       moderators: "Moderators"
       stat:
-        all_time: "Sinds het begin"
-        last_day: "Afgelopen 24 uur"
-        last_7_days: "Afgelopen 7 dagen"
-        last_30_days: "Afgelopen 30 dagen"
+        last_day: "24 uur"
       like_count: "Likes"
       topic_count: "Topics"
       post_count: "Berichten"
-      user_count: "Registraties"
-      active_user_count: "Actieve gebruikers"
-      contact: "Contact"
       contact_info: "Neem in het geval van een kritieke kwestie of dringende vraagstukken in verband met deze website contact met ons op via %{contact_info}."
     bookmarked:
       title: "Bladwijzer"
@@ -425,6 +419,9 @@ nl:
         type_bonus:
           name: "typebonus"
           title: "Aan bepaalde beoordeelbare typen kan door medewerkers een bonus worden toegekend om ze hogere prioriteit te geven."
+      revise_and_reject_post:
+        reason: "Reden"
+        optional: "optioneel"
       stale_help: "Dit beoordeelbare item is afgehandeld door <b>%{username}</b>."
       claim_help:
         optional: "Je kunt dit item claimen om te voorkomen dat anderen het beoordelen."
@@ -737,7 +734,6 @@ nl:
           imap_mailbox_not_selected: "Je moet een mailbox selecteren voor deze IMAP-configuratie, anders worden er geen mailboxen gesynchroniseerd!"
           prefill:
             title: "Vooraf invullen met instellingen voor:"
-            gmail: "GMail"
           credentials:
             title: "Aanmeldgegevens"
             smtp_server: "SMTP-server"
@@ -1314,7 +1310,6 @@ nl:
         success: "(e-mail verzonden)"
         in_progress: "(e-mail verzenden)"
         error: "(fout)"
-        emoji: "slotemoji"
         action: "E-mail voor wachtwoordherstel verzenden"
         set_password: "Wachtwoord instellen"
         choose_new: "Kies een nieuw wachtwoord"
@@ -1345,8 +1340,6 @@ nl:
         title: "Tweeledige verificatie"
         enable: "Tweeledige verificatie beheren"
         disable_all: "Alles uitschakelen"
-        forgot_password: "Wachtwoord vergeten?"
-        confirm_password_description: "Bevestig je wachtwoord om door te gaan"
         name: "Naam"
         label: "Code"
         rate_limit: "Wacht even voordat je een andere verificatiecode probeert."
@@ -1354,8 +1347,6 @@ nl:
           Scan deze QR-code in een ondersteunde app (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) en voer je verificatiecode in.
         disable_description: "Voer de verificatiecode van je app in"
         show_key_description: "Voer handmatig in"
-        short_description: |
-          Bescherm je account met eenmalige beveiligingscodes.
         extended_description: |
           Tweeledige verificatie voegt extra beveiliging toe aan je account door naast je wachtwoord een eenmalige code te vereisen. Tokens kunnen worden gegenereerd op <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>Android</a>- en <a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a> -apparaten.
         oauth_enabled_warning: "Houd er rekening mee dat sociale aanmeldingen worden uitgeschakeld zodra tweeledige verificatie is ingeschakeld op je account."
@@ -1394,6 +1385,10 @@ nl:
           save: "Opslaan"
           edit_description: "Naam fysieke beveiligingssleutel"
           name_required_error: "Je moet een naam voor je beveiligingssleutel opgeven."
+      passkeys:
+        save: "Opslaan"
+        added_prefix: "Toegevoegd"
+        last_used_prefix: "Laatst gebruikt"
       change_about:
         title: "Over mij wijzigen"
         error: "Er is een fout opgetreden bij het wijzigen van deze waarde."
@@ -1473,14 +1468,13 @@ nl:
           generic: "Je %{provider}-account wordt gebruikt voor verificatie."
       name:
         title: "Naam"
-        instructions: "uw volledige naam (optioneel)"
-        instructions_required: "Je volledige naam"
+        instructions: "Uw volledige naam (optioneel)."
+        instructions_required: "Je volledige naam."
         required: "Voer een naam in"
         too_short: "Je naam is te kort"
         ok: "Je naam ziet er goed uit"
       username:
         title: "Gebruikersnaam"
-        instructions: "uniek, geen spaties, kort"
         short_instructions: "Mensen kunnen je vermelden als @%{username}"
         available: "Je gebruikersnaam is beschikbaar"
         not_available: "Niet beschikbaar. %{suggestion} proberen?"
@@ -1675,8 +1669,9 @@ nl:
         same_as_username: "Je wachtwoord is hetzelfde als je gebruikersnaam."
         same_as_email: "Je wachtwoord is hetzelfde als je e-mailadres."
         ok: "Je wachtwoord ziet er goed uit."
-        instructions: "minimaal %{count} tekens"
+        instructions: "Minimaal %{count} tekens."
         required: "Voer een wachtwoord in"
+        confirm: "Bevestigen"
       summary:
         title: "Samenvatting"
         stats: "Statistieken"
@@ -1915,7 +1910,6 @@ nl:
       link_label: "E-mail mij een aanmeldlink"
       button_label: "met e-mailadres"
       login_link: "Wachtwoord overslaan, e-mail me een aanmeldlink"
-      emoji: "slotemoji"
       complete_username: "Als een account overeenkomt met <b>%{username}</b>, zou je binnen enkele ogenblikken een e-mail met een aanmeldlink moeten ontvangen."
       complete_email: "Als een account overeenkomt met <b>%{email}</b>, zou je binnen enkele ogenblikken een e-mail met een aanmeldlink moeten ontvangen."
       complete_username_found: "We hebben een account gevonden dat overeenkomt met de gebruikersnaam <b>%{username}</b>. Je zou binnen enkele ogenblikken een e-mail met een aanmeldlink moeten ontvangen."
@@ -2004,7 +1998,6 @@ nl:
         security_key: "Beveiligingssleutel gebruiken"
     invites:
       accept_title: "Uitnodiging"
-      emoji: "envelopemoji"
       welcome_to: "Welkom bij %{site_name}!"
       invited_by: "Je bent uitgenodigd door:"
       social_login_available: "Je kunt je ook aanmelden met een sociale-media-account dat dat e-mailadres gebruikt."
@@ -2041,12 +2034,6 @@ nl:
       topic_count:
         one: "%{count} topic in deze categorie"
         other: "%{count} topics in deze categorie"
-      plus_subcategories_title:
-        one: "%{name} en één subcategorie"
-        other: "%{name} en %{count} subcategorieën"
-      plus_subcategories:
-        one: "+ %{count} subcategorie"
-        other: "+ %{count} subcategorieën"
     select_kit:
       delete_item: "%{name} verwijderen"
       filter_by: "Filteren op: %{name}"
@@ -2101,19 +2088,16 @@ nl:
       add_warning: "Dit is een officiële waarschuwing."
       toggle_whisper: "Fluisteren in-/uitschakelen"
       toggle_unlisted: "Onzichtbaar in-/uitschakelen"
+      insert_table: "Tabel invoegen"
       posting_not_on_topic: "Op welk topic wil je antwoorden?"
       saved_local_draft_tip: "lokaal opgeslagen"
       drafts_offline: "concepten offline"
       edit_conflict: "bewerkingsconflict"
       esc: "Esc"
-      esc_label: "Klik of druk op Esc om te sluiten"
       ok_proceed: "OK, doorgaan"
       group_mentioned_limit:
         one: "<b>Waarschuwing!</b> Je hebt <a href='%{group_link}'>%{group}</a> genoemd, maar deze groep heeft meer leden dan de door een beheerder geconfigureerde vermeldingslimiet van %{count} gebruiker. Niemand krijgt een melding."
         other: "<b>Waarschuwing!</b> Je hebt <a href='%{group_link}'>%{group}</a> genoemd, maar deze groep heeft meer leden dan de door een beheerder geconfigureerde vermeldingslimiet van %{count} gebruikers. Niemand krijgt een melding."
-      group_mentioned:
-        one: "Door %{group} te vermelden, krijgt <a href='%{group_link}'>%{count} persoon</a> een melding. Weet je het zeker?"
-        other: "Door %{group} te vermelden, krijgen <a href='%{group_link}'>%{count} personen</a> een melding. Weet je het zeker?"
       cannot_see_mention:
         category: "Je hebt @%{username} genoemd, maar de gebruiker ontvangt geen melding, omdat deze geen toegang heeft tot deze categorie. Je moet de gebruiker toevoegen aan een groep die toegang heeft tot deze categorie."
         private: "Je hebt @%{username} genoemd, maar de gebruiker ontvangt geen melding, omdat deze dit persoonlijke bericht niet kan zien. Je moet de gebruiker uitnodigen voor dit persoonlijke bericht."
@@ -2338,6 +2322,7 @@ nl:
         private_message: '%{username} heeft je een persoonlijk bericht gestuurd in ''%{topic}'' - %{site_title}'
         linked: '%{username} heeft een link naar je bericht geplaatst vanuit ''%{topic}'' - %{site_title}'
         watching_first_post: '%{username} heeft een nieuw topic gemaakt: ''%{topic}'' - %{site_title}'
+        watching_category_or_tag: '%{username} heeft een bericht geplaatst in ''%{topic}'' - %{site_title}'
         confirm_title: "Meldingen ingeschakeld - %{site_title}"
         confirm_body: "Gelukt! Meldingen zijn ingeschakeld."
         custom: "Melding van %{username} op %{site_title}"
@@ -2368,6 +2353,7 @@ nl:
         reaction: "nieuwe reactie"
         votes_released: "Stem is vrijgegeven"
         new_features: "Er zijn nieuwe Discourse-functies uitgebracht!"
+        admin_problems: "nieuw advies op je websitedashboard"
     upload_selector:
       uploading: "Uploaden"
       processing: "Upload verwerken"
@@ -2719,9 +2705,7 @@ nl:
           false { of <a href="{basePath}/latest">bekijk de nieuwste topics</a>}
           other {}
         }
-      bumped_at_title: |
-        Eerste bericht: %{createdAtDate}
-        Geplaatst: %{bumpedAtDate}
+      bumped_at: "Nieuwste: %{date}"
       browse_all_categories_latest: "<a href='%{basePath}/categories'>Blader door alle categorieën</a> of <a href='%{basePath}/latest'>bekijk de nieuwste topics</a>."
       browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Blader door alle categorieën</a>, <a href='%{basePath}/latest'>bekijk de nieuwste topics</a> of zie de top:"
       browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Blader door alle tags</a> of <a href='%{basePath}/latest'>bekijk de nieuwste topics</a>."
@@ -3067,9 +3051,7 @@ nl:
     post:
       confirm_delete: "Weet je zeker dat je dit bericht wilt verwijderen?"
       quote_reply: "Citeren"
-      quote_reply_shortcut: "Of druk op q"
       quote_edit: "Bewerken"
-      quote_edit_shortcut: "Of druk op e"
       quote_share: "Delen"
       edit_reason: "Reden: "
       post_number: "bericht %{number}"
@@ -3460,8 +3442,7 @@ nl:
       action: "Bericht markeren"
       take_action_options:
         default:
-          title: "Actie ondernemen"
-          details: "De markeerdrempel direct bereiken, in plaats van op meer markeringen door de community te wachten"
+          title: "Bericht verbergen"
         suspend:
           title: "Gebruiker schorsen"
           details: "De markeerdrempel bereiken en de gebruiker schorsen"
@@ -3478,7 +3459,6 @@ nl:
       ip_address_missing: "(N.v.t.)"
       hidden_email_address: "(verborgen)"
       submit_tooltip: "Stuur de privémarkering"
-      take_action_tooltip: "De markeerdrempel direct bereiken, in plaats van op meer markeringen door de community te wachten"
       cant: "Sorry, je kunt dit bericht momenteel niet markeren."
       notify_staff: "Medewerkers privémelding sturen"
       formatted_name:
@@ -3827,7 +3807,6 @@ nl:
       other_tags: "Andere tags"
       selector_all_tags: "alle tags"
       selector_no_tags: "geen tags"
-      changed: "gewijzigde tags:"
       tags: "Tags"
       choose_for_topic: "optionele tags"
       info: "Info"
@@ -3861,7 +3840,6 @@ nl:
         one: "Het synoniem wordt ook verwijderd."
         other: "De %{count} synoniemen worden ook verwijderd."
       edit_tag: "Tagnaam en -beschrijving bewerken"
-      description: "Beschrijving"
       sort_by: "Sorteren op:"
       sort_by_count: "aantal"
       sort_by_name: "naam"
@@ -3996,8 +3974,7 @@ nl:
     second_factor_auth:
       redirect_after_success: "Tweeledige verificatie is geslaagd. Je wordt doorgestuurd naar de vorige pagina…"
     sidebar:
-      show_sidebar: "Zijbalk weergeven"
-      hide_sidebar: "Zijbalk verbergen"
+      title: "Zijbalk"
       unread_count:
         one: "%{count} ongelezen"
         other: "%{count} ongelezen"
@@ -4035,7 +4012,6 @@ nl:
           delete: "Verwijderen"
           delete_confirm: "Weet je zeker dat je deze sectie wilt verwijderen?"
           reset_confirm: "Weet je zeker dat je deze sectie wilt herstellen naar de standaardinstellingen?"
-          public: "Deze sectie openbaar en zichtbaar voor iedereen maken"
           always_public: "Content in deze sectie is altijd openbaar"
           more_menu: "Menu Meer"
           links:
@@ -4140,10 +4116,12 @@ nl:
     form_template_chooser:
       select_template: "Selecteer formuliersjablonen"
     form_templates:
+      upload_field:
+        upload: "Upload"
+        uploading: "Uploaden"
       errors:
         valueMissing:
           default: "Vul dit veld in."
-          text: "Vul dit veld in."
           select-one: "Selecteer een item in de lijst."
           select-multiple: "Selecteer ten minste één item in de lijst."
           checkbox: "Selecteer dit vakje als je verder wilt gaan."
@@ -4171,6 +4149,61 @@ nl:
           other: "De invoer moet groter zijn dan %{count}."
         patternMismatch: "Zorg dat je de gevraagde notatie gebruikt."
         badInput: "Voer een geldige invoer in."
+    table_builder:
+      title: "Tabelbouwer"
+      modal:
+        title: "Tabelbouwer"
+        create: "Tabel bouwen"
+        help:
+          title: "Gebruik van de spreadsheeteditor"
+          enter_key: "Enter"
+          tab_key: "Tab"
+          new_row: "aan het einde van een rij om een nieuwe rij in te voegen."
+          options: "Rechtsklik op cellen voor meer opties in een vervolgkeuzemenu."
+      edit:
+        btn_edit: "Tabel bewerken"
+        modal:
+          title: "Tabel bewerken"
+          cancel: "annuleren"
+          create: "Opslaan"
+          reason: "waarom bewerk je?"
+          trigger_reason: "Reden voor bewerking toevoegen"
+        default_edit_reason: "Tabel bijwerken met tabeleditor"
+      default_header:
+        col_1: "Kolom 1"
+        col_2: "Kolom 2"
+        col_3: "Kolom 3"
+        col_4: "Kolom 4"
+      spreadsheet:
+        no_records_found: "Geen records gevonden"
+        show: "Weergeven"
+        entries: "vermeldingen"
+        about: "Over"
+        prompts:
+          delete_selected_rows: "Weet je zeker dat je de geselecteerde rijen wilt verwijderen?"
+          delete_selected_cols: "Weet je zeker dat je de geselecteerde kolommen wilt verwijderen?"
+          will_destroy_merged_cells: "Hierdoor worden alle bestaande samengevoegde cellen vernietigd. Weet je het zeker?"
+          will_clear_search_results: "Hierdoor worden alle bestaande samengevoegde cellen vernietigd. Weet je het zeker?"
+          conflicts_with_merged_cells: "Er is een conflict met een andere samengevoegde cel"
+        invalid_merge_props: "Ongeldige samengevoegde eigenschappen"
+        cells_already_merged: "Cel is al samengevoegd"
+        no_cells_selected: "Geen cellen geselecteerd"
+        context_menu:
+          row:
+            before: "Nieuwe rij invoegen voor"
+            after: "Nieuwe rij invoegen na"
+            delete: "Geselecteerde rijen verwijderen"
+          col:
+            before: "Nieuwe kolom invoegen voor"
+            after: "Nieuwe kolom invoegen na"
+            delete: "Geselecteerde kolommen verwijderen"
+            rename: "Deze kolom hernoemen"
+          order:
+            ascending: "Oplopend sorteren"
+            descending: "Aflopend sorteren"
+          copy: "Kopiëren..."
+          paste: "Plakken..."
+          save: "Opslaan als..."
   admin_js:
     type_to_filter: "typ om te filteren…"
     admin:
@@ -4199,9 +4232,7 @@ nl:
         latest_version: "Nieuwste"
         problems_found: "Advies op basis van je huidige website-instellingen"
         new_features:
-          title: "\U0001F381 Nieuwe functies"
-          dismiss: "Negeren"
-          learn_more: "Meer informatie"
+          learn_more: "Meer informatie..."
         last_checked: "Laatst gecontroleerd"
         refresh_problems: "Vernieuwen"
         no_problems: "Er zijn geen problemen gevonden."
@@ -4487,42 +4518,8 @@ nl:
         groups_filter_instructions: "Relevante webhooks worden alleen geactiveerd als de gebeurtenis bij opgegeven groepen hoort. Laat dit leeg om webhooks voor alle groepen te activeren."
         groups_filter: "Geactiveerde groepen"
         delete_confirm: "Deze webhook verwijderen?"
-        topic_event:
-          name: "Topicgebeurtenis"
-          details: "Wanneer een nieuw topic wordt geplaatst, gereviseerd, gewijzigd of verwijderd."
-        post_event:
-          name: "Berichtgebeurtenis"
-          details: "Wanneer een (nieuw) bericht wordt geplaatst, bewerkt, verwijderd of hersteld."
-        user_event:
-          name: "Gebruikersgebeurtenis"
-          details: "Wanneer een gebruiker zich aanmeldt, zich afmeldt, het e-mailadres bevestigt of wordt gemaakt, goedgekeurd of bijgewerkt."
-        group_event:
-          name: "Groepsgebeurtenis"
-          details: "Wanneer een groep wordt gemaakt, bijgewerkt of verwijderd."
-        category_event:
-          name: "Categoriegebeurtenis"
-          details: "Wanneer een categorie wordt gemaakt, bijgewerkt of verwijderd."
-        tag_event:
-          name: "Tag-gebeurtenis"
-          details: "Wanneer een tag wordt gemaakt, bijgewerkt of verwijderd."
-        reviewable_event:
-          name: "Beoordeelbare gebeurtenis"
-          details: "Wanneer een nieuw item gereed is voor beoordeling en wanneer de status ervan is bijgewerkt."
-        notification_event:
-          name: "Meldingsgebeurtenis"
-          details: "Wanneer een gebruiker een melding in diens feed ontvangt."
-        user_promoted_event:
-          name: "Door gebruiker gepromoot evenement"
-          details: "Wanneer een gebruiker wordt gepromoveerd van het ene vertrouwensniveau naar het andere."
-        user_badge_event:
-          name: "Badgegebeurtenis"
-          details: "Wanneer een badge wordt toegekend of ingetrokken."
-        group_user_event:
-          name: "Groepgebruikersgebeurtenis"
-          details: "Wanneer een gebruiker wordt toegevoegd of verwijderd in een groep."
         like_event:
-          name: "Likegebeurtenis"
-          details: "Wanneer een gebruiker een bericht liket."
+          post_liked: "Wanneer een gebruiker een bericht liket."
         delivery_status:
           title: "Afleveringsstatus"
           inactive: "Inactief"
@@ -4561,8 +4558,9 @@ nl:
         not_enabled: "N"
         change_settings_short: "Instellingen"
         howto: "Hoe kan ik plug-ins installeren?"
-        official: "Officiële plug-in"
         broken_route: "Kan link naar '%{name}' niet configureren. Zorg dat advertentieblockers zijn uitgeschakeld en probeer de pagina opnieuw te laden."
+        author: "Van %{author}"
+        learn_more: "Meer informatie"
       navigation_menu:
         sidebar: "Zijbalk"
         header_dropdown: "Vervolgkeuzelijst kop"
@@ -4671,7 +4669,6 @@ nl:
           theme_name: "Themanaam"
           component_name: "Onderdeelnaam"
           themes_intro: "Selecteer een bestaand of installeer een nieuw thema om te beginnen"
-          themes_intro_emoji: "kunstenares-emoji"
           beginners_guide_title: "Beginnersgids voor het gebruik van Discourse-thema's"
           developers_guide_title: "Ontwikkelaarsgids voor Discourse-thema's"
           browse_themes: "Communitythema's bekijken"
@@ -4719,6 +4716,7 @@ nl:
           convert_theme_tooltip: "Dit thema naar een onderdeel converteren"
           inactive_themes: "Inactieve thema's:"
           inactive_components: "Ongebruikte onderdelen:"
+          cancel: "Annuleren"
           broken_theme_tooltip: "Dit thema bevat fouten in de CSS, HTML of YAML ervan"
           disabled_component_tooltip: "Dit onderdeel is uitgeschakeld"
           default_theme_tooltip: "Dit thema is het standaardthema van de website"
@@ -5699,6 +5697,9 @@ nl:
         json_schema:
           edit: Editor starten
           modal_title: "%{name} bewerken"
+        file_types_list:
+          add_image_types: "Afbeeldingen"
+          add_audio_types: "Audio"
       badges:
         title: Badges
         new_badge: Nieuwe badge
@@ -5774,7 +5775,6 @@ nl:
             with_time: <span class="username">%{username}</span> om <span class="time">%{time}</span>
         badge_intro:
           title: "Selecteer een bestaande badge of maak een nieuwe om te beginnen"
-          emoji: "studente-emoji"
           what_are_badges_title: "Wat zijn badges?"
           badge_query_examples_title: "Voorbeelden van badgequery's"
         mass_award:

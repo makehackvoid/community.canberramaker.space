@@ -29,6 +29,7 @@ class Category < ActiveRecord::Base
   belongs_to :uploaded_logo, class_name: "Upload"
   belongs_to :uploaded_logo_dark, class_name: "Upload"
   belongs_to :uploaded_background, class_name: "Upload"
+  belongs_to :uploaded_background_dark, class_name: "Upload"
 
   has_many :topics
   has_many :category_users
@@ -106,22 +107,28 @@ class Category < ActiveRecord::Base
   before_save :downcase_name
   before_save :ensure_category_setting
 
-  after_save :publish_discourse_stylesheet
-  after_save :publish_category
   after_save :reset_topic_ids_cache
   after_save :clear_subcategory_ids
   after_save :clear_url_cache
   after_save :update_reviewables
+  after_save :publish_discourse_stylesheet
+  after_save :publish_category
 
   after_save do
     if saved_change_to_uploaded_logo_id? || saved_change_to_uploaded_logo_dark_id? ||
-         saved_change_to_uploaded_background_id?
-      upload_ids = [self.uploaded_logo_id, self.uploaded_logo_dark_id, self.uploaded_background_id]
+         saved_change_to_uploaded_background_id? || saved_change_to_uploaded_background_dark_id?
+      upload_ids = [
+        self.uploaded_logo_id,
+        self.uploaded_logo_dark_id,
+        self.uploaded_background_id,
+        self.uploaded_background_dark_id,
+      ]
       UploadReference.ensure_exist!(upload_ids: upload_ids, target: self)
     end
   end
 
   after_destroy :reset_topic_ids_cache
+  after_destroy :clear_subcategory_ids
   after_destroy :publish_category_deletion
   after_destroy :remove_site_settings
 
@@ -161,7 +168,7 @@ class Category < ActiveRecord::Base
   scope :latest, -> { order("topic_count DESC") }
 
   scope :secured,
-        ->(guardian = nil) {
+        ->(guardian = nil) do
           ids = guardian.secure_category_ids if guardian
 
           if ids.present?
@@ -172,13 +179,13 @@ class Category < ActiveRecord::Base
           else
             where("NOT categories.read_restricted").references(:categories)
           end
-        }
+        end
 
   TOPIC_CREATION_PERMISSIONS ||= [:full]
   POST_CREATION_PERMISSIONS ||= %i[create_post full]
 
   scope :topic_create_allowed,
-        ->(guardian) {
+        ->(guardian) do
           scoped = scoped_to_permissions(guardian, TOPIC_CREATION_PERMISSIONS)
 
           if !SiteSetting.allow_uncategorized_topics && !guardian.is_staff?
@@ -186,10 +193,23 @@ class Category < ActiveRecord::Base
           end
 
           scoped
-        }
+        end
 
   scope :post_create_allowed,
         ->(guardian) { scoped_to_permissions(guardian, POST_CREATION_PERMISSIONS) }
+
+  scope :with_ancestors, ->(id) { where(<<~SQL, id) }
+        id IN (
+          WITH RECURSIVE ancestors(category_id) AS (
+            SELECT ?
+            UNION
+            SELECT parent_category_id
+            FROM categories, ancestors
+            WHERE id = ancestors.category_id
+          )
+          SELECT category_id FROM ancestors
+        )
+      SQL
 
   delegate :post_template, to: "self.class"
 
@@ -204,6 +224,34 @@ class Category < ActiveRecord::Base
 
   # Allows us to skip creating the category definition topic in tests.
   attr_accessor :skip_category_definition
+
+  def self.preload_user_fields!(guardian, categories)
+    category_ids = categories.map(&:id)
+
+    # Load notification levels
+    notification_levels = CategoryUser.notification_levels_for(guardian.user)
+    notification_levels.default = CategoryUser.default_notification_level
+
+    # Load permissions
+    allowed_topic_create_ids =
+      if !guardian.is_admin? && !guardian.is_anonymous?
+        Category.topic_create_allowed(guardian).where(id: category_ids).pluck(:id).to_set
+      end
+
+    # Categories with children
+    with_children =
+      Category.where(parent_category_id: category_ids).pluck(:parent_category_id).to_set
+
+    # Update category attributes
+    categories.each do |category|
+      category.notification_level = notification_levels[category[:id]]
+
+      category.permission = CategoryGroup.permission_types[:full] if guardian.is_admin? ||
+        allowed_topic_create_ids&.include?(category[:id])
+
+      category.has_children = with_children.include?(category[:id])
+    end
+  end
 
   def self.topic_id_cache
     @topic_id_cache ||= DistributedCache.new("category_topic_ids")
@@ -838,8 +886,8 @@ class Category < ActiveRecord::Base
   end
 
   def has_children?
-    @has_children ||= (id && Category.where(parent_category_id: id).exists?) ? :true : :false
-    @has_children == :true
+    return @has_children if defined?(@has_children)
+    @has_children = (id && Category.where(parent_category_id: id).exists?)
   end
 
   def uncategorized?
@@ -1185,6 +1233,7 @@ end
 #  allow_unlimited_owner_edits_on_first_post :boolean          default(FALSE), not null
 #  default_slow_mode_seconds                 :integer
 #  uploaded_logo_dark_id                     :integer
+#  uploaded_background_dark_id               :integer
 #
 # Indexes
 #

@@ -1,13 +1,13 @@
-import User from "discourse/models/user";
 import { cached, tracked } from "@glimmer/tracking";
 import { TrackedArray, TrackedObject } from "@ember-compat/tracked-built-ins";
-import ChatMessageReaction from "discourse/plugins/chat/discourse/models/chat-message-reaction";
-import Bookmark from "discourse/models/bookmark";
-import I18n from "I18n";
 import { generateCookFunction, parseMentions } from "discourse/lib/text";
-import transformAutolinks from "discourse/plugins/chat/discourse/lib/transform-auto-links";
-import { getOwner } from "discourse-common/lib/get-owner";
+import Bookmark from "discourse/models/bookmark";
+import User from "discourse/models/user";
+import { getOwnerWithFallback } from "discourse-common/lib/get-owner";
 import discourseLater from "discourse-common/lib/later";
+import I18n from "discourse-i18n";
+import transformAutolinks from "discourse/plugins/chat/discourse/lib/transform-auto-links";
+import ChatMessageReaction from "discourse/plugins/chat/discourse/models/chat-message-reaction";
 
 export default class ChatMessage {
   static cookFunction = null;
@@ -26,6 +26,7 @@ export default class ChatMessage {
   @tracked selected;
   @tracked channel;
   @tracked staged;
+  @tracked processed = true;
   @tracked draftSaved;
   @tracked draft;
   @tracked createdAt;
@@ -64,6 +65,7 @@ export default class ChatMessage {
     this.draftSaved = args.draftSaved || args.draft_saved || false;
     this.firstOfResults = args.firstOfResults || args.first_of_results || false;
     this.staged = args.staged || false;
+    this.processed = args.processed || true;
     this.edited = args.edited || false;
     this.editing = args.editing || false;
     this.availableFlags = args.availableFlags || args.available_flags;
@@ -115,6 +117,11 @@ export default class ChatMessage {
   }
 
   set thread(thread) {
+    if (!thread) {
+      this._thread = null;
+      return;
+    }
+
     this._thread = this.channel.threadsManager.add(this.channel, thread, {
       replace: true,
     });
@@ -127,7 +134,6 @@ export default class ChatMessage {
   set deletedAt(value) {
     this._deletedAt = value;
     this.incrementVersion();
-    return this._deletedAt;
   }
 
   get cooked() {
@@ -329,7 +335,7 @@ export default class ChatMessage {
   }
 
   get #markdownOptions() {
-    const site = getOwner(this).lookup("service:site");
+    const site = getOwnerWithFallback(this).lookup("service:site");
     return {
       featuresOverride:
         site.markdown_additional_options?.chat?.limited_pretty_text_features,

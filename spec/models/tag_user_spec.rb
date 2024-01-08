@@ -4,7 +4,7 @@
 RSpec.describe TagUser do
   before do
     SiteSetting.tagging_enabled = true
-    SiteSetting.min_trust_to_create_tag = 0
+    SiteSetting.create_tag_allowed_groups = Group::AUTO_GROUPS[:trust_level_0]
     SiteSetting.min_trust_level_to_tag_topics = 0
   end
 
@@ -186,7 +186,7 @@ RSpec.describe TagUser do
   end
 
   describe "integration" do
-    fab!(:user) { Fabricate(:user) }
+    fab!(:user)
     fab!(:watched_tag) { Fabricate(:tag) }
     let(:muted_tag) { Fabricate(:tag) }
     fab!(:tracked_tag) { Fabricate(:tag) }

@@ -412,15 +412,12 @@ ar:
       our_moderators: "مشرفونا"
       moderators: "المشرفون"
       stat:
-        all_time: "طوال الوقت"
-        last_day: "آخر 24 ساعة"
-        last_7_days: "آخر 7 أيام"
-        last_30_days: "آخر 30 يومًا"
+        last_day: "24 ساعة"
       like_count: "تسجيلات الإعجاب"
       topic_count: "الموضوعات"
       post_count: "المنشورات"
-      user_count: "عمليات التسجيل"
-      active_user_count: "المستخدمون النشطون"
+      user_count: "التسجيلات"
+      active_user_count: "المستخدِمون النشطون"
       contact: "تواصل معنا"
       contact_info: "في حال حدوث مشكلة خطيرة أو أمر عاجل يؤثر على الموقع، يُرجى مراسلتنا على %{contact_info}."
     bookmarked:
@@ -467,6 +464,7 @@ ar:
       copied: "تم النسخ!"
       copy: "نسخ الرمز إلى الحافظة"
       fullscreen: "عرض الرمز في وضع ملء الشاشة"
+      view_code: "عرض الرمز"
     drafts:
       label: "المسودات"
       label_with_count: "المسودات (%{count})"
@@ -581,6 +579,14 @@ ar:
         type_bonus:
           name: "مكافأة النوع"
           title: "يمكن لفريق العمل تخصيص مكافأة لبعض الأنواع القابلة للمراجعة لمنحها أولوية أعلى."
+      revise_and_reject_post:
+        title: "مراجعة"
+        reason: "السبب"
+        send_pm: "إرسال رسالة"
+        feedback: "انطباع"
+        custom_reason: "قدم وصفًا واضحًا للسبب"
+        other_reason: "آخر..."
+        optional: "اختياري"
       stale_help: "تم إجراء هذه المراجعة بواسطة <b>%{username}</b>."
       claim_help:
         optional: "يمكنك المطالبة بهذا العنصر لمنع الآخرين من مراجعته."
@@ -951,7 +957,7 @@ ar:
           imap_mailbox_not_selected: "يجب تحديد صندوق بريد لإعداد خادم IMAP وإلا فلن تتم مزامنة أي صناديق بريد!"
           prefill:
             title: "الملء المسبق بإعدادات:"
-            gmail: "GMail"
+            gmail: "Gmail"
           credentials:
             title: "بيانات الاعتماد"
             smtp_server: "خادم SMTP"
@@ -1232,6 +1238,7 @@ ar:
     user:
       said: "%{username}:"
       profile: "الملف الشخصي"
+      profile_possessive: "ملف %{username} الشخصي"
       mute: "كتم"
       edit: "تعديل التفضيلات"
       download_archive:
@@ -1610,7 +1617,6 @@ ar:
         success: "(تم إرسال رسالة البريد الإلكتروني)"
         in_progress: "(جارٍ إرسال رسالة البريد الإلكتروني)"
         error: "(خطأ)"
-        emoji: "رمز قفل"
         action: "إرسال رسالة إلكترونية لإعادة تعيين كلمة المرور"
         set_password: "تعيين كلمة المرور"
         choose_new: "اختيار كلمة مرور جديدة"
@@ -1649,8 +1655,6 @@ ar:
         title: "المصادقة الثنائية"
         enable: "إدارة المصادقة الثنائية"
         disable_all: "إيقاف الكل"
-        forgot_password: "هل نسيت كلمة المرور؟"
-        confirm_password_description: "يُرجى تأكيد كلمة المرور للمتابعة"
         name: "الاسم"
         label: "الرمز"
         rate_limit: "يُرجى الانتظار قبل تجربة رمز مصادقة آخر."
@@ -1658,8 +1662,6 @@ ar:
           امسح رمز QR ضوئيًا في أحد التطبيقات المدعومة (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> و<a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) وأدخِل رمز المصادقة.
         disable_description: "يُرجى إدخال رمز المصادقة من تطبيقك"
         show_key_description: "الإدخال يدويًا"
-        short_description: |
-          احمِ حسابك برموز أمان تُستخدَم لمرة واحدة.
         extended_description: |
           تضيف المصادقة الثنائية أمانًا إضافيًا إلى حسابك من خلال طلب رمز مميز لمرة واحدة بالإضافة إلى كلمة مرورك. يمكن إنشاء الرموز المميزة على الأجهزة التي تعمل بنظام التشغيل <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>Android</a> و<a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a>.
         oauth_enabled_warning: "يُرجى العلم بأنه سيتم إيقاف تسجيل الدخول بحسابات التواصل الاجتماعي بعد تفعيل المصادقة الثنائية على حسابك."
@@ -1698,6 +1700,12 @@ ar:
           save: "حفظ"
           edit_description: "اسم مفتاح الأمان المادي"
           name_required_error: "يجب عليك إدخال اسم لمفتاح الأمان."
+      passkeys:
+        rename_passkey_instructions: "اختر اسم مفتاح المرور الذي سيتعرف عليه بسهولة، على سبيل المثال، استخدم اسم مدير كلمات مرورك."
+        save: "حفظ"
+        short_description: "مفاتيح المرور هي بدائل لكلمات المرور تتحقق من هويتك بواسطة القياسات الحيوية (على سبيل المثال، اللمس أو معرف الوجه) أو عبر رقم التعريف الشخصي/كلمة المرور للجهاز."
+        added_prefix: "تمت الإضافة"
+        last_used_prefix: "آخر استخدام"
       change_about:
         title: "تغيير \"نبذة عني\""
         error: "حدث خطأ في أثناء تغيير هذه القيمة."
@@ -1782,14 +1790,14 @@ ar:
           generic: "سيتم استخدام حسابك على %{provider} للمصادقة."
       name:
         title: "الاسم"
-        instructions: "اسمك بالكامل (اختياري)"
-        instructions_required: "اسمك بالكامل"
+        instructions: "اسمك بالكامل (اختياري)."
+        instructions_required: "اسمك بالكامل."
         required: "يُرجى إدخال اسم"
         too_short: "اسمك قصير جدًا"
         ok: "اسمك يبدو جيدًا"
       username:
         title: "اسم المستخدم"
-        instructions: "مميز، وبلا مسافات، وقصير"
+        instructions: "مميز، وبلا مسافات، وقصير."
         short_instructions: "يمكن للأشخاص الإشارة إليك هكذا: ⁨@%{username}⁩"
         available: "اسم المستخدم متوفر"
         not_available: "غير متاح. هل تريد تجربة %{suggestion}؟"
@@ -1984,6 +1992,9 @@ ar:
           progress: "رُفع %{progress}%…"
           success: "تم تحميل الملف بنجاح. سيتم إرسال إشعار إليك عبر رسالة عند اكتمال العملية."
           error: "عذرًا، يجب أن يكون الملف بتنسيق CSV."
+      confirm_access:
+        incorrect_password: "كلمة المرور المدخلة غير صحيحة."
+        logged_in_as: "أنت مسجل الدخول ك: "
       password:
         title: "كلمة المرور"
         too_short: "كلمة مرورك قصيرة جدًا."
@@ -1991,8 +2002,10 @@ ar:
         same_as_username: "كلمة المرور تُطابق اسم المستخدم."
         same_as_email: "كلمة المرور تُطابق عنوان البريد الإلكتروني."
         ok: "تبدو كلمة مرورك جيدة."
-        instructions: "يجب ألا يقل عن %{count} حرف"
+        instructions: "يجب ألا يقل عن %{count} حرف."
         required: "يُرجى إدخال كلمة المرور"
+        confirm: "تأكيد"
+        incorrect_password: "كلمة المرور المدخلة غير صحيحة."
       summary:
         title: "الملخص"
         stats: "الإحصاءات"
@@ -2262,11 +2275,13 @@ ar:
       title: "إنشاء حسابك"
       failed: "حدث خطأ ما. قد يكون هذا البريد الإلكتروني مسجلًا بالفعل. جرِّب رابط نسيان كلمة المرور"
       associate: "لديك حساب بالفعل؟ <a href='%{associate_link}'>سجِّل الدخول</a> لربط حسابك من %{provider}."
+      activation_title: "فعّل حسابك"
     forgot_password:
       title: "إعادة تعيين كلمة المرور"
       action: "نسيت كلمة مروري"
       invite: "أدخِل اسم المستخدم أو عنوان البريد الإلكتروني، وسنُرسل إليك رسالة إلكترونية لإعادة تعيين كلمة المرور."
       invite_no_username: "أدخل عنوان بريدك الإلكتروني، وسنُرسل إليك رسالة لإعادة تعيين كلمة المرور."
+      email-username: "البريد الإلكتروني أو اسم المستخدم"
       reset: "إعادة تعيين كلمة المرور"
       complete_username: "إذا تطابق أحد الحسابات مع اسم المستخدم <b>%{username}</b>، فستتلقى سريعًا رسالة إلكترونية تتضمَّن تعليمات عن كيفية إعادة تعيين كلمة المرور."
       complete_email: "إذا تطابق أحد الحسابات مع <b>%{email}</b>، فستتلقى سريعًا رسالة إلكترونية تتضمَّن تعليمات عن كيفية إعادة تعيين كلمة المرور."
@@ -2281,7 +2296,6 @@ ar:
       link_label: "مراسلتي عبر البريد الإلكتروني برابط تسجيل الدخول"
       button_label: "عبر البريد الإلكتروني"
       login_link: "تخطي كلمة المرور؛ مراسلتي عبر البريد الإلكتروني برابط تسجيل الدخول"
-      emoji: "رمز قفل"
       complete_username: "إذا تطابق أحد الحسابات مع اسم المستخدم <b>%{username}</b>، فمن المفترض أن تتلقى رسالة إلكترونية برابط تسجيل الدخول قريبًا."
       complete_email: "إذا تطابق أحد الحسابات مع عنوان البريد الإلكتروني <b>%{email}</b>، فمن المفترض أن تتلقى رسالة إلكترونية برابط تسجيل الدخول قريبًا."
       complete_username_found: "لقد عثرنا على حساب مطابق لاسم المستخدم <b>%{username}</b>. ومن المفترض أن تتلقى رسالة إلكتروني برابط تسجيل الدخول قريبًا."
@@ -2372,7 +2386,6 @@ ar:
         security_key: "استخدم مفتاح أمان بدلًا من ذلك"
     invites:
       accept_title: "الدعوة"
-      emoji: "رمز مظروف"
       welcome_to: "مرحبًا بك في %{site_name}!"
       invited_by: "دعاك:"
       social_login_available: "يمكنك أيضًا تسجيل الدخول بأي حساب تواصل اجتماعي باستخدام هذا البريد الإلكتروني."
@@ -2415,20 +2428,6 @@ ar:
         few: "%{count} موضوعات في هذه الفئة"
         many: "%{count} موضوعًا في هذه الفئة"
         other: "%{count} موضوع في هذه الفئة"
-      plus_subcategories_title:
-        zero: "%{name} و%{count} فئة فرعية"
-        one: "%{name} وفئة فرعية واحدة (%{count})"
-        two: "%{name} وفئتان فرعيتان (%{count})"
-        few: "%{name} و%{count} فئات فرعية"
-        many: "%{name} و%{count} فئة فرعية"
-        other: "%{name} و%{count} فئة فرعية"
-      plus_subcategories:
-        zero: "تصنيف فرعي + %{count} و تصنيفات فرعية"
-        one: "+ %{count} تصنيفات فرعية"
-        two: "+ %{count} تصنيف فرعي واحد و تصنيفات فرعية"
-        few: "+ %{count} فئات فرعية"
-        many: "+ %{count} فئة فرعية"
-        other: "+ %{count} فئة فرعية"
     select_kit:
       delete_item: "حذف %{name}"
       filter_by: "التصفية حسب: %{name}"
@@ -2502,13 +2501,14 @@ ar:
       add_warning: "هذا تحذير رسمي."
       toggle_whisper: "تفعيل الهمس"
       toggle_unlisted: "تفعيل إلغاء الإدراج"
+      insert_table: "إدراج جدول"
       posting_not_on_topic: "أي موضوع تريد الرد عليه؟"
       saved_local_draft_tip: "تم الحفظ محليًا"
       similar_topics: "موضوعك يشابه…"
       drafts_offline: "مسودات بلا اتصال"
       edit_conflict: "تعارض في التعديل"
       esc: "Esc"
-      esc_label: "انقر أو اضغط على Esc للتجاهل"
+      esc_label: "تجاهل الرسالة"
       ok_proceed: "حسنًا، المتابعة"
       group_mentioned_limit:
         zero: "<b>تحذير!</b>لقد أشرت إلى <a href='%{group_link}'>%{group}</a>، لكن هذه المجموعة تتضمَّن عدد أعضاء أكثر من حد الإشارة الذي عيَّنه المسؤول وهو %{count} مستخدم. لن يتم إرسال إشعار إلى أي أحد."
@@ -2517,13 +2517,6 @@ ar:
         few: "<b>تحذير!</b>لقد أشرت إلى <a href='%{group_link}'>%{group}</a>، لكن هذه المجموعة تتضمَّن عدد أعضاء أكثر من حد الإشارة الذي عيَّنه المسؤول وهو %{count} مستخدمين. لن يتم إرسال إشعار إلى أي أحد."
         many: "<b>تحذير!</b>لقد أشرت إلى <a href='%{group_link}'>%{group}</a>، لكن هذه المجموعة تتضمَّن عدد أعضاء أكثر من حد الإشارة الذي عيَّنه المسؤول وهو %{count} مستخدمًا. لن يتم إرسال إشعار إلى أي أحد."
         other: "<b>تحذير!</b>لقد أشرت إلى <a href='%{group_link}'>%{group}</a>، لكن هذه المجموعة تتضمَّن عدد أعضاء أكثر من حد الإشارة الذي عيَّنه المسؤول وهو %{count} مستخدم. لن يتم إرسال إشعار إلى أي أحد."
-      group_mentioned:
-        zero: "تشير الإشارة إلى %{group} أنك على وشك إرسال إشعار إلى <a href='%{group_link}'>%{count} شخص</a>. هل أنت متأكد؟"
-        one: "تشير الإشارة إلى %{group} أنك على وشك إرسال إشعار إلى <a href='%{group_link}'>شخص واحد (%{count})</a>. هل أنت متأكد؟"
-        two: "تشير الإشارة إلى %{group} أنك على وشك إرسال إشعار إلى <a href='%{group_link}'>شخصين (%{count})</a>. هل أنت متأكد؟"
-        few: "تشير الإشارة إلى %{group} أنك على وشك إرسال إشعار إلى <a href='%{group_link}'>%{count} أشخاص)</a>. هل أنت متأكد؟"
-        many: "تشير الإشارة إلى %{group} أنك على وشك إرسال إشعار إلى <a href='%{group_link}'>%{count} شخصًا)</a>. هل أنت متأكد؟"
-        other: "تشير الإشارة إلى %{group} أنك على وشك إرسال إشعار إلى <a href='%{group_link}'>%{count} شخص)</a>. هل أنت متأكد؟"
       cannot_see_mention:
         category: "لقد أشرت إلى @%{username}، لكنه لن يتلقى إشعارًا لأنه ليس لديه إذن بالوصول إلى هذه الفئة. عليك إضافته إلى إحدى المجموعات التي لديها إذن بالوصول إلى هذه الفئة."
         private: "لقد أشرت إلى @%{username}، لكنه لن يتلقى إشعارًا لأنه لا يمكنه رؤية هذه الرسالة الخاصة. عليك دعوته إلى هذه الرسالة الخاصة."
@@ -2675,6 +2668,7 @@ ar:
           desc: تكون الهمسات مرئية لأعضاء فريق العمل فقط
         create_topic:
           label: "موضوع جديد"
+          desc: أنشئ موضوع جديد
         shared_draft:
           label: "مسودة مشتركة"
           desc: "إنشاء مسودة الموضوع ستكون مرئية للمستخدمين المسموح لهم فقط"
@@ -2821,6 +2815,7 @@ ar:
         private_message: 'أرسل %{username} إليك رسالة خاصة في "%{topic}" -‏ %{site_title}'
         linked: 'وضع %{username} رابطًا إلى منشورك في "%{topic}" - %{site_title}'
         watching_first_post: 'أنشأ %{username} موضوعًا جديدًا: "%{topic}" -‏ %{site_title}'
+        watching_category_or_tag: 'نشر %{username} في "%{topic}" - ‏%{site_title}'
         confirm_title: "تم تفعيل الإشعارات - %{site_title}"
         confirm_body: "تم بنجاح! تم تفعيل الإشعارات."
         custom: "إشعار من %{username} على %{site_title}"
@@ -2851,6 +2846,7 @@ ar:
         reaction: "تفاعل جديد"
         votes_released: "تم تحرير التصويت"
         new_features: "تم إطلاق ميزات جديدة في Discourse!"
+        admin_problems: "نصيحة جديدة بشأن لوحة معلومات موقعك"
     upload_selector:
       uploading: "جارٍ التحميل"
       processing: "التحميل قيد المعالجة"
@@ -3313,9 +3309,8 @@ ar:
           false { أو <a href="{basePath}/latest">شاهد آخر الموضوعات</a>}
           other {}
         }
-      bumped_at_title: |
-        أول منشور: %{createdAtDate}
-        تاريخ النشر: %{bumpedAtDate}
+      created_at: "تاريخ الإنشاء: %{date}"
+      bumped_at: "تاريخ آخر نسخ احتياطي: %{date}"
       browse_all_categories_latest: "<a href='%{basePath}/categories'>استعرض كل الفئات</a> أو <a href='%{basePath}/latest'>شاهد آخر الموضوعات</a>."
       browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>استعرض كل الفئات</a> أو <a href='%{basePath}/latest'>شاهد آخر الموضوعات</a>، أو انظر أبرز:"
       browse_all_tags_or_latest: "<a href='%{basePath}/tags'>استعرض كل الوسوم</a> أو <a href='%{basePath}/latest'>شاهد آخر الموضوعات</a>."
@@ -3728,9 +3723,7 @@ ar:
     post:
       confirm_delete: "هل تريد بالتأكيد حذف هذا المنشور؟"
       quote_reply: "اقتباس"
-      quote_reply_shortcut: "أو اضغط على q"
       quote_edit: "تعديل"
-      quote_edit_shortcut: "أو اضغط على e"
       quote_share: "مشاركة"
       edit_reason: "السبب: "
       post_number: "المنشور %{number}"
@@ -3829,6 +3822,7 @@ ar:
         create: "عذرًا، حدث خطأ في أثناء إنشاء منشورك. يُرجى إعادة المحاولة."
         edit: "عذرا، حدث خطأ في أثناء تعديل منشورك. يُرجى إعادة المحاولة."
         upload: "عذرًا، حدث خطأ في أثناء الرفع %{file_name}. يُرجى إعادة المحاولة."
+        backup_too_large: "عذرًا، ملف النسخ الاحتياطي هذا كبير جدًا."
         file_too_large: "عذرًا، لكن الملف كبير جدًا (أقصى حجم هو %{max_size_kb} ك.ب). لماذا لا تحمِّل ملفك الكبير إلى خدمة مشاركة سحابية، ثم تلصق الرابط؟"
         file_size_zero: "عذرًا، يبدو أنه حدث خطأ ما؛ فحجم الملف الذي تحاول تحميله هو 0 بايت. حاول مرة أخرى."
         file_too_large_humanized: "عذرًا، هذا الملف كبير جدًا (الحد الأقصى للحجم هو %{max_size}). لماذا لا تقوم بتحميل ملفك الكبير إلى خدمة مشاركة سحابية، ثم تلصق الرابط؟"
@@ -4204,8 +4198,7 @@ ar:
       take_action: "اتخاذ إجراء…"
       take_action_options:
         default:
-          title: "اتخاذ إجراء"
-          details: "الوصول إلى الحد الأقصى للبلاغات على الفور بدلًا من انتظار المزيد من البلاغات من أعضاء المجتمع."
+          title: "إخفاء المنشور"
         suspend:
           title: "تعليق المستخدم"
           details: "الوصول إلى الحد الأقصى للبلاغات وتعليق المستخدم"
@@ -4222,7 +4215,6 @@ ar:
       ip_address_missing: "(لا يوجد)"
       hidden_email_address: "(مخفي)"
       submit_tooltip: "إرسال البلاغ الخاص"
-      take_action_tooltip: "الوصول إلى الحد الأقصى للبلاغات على الفور بدلًا من انتظار المزيد من البلاغات من أعضاء المجتمع."
       cant: "عذرًا، لا يمكنك الإبلاغ عن هذا المنشور في الوقت الحالي."
       notify_staff: "إرسال إشعار إلى فريق العمل بشكلٍ خاص"
       formatted_name:
@@ -4659,7 +4651,6 @@ ar:
       other_tags: "وسوم أخرى"
       selector_all_tags: "كل الوسوم"
       selector_no_tags: "لا توجد وسوم"
-      changed: "الوسوم التي تم تغييرها:"
       tags: "الوسوم"
       choose_for_topic: "الوسوم الاختيارية"
       choose_for_topic_required:
@@ -4727,7 +4718,6 @@ ar:
         many: "سيتم حذف مرادفاته (%{count}) أيضًا."
         other: "سيتم حذف مرادفاته (%{count}) أيضًا."
       edit_tag: "تعديل اسم الوسم ووصفه"
-      description: "الوصف"
       sort_by: "الترتيب حسب:"
       sort_by_count: "العدد"
       sort_by_name: "الاسم"
@@ -4869,11 +4859,11 @@ ar:
       sr_jump_bottom_button: "الانتقال إلى المنشور الأخير"
     fullscreen_table:
       expand_btn: "توسيع الجدول"
+      view_table: "عرض الجدول"
     second_factor_auth:
       redirect_after_success: "نجحت المصادقة الثنائية. جارٍ إعادة التوجيه إلى الصفحة السابقة…"
     sidebar:
-      show_sidebar: "إظهار الشريط الجانبي"
-      hide_sidebar: "إخفاء الشريط الجانبي"
+      title: "الشريط الجانبي"
       unread_count:
         zero: "%{count} غير مقروء"
         one: "%{count} غير مقروء"
@@ -4919,7 +4909,7 @@ ar:
           delete: "حذف"
           delete_confirm: "هل تريد بالتأكيد حذف هذا القسم؟"
           reset_confirm: "هل تريد بالتأكيد إعادة تعيين هذا القسم إلى الإعداد الافتراضي؟"
-          public: "جعل هذا القسم عامًا ومرئيًا للجميع"
+          public: "مرئيّ للجميع"
           always_public: "دائمًا ما يكون المحتوى في هذا القسم عامًا"
           more_menu: "قائمة \"المزيد\""
           links:
@@ -5028,10 +5018,12 @@ ar:
     form_template_chooser:
       select_template: "التحديد من القوالب"
     form_templates:
+      upload_field:
+        upload: "تحميل"
+        uploading: "جارٍ الرفع"
       errors:
         valueMissing:
           default: "يُرجى ملء هذا الحقل."
-          text: "يُرجى ملء هذا الحقل."
           select-one: "يُرجى تحديد عنصر في القائمة."
           select-multiple: "يُرجى تحديد عنصر واحد على الأقل في القائمة."
           checkbox: "يُرجى تحديد هذا المربع إذا كنت تريد المتابعة."
@@ -5075,6 +5067,63 @@ ar:
           other: "يجب ان يكون الإدخال أطول من %{count}."
         patternMismatch: "يُرجى مطابقة التنسيق المطلوب."
         badInput: "يُرجى إدخال قيمة صالحة."
+    table_builder:
+      title: "أداة إنشاء الجداول"
+      modal:
+        title: "أداة إنشاء الجداول"
+        create: "إنشاء جدول"
+        help:
+          title: "استخدام محرر جداول البيانات"
+          enter_key: "Enter"
+          tab_key: "مفتاح Tab"
+          new_row: "في نهاية الصف لإدراج صف جديد."
+          new_col: "في نهاية العمود لإدراج عمود جديد."
+          options: "انقر بزر الماوس الأيمن على الخلايا للوصول إلى المزيد من الخيارات في القائمة المنسدلة."
+        confirm_close: "هل أنت متأكد أنك تريد إغلاق منشئ الجدول؟ سيتم فقدان أي تغييرات غير محفوظة."
+      edit:
+        btn_edit: "تعديل الجدول"
+        modal:
+          title: "تعديل الجدول"
+          cancel: "إلغاء"
+          create: "حفظ"
+          reason: "ما سبب التعديل؟"
+          trigger_reason: "أضِف سبب التعديل"
+        default_edit_reason: "تحديث الجدول باستخدام محرر الجداول"
+      default_header:
+        col_1: "العمود 1"
+        col_2: "العمود 2"
+        col_3: "العمود 3"
+        col_4: "العمود 4"
+      spreadsheet:
+        no_records_found: "لم يتم العثور على سجلات"
+        show: "إظهار"
+        entries: "إدخالات"
+        about: "نبذة"
+        prompts:
+          delete_selected_rows: "هل تريد بالتأكيد حذف الصفوف المحدَّدة؟"
+          delete_selected_cols: "هل تريد بالتأكيد حذف الأعمدة المحدَّدة؟"
+          will_destroy_merged_cells: "سيؤدي هذا الإجراء إلى تدمير أي خلايا مدموجة موجودة. هل أنت متأكد؟"
+          will_clear_search_results: "سيؤدي هذا الإجراء إلى تدمير أي خلايا مدموجة موجودة. هل أنت متأكد؟"
+          conflicts_with_merged_cells: "هناك تعارض مع خلية مدموجة أخرى"
+        invalid_merge_props: "خصائص الدمج غير صالحة"
+        cells_already_merged: "تم دمج الخلية بالفعل"
+        no_cells_selected: "لم يتم تحديد أي خلايا"
+        context_menu:
+          row:
+            before: "إدراج صف جديد قبله"
+            after: "إدراج صف جديد بعده"
+            delete: "حذف الصفوف المحدَّدة"
+          col:
+            before: "إدراج عمود جديد قبله"
+            after: "إدراج عمود جديد بعده"
+            delete: "حذف الأعمدة المحدَّدة"
+            rename: "إعادة تسمية هذا العمود"
+          order:
+            ascending: "ترتيب تصاعدي"
+            descending: "ترتيب تنازلي"
+          copy: "نسخ..."
+          paste: "لصق..."
+          save: "الحفظ باسم..."
   admin_js:
     type_to_filter: "اكتب للتصفية…"
     admin:
@@ -5103,9 +5152,9 @@ ar:
         latest_version: "الحديثة"
         problems_found: "بعض النصائح بناءً على إعدادات موقعك الحالية"
         new_features:
-          title: "\U0001F381 الميزات الجديدة"
-          dismiss: "تجاهل"
-          learn_more: "معرفة المزيد"
+          title: "ما الجديد"
+          previous_announcements: "يمكنك رؤية إعلانات الميزات الجديدة السابقة على <a href='%{url}' target='_blank'>Discourse Meta</a>"
+          learn_more: "معرفة المزيد..."
         last_checked: "تاريخ آخر تحقُّق"
         refresh_problems: "تحديث"
         no_problems: "لم يتم العثور على مشكلات."
@@ -5408,42 +5457,14 @@ ar:
         groups_filter_instructions: "لن يتم تشغيل خطافات الويب ذات الصلة إلا إذا كان الحدث مرتبطًا بمجموعات محدَّدة. اتركه فارغًا لتشغيل خطافات الويب لجميع المجموعات."
         groups_filter: "المجموعات المشغَّلة"
         delete_confirm: "هل تريد حذف خطاف الويب هذا؟"
-        topic_event:
-          name: "حدث الموضوع"
-          details: "عندما يكون هناك موضوع جديد، أو تمت مراجعته أو تغييره أو حذفه."
-        post_event:
-          name: "حدث المنشور"
-          details: "عندما يكون هناك رد جديد، أو تم تعديله أو حذفه أو استعادته."
-        user_event:
-          name: "حدث المستخدم"
-          details: "عند تسجيل المستخدم للدخول أو الخروج، أو تأكيده لبريده الإلكتروني أو إنشائه أو الموافقة عليه أو تحديثه."
-        group_event:
-          name: "حدث المجموعة"
-          details: "عند إنشاء مجموعة أو تحديثها أو مسحها."
-        category_event:
-          name: "حدث الفئة"
-          details: "عند إنشاء فئة أو تحديثها أو مسحها."
         tag_event:
-          name: "حدث الوسم"
-          details: "عند إنشاء وسم أو تحديثه أو مسحه."
-        reviewable_event:
-          name: "حدث العنصر القابل للمراجعة"
-          details: "عند وجود عنصر جديد جاهز للمراجعة وعند تحديث حالته."
-        notification_event:
-          name: "حدث الإشعار"
-          details: "عند تلقي المستخدم إشعار في موجزه."
-        user_promoted_event:
-          name: "حدث يروِّج له المستخدم"
-          details: "عندما تتم ترقية المستخدم من مستوى ثقة إلى آخر."
+          group_name: "أحداث الوسم"
         user_badge_event:
-          name: "حدث الشارة"
-          details: "عند منح شارة أو سحبها."
-        group_user_event:
-          name: "حدث مستخدم المجموعة"
-          details: "عند إضافة مستخدم أو إزالته في مجموعة."
+          group_name: "أحداث الشارة"
         like_event:
-          name: "حدث الإعجاب"
-          details: "عند تسجيل المستخدم إعجابه بمنشور."
+          post_liked: "عند تسجيل المستخدم إعجابه بمنشور."
+        user_promoted_event:
+          user_promoted: "تتم ترقية المستخدم"
         delivery_status:
           title: "حالة التسليم"
           inactive: "غير نشط"
@@ -5490,8 +5511,11 @@ ar:
         not_enabled: "لا"
         change_settings_short: "الإعدادات"
         howto: "كيف يمكنني تثبيت الإضافات؟"
-        official: "المكوِّن الإضافي الرسمي"
+        official: "إضافة Discourse الرسمي"
         broken_route: "تتعذَّر تهيئة الرابط إلى \"%{name}\". تأكَّد من إيقاف كل أدوات حجب الإعلانات وحاول إعادة تحميل الصفحة."
+        author: "بواسطة %{author}"
+        experimental_badge: "تجريبي"
+        learn_more: "معرفة المزيد"
       navigation_menu:
         sidebar: "الشريط الجانبي"
         header_dropdown: "القائمة المنسدلة للرأس"
@@ -5585,6 +5609,9 @@ ar:
         install: "تثبيت"
         delete: "حذف"
         delete_confirm: 'هل تريد بالتأكيد حذف السمة "%{theme_name}"؟'
+        bulk_delete: "هل أنت متأكد؟"
+        bulk_themes_delete_confirm: "سيؤدي هذا إلى إلغاء تثبيت السمات التالية، ولن تكون قابلة للاستخدام من قبل أي مستخدم على موقعك بعد الآن:"
+        bulk_components_delete_confirm: "سيؤدي هذا إلى إلغاء تثبيت المكونات التالية، ولن تكون قابلة للاستخدام من قبل أي مستخدم على موقعك بعد الآن:"
         color: "اللون"
         opacity: "الشفافية"
         copy: "تكرار"
@@ -5607,7 +5634,6 @@ ar:
           theme_name: "اسم السمة"
           component_name: "اسم المكوِّن"
           themes_intro: "حدِّد سمة موجودة أو ثبِّت سمة جديدة للبدء"
-          themes_intro_emoji: "الرمز التعبيري لفنانة"
           beginners_guide_title: "دليل المبتدئين لاستخدام سمات Discourse"
           developers_guide_title: "دليل المطوِّرين لاستخدام سمات Discourse"
           browse_themes: "تصفُّح سمات المجتمع"
@@ -5655,6 +5681,7 @@ ar:
           convert_theme_tooltip: "تحويل هذه السمة إلى مكوِّن"
           inactive_themes: "السمات غير النشطة:"
           inactive_components: "المكوِّنات غير المستخدمة:"
+          cancel: "إلغاء"
           broken_theme_tooltip: "هذه السمة بها أخطاء في CSS أو HTML أو YAML"
           disabled_component_tooltip: "لقد تم إيقاف هذا المكوِّن"
           default_theme_tooltip: "هذه السمة هي السمة الافتراضية للموقع"
@@ -6167,6 +6194,7 @@ ar:
       form_templates:
         nav_title: "القوالب"
         title: "قوالب النموذج"
+        help: "أنشئ بنية قالب النموذج يمكن استخدامها لإنشاء موضوعات جديدة."
         new_template: "قالب جديد"
         list_table:
           headings:
@@ -6605,6 +6633,7 @@ ar:
         show_outdated: "عرض القديمة/غير الصالحة فقط"
         locale: "اللغة:"
         more_than_50_results: "هناك أكثر من 50 نتيجة. يُرجى تحسين البحث."
+        no_results: "لم يتم العثور على نصوص موقع مطابقة"
         interpolation_keys: "مفاتيح الاستيفاء المتاحة:"
         outdated:
           title: "هذه الترجمة قديمة"
@@ -6684,6 +6713,9 @@ ar:
         json_schema:
           edit: تشغيل المحرِّر
           modal_title: "تعديل %{name}"
+        file_types_list:
+          add_image_types: "الصور"
+          add_audio_types: "Audio"
       badges:
         title: الشارات
         new_badge: شارة جديدة
@@ -6711,7 +6743,7 @@ ar:
         grant_badge: منح شارة
         granted_badges: الشارات الممنوحة
         grant: منح
-        no_user_badges: "لم يتم منح %{name} أي شارة."
+        no_user_badges: "لم يُمنح %{name} أيّ شارة."
         no_badges: لا توجد شارات يمكن منحها.
         none_selected: "تحديد شارة للبدء"
         allow_title: السماح للمستخدمين باستخدام الشارة كعنوان
@@ -6763,7 +6795,6 @@ ar:
             with_time: '‏<span class="username">%{username}</span> في <span class="time">%{time}</span>'
         badge_intro:
           title: "حدِّد شارة موجودة أو أنشئ شارة جديدة للبدء"
-          emoji: "الرمز التعبيري لطالبة"
           what_are_badges_title: "ما الشارات؟"
           badge_query_examples_title: "أمثلة على استعلامات الشارات"
         mass_award:

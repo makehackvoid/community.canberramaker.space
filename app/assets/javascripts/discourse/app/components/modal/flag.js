@@ -1,11 +1,11 @@
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
-import { tracked } from "@glimmer/tracking";
-import I18n from "I18n";
+import { reload } from "discourse/helpers/page-reloader";
 import { MAX_MESSAGE_LENGTH } from "discourse/models/post-action-type";
 import User from "discourse/models/user";
-import { reload } from "discourse/helpers/page-reloader";
+import I18n from "discourse-i18n";
 
 const NOTIFY_MODERATORS_KEY = "notify_moderators";
 
@@ -36,7 +36,7 @@ export default class Flag extends Component {
       label: I18n.t("flagging.take_action"),
       actions: [
         {
-          id: "agree_and_keep",
+          id: "agree_and_hide",
           icon: "thumbs-up",
           label: I18n.t("flagging.take_action_options.default.title"),
           description: I18n.t("flagging.take_action_options.default.details"),

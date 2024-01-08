@@ -39,7 +39,11 @@ module Helpers
 
   def create_topic(args = {})
     args[:title] ||= "This is my title #{Helpers.next_seq}"
-    user = args.delete(:user) || Fabricate(:user)
+    user = args.delete(:user)
+    if !user
+      user = Fabricate(:user)
+      Group.refresh_automatic_groups!
+    end
     guardian = Guardian.new(user)
     args[:category] = args[:category].id if args[:category].is_a?(Category)
     TopicCreator.create(user, guardian, args)
@@ -71,10 +75,10 @@ module Helpers
     Guardian.stubs(new: guardian).with(user, anything)
   end
 
-  def wait_for(on_fail: nil, &blk)
+  def wait_for(on_fail: nil, timeout: 1, &blk)
     i = 0
     result = false
-    while !result && i < 1000
+    while !result && i < timeout * 1000
       result = blk.call
       i += 1
       sleep 0.001
@@ -181,6 +185,16 @@ module Helpers
       `cd #{repo_dir} && git add #{name}`
     end
     `cd #{repo_dir} && git commit -am 'first commit'`
+    repo_dir
+  end
+
+  def add_to_git_repo(repo_dir, files)
+    files.each do |name, data|
+      FileUtils.mkdir_p(Pathname.new("#{repo_dir}/#{name}").dirname)
+      File.write("#{repo_dir}/#{name}", data)
+      `cd #{repo_dir} && git add #{name}`
+    end
+    `cd #{repo_dir} && git commit -am 'add #{files.size} files'`
     repo_dir
   end
 

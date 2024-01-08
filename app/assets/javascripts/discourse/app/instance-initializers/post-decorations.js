@@ -1,16 +1,20 @@
 import { schedule } from "@ember/runloop";
-import discourseLater from "discourse-common/lib/later";
-import I18n from "I18n";
-import highlightSyntax from "discourse/lib/highlight-syntax";
-import lightbox from "discourse/lib/lightbox";
-import Columns from "discourse/lib/columns";
-import { iconHTML, iconNode } from "discourse-common/lib/icon-library";
-import { setTextDirections } from "discourse/lib/text-direction";
-import { nativeLazyLoading } from "discourse/lib/lazy-load-images";
-import { withPluginApi } from "discourse/lib/plugin-api";
 import { create } from "virtual-dom";
 import FullscreenTableModal from "discourse/components/modal/fullscreen-table";
+import SpreadsheetEditor from "discourse/components/modal/spreadsheet-editor";
+import { ajax } from "discourse/lib/ajax";
+import { popupAjaxError } from "discourse/lib/ajax-error";
+import Columns from "discourse/lib/columns";
+import highlightSyntax from "discourse/lib/highlight-syntax";
+import { nativeLazyLoading } from "discourse/lib/lazy-load-images";
+import lightbox from "discourse/lib/lightbox";
 import { SELECTORS } from "discourse/lib/lightbox/constants";
+import { withPluginApi } from "discourse/lib/plugin-api";
+import { parseAsync } from "discourse/lib/text";
+import { setTextDirections } from "discourse/lib/text-direction";
+import { tokenRange } from "discourse/lib/utilities";
+import { iconHTML, iconNode } from "discourse-common/lib/icon-library";
+import I18n from "discourse-i18n";
 
 export default {
   initialize(owner) {
@@ -82,30 +86,6 @@ export default {
         });
       });
 
-      const caps = owner.lookup("service:capabilities");
-      if (caps.isSafari || caps.isIOS) {
-        api.decorateCookedElement(
-          (elem) => {
-            elem.querySelectorAll("video").forEach((video) => {
-              if (video.poster && video.poster !== "" && !video.autoplay) {
-                return;
-              }
-
-              const source = video.querySelector("source");
-              if (source) {
-                // In post-cooked.js, we create the video element in a detached DOM
-                // then adopt it into to the real DOM.
-                // This confuses safari, and preloading/autoplay do not happen.
-
-                // Calling `.load()` tricks Safari into loading the video element correctly
-                source.parentElement.load();
-              }
-            });
-          },
-          { afterAdopt: true, onlyStream: true }
-        );
-      }
-
       const oneboxTypes = {
         amazon: "discourse-amazon",
         githubactions: "fab-github",
@@ -131,43 +111,33 @@ export default {
         });
       });
 
-      api.decorateCookedElement((element) => {
-        element
-          .querySelectorAll(".video-container")
-          .forEach((videoContainer) => {
-            const video = videoContainer.getElementsByTagName("video")[0];
-            video.addEventListener("loadeddata", () => {
-              discourseLater(() => {
-                if (video.videoWidth === 0 || video.videoHeight === 0) {
-                  const notice = document.createElement("div");
-                  notice.className = "notice";
-                  notice.innerHTML =
-                    iconHTML("exclamation-triangle") +
-                    " " +
-                    I18n.t("cannot_render_video");
-
-                  videoContainer.appendChild(notice);
-                }
-              }, 500);
-            });
-          });
-      });
-
-      function _createButton() {
+      function _createButton(props) {
         const openPopupBtn = document.createElement("button");
-        openPopupBtn.classList.add(
+        const defaultClasses = [
           "open-popup-link",
           "btn-default",
           "btn",
           "btn-icon",
-          "btn-expand-table",
-          "no-text"
-        );
-        const expandIcon = create(
-          iconNode("discourse-expand", { class: "expand-table-icon" })
-        );
-        openPopupBtn.title = I18n.t("fullscreen_table.expand_btn");
-        openPopupBtn.append(expandIcon);
+          "no-text",
+        ];
+
+        openPopupBtn.classList.add(...defaultClasses);
+
+        if (props.classes) {
+          openPopupBtn.classList.add(...props.classes);
+        }
+
+        if (props.title) {
+          openPopupBtn.title = I18n.t(props.title);
+        }
+
+        if (props.icon) {
+          const icon = create(
+            iconNode(props.icon.name, { class: props.icon?.class })
+          );
+          openPopupBtn.append(icon);
+        }
+
         return openPopupBtn;
       }
 
@@ -175,14 +145,64 @@ export default {
         return scrollWidth > clientWidth;
       }
 
-      function generateModal(event) {
+      function generateFullScreenTableModal(event) {
         const table = event.currentTarget.parentElement.nextElementSibling;
         const tempTable = table.cloneNode(true);
         modal.show(FullscreenTableModal, { model: { tableHtml: tempTable } });
       }
 
-      function generatePopups(tables) {
-        tables.forEach((table) => {
+      function generateSpreadsheetModal() {
+        const tableIndex = this.tableIndex;
+
+        return ajax(`/posts/${this.id}`, { type: "GET" })
+          .then((post) => {
+            parseAsync(post.raw).then((tokens) => {
+              const allTables = tokenRange(tokens, "table_open", "table_close");
+              const tableTokens = allTables[tableIndex];
+
+              modal.show(SpreadsheetEditor, {
+                model: {
+                  post,
+                  tableIndex,
+                  tableTokens,
+                },
+              });
+            });
+          })
+          .catch(popupAjaxError);
+      }
+
+      function generatePopups(tables, attrs) {
+        tables.forEach((table, index) => {
+          const buttonWrapper = document.createElement("div");
+          buttonWrapper.classList.add("fullscreen-table-wrapper__buttons");
+
+          const tableEditorBtn = _createButton({
+            classes: ["btn-edit-table"],
+            title: "table_builder.edit.btn_edit",
+            icon: {
+              name: "pencil-alt",
+              class: "edit-table-icon",
+            },
+          });
+
+          table.parentNode.setAttribute("data-table-index", index);
+          table.parentNode.classList.add("fullscreen-table-wrapper");
+
+          if (attrs.canEdit) {
+            buttonWrapper.append(tableEditorBtn);
+            tableEditorBtn.addEventListener(
+              "click",
+              generateSpreadsheetModal.bind({
+                tableIndex: index,
+                ...attrs,
+              }),
+              false
+            );
+          }
+
+          table.parentNode.insertBefore(buttonWrapper, table);
+
           if (!isOverflown(table.parentNode)) {
             return;
           }
@@ -191,28 +211,50 @@ export default {
             return;
           }
 
-          const popupBtn = _createButton();
-          table.parentNode.classList.add("fullscreen-table-wrapper");
-          // Create a button wrapper for case of multiple buttons (i.e. table builder extension)
-          const buttonWrapper = document.createElement("div");
-          buttonWrapper.classList.add("fullscreen-table-wrapper--buttons");
-          buttonWrapper.append(popupBtn);
-          popupBtn.addEventListener("click", generateModal, false);
+          const expandTableBtn = _createButton({
+            classes: ["btn-expand-table"],
+            title: "fullscreen_table.expand_btn",
+            icon: { name: "discourse-expand", class: "expand-table-icon" },
+          });
+          buttonWrapper.append(expandTableBtn);
+          expandTableBtn.addEventListener(
+            "click",
+            generateFullScreenTableModal,
+            false
+          );
           table.parentNode.insertBefore(buttonWrapper, table);
         });
       }
 
+      function cleanupPopupBtns() {
+        const editTableBtn = document.querySelector(
+          ".open-popup-link.btn-edit-table"
+        );
+        const expandTableBtn = document.querySelector(
+          ".open-popup-link.btn-expand-table"
+        );
+
+        expandTableBtn?.removeEventListener(
+          "click",
+          generateFullScreenTableModal
+        );
+        editTableBtn?.removeEventListener("click", generateSpreadsheetModal);
+      }
+
       api.decorateCookedElement(
-        (post) => {
+        (post, helper) => {
           schedule("afterRender", () => {
-            const tables = post.querySelectorAll("table");
-            generatePopups(tables);
+            const tables = post.querySelectorAll(".md-table table");
+            generatePopups(tables, helper.widget.attrs);
           });
         },
         {
           onlyStream: true,
+          id: "table-wrapper",
         }
       );
+
+      api.cleanupStream(cleanupPopupBtns);
     });
   },
 };

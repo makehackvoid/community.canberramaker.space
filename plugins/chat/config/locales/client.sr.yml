@@ -53,9 +53,10 @@ sr:
       channel_info:
         back_to_channel: "Nazad"
         tabs:
-          about: O nama
           members: Članovi
           settings: Podešavanja
+      new_message_modal:
+        filter: "Filter"
       direct_message_creator:
         title: Nova privatna poruka
       create_channel:
@@ -74,6 +75,10 @@ sr:
         save: "Sačuvaj"
         saved: "Sačuvano"
         admin_title: "Admin"
+        settings_title: "Podešavanja"
+        category_label: "Kategorija"
+        history_label: "Istorija"
+        members_label: "Članovi"
       incoming_webhooks:
         back: "Nazad"
         description: "Opis"
@@ -92,6 +97,11 @@ sr:
           title: "Prebaci u Novu Temu"
         existing_topic:
           title: "Prebaci u Postojeću Temu"
+      retention_reminders:
+        short:
+          one: "%{count} дан"
+          few: "%{count} дана"
+          other: "%{count} дана"
       emoji_picker:
         flags: "Zastave"
       thread:

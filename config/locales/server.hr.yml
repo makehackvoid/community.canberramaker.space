@@ -199,7 +199,6 @@ hr:
       default_tags_already_selected: "Ne možete odabrati oznaku koja se koristi na drugom popisu."
       s3_upload_bucket_is_required: "Ne možete omogućiti prijenose na S3 osim ako niste naveli 's3_upload_bucket'."
       enable_s3_uploads_is_required: "Ne možete omogućiti korištenje S3 inventara osim ako niste omogućili S3 prijenose."
-      page_publishing_requirements: "Objavljivanje stranice ne može se omogućiti ako je omogućen siguran medij."
       s3_backup_requires_s3_settings: "Ne možete koristiti S3 kao pričuvnu lokaciju osim ako niste unijeli '%{setting_name}'."
   invite:
     disabled_errors:
@@ -428,7 +427,8 @@ hr:
             name:
               same_as_password: "je ista kao vaša lozinka."
             ip_address:
-              signup_not_allowed: "Prijava nije dopuštena ovom računu."
+              blocked: "Nove registracije nisu dopuštene s vaše IP adrese."
+              max_new_accounts_per_registration_ip: "Nove registracije nisu dopuštene s vaše IP adrese (dostignuto je maksimalno ograničenje). Kontaktirajte člana osoblja."
         color_scheme_color:
           attributes:
             hex:
@@ -1076,9 +1076,6 @@ hr:
     allow_user_locale: "Dopustite korisnicima da odaberu vlastite postavke jezika sučelja"
     set_locale_from_accept_language_header: "postaviti jezik sučelja za anonimne korisnike iz jezičnih zaglavlja njihovih web preglednika"
     support_mixed_text_direction: "Podržava mješoviti smjer teksta slijeva nadesno i zdesna nalijevo."
-    min_post_length: "Minimalna dopuštena duljina posta u znakovima"
-    min_first_post_length: "Minimalna dopuštena duljina prve objave (tijelo teme) u znakovima"
-    min_personal_message_post_length: "Minimalna dopuštena duljina posta u znakovima za poruke"
     max_post_length: "Najveća dopuštena duljina posta u znakovima"
     topic_featured_link_enabled: "Omogući objavljivanje poveznice s temama."
     show_topic_featured_link_in_digest: "Pokažite istaknutu vezu na temu u sažetku e-pošte."
@@ -1143,7 +1140,6 @@ hr:
     tl2_additional_flags_per_day_multiplier: "Povećajte ograničenje zastavica po danu za tl2 (član) množenjem s ovim brojem"
     tl3_additional_flags_per_day_multiplier: "Povećajte ograničenje zastavica po danu za tl3 (regular) množenjem s ovim brojem"
     tl4_additional_flags_per_day_multiplier: "Povećajte ograničenje zastavica po danu za tl4 (voditelj) množenjem s ovim brojem"
-    num_users_to_silence_new_user: "Ako postovi novog korisnika dobiju num_spam_flags_to_silence_new_user zastavice neželjene pošte od toliko različitih korisnika, sakrijte sve njihove postove i spriječite buduće objavljivanje. 0 za onemogućavanje."
     num_tl3_flags_to_silence_new_user: "Ako postovi novog korisnika dobiju ovoliko oznaka od num_tl3_users_to_silence_new_user različitih korisnika razine povjerenja 3, sakrijte sve njihove postove i spriječite buduća objavljivanja. 0 za onemogućavanje."
     num_tl3_users_to_silence_new_user: "Ako postovi novog korisnika dobiju oznake num_tl3_flags_to_silence_new_user od toliko različitih korisnika razine povjerenja 3, sakrijte sve njihove postove i spriječite buduća objavljivanja. 0 za onemogućavanje."
     notify_mods_when_user_silenced: "Ako je korisnik automatski utišan, pošaljite poruku svim moderatorima."
@@ -1157,7 +1153,6 @@ hr:
     must_approve_users: "Osoblje mora odobriti sve nove korisničke račune prije nego im se dopusti pristup stranici."
     invite_code: "Korisnik mora upisati ovaj kod kako bi mu se omogućila registracija računa, zanemaruje se kada je prazan (neosjetljivo je na velika i mala slova)"
     approve_suspect_users: "Dodajte sumnjive korisnike u red čekanja za pregled. Sumnjivi korisnici ušli su u biografiju/web stranicu, ali nemaju aktivnosti čitanja."
-    review_every_post: "Sve objave moraju biti pregledane. UPOZORENJE! NE PREPORUČUJE SE ZA PROMETNA MJESTA."
     pending_users_reminder_delay_minutes: "Obavijesti moderatore ako novi korisnici čekaju na odobrenje dulje od ovoliko minuta. Postavite na -1 da biste onemogućili obavijesti."
     persistent_sessions: "Korisnici će ostati prijavljeni kada se web preglednik zatvori"
     maximum_session_age: "Korisnik će ostati prijavljen n sati od zadnje posjete"
@@ -1165,7 +1160,6 @@ hr:
     ga_universal_tracking_code: "Google Universal Analytics ID koda za praćenje, npr.: UA-12345678-9; pogledajte <a href='https://google.com/analytics' target='_blank'>https://google.com/analytics</a>"
     ga_universal_domain_name: "Google Universal Analytics naziv domene, npr.: mysite.com; pogledajte <a href='https://google.com/analytics' target='_blank'>https://google.com/analytics</a>"
     ga_universal_auto_link_domains: "Omogućite Google Universal Analytics praćenje među domenama. Odlazne veze na te domene imat će dodan ID klijenta. Pogledajte <a href='https://support.google.com/analytics/answer/1034342?hl=en' target='_blank'>Googleov vodič za praćenje među domenama.</a>"
-    gtm_container_id: "ID spremnika Google upravitelja oznaka. npr.: GTM-ABCDEF. <br/>Napomena: Skripte trećih strana koje učitava GTM možda će morati biti stavljene na popis dopuštenih u 'src skripte sigurnosne politike sadržaja'."
     enable_escaped_fragments: "Vratite se na Googleov Ajax-Crawling API ako se ne otkrije alat za indeksiranje. Pogledajte <a href='https://developers.google.com/webmasters/ajax-crawling/docs/learn-more' target='_blank'>https://developers.google.com/webmasters/ajax-crawling/docs/learn-more</a>"
     moderators_manage_categories_and_groups: "Dopustite moderatorima stvaranje i upravljanje kategorijama i grupama"
     moderators_change_post_ownership: "Dopusti moderatorima promjenu vlasništva posta"
@@ -1274,14 +1268,8 @@ hr:
     min_title_similar_length: "Minimalna duljina naslova prije nego što će se provjeriti za slične teme."
     desktop_category_page_style: "Vizualni stil za stranicu /kategorije."
     category_colors: "Popis heksadecimalnih vrijednosti boja dopuštenih za kategorije."
-    category_style: "Vizualni stil za bedževe kategorije."
     default_dark_mode_color_scheme_id: "Shema boja koja se koristi u tamnom načinu rada."
     dark_mode_none: "ništa"
-    max_image_size_kb: "Maksimalna veličina slike za učitavanje u kB. Ovo također mora biti konfigurirano u nginx (client_max_body_size) / apache ili proxy. Slike veće od ovoga i manje od client_max_body_size bit će promijenjene u veličini kako bi stale pri prijenosu."
-    max_attachment_size_kb: "Maksimalna veličina učitanih datoteka privitka u kB. Ovo također mora biti konfigurirano u nginx (client_max_body_size) / apache ili proxy."
-    authorized_extensions: "Popis ekstenzija datoteka dopuštenih za prijenos (upotrijebite '*' da biste omogućili sve vrste datoteka)"
-    authorized_extensions_for_staff: "Popis ekstenzija datoteka dopuštenih za učitavanje za korisnike osoblja uz popis definiran u postavci web mjesta `authorized_extensions`. (koristite '*' da omogućite sve vrste datoteka)"
-    theme_authorized_extensions: "Popis ekstenzija datoteka dopuštenih za učitavanje tema (upotrijebite '*' da omogućite sve vrste datoteka)"
     max_similar_results: "Koliko sličnih tema prikazati iznad uređivača prilikom sastavljanja nove teme. Usporedba se temelji na naslovu i tijelu."
     max_image_megapixels: "Maksimalni dopušteni broj megapiksela za sliku. Slike s većim brojem megapiksela bit će odbijene."
     title_prettify: "Spriječite uobičajene tipfelere i pogreške u naslovu, uključujući velika slova, prvi znak malim slovima, više! i ?, ekstra . na kraju itd."
@@ -1377,7 +1365,6 @@ hr:
     embed_topics_list: "Podržava HTML ugradnju popisa tema"
     embed_set_canonical_url: "Postavite kanonski URL za ugrađene teme na URL ugrađenog sadržaja."
     embed_truncate: "Skratite ugrađene postove."
-    embed_unlisted: "Uvezene teme neće biti navedene dok korisnik ne odgovori."
     embed_support_markdown: "Podržava Markdown formatiranje za ugrađene objave."
     allowed_embed_selectors: "Popis CSS elemenata odvojenih zarezima koji su dopušteni u ugrađivanju."
     allowed_href_schemes: "Sheme dopuštene u vezama uz http i https."
@@ -1422,7 +1409,6 @@ hr:
     suppress_overlapping_tags_in_list: "Ako oznake odgovaraju točnim riječima u naslovima tema, nemojte prikazivati oznaku"
     remove_muted_tags_from_latest: "Ne prikazuj teme označene samo prigušenim oznakama na najnovijem popisu tema."
     force_lowercase_tags: "Prisilno navedite da sve nove oznake budu ispisane malim slovima."
-    company_name: "Ime tvrtke"
     governing_law: "Mjerodavno pravo"
     city_for_disputes: "Grad za sporove"
     shared_drafts_category: "Omogućite značajku Dijeljene skice određivanjem kategorije za skice tema. Teme u ovoj kategoriji bit će potisnute s popisa tema za korisnike osoblja."
@@ -1452,7 +1438,6 @@ hr:
     suggest_weekends_in_date_pickers: "Uključite vikende (subota i nedjelja) u prijedloge za odabir datuma (onemogućite ovo ako Discourse koristite samo radnim danima, od ponedjeljka do petka)."
     splash_screen: "Prikazuje privremeni zaslon za učitavanje dok se sredstva web-mjesta učitavaju"
     navigation_menu: "Odredite koji navigacijski izbornik koristiti. Bočnu traku i navigaciju u zaglavlju korisnici mogu prilagoditi. Naslijeđena opcija dostupna je za kompatibilnost s prethodnim verzijama."
-    enable_experimental_hashtag_autocomplete: "EKSPERIMENTALNO: Upotrijebite novi #hashtag sustav automatskog dovršavanja za kategorije i oznake koji drugačije prikazuje odabranu stavku i ima poboljšano pretraživanje"
     errors:
       invalid_css_color: "Nevažeća boja. Unesite naziv boje ili hex vrijednost."
       invalid_email: "Nevažeća adresa e-pošte."
@@ -1628,9 +1613,6 @@ hr:
       blocked: "nije dopušteno."
       revoked: "Neće slati e-poštu na '%{email}' do %{date}."
       does_not_exist: "N/A"
-    ip_address:
-      blocked: "Nove registracije nisu dopuštene s vaše IP adrese."
-      max_new_accounts_per_registration_ip: "Nove registracije nisu dopuštene s vaše IP adrese (dostignuto je maksimalno ograničenje). Kontaktirajte člana osoblja."
     website:
       domain_not_allowed: "Web stranica nije važeća. Dopuštene domene su: %{domains}"
     auto_rejected: "Automatski odbijeno zbog starosti. Pogledajte postavku web mjesta auto_handle_queued_age."

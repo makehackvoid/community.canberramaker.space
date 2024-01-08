@@ -50,9 +50,10 @@ be:
       channel_info:
         back_to_channel: "Назад"
         tabs:
-          about: Аб тэме
           members: Удзельнікі
           settings: Налады
+      new_message_modal:
+        filter: "Filter"
       direct_message_creator:
         title: новае паведамленне
         prefix: "да:"
@@ -75,6 +76,10 @@ be:
         save: "захаваць"
         saved: "Захавана"
         admin_title: "адміністратар"
+        settings_title: "Налады"
+        category_label: "катэгорыя"
+        history_label: "гісторыя"
+        members_label: "Удзельнікі"
       incoming_webhooks:
         back: "Назад"
         description: "Апісанне"

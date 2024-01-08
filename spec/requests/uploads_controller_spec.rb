@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe UploadsController do
-  fab!(:user) { Fabricate(:user) }
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
 
   describe "#create" do
     it "requires you to be logged in" do
@@ -132,24 +132,21 @@ RSpec.describe UploadsController do
         )
       end
 
-      it "ensures allow_uploaded_avatars is enabled when uploading an avatar" do
-        SiteSetting.allow_uploaded_avatars = "disabled"
+      it "ensures user belongs to uploaded_avatars_allowed_groups when uploading an avatar" do
+        SiteSetting.uploaded_avatars_allowed_groups = "13"
         post "/uploads.json", params: { file: logo, type: "avatar" }
         expect(response.status).to eq(422)
+
+        user.update!(trust_level: 3)
+        Group.refresh_automatic_groups!
+        post "/uploads.json", params: { file: logo, type: "avatar" }
+        expect(response.status).to eq(200)
       end
 
       it "ensures discourse_connect_overrides_avatar is not enabled when uploading an avatar" do
         SiteSetting.discourse_connect_overrides_avatar = true
         post "/uploads.json", params: { file: logo, type: "avatar" }
         expect(response.status).to eq(422)
-      end
-
-      it "always allows admins to upload avatars" do
-        sign_in(Fabricate(:admin))
-        SiteSetting.allow_uploaded_avatars = "disabled"
-
-        post "/uploads.json", params: { file: logo, type: "avatar" }
-        expect(response.status).to eq(200)
       end
 
       it "allows staff to upload any file in PM" do
@@ -672,7 +669,7 @@ RSpec.describe UploadsController do
   end
 
   describe "#metadata" do
-    fab!(:upload) { Fabricate(:upload) }
+    fab!(:upload)
 
     describe "when url is missing" do
       it "should return the right response" do
@@ -778,6 +775,29 @@ RSpec.describe UploadsController do
           "x-amz-acl" => "private",
           "x-amz-meta-sha1-checksum" => "testing",
         )
+      end
+
+      context "when enable_s3_transfer_acceleration is true" do
+        before { SiteSetting.enable_s3_transfer_acceleration = true }
+
+        it "uses the s3-accelerate endpoint for presigned URLs" do
+          post "/uploads/generate-presigned-put.json",
+               **{
+                 params: {
+                   file_name: "test.png",
+                   file_size: 1024,
+                   type: "card_background",
+                   metadata: {
+                     "sha1-checksum" => "testing",
+                     "blah" => "wontbeincluded",
+                   },
+                 },
+               }
+          expect(response.status).to eq(200)
+
+          result = response.parsed_body
+          expect(result["url"]).to include("s3-accelerate")
+        end
       end
 
       describe "rate limiting" do
@@ -1045,7 +1065,7 @@ RSpec.describe UploadsController do
         XML
         stub_request(
           :get,
-          "https://s3-upload-bucket.s3.us-west-1.amazonaws.com/#{external_upload_stub.key}?max-parts=1&uploadId=#{mock_multipart_upload_id}",
+          "https://s3-upload-bucket.#{SiteSetting.enable_s3_transfer_acceleration ? "s3-accelerate" : "s3.us-west-1"}.amazonaws.com/#{external_upload_stub.key}?max-parts=1&uploadId=#{mock_multipart_upload_id}",
         ).to_return({ status: 200, body: list_multipart_result })
       end
 
@@ -1129,6 +1149,24 @@ RSpec.describe UploadsController do
         )
       end
 
+      context "when enable_s3_transfer_acceleration is true" do
+        before { SiteSetting.enable_s3_transfer_acceleration = true }
+
+        it "uses the s3-accelerate endpoint for presigned URLs" do
+          stub_list_multipart_request
+          post "/uploads/batch-presign-multipart-parts.json",
+               params: {
+                 unique_identifier: external_upload_stub.unique_identifier,
+                 part_numbers: [2, 3, 4],
+               }
+
+          expect(response.status).to eq(200)
+          result = response.parsed_body
+          expect(result["presigned_urls"].keys).to eq(%w[2 3 4])
+          expect(result["presigned_urls"]["2"]).to include("s3-accelerate")
+        end
+      end
+
       describe "rate limiting" do
         before { RateLimiter.enable }
 
@@ -1173,7 +1211,7 @@ RSpec.describe UploadsController do
 
   describe "#complete_multipart" do
     let(:upload_base_url) do
-      "https://#{SiteSetting.s3_upload_bucket}.s3.#{SiteSetting.s3_region}.amazonaws.com"
+      "https://#{SiteSetting.s3_upload_bucket}.#{SiteSetting.enable_s3_transfer_acceleration ? "s3-accelerate" : "s3.#{SiteSetting.s3_region}"}.amazonaws.com"
     end
     let(:mock_multipart_upload_id) do
       "ibZBv_75gd9r8lH_gqXatLdxMVpAlj6CFTR.OwyF3953YdwbcQnMA2BLGn8Lx12fQNICtMw5KyteFeHw.Sjng--"
@@ -1396,7 +1434,7 @@ RSpec.describe UploadsController do
 
   describe "#abort_multipart" do
     let(:upload_base_url) do
-      "https://#{SiteSetting.s3_upload_bucket}.s3.#{SiteSetting.s3_region}.amazonaws.com"
+      "https://#{SiteSetting.s3_upload_bucket}.#{SiteSetting.enable_s3_transfer_acceleration ? "s3-accelerate" : "s3.#{SiteSetting.s3_region}"}.amazonaws.com"
     end
     let(:mock_multipart_upload_id) do
       "ibZBv_75gd9r8lH_gqXatLdxMVpAlj6CFTR.OwyF3953YdwbcQnMA2BLGn8Lx12fQNICtMw5KyteFeHw.Sjng--"

@@ -19,8 +19,6 @@
     <AddTopicStatusClasses @topic={{this.model}} />
     <div class="container">
       <DiscourseBanner
-        @user={{this.currentUser}}
-        @banner={{this.site.banner}}
         @overlay={{this.hasScrolled}}
         @hide={{this.model.errorLoading}}
       />
@@ -65,9 +63,9 @@
 
             {{#if this.showCategoryChooser}}
               <CategoryChooser
-                @class="small"
                 @value={{this.buffered.category_id}}
                 @onChange={{action "topicCategoryChanged"}}
+                class="small"
               />
             {{/if}}
 
@@ -166,7 +164,7 @@
             />
           </h1>
 
-          <TopicCategory @topic={{this.model}} @class="topic-category" />
+          <TopicCategory @topic={{this.model}} class="topic-category" />
         {{/if}}
       </TopicTitle>
 
@@ -220,16 +218,19 @@
       <PluginOutlet @name="above-timeline" @connectorTagName="div" />
 
       <TopicNavigation
-        @class="topic-navigation"
         @topic={{this.model}}
         @jumpToDate={{action "jumpToDate"}}
         @jumpToIndex={{action "jumpToIndex"}}
+        class="topic-navigation"
         as |info|
       >
         <PluginOutlet
           @name="topic-navigation"
           @connectorTagName="div"
-          @outletArgs={{hash topic=this.model}}
+          @outletArgs={{hash
+            topic=this.model
+            renderTimeline=info.renderTimeline
+          }}
         />
 
         {{#if info.renderTimeline}}
@@ -359,6 +360,8 @@
                 @toggleWiki={{action "toggleWiki"}}
                 @showTopReplies={{action "showTopReplies"}}
                 @cancelFilter={{action "cancelFilter"}}
+                @collapseSummary={{action "collapseSummary"}}
+                @showSummary={{action "showSummary"}}
                 @removeAllowedUser={{action "removeAllowedUser"}}
                 @removeAllowedGroup={{action "removeAllowedGroup"}}
                 @topVisibleChanged={{action "topVisibleChanged"}}
@@ -543,7 +546,7 @@
               @icon="reply"
               @action={{route-action "showLogin"}}
               @label="topic.reply.title"
-              class="btn-primary pull-right"
+              class="btn-primary"
             />
           </div>
         {{/if}}
@@ -593,9 +596,10 @@
     </div>
   {{/if}}
 
-  <QuoteButton
+  <PostTextSelection
     @quoteState={{this.quoteState}}
     @selectText={{action "selectText"}}
+    @buildQuoteMarkdown={{this.buildQuoteMarkdown}}
     @editPost={{action "editPost"}}
     @topic={{this.model}}
   />

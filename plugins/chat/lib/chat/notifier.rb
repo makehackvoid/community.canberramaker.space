@@ -85,7 +85,8 @@ module Chat
       already_notified_user_ids =
         Chat::Mention
           .where(chat_message: @chat_message)
-          .where.not(notification: nil)
+          .left_outer_joins(:notifications)
+          .where.not(notifications: { id: nil })
           .pluck(:user_id)
 
       to_notify, inaccessible, all_mentioned_user_ids = list_users_to_notify
@@ -198,7 +199,6 @@ module Chat
         @parsed_mentions
           .group_mentions
           .not_suspended
-          .where("user_count <= ?", SiteSetting.max_users_notified_per_group_mention)
           .where.not(username_lower: @user.username_lower)
           .where.not(id: already_covered_ids)
 
@@ -359,7 +359,7 @@ module Chat
           chat_message_id: @chat_message.id,
           to_notify_ids_map: to_notify.as_json,
           already_notified_user_ids: already_notified_user_ids,
-          timestamp: @timestamp,
+          timestamp: @timestamp.to_s,
         },
       )
     end
@@ -367,7 +367,7 @@ module Chat
     def notify_watching_users(except: [])
       Jobs.enqueue(
         Jobs::Chat::NotifyWatching,
-        { chat_message_id: @chat_message.id, except_user_ids: except, timestamp: @timestamp },
+        { chat_message_id: @chat_message.id, except_user_ids: except, timestamp: @timestamp.to_s },
       )
     end
   end

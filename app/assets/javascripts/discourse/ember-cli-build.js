@@ -11,8 +11,31 @@ const generateScriptsTree = require("./lib/scripts");
 const funnel = require("broccoli-funnel");
 const DeprecationSilencer = require("deprecation-silencer");
 const generateWorkboxTree = require("./lib/workbox-tree-builder");
+const { compatBuild } = require("@embroider/compat");
+const { Webpack } = require("@embroider/webpack");
+const { StatsWriterPlugin } = require("webpack-stats-plugin");
+const withSideWatch = require("./lib/with-side-watch");
+const RawHandlebarsCompiler = require("discourse-hbr/raw-handlebars-compiler");
+const crypto = require("crypto");
+
+const EMBER_MAJOR_VERSION = parseInt(
+  require("ember-source/package.json").version.split(".")[0],
+  10
+);
 
 process.env.BROCCOLI_ENABLED_MEMOIZE = true;
+
+function filterForEmberVersion(tree) {
+  if (EMBER_MAJOR_VERSION < 4) {
+    return tree;
+  }
+
+  return funnel(tree, {
+    // d-modal-legacy includes a named outlet which would cause
+    // a build failure in modern Ember
+    exclude: ["**/components/d-modal-legacy.hbs"],
+  });
+}
 
 module.exports = function (defaults) {
   const discourseRoot = path.resolve("../../../..");
@@ -22,28 +45,7 @@ module.exports = function (defaults) {
   DeprecationSilencer.silence(console, "warn");
   DeprecationSilencer.silence(defaults.project.ui, "writeWarnLine");
 
-  const isEmbroider = process.env.USE_EMBROIDER === "1";
   const isProduction = EmberApp.env().includes("production");
-  const isTest = EmberApp.env().includes("test");
-
-  // This is more or less the same as the one in @embroider/test-setup
-  const maybeEmbroider = (app, options) => {
-    if (isEmbroider) {
-      const { compatBuild } = require("@embroider/compat");
-      const { Webpack } = require("@embroider/webpack");
-
-      // https://github.com/embroider-build/embroider/issues/1581
-      if (Array.isArray(options?.extraPublicTrees)) {
-        options.extraPublicTrees = [
-          app.addonPostprocessTree("all", mergeTrees(options.extraPublicTrees)),
-        ];
-      }
-
-      return compatBuild(app, Webpack, options);
-    } else {
-      return app.toTree(options?.extraPublicTrees);
-    }
-  };
 
   const app = new EmberApp(defaults, {
     autoRun: false,
@@ -55,42 +57,6 @@ module.exports = function (defaults) {
       // that causes the `app.import` statements below to fail in production mode.
       // This forces the use of `fast-sourcemap-concat` which works in production.
       enabled: true,
-    },
-    autoImport: {
-      forbidEval: true,
-      insertScriptsAt: "ember-auto-import-scripts",
-      webpack: {
-        // Workarounds for https://github.com/ef4/ember-auto-import/issues/519 and https://github.com/ef4/ember-auto-import/issues/478
-        devtool: isProduction ? false : "source-map", // Sourcemaps contain reference to the ephemeral broccoli cache dir, which changes on every deploy
-        optimization: {
-          moduleIds: "size", // Consistent module references https://github.com/ef4/ember-auto-import/issues/478#issuecomment-1000526638
-        },
-        resolve: {
-          fallback: {
-            // Sinon needs a `util` polyfill
-            util: require.resolve("util/"),
-            // Also for sinon
-            timers: false,
-          },
-        },
-        module: {
-          rules: [
-            // Sinon/`util` polyfill accesses the `process` global,
-            // so we need to provide a mock
-            {
-              test: require.resolve("util/"),
-              use: [
-                {
-                  loader: "imports-loader",
-                  options: {
-                    additionalCode: "var process = { env: {} };",
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      },
     },
     fingerprint: {
       // Handled by Rails asset pipeline
@@ -107,9 +73,7 @@ module.exports = function (defaults) {
 
     "ember-cli-terser": {
       enabled: isProduction,
-      exclude:
-        ["**/highlightjs/*", "**/javascripts/*"] +
-        (isEmbroider ? [] : ["**/test-*.js", "**/core-tests*.js"]),
+      exclude: ["**/highlightjs/*", "**/javascripts/*"],
     },
 
     "ember-cli-babel": {
@@ -120,26 +84,31 @@ module.exports = function (defaults) {
       plugins: [require.resolve("deprecation-silencer")],
     },
 
-    // Was previously true so that we could run theme tests in production
-    // but we're moving away from that as part of the Embroider migration
-    tests: isEmbroider ? !isProduction : true,
-
     vendorFiles: {
       // Freedom patch - includes bug fix and async stack support
       // https://github.com/discourse/backburner.js/commits/discourse-patches
       backburner:
         "node_modules/@discourse/backburner.js/dist/named-amd/backburner.js",
     },
+
+    trees: {
+      app: filterForEmberVersion(
+        RawHandlebarsCompiler(
+          withSideWatch("app", { watching: ["../discourse-markdown-it"] })
+        )
+      ),
+    },
   });
 
+  if (EMBER_MAJOR_VERSION < 4) {
+    // TODO: remove me
+    // Ember 3.28 still has some internal dependency on jQuery being a global,
+    // for the time being we will bring it in vendor.js
+    app.import("node_modules/jquery/dist/jquery.js", { prepend: true });
+  }
+
   // WARNING: We should only import scripts here if they are not in NPM.
-  // For example: our very specific version of bootstrap-modal.
   app.import(vendorJs + "bootbox.js");
-  app.import("node_modules/bootstrap/js/modal.js");
-  app.import(vendorJs + "caret_position.js");
-  app.import("node_modules/ember-source/dist/ember-template-compiler.js", {
-    type: "test",
-  });
   app.import(discourseRoot + "/app/assets/javascripts/polyfills.js");
 
   app.import(
@@ -149,67 +118,76 @@ module.exports = function (defaults) {
 
   const discoursePluginsTree = app.project
     .findAddonByName("discourse-plugins")
-    .generatePluginsTree();
+    .generatePluginsTree(app.tests);
 
   const adminTree = app.project.findAddonByName("admin").treeForAddonBundle();
 
-  const wizardTree = app.project.findAddonByName("wizard").treeForAddonBundle();
+  const testStylesheetTree = mergeTrees([
+    discourseScss(`${discourseRoot}/app/assets/stylesheets`, "qunit.scss"),
+    discourseScss(
+      `${discourseRoot}/app/assets/stylesheets`,
+      "qunit-custom.scss"
+    ),
+  ]);
+  app.project.liveReloadFilterPatterns = [/.*\.scss/];
 
-  const markdownItBundleTree = app.project
-    .findAddonByName("pretty-text")
-    .treeForMarkdownItBundle();
+  const terserPlugin = app.project.findAddonByName("ember-cli-terser");
+  const applyTerser = (tree) => terserPlugin.postprocessTree("all", tree);
 
-  const extraPublicTrees = [];
-
-  if (isTest) {
-    const testemStylesheetTree = mergeTrees([
-      discourseScss(`${discourseRoot}/app/assets/stylesheets`, "qunit.scss"),
-      discourseScss(
-        `${discourseRoot}/app/assets/stylesheets`,
-        "qunit-custom.scss"
-      ),
-    ]);
-    extraPublicTrees.push(testemStylesheetTree);
-  }
-
-  extraPublicTrees.push(
+  let extraPublicTrees = [
     createI18nTree(discourseRoot, vendorJs),
     parsePluginClientSettings(discourseRoot, vendorJs, app),
     funnel(`${discourseRoot}/public/javascripts`, { destDir: "javascripts" }),
-    funnel(`${vendorJs}/highlightjs`, {
-      files: ["highlight-test-bundle.min.js"],
-      destDir: "assets/highlightjs",
-    }),
     generateWorkboxTree(),
-    concat(adminTree, {
-      inputFiles: ["**/*.js"],
-      outputFile: `assets/admin.js`,
-    }),
-    concat(wizardTree, {
-      inputFiles: ["**/*.js"],
-      outputFile: `assets/wizard.js`,
-    }),
-    concat(markdownItBundleTree, {
-      inputFiles: ["**/*.js"],
-      outputFile: `assets/markdown-it-bundle.js`,
-    }),
-    generateScriptsTree(app),
-    discoursePluginsTree
-  );
+    applyTerser(
+      concat(adminTree, {
+        inputFiles: ["**/*.js"],
+        outputFile: `assets/admin.js`,
+      })
+    ),
+    applyTerser(generateScriptsTree(app)),
+    applyTerser(discoursePluginsTree),
+    testStylesheetTree,
+  ];
 
-  return maybeEmbroider(app, {
-    extraPublicTrees,
+  const assetCachebuster = process.env["DISCOURSE_ASSET_URL_SALT"] || "";
+  const cachebusterHash = crypto
+    .createHash("md5")
+    .update(assetCachebuster)
+    .digest("hex")
+    .slice(0, 8);
+
+  const appTree = compatBuild(app, Webpack, {
+    splitAtRoutes: ["wizard"],
+    staticAppPaths: ["static"],
     packagerOptions: {
       webpackConfig: {
         devtool: "source-map",
+        output: {
+          publicPath: "auto",
+          filename: `assets/chunk.[chunkhash].${cachebusterHash}.js`,
+          chunkFilename: `assets/chunk.[chunkhash].${cachebusterHash}.js`,
+        },
+        cache: isProduction
+          ? false
+          : {
+              type: "memory",
+              maxGenerations: 1,
+            },
+        entry: {
+          "assets/discourse.js/features/markdown-it.js": {
+            import: "./static/markdown-it",
+            dependOn: "assets/discourse.js",
+            runtime: false,
+          },
+        },
         externals: [
           function ({ request }, callback) {
             if (
               !request.includes("-embroider-implicit") &&
-              (request.startsWith("admin/") ||
-                request.startsWith("wizard/") ||
-                (request.startsWith("pretty-text/engines/") &&
-                  request !== "pretty-text/engines/discourse-markdown-it") ||
+              // TODO: delete special case for jquery when removing app.import() above
+              ((EMBER_MAJOR_VERSION < 4 && request === "jquery") ||
+                request.startsWith("admin/") ||
                 request.startsWith("discourse/plugins/") ||
                 request.startsWith("discourse/theme-"))
             ) {
@@ -225,8 +203,59 @@ module.exports = function (defaults) {
               exportsPresence: "error",
             },
           },
+          rules: [
+            {
+              test: require.resolve("bootstrap/js/modal"),
+              use: [
+                {
+                  loader: "imports-loader",
+                  options: {
+                    imports: {
+                      moduleName: "jquery",
+                      name: "jQuery",
+                    },
+                  },
+                },
+              ],
+            },
+          ],
         },
+        plugins: [
+          // The server use this output to map each asset to its chunks
+          new StatsWriterPlugin({
+            filename: "assets.json",
+            stats: {
+              all: false,
+              entrypoints: true,
+            },
+            transform({ entrypoints }) {
+              let names = Object.keys(entrypoints);
+              let output = {};
+
+              for (let name of names.sort()) {
+                let assets = entrypoints[name].assets.map(
+                  (asset) => asset.name
+                );
+
+                let parent = names.find((parentName) =>
+                  name.startsWith(parentName + "/")
+                );
+
+                if (parent) {
+                  name = name.slice(parent.length + 1);
+                  output[parent][name] = { assets };
+                } else {
+                  output[name] = { assets };
+                }
+              }
+
+              return JSON.stringify(output, null, 2);
+            },
+          }),
+        ],
       },
     },
   });
+
+  return mergeTrees([appTree, mergeTrees(extraPublicTrees)]);
 };

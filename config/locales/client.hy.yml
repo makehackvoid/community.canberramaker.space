@@ -238,13 +238,9 @@ hy:
       our_admins: "Մեր Ադմինները"
       our_moderators: "Մեր Մոդերատորները"
       moderators: "Մոդերատորներ"
-      stat:
-        all_time: "Ամբողջ Ժամանակ"
       like_count: "Հավանումներ"
       topic_count: "Թեմաներ"
       post_count: "Գրառում"
-      active_user_count: "Ակտիվ Օգտատերեր"
-      contact: "Հետադարձ Կապ"
       contact_info: "Այս կայքի հետ կապված կրիտիկական խնդիրների կամ հրատապ հարցերի դեպքում խնդրում ենք կապվել մեզ հետ %{contact_info} էլ. հասցեով:"
     bookmarked:
       title: "Էջանշել"
@@ -344,6 +340,9 @@ hy:
         type_bonus:
           name: "բոնուսի տեսակը"
           title: "Որոշ ստուգվող տեսակների դեպքում, աշխատակիցներին կարող են բոնուս նշանակվել, որպեսզի նրանք գերակայության հասնեն: "
+      revise_and_reject_post:
+        reason: "Պատճառ"
+        optional: "ընտրովի"
       claim_help:
         optional: "Դուք կարող եք պահանջել այդ էլեմենտը, որպեսզի ուրիշները չկարողանան այն դիտել:  "
         required: "Դուք պետք է նախ՝ հայտ ներկայացնեք, որպեսզի կարողանաք այն դիտեք: "
@@ -919,7 +918,6 @@ hy:
         success: "(էլ. նամակն ուղարկված է)"
         in_progress: "(էլ. նամակն ուղարկվում է)"
         error: "(սխալ)"
-        emoji: "կողպեք էմոջի"
         action: "Ուղարկել Գաղտնաբառի Վերականգման Էլ. Նամակ"
         set_password: "Առաջադրել Գաղտնաբառ"
         choose_new: "Ընտրել նոր գաղտնաբառ"
@@ -936,8 +934,6 @@ hy:
           title: "Պահուստային Կոդերը Գեներացվել են"
           description: "Այս պահուստային կոդերից յուրաքանչյուրը կարող է օգտագործվել միայն մեկ անգամ: Պահեք դրանք ապահով, բայց հասանելի վայրում:"
       second_factor:
-        forgot_password: "Մոռացե՞լ եք Գաղտնաբառը:"
-        confirm_password_description: "Շարունակելու համար խնդրում ենք հաստատել Ձեր գաղտնաբառը"
         name: "Անուն"
         label: "Կոդ"
         rate_limit: "Խնդրում ենք սպասել՝ նախքան մեկ այլ վավերացման կոդ փորձելը:"
@@ -945,8 +941,6 @@ hy:
           Սկանավորեք այս QR կոդը համապատասխան հավելվածում (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) և մուտքագրեք Ձեր նույնականացման կոդը:
         disable_description: "Խնդրում ենք Ձեր հավելվածից մուտքագրել վավերացման կոդը:"
         show_key_description: "Մուտքագրել ձեռքով"
-        short_description: |
-          Ձեր ակաունտը պաշտպանեք մեկանգամյա օգտագործման անվտանգության կոդերով:
         use: "Օգտագործեք Նույնականացման հավելվածը՝ ստուգման համար  "
         disable: "Անջատել"
         delete: "Ջնջել"
@@ -966,6 +960,10 @@ hy:
           already_added_error: "Դուք արդեն գրանցել եք այս անվտանգության բանալին: Պետք չէ այն նորից գրանցել:"
           save: "Պահպանել"
           name_required_error: "Դուք պետք է նշեք անվտանգության բանալու անվանումը "
+      passkeys:
+        save: "Պահպանել"
+        added_prefix: "Ավելացված"
+        last_used_prefix: "Վերջին Օգտագործվածը "
       change_about:
         title: "Փոփոխել Իմ Մասին բաժինը"
         error: "Այս արժեքը փոփոխելիս տեղի է ունեցել սխալ:"
@@ -1029,13 +1027,12 @@ hy:
           generic: "Ձեր %{provider} հաշիվը կօգտագործվի վավերացման համար:"
       name:
         title: "Անուն"
-        instructions: "Ձեր անուն ազգանունը (ընտրովի)"
-        instructions_required: "Ձեր անուն ազգանունը"
+        instructions: "Ձեր անուն ազգանունը (ընտրովի)."
+        instructions_required: "Ձեր անուն ազգանունը."
         too_short: "Ձեր անունը շատ կարճ է"
         ok: "Ձեր անունն ընդունված է"
       username:
         title: "Օգտանուն"
-        instructions: "եզակի, առանց բացատների, կարճ"
         short_instructions: "Մարդիկ կարող են հիշատակել Ձեզ որպես @%{username}"
         available: "Ձեր օգտանունը հասանելի է"
         not_available: "Հասանելի չէ: Փորձե՞լ %{suggestion}-ը:"
@@ -1174,7 +1171,7 @@ hy:
         same_as_username: "Ձեր գաղտնաբառը համընկնում է Ձեր օգտանվան հետ:"
         same_as_email: "Ձեր գաղտնաբառը համընկնում է Ձեր էլ. հասցեի հետ:"
         ok: "Ձեր գաղտնաբառն ընդունված է:"
-        instructions: "առնվազն %{count} սիմվոլ"
+        instructions: "Առնվազն %{count} սիմվոլ."
       summary:
         title: "Ամփոփում"
         stats: "Վիճակագրություն"
@@ -1334,7 +1331,6 @@ hy:
     email_login:
       link_label: "Ուղարկեք ինձ մուտքի հղում"
       button_label: "էլ. նամակով"
-      emoji: "կողպեք էմոջի"
       complete_username: "Եթե <b>%{username}</b> օգտանվանը համապատասխանող հաշիվ գոյություն ունի, ապա Դուք շուտով կստանաք էլ-նամակ մուտքի հղումով:"
       complete_email: "Եթե <b>%{email}</b> էլ. հասցեին համապատասխանող հաշիվ գոյություն ունի, ապա Դուք շուտով կստանաք էլ. նամակ մուտքի հղումով:"
       complete_username_found: "Մենք գտել ենք <b>%{username}</b> օգտանվանը համապատասխանող հաշիվ, Դուք շուտով կստանաք մուտքի հղումով էլ. նամակ:"
@@ -1397,7 +1393,6 @@ hy:
         backup_code: "Փոխարենը օգտագործել պահուստային կոդը"
     invites:
       accept_title: "Հրավեր"
-      emoji: "ծրար էմոջի"
       welcome_to: "Բարի Գալուստ %{site_name}!"
       invited_by: "Ձեզ հրավիրել է՝"
       social_login_available: "Դուք նաև կկարողանաք մուտք գործել ցանկացած սոցիալական կայքով՝ օգտագործելով այդ էլ. հասցեն:"
@@ -1476,9 +1471,6 @@ hy:
       saved_local_draft_tip: "պահված է տեղում"
       drafts_offline: "Օֆլայն սևագրեր"
       edit_conflict: "խմբագրել հակասությունը"
-      group_mentioned:
-        one: "Նշելով %{group} ՝ Դուք ծանուցում եք <a href='%{group_link}'>%{count} person</a> . Դուք համոզվա՞ծ եք:"
-        other: "Հիշատակելով %{group}-ը՝ Դուք ծանուցում կուղարկեք <a href='%{group_link}'>%{count} օգտագիրոջ</a>: Համոզվա՞ծ եք:"
       duplicate_link: "Կարծես թե դեպի <b>%{domain}</b> Ձեր հղումն արդեն իսկ հրապարակված է թեմայում <b>@%{username}</b>-ի <a href='%{post_url}'>պատասխանում %{ago}</a>: Դուք համոզվա՞ծ եք, որ ցանկանում եք այն կրկին հրապարակել:"
       reference_topic_title: "RE: %{title}"
       error:
@@ -1625,6 +1617,7 @@ hy:
         private_message: '%{username}-ը ուղարկել է Ձեզ անձնական հաղորդագրություն այստեղ՝ "%{topic}" - %{site_title}'
         linked: '%{username}-ը "%{topic}" - %{site_title}"-ից հղում է կատարել Ձեր գրառմանը:'
         watching_first_post: '%{username} -ը ստեղծել է նոր թեմա՝ "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} -ը գրառում է կատարել այստեղ՝ "%{topic}" - %{site_title}'
         confirm_title: "Ծանուցումները միացված են. %{site_title}"
         confirm_body: "Հաջողվեց! Ծանուցումները միացված են:"
         custom: "Ծանուցում %{username} -ից մինչև %{site_title}"
@@ -1652,6 +1645,7 @@ hy:
         liked_consolidated: "նոր հավանումներ"
         post_approved: "գրառումը հաստատված է"
         membership_request_consolidated: "Մշակել անդամակցության նոր հարցումները"
+        admin_problems: "նոր խորհուրդ Ձեր կայքի կառավարման հարթակում"
     upload_selector:
       uploading: "Վերբեռնվում է"
       select_file: "Ընտրել Ֆայլ"
@@ -1843,6 +1837,7 @@ hy:
       options: "Թեմաների Տարբերակները"
       show_links: "ցուցադրել այս թեմայի հղումները"
       unread_indicator: "Ոչ մի անդամ դեռ չի կարդացել այս թեմայի մինչև վերջին գրառումը: "
+      bumped_at: "Վերջինը՝ %{date}"
       deleted: "Թեման ջնջվել է"
       slow_mode_update:
         enable: "Միացնել"
@@ -2398,8 +2393,7 @@ hy:
       action: "Դրոշակավորել Գրառումը"
       take_action_options:
         default:
-          title: "Ձեռնարկել Գործողություն"
-          details: "Անմիջապես հասնել դրոշակների քանակի սահմանին՝ առանց սպասելու համայնքային ավելի շատ դրոշակների"
+          title: "Թաքցնել Գրառումը"
         suspend:
           title: "Սառեցնել Օգտատիրոջը"
         silence:
@@ -2411,7 +2405,6 @@ hy:
       ip_address_missing: "(անհասանելի)"
       hidden_email_address: "(թաքցված)"
       submit_tooltip: "Կիրառել գաղտնի դրոշակ"
-      take_action_tooltip: "Անմիջապես հասնել դրոշակների քանակի սահմանին՝ առանց սպասելու համայնքային ավելի շատ դրոշակների"
       cant: "Ներողություն, Դուք չեք կարող դրոշակավորել այս գրառումը այս պահին:"
       notify_staff: "Գաղտնի ծանուցում ուղարկել անձնակազմին"
       formatted_name:
@@ -2700,7 +2693,6 @@ hy:
       other_tags: "Այլ Թեգեր"
       selector_all_tags: "բոլոր թեգերը"
       selector_no_tags: "առանց թեգերի"
-      changed: "փոփոխված թեգերը՝ "
       tags: "Թեգեր"
       choose_for_topic: "ընտրովի թեգեր"
       info: "Ինֆորմացիա"
@@ -2721,7 +2713,6 @@ hy:
         one: "Դուք համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թեգը և հեռացնել այն %{count} թեմայից, որին այն վերագրված է:"
         other: "Դուք համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թեգը և հեռացնել այն %{count} թեմայից, որոնց այն վերագրված է:"
       delete_confirm_no_topics: "Դուք համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թեգը:"
-      description: "Նկարագրույթուն"
       sort_by: "Դասավորել ըստ՝ "
       sort_by_count: "քանակի"
       sort_by_name: "անվան"
@@ -2861,10 +2852,25 @@ hy:
             review:
               content: "Վերանայում"
     form_templates:
+      upload_field:
+        upload: "Վերբեռնել"
+        uploading: "Վերբեռնում"
       errors:
         typeMismatch:
           default: "Խնդրում ենք մուտքագրել վավեր արժեք:"
           email: "Խնդրում ենք մուտքագրել վավեր էլ. հասցե."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Մուտք"
+      edit:
+        modal:
+          cancel: "չեղարկել"
+          create: "Պահպանել"
+          reason: "Ո՞րն է խմբագրման պատճառը:"
+      spreadsheet:
+        show: "Ցուցադրել"
+        about: "Մասին"
   admin_js:
     admin:
       title: "Discourse Ադմին"
@@ -2892,8 +2898,7 @@ hy:
         latest_version: "Վերջինը"
         problems_found: "Որոշ խորհուրդներ՝ հիմնված Ձեր կայքի ընթացիկ կարգավորումների վրա"
         new_features:
-          dismiss: "Չեղարկել"
-          learn_more: "Իմանալ ավելին"
+          learn_more: "Իմանալ ավելին..."
         last_checked: "Վերջին ստուգումը՝ "
         refresh_problems: "Թարմացնել"
         no_problems: "Խնդիրներ չեն գտնվել:"
@@ -3084,29 +3089,6 @@ hy:
         groups_filter_instructions: "Համապատասխան webhook-ները կգործարկվեն միայն, եթե իրադարձությունը կապված է ընտրված խմբերի հետ: Թողեք դատարկ՝ webhook-ները բոլոր խմբերի համար գործարկելու համար:"
         groups_filter: "Գործարկվող Խմբերը"
         delete_confirm: "Ջնջե՞լ այս webhook-ը:"
-        topic_event:
-          name: "Թեմայի Իրադարձությունը"
-          details: "Երբ կա նոր թեմա, այն վերանայվում է, փոփոխվում կամ ջնջվում:"
-        post_event:
-          name: "Գրառման Իրադարձություն"
-          details: "Երբ կա նոր պատասխան, խմբագրում, այն ջնջվում է կամ վերականգնվում:"
-        user_event:
-          name: "Օգտատիրոջ Իրադարձություն"
-        group_event:
-          name: "Խմբի Իրադարձություն"
-          details: "Երբ խումբ է ստեղծվում, թարմացվում կամ ջնջվում:"
-        category_event:
-          name: "Կատեգորիայի Իրադարձություն"
-          details: "Երբ կատեգորիա է ստեղծվում, թարմացվում կամ ջնջվում:"
-        tag_event:
-          name: "Թեգի Իրադարձություն"
-          details: "Երբ թեգ է ստեղծվում, թարմացվում կամ ջնջվում:"
-        reviewable_event:
-          name: "Ամփոփիչ Իրադարձություն"
-          details: "Երբ նոր էլեմենտը պատրաստ է վերանայման, և երբ դրա կարգավիճակը թարմացվում է:"
-        notification_event:
-          name: "Ծանուցման Իրադարձություն"
-          details: "Երբ օգտատերը ծանուցումների ժապավենին նոր էլեմենտի ավելացման մասին ծանուցում է ստանում:"
         delivery_status:
           title: "Ուղարկման Կարգավիճակը"
           inactive: "Ոչ ակտիվ"
@@ -3145,7 +3127,8 @@ hy:
         not_enabled: "Ո"
         change_settings_short: "Կարգավորումներ"
         howto: "Ինչպե՞ս կարող եմ ես տեղադրել հավելումներ:"
-        official: "Պաշտոնական Հավելում"
+        author: "%{author}-Ի կողմԻց"
+        learn_more: "Իմանալ ավելին"
       backups:
         title: "Պահուստներ"
         menu:
@@ -3243,7 +3226,6 @@ hy:
           theme_name: "Թեմայի անվանում"
           component_name: "Բաղադրիչի անուն"
           themes_intro: "Ընտրել գոյություն ունեցող թեմա կամ տեղադրել նորը՝ մեկնարկի համար"
-          themes_intro_emoji: "կին արտիստ էմոջի"
           beginners_guide_title: "Discourse Թեմաների օգտագործման Սկսնակի ուղեցույց"
           developers_guide_title: " Discourse Թեմաների՝ Ծրագրավորողի ուղեցույց"
           browse_themes: "Դիտել համայնքի թեմաները"
@@ -3285,6 +3267,7 @@ hy:
           convert_theme_tooltip: "Փոխակերպել այս թեման բաղադրիչի"
           inactive_themes: "Ոչ ակտիվ թեմաներ՝ "
           inactive_components: "Չօգտագործված բաղադրիչներ՝"
+          cancel: "Չեղարկել"
           broken_theme_tooltip: "Այս թեման սխալներ ունի իր CSS-ում, HTML-ում կամ YAML-ում:"
           disabled_component_tooltip: "Այս բաղադրիչը անջատված է"
           default_theme_tooltip: "Այս թեման կայքի լռելյայն թեման է"
@@ -4047,6 +4030,8 @@ hy:
           modal_description: "Ցանկանաու՞մ եք այս փոփոխությունը կիրառել պատմականորեն: Սա կփոխի կարգավորումը %{count} համար՝ առկա օգտատերերի:"
           modal_yes: "Այո"
           modal_no: "Ոչ, կիրառել փոփոխություններ միայն՝ ապագայում "
+        file_types_list:
+          add_image_types: "Նկարներ"
       badges:
         title: Կրծքանշաններ
         new_badge: Նոր Կրծքանշան
@@ -4116,7 +4101,6 @@ hy:
             with_time: <span class="username">%{username}</span>-ին <span class="time">%{time}</span>-ին
         badge_intro:
           title: "Ընտրեք գոյություն ունեցող կրծքանշան կամ ստեղծեք նորը՝ մեկնարկի համար"
-          emoji: "կին ուսանող էմոջի"
           what_are_badges_title: "Ի՞նչ է կրծքանշանը:"
           badge_query_examples_title: "Կրծքանշանների հարցման օրինակներ"
         mass_award:

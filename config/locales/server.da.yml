@@ -183,7 +183,6 @@ da:
       default_tags_already_selected: "Du kan ikke vælge et mærke, der bruges i en anden liste."
       s3_upload_bucket_is_required: "Du kan ikke aktivere overførsler til S3 med mindre du har angivet 's3_upload_bucket'."
       enable_s3_uploads_is_required: "Du kan ikke aktivere beholdning til S3, medmindre du har aktiveret S3-uploads."
-      page_publishing_requirements: "Sideudgivelse kan ikke aktiveres, hvis sikre medier er aktiveret."
       s3_backup_requires_s3_settings: "Du kan ikke bruge S3 som backupplacering, medmindre du har angivet '%{setting_name}'."
       s3_bucket_reused: "Du kan ikke bruge den samme spand til 's3_upload_bucket' og 's3_backup_bucket'. Vælg en anden spand, eller brug en anden sti til hver spand."
       share_quote_facebook_requirements: "Du skal indstille et Facebook-app-id for at aktivere citatdeling for Facebook."
@@ -513,7 +512,8 @@ da:
             name:
               same_as_password: "er det samme som dit kodeord."
             ip_address:
-              signup_not_allowed: "Tilmelding er ikke tilladt fra denne konto."
+              blocked: "Nye registreringer er ikke tilladt fra din IP adresse."
+              max_new_accounts_per_registration_ip: "Nye kontoer kan ikke oprettes fra din IP-adresse (max antal er nået). Kontakt et medlem af hjælperteamet."
         user_profile:
           attributes:
             featured_topic_id:
@@ -792,6 +792,8 @@ da:
     sequence_conflict_error:
       title: "kladdefejl"
       description: "Kladde redigeres i et andet vindue. Genindlæs venligst denne side."
+    too_many_drafts:
+      title: "For mange kladder"
   draft_backup:
     pm_title: "Sikkerhedskopiér Kladder fra igangværende emner"
     pm_body: "Emne, der indeholder backup-kladder"
@@ -1266,9 +1268,6 @@ da:
     allow_user_locale: "Tillad brugere at vælge egne sprog præferencer på site"
     set_locale_from_accept_language_header: "indstil grænsefladesprog for anonyme brugere ud fra deres webbrowsers sprog headere"
     support_mixed_text_direction: "Understøt blandede tekstretninger fra venstre til højre og højre mod venstre."
-    min_post_length: "Minimumlængde tilladt for indlæg i tegn"
-    min_first_post_length: "Minimum tilladte antal tegn (i emne felt) i første indlæg"
-    min_personal_message_post_length: "Minimumlængde tilladt for indlæg i tegn"
     max_post_length: "Maksimal længde af indlæg i tegn"
     topic_featured_link_enabled: "Tillad opslag af et link med emner."
     show_topic_featured_link_in_digest: "Vis link med det fremhævede emne i e-mail-sammendraget."
@@ -1307,7 +1306,6 @@ da:
     show_pinned_excerpt_desktop: "Vis uddrag af fastgjorte emner i desktop visning"
     post_onebox_maxlength: "Max længde af Discourse indlæg i tegn"
     allowed_inline_onebox_domains: "En liste over domæner, der vil blive onebox'et i miniatureform, hvis de linkes uden en titel"
-    enable_inline_onebox_on_all_domains: "Ignorer webstedsindstilling for inline_onebox_domain_allowlist, og tillad indlejret onebox på alle domæner."
     max_oneboxes_per_post: "Maksimalt antal onebox-forekomster i et opslag."
     facebook_app_access_token: "Et token genereret fra dit Facebook-app-id og hemmelighed. Bruges til at generere Instagram oneboxes."
     mobile_logo: "Logoet, der bruges på mobilversionen af dit websted. Brug et bredt rektangulært billede med en højde på 120 og et billedformat, der er større end 3: 1. Hvis det er tomt, bruges billedet fra 'logo'-indstillingen."
@@ -1315,7 +1313,6 @@ da:
     notification_email: "Afsender email adresse, anvendt når der sendes esentielle system emails. Domænet her skal have korrekt opsatte SPF, DKIM og 'PTR records', for succesfuld afskibning af mails."
     email_custom_headers: "En liste af brugerdefinerede e-mail-headers adskilt af |-tegn."
     detailed_404: "Giver flere detaljer til brugerne om, hvorfor de ikke kan få adgang til et bestemt emne. Bemærk: Dette er mindre sikkert, fordi brugerne vil vide, om en URL oversættes til et gyldigt emne."
-    enforce_second_factor: "Tvinger brugere til at aktivere to-faktor godkendelse. Vælg 'alle' for at håndhæve det for alle brugere. Vælg 'personale' for kun at håndhæve den til medarbejderbrugere."
     force_https: "Tving din side til kun at anvende HTTPS. Slå ikke denne funktion til før det er sat helt op og virker overalt! Har du tjekket dit CDN, alle social logins, og eksterne logos og afhængigheder og sikret at de også er HTTPS kompatible?"
     summary_score_threshold: "Påkrævet minimum score for et indlæg til at blive inkluderet i 'opsummering af emne'"
     summary_posts_required: "Minimumsopslag i et emne før 'Opsummér dette emne' er aktiveret. Ændringer af denne indstilling vil blive anvendt med tilbagevirkende kraft inden for en uge."
@@ -1335,7 +1332,6 @@ da:
     tl2_additional_likes_per_day_multiplier: "Øg antallet af 'synes godt om' pr dag for tl2 (medlemmer) ved at gange med dette tal"
     tl3_additional_likes_per_day_multiplier: "Øg antallet af 'synes godt om' pr. dag for tl3 (regular) ved at gange med dette tal"
     tl4_additional_likes_per_day_multiplier: "Øg antallet af 'synes godt om' pr. dag for tl4 (leader) ved at gange med dette tal"
-    num_users_to_silence_new_user: "Hvis en ny brugers indlæg får num_spam_flags_to_silence_new_user spam-flag fra disse mange forskellige brugere, så skjul alle deres indlæg og forhindre fremtidige indlæg. 0 for at deaktivere."
     num_tl3_flags_to_silence_new_user: "Hvis en ny brugers indlæg får så mange rapporteringer fra num_tl3_users_to_silence_new_user forskellige tillidsniveauer 3 brugere, skal du skjule alle deres indlæg og forhindre fremtidige indlæg. 0 for at deaktivere."
     num_tl3_users_to_silence_new_user: "Hvis en ny brugers indlæg får num_tl3_flags_to_silence_new_user rapporteringer fra så mange forskellige tillidsniveau 3-brugere, skal du skjule alle deres indlæg og forhindrer fremtidige indlæg. 0 til at deaktivere."
     flag_sockpuppets: "Hvis en ny bruger svarer på et emne fra den samme IP-adresse som den bruger, der startede emnet, skal begges deres indlæg anmeldes som potentiel spam."
@@ -1360,8 +1356,6 @@ da:
     slow_down_crawler_rate: "Hvis der er angivet slow_down_crawler_user_agents, gælder denne sats for alle crawlere (antal sekunders forsinkelse mellem anmodninger)"
     content_security_policy_collect_reports: "Aktivér CSP-overtrædelsesrapportindsamling på /csp_reports"
     invalidate_inactive_admin_email_after_days: "Administratorkonti, der ikke har besøgt webstedet i dette antal dage, skal validere deres e-mailadresse igen, før de logger ind. Indstil til til 0 for at deaktivere."
-    top_menu: "Afklar hvilke ting fremgår af sidens navigations bar, og i hvilken rækkefølge. Eksempel: latest|new|unread|categories|top|read|posted|bookmarks"
-    post_menu: "Angiv hvilke elementer der skal vises i indlægsmenuen, og i hvilken rækkefølge. Eksempel: 'Synes godt om'|rediger|anmeld|slet|del|bogmærke|svar."
     post_menu_hidden_items: "Menuen vil automatisk gemme disse elementer i indlægs menuen, med mindre en udvidelse er tilvalgt."
     share_links: "Angiv hvilke elementer der skal vises i “del“-dialogboksen og i hvilken rækkefølge."
     site_contact_username: "Et gyldigt personale-brugernavn, som alle automatiske meddelelser skal sendes fra. Hvis den er tom, bruges standard systemkontoen."
@@ -1498,13 +1492,8 @@ da:
     min_title_similar_length: "Minimumslængden af en titel før den vil blive kontrolleret for lignende emner."
     desktop_category_page_style: "Visuel stil for siden /categories."
     category_colors: "En liste med hexadecimal farveværdier som er tilladte for kategorier."
-    category_style: "Visuel stil for kategoribadges."
     default_dark_mode_color_scheme_id: "Farveskemaet der bruges ved mørk tilstand."
     dark_mode_none: "Ingen"
-    max_image_size_kb: "Den maksimale billedupload størrelse i kB. Dette skal konfigureres i nginx (client_ max_ body_ size) / apache eller proxy. Billeder større end dette og mindre end client_max_body_size vil blive mindsket så så de opfylder betingelserne for upload."
-    max_attachment_size_kb: "Den maksimale uploadstørrelse af vedhæftede filer i kB. Dette skal konfigureres i nginx (client_ max_ body_ size) / apache eller proxy."
-    authorized_extensions: "En liste over filendelser tilladt for overførsel (brug '*' for at aktivere alle filtyper)"
-    authorized_extensions_for_staff: "En liste over filendelser, der er tilladt for overførsel for personalebrugere ud over den liste, der er defineret i webstedsindstillingen `authorized_extensions` (brug '*' for at tillade alle filtyper)"
     max_similar_results: "Hvor mange lignende emner der skal vises over editoren når du opretter et nyt emne. Sammenligning er baseret på titel og indhold."
     max_image_megapixels: "Maksimalt antal megapixel tilladt for et billede. Billeder med et højere antal megapixel vil blive afvist."
     title_prettify: "Undgå hyppige tastefejl i titlen, inklusive overforbrug af store bogstaver, første bogstav med småt, gentagne ! og ?, ekstra . i slutningen, etc."
@@ -1583,7 +1572,6 @@ da:
     share_anonymized_statistics: "Del anonymiseret brugsstatistik."
     full_name_required: "Fuldt navn er et påkrævet felt på en brugerprofil."
     short_progress_text_threshold: "Når antallet af indlæg overstiger dette tal viser statuslinjen kun det aktuelle indlægsnummer. Hvis du ændrer bredden af statuslinjen kan det være nødvendigt at opdatere denne værdi."
-    autohighlight_all_code: "Gennemtving anvendelsen af kodefremhævning på alle præformaterede kodeblokke, selv når de ikke eksplicit angiver sproget."
     embed_topics_list: "Understøt HTML indlejring af emne lister"
     embed_truncate: "Afkort de indlejrede indlæg."
     embed_support_markdown: "Support markdown formatering af indlejrede indlæg."
@@ -1619,8 +1607,11 @@ da:
     default_tags_tracking: "Liste over mærker, der spores som standard."
     default_tags_muted: "Liste over mærker, der er tavse som standard."
     default_tags_watching_first_post: "Liste over mærker, hvor første indlæg i hvert nyt emne vil blive overvåget som standard."
+    revoke_api_keys_unused_days: "Antal dage siden en API-nøgle sidst blev brugt, før den automatisk tilbagekaldes (0 for aldrig)"
+    revoke_api_keys_maxlife_days: "Antal dage før en API-nøgle tilbagekaldes automatisk (0 for aldrig)"
     allow_user_api_key_scopes: "Liste over tilladte anvendelsesområder for bruger-API-nøgler"
-    revoke_user_api_keys_unused_days: "Antal dage før en bruger API-nøgle automatisk udløber (0 for aldrig)"
+    revoke_user_api_keys_unused_days: "Antal dage siden en bruger-API-nøgle sidst blev brugt, før den automatisk tilbagekaldes (0 for aldrig)"
+    revoke_user_api_keys_maxlife_days: "Antal dage før en bruger-API-nøgle automatisk tilbagekaldes (0 for aldrig)"
     tagging_enabled: "Aktivér mærker på emner?"
     max_tags_per_topic: "Det maksimale antal mærker, der kan anvendes i et emne."
     max_tag_search_results: "Ved søger efter mærker, skal der maksimalt vises følgende antal resultater."
@@ -1631,7 +1622,6 @@ da:
     suppress_overlapping_tags_in_list: "Hvis mærkerne matcher nøjagtige ord i emnetitler, skal du ikke vise mærket"
     remove_muted_tags_from_latest: "Vis ikke emner, der kun er mærket med tavse mærker på den seneste emneliste."
     force_lowercase_tags: "Tving alle nye mærker til at kun benytte små bogstaver."
-    company_name: "Virksomhedens navn"
     governing_law: "Gældende Lov"
     city_for_disputes: "By for tvister"
     shared_drafts_category: "Aktiver funktionen Delte kladder ved at angive en kategori for emneudkast. Emner i denne kategori vil blive undertrykt fra emnelister for personalebrugere."
@@ -1778,6 +1768,11 @@ da:
   admin:
     email:
       sent_test: "sendt!"
+    user:
+      merge_user:
+        updating_username: "Opdaterer brugernavn…"
+        changing_post_ownership: "Ændrer ejerskab af indlæg…"
+        updating_user_ids: "Opdaterer bruger-id'er…"
   user:
     deactivated: "Blev deaktiveret på grund af for mange returnerede e-mails til '%{email}'."
     deactivated_by_staff: "Deaktiveret af hjælperteamet"
@@ -1803,9 +1798,6 @@ da:
       blocked: "er ikke tilladt."
       revoked: "Vil ikke sende e-mails til '%{email}' indtil %{date}."
       does_not_exist: "I/T"
-    ip_address:
-      blocked: "Nye registreringer er ikke tilladt fra din IP adresse."
-      max_new_accounts_per_registration_ip: "Nye kontoer kan ikke oprettes fra din IP-adresse (max antal er nået). Kontakt et medlem af hjælperteamet."
     website:
       domain_not_allowed: "Webstedet er ugyldigt. Tilladte domæner er: %{domains}"
     auto_rejected: "Afvist automatisk på grund af alder. Se auto_handle_queued_age webstedsindstilling."
@@ -3268,6 +3260,9 @@ da:
       automatic_revoked:
         one: "Automatisk tilbagekaldt, sidste aktivitet for mere end %{count} dag siden"
         other: "Automatisk tilbagekaldt, sidste aktivitet for mere end %{count} dage siden"
+      automatic_revoked_max_life:
+        one: "Automatisk tilbagekaldt, oprettet for mere end %{count} dag siden"
+        other: "Automatisk tilbagekaldt, oprettet for mere end %{count} dage siden"
       revoked: Tilbagekaldt
       restored: Gendannet
   reviewables:
@@ -3294,6 +3289,8 @@ da:
         description: "Gendan indlægget, så alle brugere kan se det."
       delete_single:
         title: "Slet"
+      delete:
+        title: "Slet…"
       delete_and_ignore_replies:
         confirm: "Er du sikker på, at du også vil slette svarene på indlægget?"
       delete_and_agree_replies:
@@ -3315,6 +3312,7 @@ da:
       approve_user:
         title: "Godkend Bruger"
       reject_user:
+        title: "Slet Bruger…"
         delete:
           title: "Slet Bruger"
           description: "Brugeren vil blive slettet fra forummet."
@@ -3323,6 +3321,7 @@ da:
           description: "Brugeren vil blive slettet, og vi vil blokere deres IP og e-mail-adresse."
       reject:
         title: "Afvis"
+        bundle_title: "Afvis…"
       delete_user:
         reason: "Slettet via gennemgangskø"
   email_style:
@@ -3331,6 +3330,11 @@ da:
     ignore_error: "Beklager, du kan ikke ignorere denne bruger."
     mute_error: "Beklager, du kan ikke gøre denne bruger tavs."
   fallback_username: "bruger"
+  form_templates:
+    errors:
+      missing_id: "mangler et felt-id"
+      duplicate_ids: "har duplikerede id'er"
+      reserved_id: "har et reserveret nøgleord som id: %{id}"
   activemodel:
     errors:
       <<: *errors

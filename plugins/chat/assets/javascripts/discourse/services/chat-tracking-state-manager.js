@@ -1,8 +1,8 @@
+import { getOwner } from "@ember/application";
+import { cancel } from "@ember/runloop";
 import Service, { inject as service } from "@ember/service";
 import discourseDebounce from "discourse-common/lib/debounce";
-import { cancel } from "@ember/runloop";
 import ChatTrackingState from "discourse/plugins/chat/discourse/models/chat-tracking-state";
-import { getOwner } from "discourse-common/lib/get-owner";
 
 /**
  * This service is used to provide a global interface to tracking individual
@@ -42,20 +42,38 @@ export default class ChatTrackingStateManager extends Service {
   }
 
   get publicChannelUnreadCount() {
-    return this.#publicChannels().reduce((unreadCount, channel) => {
+    return this.#publicChannels.reduce((unreadCount, channel) => {
       return unreadCount + channel.tracking.unreadCount;
     }, 0);
   }
 
+  get allChannelMentionCount() {
+    let totalPublicMentions = this.#publicChannels.reduce(
+      (channelMentionCount, channel) => {
+        return channelMentionCount + channel.tracking.mentionCount;
+      },
+      0
+    );
+
+    let totalPrivateMentions = this.#directMessageChannels.reduce(
+      (dmMentionCount, channel) => {
+        return dmMentionCount + channel.tracking.mentionCount;
+      },
+      0
+    );
+
+    return totalPublicMentions + totalPrivateMentions;
+  }
+
   get allChannelUrgentCount() {
-    let publicChannelMentionCount = this.#publicChannels().reduce(
+    let publicChannelMentionCount = this.#publicChannels.reduce(
       (mentionCount, channel) => {
         return mentionCount + channel.tracking.mentionCount;
       },
       0
     );
 
-    let dmChannelUnreadCount = this.#directMessageChannels().reduce(
+    let dmChannelUnreadCount = this.#directMessageChannels.reduce(
       (unreadCount, channel) => {
         return unreadCount + channel.tracking.unreadCount;
       },
@@ -96,11 +114,11 @@ export default class ChatTrackingStateManager extends Service {
     model.tracking.mentionCount = state.mention_count;
   }
 
-  #publicChannels() {
+  get #publicChannels() {
     return this.chatChannelsManager.publicMessageChannels;
   }
 
-  #directMessageChannels() {
+  get #directMessageChannels() {
     return this.chatChannelsManager.directMessageChannels;
   }
 }

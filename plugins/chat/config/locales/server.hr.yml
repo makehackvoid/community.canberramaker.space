@@ -53,6 +53,10 @@ hr:
       errors:
         slug_contains_non_ascii_chars: "sadrži ne-ascii znakove"
         is_already_in_use: "je već u upotrebi"
+    onebox:
+      thread_title_connector: "u"
+    transcript:
+      default_thread_title: "Nit"
   discourse_push_notifications:
     popup:
       chat_mention:

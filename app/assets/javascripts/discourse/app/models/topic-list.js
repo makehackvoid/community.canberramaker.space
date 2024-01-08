@@ -1,13 +1,14 @@
 import EmberObject from "@ember/object";
-import { Promise } from "rsvp";
-import RestModel from "discourse/models/rest";
-import Session from "discourse/models/session";
-import User from "discourse/models/user";
-import { ajax } from "discourse/lib/ajax";
-import { getOwner } from "discourse-common/lib/get-owner";
-import { isEmpty } from "@ember/utils";
 import { notEmpty } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import { isEmpty } from "@ember/utils";
+import { Promise } from "rsvp";
+import { ajax } from "discourse/lib/ajax";
+import RestModel from "discourse/models/rest";
+import Site from "discourse/models/site";
+import User from "discourse/models/user";
 import deprecated from "discourse-common/lib/deprecated";
+import { getOwnerWithFallback } from "discourse-common/lib/get-owner";
 
 function extractByKey(collection, klass) {
   const retval = {};
@@ -40,6 +41,7 @@ function displayCategoryInList(site, category) {
 }
 
 const TopicList = RestModel.extend({
+  session: service(),
   canLoadMore: notEmpty("more_topics_url"),
 
   forEachNew(topics, callback) {
@@ -118,7 +120,7 @@ const TopicList = RestModel.extend({
             more_topics_url: result.topic_list.more_topics_url,
           });
 
-          Session.currentProp("topicList", this);
+          this.session.set("topicList", this);
           return { moreTopicsUrl: this.more_topics_url, newTopics };
         }
       });
@@ -147,7 +149,7 @@ const TopicList = RestModel.extend({
       });
 
       if (storeInSession) {
-        Session.currentProp("topicList", this);
+        this.session.set("topicList", this);
       }
     });
   },
@@ -166,6 +168,12 @@ TopicList.reopenClass({
 
     const users = extractByKey(result.users, User);
     const groups = extractByKey(result.primary_groups, EmberObject);
+
+    if (result.topic_list.categories) {
+      result.topic_list.categories.forEach((c) => {
+        Site.current().updateCategory(c);
+      });
+    }
 
     return result.topic_list[listKey].map((t) => {
       t.posters.forEach((p) => {
@@ -217,7 +225,7 @@ TopicList.reopenClass({
       }
     );
 
-    const store = getOwner(this).lookup("service:store");
+    const store = getOwnerWithFallback(this).lookup("service:store");
     return store.findFiltered("topicList", { filter, params });
   },
 

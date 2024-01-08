@@ -37,6 +37,7 @@ module Chat
     def mentioned_users
       object
         .chat_mentions
+        .includes(user: :user_status)
         .map(&:user)
         .compact
         .sort_by(&:id)
@@ -49,7 +50,7 @@ module Chat
     end
 
     def user
-      object.user || Chat::DeletedUser.new
+      object.user || Chat::NullUser.new
     end
 
     def excerpt

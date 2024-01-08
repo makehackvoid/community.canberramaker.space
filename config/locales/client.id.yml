@@ -255,17 +255,9 @@ id:
       our_admins: "Admin Kami"
       our_moderators: "Moderator Kami"
       moderators: "Moderator"
-      stat:
-        all_time: "Sepanjang Waktu"
-        last_day: "24 jam terakhir"
-        last_7_days: "7 hari terakhir"
-        last_30_days: "30 hari terakhir"
       like_count: "Suka"
       topic_count: "Topik"
       post_count: "Pos"
-      user_count: "Pendaftaran"
-      active_user_count: "Pengguna Aktif"
-      contact: "Kontak kami"
       contact_info: "Pada kegiatan dari sebuah isu kritikal atau penting terjadi pada situs ini, silahkan kontak kami di %{contact_info}."
     bookmarked:
       title: "Penandaan"
@@ -388,6 +380,9 @@ id:
         type_bonus:
           name: "jenis bonus"
           title: "Jenis tertentu yang dapat ditinjau akan diberikan bonus oleh staf untuk menjadikannya prioritas yang lebih tinggi."
+      revise_and_reject_post:
+        reason: "Alasan"
+        optional: "opsional"
       stale_help: "Butir tinjauan ini telah diselesaikan oleh <b>%{username}</b>."
       claim_help:
         optional: "Anda dapat mengklaim item ini untuk mencegah orang lain meninjaunya."
@@ -680,8 +675,6 @@ id:
           imap_title: "IMAP"
           imap_additional_settings: "Pengaturan Tambahan"
           imap_settings_valid: "Pengaturan IMAP valid."
-          prefill:
-            gmail: "GMail"
           credentials:
             title: "Kredensial"
             smtp_server: "Server SMTP"
@@ -1102,8 +1095,6 @@ id:
         codes:
           title: "Kode Cadangan Dibuat"
       second_factor:
-        forgot_password: "Lupa password?"
-        confirm_password_description: "Harap konfirmasi password Anda untuk melanjutkan"
         name: "Nama"
         label: "Kode"
         show_key_description: "Masukkan secara manual"
@@ -1113,6 +1104,9 @@ id:
         edit: "Ubah"
         security_key:
           save: "Simpan"
+      passkeys:
+        save: "Simpan"
+        added_prefix: "Ditambahkan"
       change_about:
         title: "Ganti Tentang Saya"
         error: "Ada kesalahan saat mengganti nilai ini"
@@ -1162,13 +1156,12 @@ id:
         confirm_modal_title: "Hubungkan Akun %{provider}"
       name:
         title: "Name"
-        instructions: "Nama lengkap anda (opsional)"
-        instructions_required: "Nama lengkap anda"
+        instructions: "Nama lengkap anda (opsional)."
+        instructions_required: "Nama lengkap anda."
         too_short: "Nama anda terlalu pendek"
         ok: "Nama anda terlihat bagus"
       username:
         title: "Nama Pengguna"
-        instructions: "unik, tidak ada spasi, pendek"
         short_instructions: "Orang dapat menyebut anda sebagai @%{username}"
         available: "Nama pengguna anda tersedia"
         not_available: "Tidak tersedia. Coba %{suggestion}?"
@@ -1274,7 +1267,8 @@ id:
         same_as_username: "Password dan nama pengguna kamu sama"
         same_as_email: "Password dan email kamu sama"
         ok: "Kata sandi Anda terlihat baik."
-        instructions: "paling tidak %{count} karakter"
+        instructions: "Paling tidak %{count} karakter."
+        confirm: "Konfirmasi"
       summary:
         title: "Ringkasan"
         stats: "Statistik"
@@ -1495,6 +1489,7 @@ id:
       emoji: "Emoji :)"
       options: "Pilihan"
       add_warning: "Ini adalah peringatan resmi."
+      esc_label: "abaikan pesan"
       reference_topic_title: "RE: %{title}"
       error:
         title_missing: "Judul harus ada"
@@ -1595,6 +1590,7 @@ id:
         watching_first_post: "topik baru"
         post_approved: "tulisan disetujui"
         membership_request_consolidated: "permintaan keanggotaan baru"
+        admin_problems: "saran baru di dasbor situs Anda"
     upload_selector:
       uploading: "Mengunggah"
       select_file: "Pilih Berkas"
@@ -1745,6 +1741,7 @@ id:
         other: "%{count} Balasan"
       errors:
         upload: "Maaf, terjadi kesalahan saat mengunggah %{file_name}. Silakan coba lagi."
+        backup_too_large: "Maaf, file cadangan terlalu besar."
         image_upload_not_allowed_for_new_user: "Maaf, pengguna baru belum diperbolehkan mengunggah gambar."
         attachment_upload_not_allowed_for_new_user: "Maaf, pengguna baru belum diperbolehkan mengunggah lampiran."
       cancel_composer:
@@ -1775,6 +1772,7 @@ id:
       required_tag_group:
         delete: "Hapus"
       name: "Nama Kategori"
+      background_image_dark: "Gambar Latar Belakang Kategori Gelap"
       permissions:
         reply: "Balas"
       review_group_name: "nama grup"
@@ -2030,10 +2028,12 @@ id:
     form_template_chooser:
       select_template: "Pilih templat formulir"
     form_templates:
+      upload_field:
+        upload: "Unggah"
+        uploading: "Mengunggah"
       errors:
         valueMissing:
           default: "Harap isi kolom ini."
-          text: "Harap isi kolom ini."
           select-one: "Harap pilih item dalam daftar."
           select-multiple: "Pilih setidaknya satu item dalam daftar."
           checkbox: "Harap centang kotak ini jika Anda ingin melanjutkan."
@@ -2057,6 +2057,18 @@ id:
           other: "Masukan harus lebih dari %{count}."
         patternMismatch: "Harap sesuaikan dengan format yang diminta."
         badInput: "Harap masukkan masukan yang valid."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Enter"
+      edit:
+        modal:
+          cancel: "batal"
+          create: "Simpan"
+          reason: "mengapa Anda menyunting?"
+      spreadsheet:
+        show: "Tunjukkan"
+        about: "Tentang"
   admin_js:
     admin:
       title: "Admin Discourse"
@@ -2067,8 +2079,6 @@ id:
           never: "tidak pernah"
       dashboard:
         latest_version: "Terbaru"
-        new_features:
-          dismiss: "Bubar"
         last_checked: "Terakhir dicek"
         refresh_problems: "Segarkan"
         moderators: "Moderator:"
@@ -2076,6 +2086,7 @@ id:
         report_filter_any: "apa saja"
         disabled: Dinonaktifkan
         filter_reports: Filter laporan
+        custom_date_range: Rentang tanggal tertentu
         reports:
           last_7_days: "7 terakhir"
           last_30_days: "30 terakhir"
@@ -2122,12 +2133,15 @@ id:
               status: "Memperbarui status topik. Status: ditutup, arsip, terlihat, disematkan. Diaktifkan: benar, salah. Tentukan kategori_id di sini dan di dalam muatan permintaan untuk hanya mengizinkan perubahan status pada topik-topik di dalam kategori tersebut."
             posts:
               list: Daftar post terbaru dan post pribadi. RSS juga didukung.
+            tag_groups:
+              list: Dapatkan daftar grup tag.
+              show: Dapatkan satu grup tag berdasarkan id.
+              create: Membuat grup tag.
+              update: Memperbarui grup tag yang ditentukan oleh id.
       web_hooks:
         edit: "Ubah"
         save: "Simpan"
         active: "Aktif"
-        user_badge_event:
-          details: "Ketika badge diberikan atau dicabut."
         delivery_status:
           failed: "Gagal"
           disabled: "Dinonaktifkan"
@@ -2171,6 +2185,7 @@ id:
           save: "Simpan"
           edit: "Ubah"
           settings: "Pengaturan"
+          cancel: "Batal"
           collapse: Persempit
           upload: "Unggah"
           discard: "Batalkan"
@@ -2364,6 +2379,7 @@ id:
       site_text:
         edit: "ubah"
         show_outdated: "Hanya tampilkan yang usang/tidak valid"
+        no_results: "Tidak ditemukan teks situs yang cocok"
         interpolation_keys: "Kunci interpolasi yang tersedia:"
         outdated:
           title: "Terjemahan ini sudah usang"

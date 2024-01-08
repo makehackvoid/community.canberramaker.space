@@ -242,6 +242,31 @@ RSpec.describe Group do
     end
   end
 
+  describe ".auto_groups_between" do
+    it "returns the auto groups between lower and upper bounds" do
+      expect(
+        described_class.auto_groups_between(:trust_level_0, :trust_level_3),
+      ).to contain_exactly(10, 11, 12, 13)
+    end
+
+    it "excludes the undefined groups between staff and TL0" do
+      expect(described_class.auto_groups_between(:admins, :trust_level_0)).to contain_exactly(
+        1,
+        2,
+        3,
+        10,
+      )
+    end
+
+    it "returns an empty array when lower group is higher than upper group" do
+      expect(described_class.auto_groups_between(:trust_level_1, :trust_level_0)).to be_empty
+    end
+
+    it "returns an empty array when passing an unknown group" do
+      expect(described_class.auto_groups_between(:trust_level_0, :trust_level_1337)).to be_empty
+    end
+  end
+
   describe ".refresh_automatic_group!" do
     it "does not include staged users in any automatic groups" do
       staged = Fabricate(:staged, trust_level: 1)
@@ -257,7 +282,7 @@ RSpec.describe Group do
     end
 
     describe "after updating automatic group members" do
-      fab!(:user) { Fabricate(:user) }
+      fab!(:user)
 
       it "triggers an event when a user is removed from an automatic group" do
         tl3_users = Group.find(Group::AUTO_GROUPS[:trust_level_3])
@@ -277,8 +302,9 @@ RSpec.describe Group do
 
         expect(GroupUser.exists?(group: tl0_users, user: user)).to eq(false)
 
-        _events = DiscourseEvent.track_events { Group.refresh_automatic_group!(:trust_level_0) }
+        events = DiscourseEvent.track_events { Group.refresh_automatic_group!(:trust_level_0) }
 
+        expect(events).to include(event_name: :group_updated, params: [tl0_users])
         expect(GroupUser.exists?(group: tl0_users, user: user)).to eq(true)
         publish_event_job_args = Jobs::PublishGroupMembershipUpdates.jobs.last["args"].first
         expect(publish_event_job_args["user_ids"]).to include(user.id)
@@ -513,7 +539,7 @@ RSpec.describe Group do
   end
 
   describe "destroy" do
-    fab!(:user) { Fabricate(:user) }
+    fab!(:user)
     fab!(:group) { Fabricate(:group, users: [user]) }
 
     before { group.add(user) }
@@ -636,7 +662,7 @@ RSpec.describe Group do
   end
 
   describe "group management" do
-    fab!(:group) { Fabricate(:group) }
+    fab!(:group)
 
     it "by default has no managers" do
       expect(group.group_users.where("group_users.owner")).to be_empty
@@ -909,7 +935,7 @@ RSpec.describe Group do
     end
 
     describe "with webhook" do
-      fab!(:group_user_web_hook) { Fabricate(:group_user_web_hook) }
+      fab!(:group_user_web_hook)
 
       it "Enqueues webhook events" do
         group.remove(user)
@@ -977,7 +1003,7 @@ RSpec.describe Group do
     end
 
     context "when adding a user into a public group" do
-      fab!(:category) { Fabricate(:category) }
+      fab!(:category)
 
       it "should publish the group's categories to the client" do
         group.update!(public_admission: true, categories: [category])
@@ -1073,7 +1099,7 @@ RSpec.describe Group do
     end
 
     describe "with webhook" do
-      fab!(:group_user_web_hook) { Fabricate(:group_user_web_hook) }
+      fab!(:group_user_web_hook)
 
       it "Enqueues user_removed_from_group webhook events for each group_user" do
         group.bulk_add([user.id, admin.id])

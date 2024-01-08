@@ -25,11 +25,8 @@ ar:
           descriptions:
             chat:
               create_message: "أنشئ رسالة دردشة في قناة محدَّدة."
-    about:
-      chat_messages_count: "رسائل الدردشة"
-      chat_channels_count: "قنوات الدردشة"
-      chat_users_count: "مستخدمو الدردشة"
     chat:
+      back_to_forum: "المنتدى"
       deleted_chat_username: تم الحذف
       dates:
         time_tiny: "h:mm"
@@ -275,7 +272,6 @@ ar:
       save: "حفظ"
       select: "تحديد"
       return_to_list: "العودة إلى قائمة القنوات"
-      return_to_threads_list: "العودة إلى المناقشات الجارية"
       unread_threads_count:
         zero: "لديك %{count} مناقشة غير مقروءة"
         one: "لديك مناقشة واحدة (%{count}) غير مقروءة"
@@ -340,7 +336,6 @@ ar:
         back_to_all_channels: "كل القنوات"
         back_to_channel: "العودة"
         tabs:
-          about: نبذة
           members: الأعضاء
           settings: الإعدادات
       new_message_modal:
@@ -351,9 +346,9 @@ ar:
         default_search_placeholder: "#a-channel، @شخص أو شيء"
         default_channel_search_placeholder: "#a-channel"
         default_user_search_placeholder: "@شخص"
-        user_search_placeholder: "...إضافة المزيد من المستخدمين"
         disabled_user: "عطَّل الدردشة"
         no_items: "لا توجد عناصر"
+        filter: "المرشح"
       channel_edit_name_slug_modal:
         title: تعديل القناة
         input_placeholder: أضِف اسمًا
@@ -437,26 +432,6 @@ ar:
           topic: "الموضوع"
       reviewable:
         type: "رسالة دردشة"
-      reactions:
-        only_you: "لقد تفاعلت باستخدام :%{emoji}:"
-        you_and_single_user: "لقد تفاعلت أنت و%{username} بالرمز التعبيري :%{emoji}:"
-        you_and_multiple_users: "لقد تفاعلت أنت و%{commaSeparatedUsernames} و%{username} بالرمز التعبيري :%{emoji}:"
-        you_multiple_users_and_more:
-          zero: "لقد تفاعلت أنت و%{commaSeparatedUsernames} و%{count} مستخدم آخر بالرمز التعبيري :%{emoji}:"
-          one: "لقد تفاعلت أنت و%{commaSeparatedUsernames} ومستخدم واحد (%{count}) آخر بالرمز التعبيري :%{emoji}:"
-          two: "لقد تفاعلت أنت و%{commaSeparatedUsernames} ومستخدمان (%{count}) آخران بالرمز التعبيري :%{emoji}:"
-          few: "لقد تفاعلت أنت و%{commaSeparatedUsernames} و%{count} مستخدمين آخرين بالرمز التعبيري :%{emoji}:"
-          many: "لقد تفاعلت أنت و%{commaSeparatedUsernames} و%{count} مستخدمًا آخر بالرمز التعبيري :%{emoji}:"
-          other: "لقد تفاعلت أنت و%{commaSeparatedUsernames} و%{count} مستخدم آخر بالرمز التعبيري :%{emoji}:"
-        single_user: "لقد تفاعل المستخدم %{username} بالرمز التعبيري :%{emoji}:"
-        multiple_users: "لقد تفاعل %{commaSeparatedUsernames} و%{username} بالرمز التعبيري :%{emoji}:"
-        multiple_users_and_more:
-          zero: "لقد تفاعل %{commaSeparatedUsernames} و%{count} مستخدم آخر بالرمز التعبيري :%{emoji}:"
-          one: "لقد تفاعل %{commaSeparatedUsernames} ومستخدم واحد (%{count}) آخر بالرمز التعبيري :%{emoji}:"
-          two: "لقد تفاعل %{commaSeparatedUsernames} ومستخدمان (%{count}) آخران بالرمز التعبيري :%{emoji}:"
-          few: "لقد تفاعل %{commaSeparatedUsernames} و%{count} مستخدمين آخرين بالرمز التعبيري :%{emoji}:"
-          many: "لقد تفاعل %{commaSeparatedUsernames} و%{count} مستخدمًا آخر بالرمز التعبيري :%{emoji}:"
-          other: "لقد تفاعل %{commaSeparatedUsernames} و%{count} مستخدم آخر بالرمز التعبيري :%{emoji}:"
       composer:
         toggle_toolbar: "تشغيل شريط الأدوات"
         italic_text: "نص بارز"
@@ -466,6 +441,7 @@ ar:
       quote:
         original_channel: 'تم إرساله في الأساس في <a href="%{channelLink}">%{channel}</a>'
         copy_success: "تم نسخ اقتباس الدردشة إلى الحافظة"
+        default_thread_title: "سلسلة الدردشة"
       notification_levels:
         never: "أبدًا"
         mention: "للإشارات فقط"
@@ -494,6 +470,10 @@ ar:
         saved: "تم الحفظ"
         unfollow: "مغادرة"
         admin_title: "مسؤول"
+        settings_title: "الإعدادات"
+        category_label: "الفئة"
+        history_label: "السجل"
+        members_label: "الأعضاء"
       admin:
         title: "الدردشة"
         export_messages:
@@ -580,22 +560,13 @@ ar:
           many: "%{commaSeparatedUsernames} و%{count} آخرون يكتبون"
           other: "%{commaSeparatedUsernames} و%{count} آخرون يكتبون"
       retention_reminders:
-        public_none: "يتم الاحتفاظ بسجل القناة إلى أجلٍ غير مسمى."
-        public:
-          zero: "يتم الاحتفاظ بسجل القناة لمدة %{count} يوم."
-          one: "يتم الاحتفاظ بسجل القناة لمدة يوم واحد (%{count})."
-          two: "يتم الاحتفاظ بسجل القناة لمدة يومين (%{count})."
-          few: "يتم الاحتفاظ بسجل القناة لمدة %{count} أيام."
-          many: "يتم الاحتفاظ بسجل القناة لمدة %{count} يومًا."
-          other: "يتم الاحتفاظ بسجل القناة لمدة %{count} يوم."
-        dm_none: "يتم الاحتفاظ بسجل الدردشة الشخصية إلى أجلٍ غير مسمى."
-        dm:
-          zero: "يتم الاحتفاظ بسجل الدردشة الشخصية لمدة %{count} يوم."
-          one: "يتم الاحتفاظ بسجل الدردشة الشخصية لمدة يوم واحد (%{count})."
-          two: "يتم الاحتفاظ بسجل الدردشة الشخصية لمدة يومين (%{count})."
-          few: "يتم الاحتفاظ بسجل الدردشة الشخصية لمدة %{count} أيام."
-          many: "يتم الاحتفاظ بسجل الدردشة الشخصية لمدة %{count} يومًا."
-          other: "يتم الاحتفاظ بسجل الدردشة الشخصية لمدة %{count} يوم."
+        short:
+          zero: "يومان (%{count})"
+          one: "يوم واحد (%{count})"
+          two: "يومان (%{count})"
+          few: "%{count} أيام"
+          many: "%{count} يومًا"
+          other: "%{count} يوم"
       flags:
         off_topic: "هذه الرسالة ليست ذات صلة بالمناقشة الحالية كما هو محدَّد في عنوان القناة، وربما ينبغي نقلها إلى مكانٍ آخر."
         inappropriate: "تحتوي هذه الرسالة على محتوى قد يعتبره الشخص العاقل مسيئًا أو مهينًا أو ينتهك <a href=\"%{basePath}/guidelines\">إرشادات المجتمع</a> لدينا."
@@ -649,7 +620,6 @@ ar:
           other: "+%{count}"
       threads:
         open: "فتح سلسلة دردشة"
-        list: "المناقشات الجارية"
         none: "أنت لا تشارك في أي سلاسل دردشة في هذه القناة."
       draft_channel_screen:
         header: "رسالة جديدة"

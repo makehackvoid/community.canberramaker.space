@@ -1,21 +1,21 @@
 import Component from "@glimmer/component";
 import { cached, tracked } from "@glimmer/tracking";
+import { getOwner } from "@ember/application";
 import { action } from "@ember/object";
-import { NO_REMINDER_ICON } from "discourse/models/bookmark";
-import UserMenuTab, { CUSTOM_TABS_CLASSES } from "discourse/lib/user-menu/tab";
 import { inject as service } from "@ember/service";
-import getUrl from "discourse-common/lib/get-url";
 import { wantsNewWindow } from "discourse/lib/intercept-click";
-import UserMenuNotificationsList from "./notifications-list";
-import UserMenuRepliesNotificationsList from "./replies-notifications-list";
+import UserMenuTab, { CUSTOM_TABS_CLASSES } from "discourse/lib/user-menu/tab";
+import { NO_REMINDER_ICON } from "discourse/models/bookmark";
+import deprecated from "discourse-common/lib/deprecated";
+import getUrl from "discourse-common/lib/get-url";
+import UserMenuBookmarksList from "./bookmarks-list";
 import UserMenuLikesNotificationsList from "./likes-notifications-list";
 import UserMenuMessagesList from "./messages-list";
-import UserMenuBookmarksList from "./bookmarks-list";
-import UserMenuReviewablesList from "./reviewables-list";
-import UserMenuProfileTabContent from "./profile-tab-content";
+import UserMenuNotificationsList from "./notifications-list";
 import UserMenuOtherNotificationsList from "./other-notifications-list";
-import deprecated from "discourse-common/lib/deprecated";
-import { getOwner } from "discourse-common/lib/get-owner";
+import UserMenuProfileTabContent from "./profile-tab-content";
+import UserMenuRepliesNotificationsList from "./replies-notifications-list";
+import UserMenuReviewablesList from "./reviewables-list";
 
 const DEFAULT_TAB_ID = "all-notifications";
 const DEFAULT_PANEL_COMPONENT = UserMenuNotificationsList;
@@ -195,6 +195,14 @@ export default class UserMenu extends Component {
   @tracked currentTabId = DEFAULT_TAB_ID;
   @tracked currentPanelComponent = DEFAULT_PANEL_COMPONENT;
   @tracked currentNotificationTypes;
+
+  get classNames() {
+    let classes = ["user-menu", "revamped", "menu-panel", "drop-down"];
+    if (this.siteSettings.show_user_menu_avatars) {
+      classes.push("show-avatars");
+    }
+    return classes.join(" ");
+  }
 
   @cached
   get topTabs() {

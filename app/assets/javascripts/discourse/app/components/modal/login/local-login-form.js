@@ -1,15 +1,15 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
-import { ajax } from "discourse/lib/ajax";
+import { inject as service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import { isEmpty } from "@ember/utils";
-import { escapeExpression } from "discourse/lib/utilities";
-import { inject as service } from "@ember/service";
-import { popupAjaxError } from "discourse/lib/ajax-error";
-import I18n from "I18n";
-import { getWebauthnCredential } from "discourse/lib/webauthn";
 import ForgotPassword from "discourse/components/modal/forgot-password";
+import { ajax } from "discourse/lib/ajax";
+import { popupAjaxError } from "discourse/lib/ajax-error";
+import { escapeExpression } from "discourse/lib/utilities";
+import { getWebauthnCredential } from "discourse/lib/webauthn";
+import I18n from "discourse-i18n";
 
 export default class LocalLoginBody extends Component {
   @service modal;
@@ -32,6 +32,13 @@ export default class LocalLoginBody extends Component {
 
   get disableLoginFields() {
     return this.args.showSecondFactor || this.args.showSecurityKey;
+  }
+
+  @action
+  passkeyConditionalLogin() {
+    if (this.args.canUsePasskeys) {
+      this.args.passkeyLogin("conditional");
+    }
   }
 
   @action

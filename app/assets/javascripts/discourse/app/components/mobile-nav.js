@@ -1,8 +1,9 @@
-import { on } from "discourse-common/utils/decorators";
 import Component from "@ember/component";
 import { action } from "@ember/object";
 import { next } from "@ember/runloop";
 import { inject as service } from "@ember/service";
+import $ from "jquery";
+import { on } from "discourse-common/utils/decorators";
 
 export default Component.extend({
   @on("init")
@@ -47,6 +48,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     this.router.off("routeDidChange", this, this.currentRouteChanged);
   },
 

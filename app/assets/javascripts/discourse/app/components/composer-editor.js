@@ -1,19 +1,12 @@
-import { authorizesOneOrMoreImageExtensions } from "discourse/lib/uploads";
+import { getOwner } from "@ember/application";
+import Component from "@ember/component";
+import EmberObject, { computed } from "@ember/object";
 import { alias } from "@ember/object/computed";
+import { next, schedule, throttle } from "@ember/runloop";
 import { BasePlugin } from "@uppy/core";
+import $ from "jquery";
 import { resolveAllShortUrls } from "pretty-text/upload-short-url";
-import {
-  caretPosition,
-  formatUsername,
-  inCodeBlock,
-} from "discourse/lib/utilities";
-import { tinyAvatar } from "discourse-common/lib/avatar-utils";
-import discourseComputed, {
-  bind,
-  debounce,
-  observes,
-  on,
-} from "discourse-common/utils/decorators";
+import { ajax } from "discourse/lib/ajax";
 import {
   fetchUnseenHashtagsInContext,
   linkSeenHashtagsInContext,
@@ -22,26 +15,35 @@ import {
   fetchUnseenMentions,
   linkSeenMentions,
 } from "discourse/lib/link-mentions";
-import { next, schedule, throttle } from "@ember/runloop";
-import discourseLater from "discourse-common/lib/later";
-import Component from "@ember/component";
-import Composer from "discourse/models/composer";
-import ComposerUploadUppy from "discourse/mixins/composer-upload-uppy";
-import EmberObject from "@ember/object";
-import I18n from "I18n";
-import { ajax } from "discourse/lib/ajax";
-import discourseDebounce from "discourse-common/lib/debounce";
-import { findRawTemplate } from "discourse-common/lib/raw-templates";
-import { iconHTML } from "discourse-common/lib/icon-library";
-import { isTesting } from "discourse-common/config/environment";
 import { loadOneboxes } from "discourse/lib/load-oneboxes";
 import putCursorAtEnd from "discourse/lib/put-cursor-at-end";
+import { authorizesOneOrMoreImageExtensions } from "discourse/lib/uploads";
 import userSearch from "discourse/lib/user-search";
 import {
   destroyUserStatuses,
   initUserStatusHtml,
   renderUserStatusHtml,
 } from "discourse/lib/user-status-on-autocomplete";
+import {
+  caretPosition,
+  formatUsername,
+  inCodeBlock,
+} from "discourse/lib/utilities";
+import ComposerUploadUppy from "discourse/mixins/composer-upload-uppy";
+import Composer from "discourse/models/composer";
+import { isTesting } from "discourse-common/config/environment";
+import { tinyAvatar } from "discourse-common/lib/avatar-utils";
+import discourseDebounce from "discourse-common/lib/debounce";
+import { iconHTML } from "discourse-common/lib/icon-library";
+import discourseLater from "discourse-common/lib/later";
+import { findRawTemplate } from "discourse-common/lib/raw-templates";
+import discourseComputed, {
+  bind,
+  debounce,
+  observes,
+  on,
+} from "discourse-common/utils/decorators";
+import I18n from "discourse-i18n";
 
 // original string `![image|foo=bar|690x220, 50%|bar=baz](upload://1TjaobgKObzpU7xRMw2HuUc87vO.png "image title")`
 // group 1 `image|foo=bar`
@@ -223,7 +225,7 @@ export default Component.extend(ComposerUploadUppy, {
             categoryId: this.topic?.category_id || this.composer?.categoryId,
             includeGroups: true,
           }).then((result) => {
-            initUserStatusHtml(result.users);
+            initUserStatusHtml(getOwner(this), result.users);
             return result;
           });
         },
@@ -283,7 +285,7 @@ export default Component.extend(ComposerUploadUppy, {
         count: minimumPostLength,
       });
       const tl = this.get("currentUser.trust_level");
-      if (tl === 0 || tl === 1) {
+      if ((tl === 0 || tl === 1) && !this._isNewTopic) {
         reason +=
           "<br/>" +
           I18n.t("composer.error.try_like", {
@@ -301,6 +303,15 @@ export default Component.extend(ComposerUploadUppy, {
         lastShownAt: lastValidatedAt,
       });
     }
+  },
+
+  @computed("composer.{creatingTopic,editingFirstPost,creatingSharedDraft}")
+  get _isNewTopic() {
+    return (
+      this.composer.creatingTopic ||
+      this.composer.editingFirstPost ||
+      this.composer.creatingSharedDraft
+    );
   },
 
   _resetShouldBuildScrollMap() {

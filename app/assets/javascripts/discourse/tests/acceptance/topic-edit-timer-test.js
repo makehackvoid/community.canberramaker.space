@@ -1,3 +1,6 @@
+import { click, fillIn, visit } from "@ember/test-helpers";
+import { test } from "qunit";
+import topicFixtures from "discourse/tests/fixtures/topic";
 import {
   acceptance,
   exists,
@@ -7,12 +10,9 @@ import {
   queryAll,
   updateCurrentUser,
 } from "discourse/tests/helpers/qunit-helpers";
-import { click, fillIn, visit } from "@ember/test-helpers";
-import { test } from "qunit";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
-import I18n from "I18n";
 import { cloneJSON } from "discourse-common/lib/object";
-import topicFixtures from "discourse/tests/fixtures/topic";
+import I18n from "discourse-i18n";
 
 acceptance("Topic - Edit timer", function (needs) {
   let clock = null;
@@ -131,7 +131,7 @@ acceptance("Topic - Edit timer", function (needs) {
   test("schedule publish to category - visible for a PM", async function (assert) {
     updateCurrentUser({ moderator: true });
     const timerType = selectKit(".select-kit.timer-type");
-    const categoryChooser = selectKit(".modal-body .category-chooser");
+    const categoryChooser = selectKit(".d-modal__body .category-chooser");
 
     await visit("/t/pm-for-testing/12");
     await click(".toggle-admin-menu");
@@ -170,7 +170,7 @@ acceptance("Topic - Edit timer", function (needs) {
   test("schedule publish to category - visible for a private category", async function (assert) {
     updateCurrentUser({ moderator: true });
     const timerType = selectKit(".select-kit.timer-type");
-    const categoryChooser = selectKit(".modal-body .category-chooser");
+    const categoryChooser = selectKit(".d-modal__body .category-chooser");
 
     // has private category id 24 (shared drafts)
     await visit("/t/some-topic/9");
@@ -210,7 +210,7 @@ acceptance("Topic - Edit timer", function (needs) {
   test("schedule publish to category - visible for an unlisted public topic", async function (assert) {
     updateCurrentUser({ moderator: true });
     const timerType = selectKit(".select-kit.timer-type");
-    const categoryChooser = selectKit(".modal-body .category-chooser");
+    const categoryChooser = selectKit(".d-modal__body .category-chooser");
 
     await visit("/t/internationalization-localization/280");
 

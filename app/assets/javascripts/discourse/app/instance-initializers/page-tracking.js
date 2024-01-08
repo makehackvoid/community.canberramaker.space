@@ -1,15 +1,16 @@
+import { resetAjax, trackNextAjaxAsPageview } from "discourse/lib/ajax";
 import {
   googleTagManagerPageChanged,
   resetPageTracking,
   startPageTracking,
 } from "discourse/lib/page-tracker";
-import { resetAjax, trackNextAjaxAsPageview } from "discourse/lib/ajax";
 
 export default {
   after: "inject-objects",
 
   initialize(owner) {
     // Tell our AJAX system to track a page transition
+    // eslint-disable-next-line ember/no-private-routing-service
     const router = owner.lookup("router:main");
     router.on("routeWillChange", this.handleRouteWillChange);
 

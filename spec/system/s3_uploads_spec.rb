@@ -22,12 +22,12 @@ describe "Uploading files in the composer to S3", type: :system do
         attach_file(File.absolute_path(file_from_fixtures("logo.jpg"))) do
           find("#avatar-uploader").click
         end
-        expect(page).to have_css(".avatar-uploader label[data-uploaded]")
+        expect(page).to have_css(".avatar-uploader .avatar-uploader__button[data-uploaded]")
         modal.click_primary_button
         expect(modal).to be_closed
         expect(page).to have_css(
           "#user-avatar-uploads[data-custom-avatar-upload-id]",
-          visible: false,
+          visible: :hidden,
         )
         expect(current_user.reload.uploaded_avatar_id).to eq(
           find("#user-avatar-uploads", visible: false)["data-custom-avatar-upload-id"].to_i,

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Admin::ThemesController do
-  fab!(:admin) { Fabricate(:admin) }
-  fab!(:moderator) { Fabricate(:moderator) }
-  fab!(:user) { Fabricate(:user) }
+  fab!(:admin)
+  fab!(:moderator)
+  fab!(:user)
 
   let! :repo do
     setup_git_repo("about.json" => { name: "discourse-branch-header" }.to_json)
@@ -73,12 +73,8 @@ RSpec.describe Admin::ThemesController do
         let(:uploaded_file) { Upload.find_by(original_filename: filename) }
         let(:response_json) { response.parsed_body }
 
-        before do
-          post "/admin/themes/upload_asset.json", params: { file: upload }
-          expect(response.status).to eq(201)
-        end
-
         it "reuses the original upload" do
+          post "/admin/themes/upload_asset.json", params: { file: upload }
           expect(response.status).to eq(201)
           expect(response_json["upload_id"]).to eq(uploaded_file.id)
         end
@@ -137,7 +133,7 @@ RSpec.describe Admin::ThemesController do
         expect do
           post "/admin/themes/import.json", params: { theme: uploaded_file }
           expect(response.status).to eq(201)
-        end.to change { Theme.count }.by (1)
+        end.to change { Theme.count }.by(1)
 
         json = response.parsed_body
 
@@ -235,6 +231,32 @@ RSpec.describe Admin::ThemesController do
         expect(response.status).to eq(201)
       end
 
+      it "responds with suitable error message when a migration fails" do
+        repo_path =
+          setup_git_repo(
+            "about.json" => { name: "test theme" }.to_json,
+            "settings.yaml" => "boolean_setting: true",
+            "migrations/settings/0001-some-migration.js" => <<~JS,
+            export default function migrate(settings) {
+              settings.set("unknown_setting", "dsad");
+              return settings;
+            }
+          JS
+          )
+        repo_url = MockGitImporter.register("https://example.com/initial_repo.git", repo_path)
+
+        post "/admin/themes/import.json", params: { remote: repo_url }
+
+        expect(response.status).to eq(422)
+        expect(response.parsed_body["errors"]).to contain_exactly(
+          I18n.t(
+            "themes.import_error.migrations.unknown_setting_returned_by_migration",
+            name: "0001-some-migration",
+            setting_name: "unknown_setting",
+          ),
+        )
+      end
+
       it "fails to import with a failing status" do
         post "/admin/themes/import.json", params: { remote: "non-existent" }
 
@@ -250,16 +272,9 @@ RSpec.describe Admin::ThemesController do
       it "can lookup a private key by public key" do
         Discourse.redis.setex("ssh_key_abcdef", 1.hour, "rsa private key")
 
-        ThemeStore::GitImporter.any_instance.stubs(:import!)
-        RemoteTheme.stubs(:extract_theme_info).returns(
-          "name" => "discourse-brand-header",
-          "component" => true,
-        )
-        RemoteTheme.any_instance.stubs(:update_from_remote)
-
         post "/admin/themes/import.json",
              params: {
-               remote: "    https://github.com/discourse/discourse-brand-header.git       ",
+               remote: "    #{repo_url}       ",
                public_key: "abcdef",
              }
 
@@ -304,9 +319,9 @@ RSpec.describe Admin::ThemesController do
       it "fails to import with an error if uploads are not allowed" do
         SiteSetting.theme_authorized_extensions = "nothing"
 
-        expect do post "/admin/themes/import.json", params: { theme: theme_archive } end.to change {
-          Theme.count
-        }.by (0)
+        expect do
+          post "/admin/themes/import.json", params: { theme: theme_archive }
+        end.not_to change { Theme.count }
 
         expect(response.status).to eq(422)
       end
@@ -316,7 +331,7 @@ RSpec.describe Admin::ThemesController do
 
         expect do post "/admin/themes/import.json", params: { theme: theme_archive } end.to change {
           Theme.count
-        }.by (1)
+        }.by(1)
         expect(response.status).to eq(201)
         json = response.parsed_body
 
@@ -339,7 +354,7 @@ RSpec.describe Admin::ThemesController do
                      bundle: theme_archive,
                      theme_id: other_existing_theme.id,
                    }
-            end.to change { Theme.count }.by (0)
+            end.not_to change { Theme.count }
           end
         expect(response.status).to eq(201)
         json = response.parsed_body
@@ -362,7 +377,7 @@ RSpec.describe Admin::ThemesController do
 
         expect do
           post "/admin/themes/import.json", params: { bundle: theme_archive, theme_id: nil }
-        end.to change { Theme.count }.by (1)
+        end.to change { Theme.count }.by(1)
         expect(response.status).to eq(201)
         json = response.parsed_body
 
@@ -1050,6 +1065,25 @@ RSpec.describe Admin::ThemesController do
       before { sign_in(user) }
 
       include_examples "theme update not allowed"
+    end
+  end
+
+  describe "#bulk_destroy" do
+    fab!(:theme) { Fabricate(:theme, name: "Awesome Theme") }
+    fab!(:theme_2) { Fabricate(:theme, name: "Another awesome Theme") }
+    let(:theme_ids) { [theme.id, theme_2.id] }
+
+    before { sign_in(admin) }
+
+    it "destroys all selected the themes" do
+      expect do
+        delete "/admin/themes/bulk_destroy.json", params: { theme_ids: theme_ids }
+      end.to change { Theme.count }.by(-2)
+    end
+
+    it "logs the theme destroy action for each theme" do
+      StaffActionLogger.any_instance.expects(:log_theme_destroy).twice
+      delete "/admin/themes/bulk_destroy.json", params: { theme_ids: theme_ids }
     end
   end
 end

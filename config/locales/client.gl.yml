@@ -245,12 +245,10 @@ gl:
       our_moderators: "Os moderadores"
       moderators: "Moderadores"
       stat:
-        all_time: "Todos"
+        last_day: "24 horas"
       like_count: "Gústames"
       topic_count: "Temas"
       post_count: "Publicacións"
-      active_user_count: "Usuarios activos"
-      contact: "Contacte connosco"
       contact_info: "No caso dunha incidencia crítica ou asunto urxente que afecte este sitio, contacte connosco en %{contact_info}."
     bookmarked:
       title: "Marcador"
@@ -359,6 +357,9 @@ gl:
         type_bonus:
           name: "tipo de bonificación"
           title: "O equipo pode asignar unha bonificación a certos tipos revisábeis para facelos de maior prioridade."
+      revise_and_reject_post:
+        reason: "Motivo"
+        optional: "opcional"
       claim_help:
         optional: "Podes reclamar este elemento para evitar que outros o revisen."
         required: "Debes reclamar os elementos antes de revisalos."
@@ -1069,7 +1070,6 @@ gl:
         success: "(correo enviado)"
         in_progress: "(enviando o correo)"
         error: "(erro)"
-        emoji: "bloquear emoji"
         action: "Enviar correo para restabelecer o contrasinal"
         set_password: "Estabelecer o contrasinal"
         choose_new: "Elixir un novo contrasinal"
@@ -1097,8 +1097,6 @@ gl:
         title: "Autenticación de dobre paso"
         enable: "Xestionar autenticación de dobre paso"
         disable_all: "Desactivar todos"
-        forgot_password: "Esqueceu o contrasinal?"
-        confirm_password_description: "Confirme o seu contrasinal para continuar"
         name: "Nome"
         label: "Código"
         rate_limit: "Agarde antes de tentalo con outro código de autenticación."
@@ -1106,8 +1104,6 @@ gl:
           Escanee este código QR nunha aplicación compatíbel (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> - <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) e escriba o código de autenticación.
         disable_description: "Escriba o código de autenticación da súa aplicación"
         show_key_description: "Introducilo manualmente"
-        short_description: |
-          Protexa a súa conta con códigos de seguranza dun só uso.
         extended_description: |
           A autenticación de dobre paso reforza a seguranza da sús conta, ao requirir un código dun só uso ademais do contrasinal. Os tokens pódense xear en dispositivos <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>Android</a> e <a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a>.
         oauth_enabled_warning: "Repare en que a activación na súa conta da autenticación de dobre paso implica a desactivación do inicio de sesión a través de redes sociais."
@@ -1133,6 +1129,10 @@ gl:
           already_added_error: "Xa rexistrou esta clave de seguranza. Non precisa volver rexistrala."
           save: "Gardar"
           name_required_error: "Debe escribir un nome para a clave de seguranza."
+      passkeys:
+        save: "Gardar"
+        added_prefix: "Engadido"
+        last_used_prefix: "Último utilizado"
       change_about:
         title: "Cambiar «Verbo de min»"
         error: "Produciuse un erro ao cambiar este valor."
@@ -1207,14 +1207,13 @@ gl:
           generic: "Usarase a súa conta de %{provider} para a autenticación."
       name:
         title: "Nome"
-        instructions: "o seu nome completo (opcional)"
-        instructions_required: "Nome completo"
+        instructions: "O seu nOme cOmpletO (OpciOnal)."
+        instructions_required: "Nome completo."
         required: "Escriba un nome"
         too_short: "O nome é curto de mais"
         ok: "O nome parece correcto"
       username:
         title: "Nome de usuario"
-        instructions: "exclusivo, sen espazos, curto"
         short_instructions: "A xente pode mencionalo como @%{username}"
         available: "O nome de usuario está dispoñíbel"
         not_available: "Non dispoñíbel. Tentar %{suggestion}?"
@@ -1396,8 +1395,9 @@ gl:
         same_as_username: "O contrasinal é igual ao nome de usuario."
         same_as_email: "O contrasinal é igual ao correo electrónico."
         ok: "O contrasinal semella bo."
-        instructions: "como mínimo %{count} caracteres"
+        instructions: "Como mínimo %{count} caracteres."
         required: "Escriba un contrasinal"
+        confirm: "Confirmar"
       summary:
         title: "Resumo"
         stats: "Estatísticas"
@@ -1577,7 +1577,6 @@ gl:
       link_label: "Envíeme ao correo unha ligazón de acceso"
       button_label: "con correo electrónico"
       login_link: "Saltar o contrasinal; envíeme por correo unha ligazón de inicio de sesión"
-      emoji: "bloquear emoji"
       complete_username: "Se unha conta corresponde ao nome de usuario <b>%{username}</b>, deberá recibir en breve un correo electrónico cunha ligazón de inicio de sesión."
       complete_email: "Se unha conta corresponde a <b>%{email}</b>, deberá recibir en breve unha ligazón de inicio de sesión."
       complete_username_found: "Atopamos unha conta que co nome de usuario <b>%{username}</b>, deberá recibir en breve un correo electrónico cunha ligazón de inicio de sesión."
@@ -1646,7 +1645,6 @@ gl:
         backup_code: "Usar no seu lugar un código de copia de seguranza"
     invites:
       accept_title: "Convite"
-      emoji: "emoji de sobre"
       welcome_to: "Dámoslle a benvida a %{site_name}!"
       invited_by: "Recibiu o convite de:"
       social_login_available: "Con ese correo electrónico tamén poderá iniciar a sesión a través de calquera rede social."
@@ -1680,12 +1678,6 @@ gl:
       topic_count:
         one: "%{count} tema nesta categoría"
         other: "%{count} temas nesta categoría"
-      plus_subcategories_title:
-        one: "%{name} e unha subcategoría"
-        other: "%{name} e %{count} subcategorías"
-      plus_subcategories:
-        one: "+ %{count} subcategoría"
-        other: "+ %{count} subcategorías"
     select_kit:
       delete_item: "Eliminar %{name}"
       filter_by: "Filtrado por: %{name}"
@@ -1744,9 +1736,6 @@ gl:
       group_mentioned_limit:
         one: "<b>Aviso!</b> Mencionou a <a href='%{group_link}'>%{group}</a>, con todo, este grupo ten máis membros có límite de mencións configurado polo administrador en %{count} usuario. Ninguén será avisado."
         other: "<b>Aviso!</b> Mencionou a <a href='%{group_link}'>%{group}</a>, con todo, este grupo ten máis membros có límite de mencións configurado polo administrador en %{count} usuarios. Ninguén será avisado."
-      group_mentioned:
-        one: "Ao mencionar %{group}, vai enviar a notificación a <a href='%{group_link}'>%{count} persoa</a>. Está seguro de querelo facer?"
-        other: "Ao mencionar %{group}, vai enviar a notificación a <a href='%{group_link}'>%{count} persoas</a>. Está seguro de querelo facer?"
       duplicate_link: "Parece que a súa ligazón a <b>%{domain}</b> xa foi publicada no tema por <b>@%{username}</b> e <a href='%{post_url}'>nunha resposta sobre %{ago}</a> Confirma que quere publicala de novo?"
       reference_topic_title: "RE: %{title}"
       error:
@@ -1919,6 +1908,7 @@ gl:
         private_message: '%{username} envioulle unha mensaxe privada sobre «%{topic}» - %{site_title}'
         linked: '%{username} ligou a súa publicación desde «%{topic}» - %{site_title}'
         watching_first_post: '%{username} creou un tema novo «%{topic}» - %{site_title}'
+        watching_category_or_tag: '%{username} publicou en "%{topic}" - %{site_title}'
         confirm_title: "Notificacións activadas - %{site_title}"
         confirm_body: "Perfecto! As notificacións están activadas."
         custom: "Notificación de %{username} en %{site_title}"
@@ -1948,6 +1938,7 @@ gl:
         membership_request_consolidated: "novas solicitudes de incorporación"
         reaction: "nova reacción"
         votes_released: "O voto foi liberado"
+        admin_problems: "novo consello no seu panel de sitio"
     upload_selector:
       uploading: "Cargando"
       select_file: "Seleccionar ficheiro"
@@ -2159,6 +2150,7 @@ gl:
       options: "Opcións de temas"
       show_links: "amosar as ligazóns a este tema"
       unread_indicator: "Ningún membro leu aínda a última publicación neste tema."
+      bumped_at: "Últimas: %{date}"
       deleted: "Eliminouse o tema"
       slow_mode_update:
         title: "Modo lento"
@@ -2817,8 +2809,7 @@ gl:
       action: "Sinalar a publicación"
       take_action_options:
         default:
-          title: "Intervir"
-          details: "Acadar o límite da alerta inmediatamente e non agardar por máis alertas da comunidade"
+          title: "Agochar publicación"
         suspend:
           title: "Suspender o usuario"
           details: "Acadar o límite da alerta e suspender o usuario"
@@ -2835,7 +2826,6 @@ gl:
       ip_address_missing: "(N/D)"
       hidden_email_address: "(agochado)"
       submit_tooltip: "Enviar a alerta privada"
-      take_action_tooltip: "Acadar o limiar de alertas inmediatamente no canto de agardar por máis alertas da comunidade"
       cant: "Sentímolo pero non pode sinalar esta publicación neste intre."
       notify_staff: "Notificarllo ao equipo privadamente"
       formatted_name:
@@ -3132,7 +3122,6 @@ gl:
       other_tags: "Outras etiquetas"
       selector_all_tags: "todas as etiquetas"
       selector_no_tags: "sen etiquetas"
-      changed: "etiquetas cambiadas:"
       tags: "Etiquetas"
       choose_for_topic: "etiquetas opcionais"
       info: "Información"
@@ -3162,7 +3151,6 @@ gl:
       delete_confirm_synonyms:
         one: "Tamén se eliminará o seu sinónimo."
         other: "Tamén se eliminarán os seus %{count} sinónimos."
-      description: "Descrición"
       sort_by: "Ordenar por:"
       sort_by_count: "número"
       sort_by_name: "nome"
@@ -3321,10 +3309,25 @@ gl:
               content: "Revisar"
     until: "Ata:"
     form_templates:
+      upload_field:
+        upload: "Cargar"
+        uploading: "Cargando"
       errors:
         typeMismatch:
           default: "Introduza un valor correcto."
           email: "Introduza un enderezo de correo electrónico correcto."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Intro"
+      edit:
+        modal:
+          cancel: "cancelar"
+          create: "Gardar"
+          reason: "por que o está editando?"
+      spreadsheet:
+        show: "Amosar"
+        about: "Verbo de"
   admin_js:
     admin:
       title: "Administrador de Discourse"
@@ -3352,9 +3355,7 @@ gl:
         latest_version: "Últimos"
         problems_found: "Algúns consellos baseados na súa configuración actual do sitio"
         new_features:
-          title: "Novas funcionalidades"
-          dismiss: "Desbotar"
-          learn_more: "Saber máis"
+          learn_more: "Saber máis..."
         last_checked: "Última comprobación"
         refresh_problems: "Actualizar"
         no_problems: "Non se atoparon problemas."
@@ -3577,29 +3578,6 @@ gl:
         groups_filter_instructions: "Os enganches de web relevantes soamente se dispararán se o evento está relacionado con grupos específicos. Déixeo en branco para que os enganches de web se disparen con calquera grupo."
         groups_filter: "Grupos disparados"
         delete_confirm: "Eliminar este enganche de web?"
-        topic_event:
-          name: "Evento de tema"
-          details: "Cando se publica, revisa, cambia ou elimina un novo tema."
-        post_event:
-          name: "Evento de publicación"
-          details: "Cando se publica, cambia, elimina ou recupera unha nova resposta."
-        user_event:
-          name: "Evento de usuario"
-        group_event:
-          name: "Evento de grupo"
-          details: "Cando se crea, actualiza ou destrúe un grupo."
-        category_event:
-          name: "Evento de categoría"
-          details: "Cando se crea, actualiza ou destrúe unha categoría."
-        tag_event:
-          name: "Evento de etiqueta"
-          details: "Cando se crea, actualiza ou destrúe unha etiqueta."
-        reviewable_event:
-          name: "Evento revisábel"
-          details: "Cando hai un novo elemento para revisar e se actualiza o seu estado."
-        notification_event:
-          name: "Evento de notificación"
-          details: "Cando o usuario recibe unha notificación na fonte."
         delivery_status:
           title: "Estado de entrega"
           inactive: "Inactivo"
@@ -3638,7 +3616,8 @@ gl:
         not_enabled: "N"
         change_settings_short: "Configuración"
         howto: "Como podo instalar un complemento?"
-        official: "Complemento oficial"
+        author: "De %{author}"
+        learn_more: "Saber máis"
       backups:
         title: "Copias de seguranza"
         menu:
@@ -3736,7 +3715,6 @@ gl:
           theme_name: "Nome do tema"
           component_name: "Nome do compoñente"
           themes_intro: "Seleccione un tema existente ou instale un novo para comezar"
-          themes_intro_emoji: "muller artista emoji"
           beginners_guide_title: "Guía de uso dos temas do Discourse para principiantes"
           developers_guide_title: "Guía de uso dos temas do Discourse para desenvolvedores"
           browse_themes: "Explorar temas da comunidade"
@@ -3783,6 +3761,7 @@ gl:
           convert_theme_tooltip: "Converter este tema nun compoñente"
           inactive_themes: "Temas inactivos:"
           inactive_components: "Compoñentes non utilizados:"
+          cancel: "Cancelar"
           broken_theme_tooltip: "Este tema ten erros no CSS, HTML ou YAML"
           disabled_component_tooltip: "Este compoñente foi desactivado"
           default_theme_tooltip: "Este tema é o predeterminado do sitio"
@@ -4624,6 +4603,9 @@ gl:
         json_schema:
           edit: Abrir o editor
           modal_title: "Editar: %{name}"
+        file_types_list:
+          add_image_types: "Imaxes"
+          add_audio_types: "Audio"
       badges:
         title: Insignias
         new_badge: Nova insignia
@@ -4699,7 +4681,6 @@ gl:
             with_time: <span class="username">%{username}</span> o <span class="time">%{time}</span>
         badge_intro:
           title: "Seleccione unha insignia existente ou cree unha nova para comezar"
-          emoji: "emoji de muller estudante"
           what_are_badges_title: "Que son as insignias?"
           badge_query_examples_title: "Exemplos de consulta de insignias"
         mass_award:

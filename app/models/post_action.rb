@@ -123,19 +123,6 @@ class PostAction < ActiveRecord::Base
     RateLimiter.new(user, "post_action-#{post.id}_#{post_action_type_id}", 4, 1.minute).performed!
   end
 
-  def self.act(created_by, post, post_action_type_id, opts = {})
-    Discourse.deprecate(
-      "PostAction.act is deprecated. Use `PostActionCreator` instead.",
-      output_in_test: true,
-      drop_from: "2.9.0",
-    )
-
-    result =
-      PostActionCreator.new(created_by, post, post_action_type_id, message: opts[:message]).perform
-
-    result.success? ? result.post_action : nil
-  end
-
   def self.copy(original_post, target_post)
     cols_to_copy = (column_names - %w[id post_id]).join(", ")
 
@@ -147,16 +134,6 @@ class PostAction < ActiveRecord::Base
     SQL
 
     target_post.post_actions.each { |post_action| post_action.update_counters }
-  end
-
-  def self.remove_act(user, post, post_action_type_id)
-    Discourse.deprecate(
-      "PostAction.remove_act is deprecated. Use `PostActionDestroyer` instead.",
-      output_in_test: true,
-      drop_from: "2.9.0",
-    )
-
-    PostActionDestroyer.new(user, post, post_action_type_id).perform
   end
 
   def remove_act!(user)

@@ -206,13 +206,9 @@ sq:
       our_admins: "Administratorët tanë"
       our_moderators: "Moderatorët tanë"
       moderators: "Moderatorë"
-      stat:
-        all_time: "Gjithë kohës"
       like_count: "Pëlqime"
       topic_count: "Tema"
       post_count: "Postime"
-      active_user_count: "Përdorues Aktivë"
-      contact: "Na kontaktoni"
       contact_info: "Në rast të një problemi madhor ose të një çështjeje urgjente që prek faqen, ju lutemi të kontaktoni %{contact_info}."
     bookmarked:
       title: "Të preferuarat"
@@ -244,6 +240,8 @@ sq:
       in_reply_to: "në përgjigje të"
       explain:
         total: "Total"
+      revise_and_reject_post:
+        reason: "Arsye"
       delete: "Fshij"
       settings:
         saved: "U ruajtën"
@@ -641,6 +639,8 @@ sq:
         edit: "Redakto"
         security_key:
           save: "Ruaj"
+      passkeys:
+        save: "Ruaj"
       change_about:
         title: "Ndrysho Rreth meje"
         error: "Pati një gabim gjatë ndryshimit të kësaj të dhëne."
@@ -683,13 +683,12 @@ sq:
         cancel: "Anulo"
       name:
         title: "Emri juaj"
-        instructions: "emri i plotë (opsional)"
-        instructions_required: "Emri i plotë"
+        instructions: "Emri i plotë (opsional)."
+        instructions_required: "Emri i plotë."
         too_short: "Emri juaj është shumë i shkurtër"
         ok: "Emri duket në rregull"
       username:
         title: "Emri i përdoruesit"
-        instructions: "unik, pa hapësira, i shkurtër"
         short_instructions: "Anëtarët e tjerë mund t'ju përmendin si @%{username}"
         available: "Emri është i disponueshëm"
         not_available: "Nuk është i disponueshëm. Provoni %{suggestion}?"
@@ -793,7 +792,7 @@ sq:
         same_as_username: "Fjalëkalimi është i njëjtë me emrin e përdoruesit."
         same_as_email: "Fjalëkalimi është i njëjtë me adresën email."
         ok: "Fjalëkalimi është i pranueshëm."
-        instructions: "të paktën %{count} shkronja"
+        instructions: "Të pakTën %{count} shkronja."
       summary:
         title: "Përmbledhja"
         stats: "Statistikat"
@@ -1006,9 +1005,6 @@ sq:
       posting_not_on_topic: "Cilës temë doni t'i përgjigjeni?"
       saved_local_draft_tip: "ruajtur lokalisht"
       drafts_offline: "draftet offline"
-      group_mentioned:
-        one: "By mentioning %{group}, you are about to notify <a href='%{group_link}'>%{count} person</a> – are you sure?"
-        other: "By mentioning %{group}, you are about to notify <a href='%{group_link}'>%{count} people</a> – are you sure?"
       error:
         title_missing: "Titulli është i nevojshëm"
         category_missing: "Duhet të zgjidhni një kategori"
@@ -1073,6 +1069,7 @@ sq:
         replied: '%{username} ju u përgjigj në "%{topic}" - %{site_title}'
         posted: '%{username} postoi në "%{topic}" - %{site_title}'
         linked: '%{username} vendosi një lidhje për postimin tuaj nga "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} postoi në "%{topic}" - %{site_title}'
       titles:
         watching_first_post: "temë e re"
     upload_selector:
@@ -1581,9 +1578,6 @@ sq:
       title: "Faleminderit për ndihmën që i jepni këtij komuniteti!"
       action: "Sinjalizo postimin"
       take_action_options:
-        default:
-          title: "Vepro"
-          details: "Kaloni direkt tek pragu i sinjalizimeve (dmth, mos prisni për sinjalizime të tjera nga komuniteti)"
         suspend:
           title: "Pezullo anëtarin"
       notify_action: "Mesazh"
@@ -1593,7 +1587,6 @@ sq:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(fshehur)"
       submit_tooltip: "Dërgoni sinjalizimin privatisht"
-      take_action_tooltip: "Kaloni direkt tek pragu i sinjalizimeve (dmth, mos prisni për sinjalizime të tjera nga komuniteti)"
       cant: "Na vjen keq, nuk mund të sinjalizoni këtë postim tani. "
       notify_staff: "Njoftoni stafin privatisht"
       formatted_name:
@@ -1834,11 +1827,9 @@ sq:
     tagging:
       selector_all_tags: "të gjitha etiketat"
       selector_no_tags: "asnjë etiketë"
-      changed: "etiketat e ndryshuara:"
       tags: "Etiketat"
       add_synonyms: "Shto"
       delete_tag: "Fshi etiketën"
-      description: "Përshkrimi"
       sort_by: "Rendit sipas:"
       sort_by_count: "numri"
       sort_by_name: "emër"
@@ -1952,10 +1943,22 @@ sq:
             my_posts:
               content: "Postimet e mia"
     form_templates:
+      upload_field:
+        upload: "Ngarko"
+        uploading: "Duke ngarkuar"
       errors:
         typeMismatch:
           default: "Ju lutem shkruani një vlerë të vlefshme."
           email: "Ju lutemi të vendosni një email të vlefshëm."
+    table_builder:
+      edit:
+        modal:
+          cancel: "anulo"
+          create: "Ruaj"
+          reason: "pse jeni duke e redaktuar?"
+      spreadsheet:
+        show: "Shfaq"
+        about: "Rreth"
   admin_js:
     admin:
       title: "Administrator"
@@ -1977,8 +1980,7 @@ sq:
         installed_version: "Instaluar"
         latest_version: "Të fundit"
         new_features:
-          dismiss: "Hiqe"
-          learn_more: "Mëso më shumë"
+          learn_more: "Mëso më shumë..."
         last_checked: "Verifikimi i fundit"
         refresh_problems: "Rifresko"
         no_problems: "Nuk u gjet asnjë gabim."
@@ -2084,6 +2086,8 @@ sq:
         not_enabled: "N"
         change_settings_short: "Rregullimet"
         howto: "Si mund të instaloj një plugin?"
+        author: "Nga %{author}"
+        learn_more: "Mëso më shumë"
       backups:
         title: "Rezervat"
         menu:
@@ -2170,6 +2174,7 @@ sq:
           mobile: "Mobile"
           settings: "Rregullimet"
           preview: "Parashikimi"
+          cancel: "Anulo"
           upload: "Ngarko"
           installed: "Instaluar"
           install_popular: "Popullore"
@@ -2661,6 +2666,8 @@ sq:
           navigation: "Shfletimi"
         default_categories:
           modal_yes: "Po"
+        file_types_list:
+          add_image_types: "Imazhet"
       badges:
         title: Stemat
         new_badge: Stemë e Re

@@ -68,8 +68,11 @@ id:
       generic: Terjadi kesalahan saat mengimpor tema itu
       upload: "Kesalahan saat membuat aset unggahan: %{name}. %{errors}"
       about_json: "Kesalahan Impor: about.json tidak ada, atau tidak valid. Apakah Anda yakin ini adalah Tema Discourse?"
+      about_json_too_big: "Kesalahan Impor: about.json lebih besar dari batas %{limit}."
       about_json_values: "about.json berisi nilai yang tidak valid: %{errors}"
       modifier_values: "pengubah about.json berisi nilai yang tidak valid: %{errors}"
+      asset_too_big: "Aset %{filename} lebih besar dari batas %{limit}"
+      theme_too_big: "Tema lebih besar dari batas %{limit}"
       git: "Kesalahan kloning repositori git, akses ditolak atau repositori tidak ditemukan"
       git_ref_not_found: "Tidak dapat checkout referensi git: %{ref}"
       git_unsupported_scheme: "Tidak dapat clone git repo: skema tidak didukung"
@@ -78,6 +81,7 @@ id:
       unknown_file_type: "File yang Anda unggah tampaknya bukan tema Discourse yang valid."
       not_allowed_theme: "`%{repo}` tidak ada dalam daftar tema yang diizinkan (centang pengaturan global `allowed_theme_repos`)."
       ssh_key_gone: "Anda menunggu terlalu lama untuk memasang tema dan kunci SSH kedaluwarsa. Silakan coba lagi."
+      too_many_files: "Jumlah file (%{count}) dalam tema telah melampaui jumlah maksimum file yang diperbolehkan (%{limit})"
     errors:
       component_no_user_selectable: "Komponen tema tidak dapat dipilih oleh pengguna"
       component_no_default: "Komponen tema tidak bisa menjadi tema default"
@@ -195,7 +199,6 @@ id:
       default_tags_already_selected: "Anda tidak dapat memilih tag yang digunakan di daftar lain."
       s3_upload_bucket_is_required: "Anda tidak dapat mengaktifkan unggahan ke S3 kecuali Anda telah menyediakan 's3_upload_bucket'."
       enable_s3_uploads_is_required: "Anda tidak dapat mengaktifkan penggunaan inventaris S3 kecuali Anda telah mengaktifkan unggahan S3."
-      page_publishing_requirements: "Penerbitan halaman tidak dapat diaktifkan jika media aman diaktifkan."
       s3_backup_requires_s3_settings: "Anda tidak dapat menggunakan S3 sebagai lokasi cadangan kecuali Anda telah memberikan '%{setting_name}'."
       s3_bucket_reused: "Anda tidak dapat menggunakan keranjang yang sama untuk 's3_upload_bucket' dan 's3_backup_bucket'. Pilih keranjang yang berbeda atau gunakan jalur yang berbeda untuk setiap keranjang."
       secure_uploads_requirements: "Unggahan S3 dan ACL S3 harus diaktifkan sebelum mengaktifkan unggahan aman."
@@ -516,7 +519,8 @@ id:
             name:
               same_as_password: "sama dengan kata sandi Anda."
             ip_address:
-              signup_not_allowed: "Pendaftaran tidak diperbolehkan dari akun ini."
+              blocked: "Registrasi baru dari alamat IP Anda tidak diijinkan."
+              max_new_accounts_per_registration_ip: "Registrasi baru dari alamat IP Anda tidak diijinkan (telah mencapai batas maksimum). Silahkan hubungi staff."
         user_profile:
           attributes:
             featured_topic_id:
@@ -794,6 +798,9 @@ id:
     sequence_conflict_error:
       title: "kesalahan draf"
       description: "Draf sedang diedit di jendela lain. Muat ulang halaman ini."
+    too_many_drafts:
+      title: "Terlalu banyak draf"
+      description: "Anda telah mencapai jumlah maksimum draf yang diperbolehkan. Harap hapus beberapa [draf Anda](%{base_url}/my/activity/drafts) dan coba lagi."
   draft_backup:
     pm_title: "Draf Cadangan dari topik yang sedang berlangsung"
     pm_body: "Topik berisi draf cadangan"
@@ -810,6 +817,7 @@ id:
     validation:
       invalid_type_error: "Jenis webauthn yang diberikan tidak valid. Jenis yang valid adalah webauthn.get dan webauthn.create."
       malformed_attestation_error: "Terjadi kesalahan saat mengartikan data pengesahan."
+      user_presence_error: "Kehadiran pengguna diperlukan."
       user_verification_error: "Verifikasi pengguna diperlukan."
       unsupported_public_key_algorithm_error: "Algoritma kunci publik yang disediakan tidak didukung oleh server."
       unsupported_attestation_format_error: "Format pengesahan tidak didukung oleh server."
@@ -818,6 +826,7 @@ id:
       ownership_error: "Kunci keamanan tidak dimiliki oleh pengguna."
       not_found_error: "Kunci keamanan dengan ID kredensial yang diberikan tidak dapat ditemukan."
       unknown_cose_algorithm_error: "Algoritma yang digunakan untuk kunci keamanan tidak dikenali."
+      malformed_public_key_credential_error: "Kunci publik yang diberikan tidak valid."
   topic_flag_types:
     spam:
       title: "Spam"
@@ -1186,10 +1195,13 @@ id:
       other: "Email polling telah menghasilkan %{count} kesalahan dalam 24 jam terakhir. Lihatlah <a href='%{base_path}/logs' target='_blank'>log</a> untuk lebih jelasnya."
     missing_mailgun_api_key: "Server dikonfigurasi untuk mengirim email melalui Mailgun tetapi Anda belum memberikan kunci API yang digunakan untuk memverifikasi pesan webhook."
     v3_analytics_deprecated: "Wacana Anda saat ini menggunakan Google Analytics 3, yang tidak akan didukung lagi setelah Juli 2023.0 <a href='https://meta.discourse.org/t/260498'>ke Google Analytics 4</a> sekarang untuk terus menerima wawasan dan analitik berharga untuk kinerja situs web Anda."
-    legacy_navigation_menu_deprecated: "Discourse Anda saat ini menggunakan menu navigasi 'lama' yang <a href='https://meta.discourse.org/t/removing-the-legacy-hamburger-navigation-menu-option/265274'>akan dihapus pada rilis beta pertama Discourse 3.2</a>. Migrasi ke menu navigasi yang baru dengan memperbarui pengaturan situs menu navigasi <a href='%{base_path}/admin/site_settings/category/all_results?filter=navigation_menu'></a> ke 'sidebar' atau 'header dropdown'."
+    category_style_deprecated: "Discourse Anda saat ini menggunakan gaya kategori yang sudah tidak digunakan lagi dan akan dihapus sebelum rilis beta terakhir dari Discourse 3.2. Silakan merujuk ke <a href='https://meta.discourse.org/t/282441'>Pindah ke Pengaturan Situs Gaya Kategori Tunggal</a> untuk petunjuk tentang cara mempertahankan gaya kategori yang Anda pilih."
   site_settings:
     disabled: "dinonaktifkan"
     allow_user_locale: "Perbolehkan pengguna untuk memilih bahasa sendiri"
+    min_post_length: "Panjang post minimum yang diperbolehkan dalam karakter (tidak termasuk pesan pribadi)"
+    min_first_post_length: "Panjang post pertama (isi topik) minimum yang diperbolehkan (tidak termasuk pesan pribadi)"
+    min_personal_message_post_length: "Panjang post minimum yang diperbolehkan dalam karakter untuk pesan (postingan pertama dan balasan)"
     topic_featured_link_enabled: "Aktifkan post tautan dengan topik."
     allow_duplicate_topic_titles: "Perbolehkan topik dengan judul yang sama."
     max_form_template_title_length: "Panjang maksimum yang diperbolehkan untuk judul templat formulir."
@@ -1198,8 +1210,12 @@ id:
     apple_touch_icon: "Ikon yang digunakan untuk perangkat sentuh Apple. Backround transparan tidak disarankan. Akan secara otomatis diubah ukurannya menjadi 180x180. Jika dibiarkan kosong, large_icon akan digunakan."
     summarization_strategy: "Cara tambahan untuk meringkas konten yang didaftarkan oleh plugin"
     custom_summarization_allowed_groups: "Grup diizinkan untuk meringkas konten menggunakan `summarization_strategy`."
+    num_users_to_silence_new_user: "Jika post pengguna baru melebihi pengaturan hide_post_sensitive, dan memiliki tanda spam dari banyak pengguna yang berbeda, sembunyikan semua posting mereka dan cegah post lagi di masa mendatang. 0 untuk menonaktifkan."
+    gtm_container_id: "ID penampung Google Pengelola Tag. misalnya: GTM-ABCD12E. <br/>Catatan: Untuk menggunakan GTM saat Kebijakan Keamanan Konten (CSP) diaktifkan, lihat dokumentasi tentang meta: <a href='https://meta.discourse.org/t/use-nonces-in-google-tag-manager-scripts/188296' target='_blank'>Gunakan nonce dalam skrip Google Pengelola Tag</a>."
     include_secure_categories_in_tag_counts: "Saat diaktifkan, jumlah topik untuk sebuah tag akan menyertakan topik yang berada dalam kategori yang dibatasi untuk dibaca bagi semua pengguna. Saat dinonaktifkan, pengguna normal hanya ditampilkan sejumlah topik untuk tag yang semua topiknya berada dalam kategori publik."
     display_personal_messages_tag_counts: "Saat diaktifkan, jumlah pesan pribadi yang diberi tag dengan tag tertentu akan ditampilkan."
+    top_menu: "Tentukan item mana yang muncul di navigasi beranda, dan dalam urutan apa."
+    post_menu: "Tentukan item mana yang muncul di menu post, dan dalam urutan apa."
     send_welcome_message: "Kirim semua pengguna ucapan selamat datang dengan panduan awal singkat."
     hidden_post_visible_groups: "Izinkan anggota grup ini untuk melihat post tersembunyi. Pengguna staf selalu dapat melihat post tersembunyi."
     blocked_email_domains: "Daftar domain email yang dipisahkan tanda pipa yang tidak diizinkan untuk didaftarkan akun oleh pengguna. Subdomain secara otomatis ditangani untuk domain yang ditentukan. Simbol wildcard * dan ? tidak didukung. Contoh: mailinator.com|trashmail.net"
@@ -1242,6 +1258,7 @@ id:
     enable_max_tags_per_email_subject: "Gunakan max_tags_per_email_subject saat membuat subjek email"
     max_tags_per_email_subject: "Tag maksimum yang dapat dimasukkan ke dalam subjek email"
     create_post_for_category_and_tag_changes: "Buat post tindakan kecil saat kategori atau tag topik berubah"
+    automatically_clean_unused_tags: "Secara otomatis menghapus tag yang tidak digunakan pada topik atau pesan pribadi apa pun setiap hari."
     watched_precedence_over_muted: "Beri tahu saya tentang topik dalam kategori atau tag yang saya ikuti yang juga termasuk dalam kategori yang telah saya nonaktifkan"
     enable_user_tips: "Aktifkan kiat pengguna baru yang menjelaskan fitur utama kepada pengguna"
     default_navigation_menu_categories: "Kategori yang dipilih akan ditampilkan di bawah bagian Kategori pada Menu Navigasi secara bawaan."
@@ -1275,6 +1292,8 @@ id:
   login:
     not_available: "Tidak tersedia. Coba %{suggestion}?"
     omniauth_confirm_button: "Lanjutkan"
+    too_many_authenticators: "Maaf, Anda tidak dapat memiliki lebih dari 50 autentikator. Harap hapus yang sudah ada dan coba lagi."
+    too_many_security_keys: "Maaf, Anda tidak boleh memiliki lebih dari 50 kunci keamanan. Silakan hapus yang sudah ada dan coba lagi."
   admin:
     email:
       sent_test: "terkirim!"
@@ -1283,9 +1302,6 @@ id:
       blank: "tidak boleh kosong."
       not_allowed: "tidak diijinkan dari penyedia layanan email ini. Silahkan gunakan alamat email yang lain."
       blocked: "tidak diperbolehkan."
-    ip_address:
-      blocked: "Registrasi baru dari alamat IP Anda tidak diijinkan."
-      max_new_accounts_per_registration_ip: "Registrasi baru dari alamat IP Anda tidak diijinkan (telah mencapai batas maksimum). Silahkan hubungi staff."
   system_messages:
     queued_by_staff:
       title: "Pesan Membutuhkan Persetujuan"
@@ -1726,6 +1742,7 @@ id:
       missing_id: "tidak ada id bidang"
       duplicate_ids: "memiliki id duplikat"
       reserved_id: "memiliki kata kunci khusus sebagai id: %{id}"
+      unsafe_description: "memiliki deskripsi HTML yang tidak aman"
   activemodel:
     errors:
       <<: *errors

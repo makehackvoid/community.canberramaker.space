@@ -1,4 +1,15 @@
-import I18n from "I18n";
+import I18n from "discourse-i18n";
+
+export function getFormTemplateObject(form) {
+  const formData = new FormData(form);
+
+  const formObject = {};
+  formData.forEach((value, key) => {
+    formObject[key] = value;
+  });
+
+  return formObject;
+}
 
 export default function prepareFormTemplateData(form, formTemplate) {
   const labelMap = formTemplate.reduce((acc, field) => {
@@ -91,13 +102,7 @@ function _validateFormTemplateData(form) {
 function _showErrorMessage(field, element) {
   if (field.validity.valueMissing) {
     const prefix = "form_templates.errors.valueMissing";
-    const types = [
-      "select-one",
-      "select-multiple",
-      "checkbox",
-      "text",
-      "number",
-    ];
+    const types = ["select-one", "select-multiple", "checkbox"];
     _showErrorByType(element, field, prefix, types);
   } else if (field.validity.typeMismatch) {
     const prefix = "form_templates.errors.typeMismatch";

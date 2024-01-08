@@ -4,8 +4,8 @@ require "cooked_post_processor"
 require "file_store/s3_store"
 
 RSpec.describe CookedPostProcessor do
-  fab!(:upload) { Fabricate(:upload) }
-  fab!(:large_image_upload) { Fabricate(:large_image_upload) }
+  fab!(:upload)
+  fab!(:large_image_upload)
   let(:upload_path) { Discourse.store.upload_path }
 
   describe "#post_process" do
@@ -125,7 +125,7 @@ RSpec.describe CookedPostProcessor do
       before { SiteSetting.enable_inline_onebox_on_all_domains = true }
 
       describe "internal links" do
-        fab!(:topic) { Fabricate(:topic) }
+        fab!(:topic)
         fab!(:post) { Fabricate(:post, raw: "Hello #{topic.url}") }
         let(:url) { topic.url }
 
@@ -516,8 +516,6 @@ RSpec.describe CookedPostProcessor do
 
           context "when the upload is attached to the correct post" do
             before do
-              FastImage.expects(:size).returns([1750, 2000])
-              OptimizedImage.expects(:resize).returns(true)
               Discourse
                 .store
                 .class
@@ -525,14 +523,50 @@ RSpec.describe CookedPostProcessor do
                 .expects(:has_been_uploaded?)
                 .at_least_once
                 .returns(true)
-              upload.update(secure: true, access_control_post: post)
+              upload.update!(secure: true, access_control_post: post)
+              post.link_post_uploads
             end
 
             # TODO fix this spec, it is sometimes getting CDN links when it runs concurrently
             xit "handles secure images with the correct lightbox link href" do
+              FastImage.expects(:size).returns([1750, 2000])
+              OptimizedImage.expects(:resize).returns(true)
               cpp.post_process
 
               expect(cpp.html).to match_html cooked_html
+            end
+
+            context "when the upload was not secure" do
+              before { upload.update!(secure: false) }
+
+              it "changes the secure status" do
+                cpp.post_process
+                expect(upload.reload.secure).to eq(true)
+              end
+            end
+
+            context "when the upload should no longer be considered secure" do
+              before { SiteSetting.login_required = false }
+
+              it "changes the secure status" do
+                cpp.post_process
+                expect(upload.reload.secure).to eq(false)
+              end
+
+              it "does not use a secure-uploads URL for the lightbox href" do
+                SiteSetting.create_thumbnails = false
+                SiteSetting.max_image_width = 10
+                SiteSetting.max_image_height = 10
+
+                cpp.post_process
+                expect(cpp.html).not_to have_tag(
+                  "a",
+                  with: {
+                    class: "lightbox",
+                    href: "//test.localhost/secure-uploads/original/1X/#{upload.sha1}.png",
+                  },
+                )
+              end
             end
           end
 
@@ -755,22 +789,6 @@ RSpec.describe CookedPostProcessor do
           post.topic.reload
           expect(post.topic.image_upload_id).not_to be_present
           expect(post.image_upload_id).not_to be_present
-        end
-
-        it "won't remove the original image if another post doesn't have an image" do
-          topic = post.topic
-
-          cpp.post_process
-          topic.reload
-          expect(topic.image_upload_id).to be_present
-          expect(post.image_upload_id).to be_present
-
-          post = Fabricate(:post, topic: topic, raw: "this post doesn't have an image")
-          CookedPostProcessor.new(post).post_process
-          topic.reload
-
-          expect(post.topic.image_upload_id).to be_present
-          expect(post.image_upload_id).to be_blank
         end
 
         it "generates thumbnails correctly" do
@@ -1862,7 +1880,7 @@ RSpec.describe CookedPostProcessor do
   end
 
   describe "full quote on direct reply" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
     let!(:post) { Fabricate(:post, topic: topic, raw: 'this is the "first" post') }
 
     let(:raw) { <<~RAW.strip }
@@ -1991,7 +2009,7 @@ RSpec.describe CookedPostProcessor do
 
   describe "full quote on direct reply with full name prioritization" do
     fab!(:user) { Fabricate(:user, name: "james, john, the third") }
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
     let!(:post) { Fabricate(:post, user: user, topic: topic, raw: 'this is the "first" post') }
 
     let(:raw) { <<~RAW.strip }
@@ -2124,7 +2142,7 @@ RSpec.describe CookedPostProcessor do
 
   describe "prioritizes full name in quotes" do
     fab!(:user) { Fabricate(:user, name: "james, john, the third") }
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
     let!(:post) { Fabricate(:post, user: user, topic: topic, raw: 'this is the "first" post') }
 
     before do

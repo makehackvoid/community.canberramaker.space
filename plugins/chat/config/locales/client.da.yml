@@ -24,11 +24,8 @@ da:
           descriptions:
             chat:
               create_message: "Opret en chatbesked i en angivet kanal."
-    about:
-      chat_messages_count: "Chatbeskeder"
-      chat_channels_count: "Chatkanaler"
-      chat_users_count: "Chatbrugere"
     chat:
+      back_to_forum: "Forum"
       deleted_chat_username: slettet
       dates:
         time_tiny: "tt:mm"
@@ -131,11 +128,11 @@ da:
       channel_info:
         back_to_channel: "Tilbage"
         tabs:
-          about: Om
           members: Brugere
           settings: Indstillinger
       new_message_modal:
         no_items: "Ingen punkter"
+        filter: "Filter"
       direct_message_creator:
         title: Ny Besked
         prefix: "Til:"
@@ -153,8 +150,6 @@ da:
           topic: "Emne"
       reviewable:
         type: "Chatbesked"
-      reactions:
-        only_you: "Du reagerede med :%{emoji}:"
       composer:
         italic_text: "kursiv skrift"
         bold_text: "fed skrift"
@@ -175,6 +170,10 @@ da:
         saved: "Gemt"
         unfollow: "Forlad"
         admin_title: "Admin"
+        settings_title: "Indstillinger"
+        category_label: "Kategori"
+        history_label: "Historik"
+        members_label: "Brugere"
       admin:
         title: "Chat"
         export_messages:
@@ -204,6 +203,10 @@ da:
           title: "Flyt til ny besked"
       replying_indicator:
         single_user: "%{username} skriver"
+      retention_reminders:
+        short:
+          one: "%{count} dag"
+          other: "%{count} dage"
       emoji_picker:
         objects: "Objekter"
         activities: "Aktiviteter"

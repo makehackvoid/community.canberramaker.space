@@ -1,11 +1,12 @@
-import Service, { inject as service } from "@ember/service";
-import { defaultHomepage } from "discourse/lib/utilities";
 import { tracked } from "@glimmer/tracking";
+import Service, { inject as service } from "@ember/service";
 import KeyValueStore from "discourse/lib/key-value-store";
+import { withPluginApi } from "discourse/lib/plugin-api";
+import { defaultHomepage } from "discourse/lib/utilities";
 import Site from "discourse/models/site";
+import { MAIN_PANEL } from "discourse/services/sidebar-state";
 import getURL from "discourse-common/lib/get-url";
 import { getUserChatSeparateSidebarMode } from "discourse/plugins/chat/discourse/lib/get-user-chat-separate-sidebar-mode";
-import { withPluginApi } from "discourse/lib/plugin-api";
 
 const PREFERRED_MODE_KEY = "preferred_mode";
 const PREFERRED_MODE_STORE_NAMESPACE = "discourse_chat_";
@@ -60,7 +61,7 @@ export default class ChatStateManager extends Service {
   didOpenDrawer(url = null) {
     withPluginApi("1.8.0", (api) => {
       if (getUserChatSeparateSidebarMode(this.currentUser).always) {
-        api.setSidebarPanel("main");
+        api.setSidebarPanel(MAIN_PANEL);
         api.setSeparatedSidebarMode();
         api.hideSidebarSwitchPanelButtons();
       } else {
@@ -81,7 +82,7 @@ export default class ChatStateManager extends Service {
 
   didCloseDrawer() {
     withPluginApi("1.8.0", (api) => {
-      api.setSidebarPanel("main");
+      api.setSidebarPanel(MAIN_PANEL);
 
       const chatSeparateSidebarMode = getUserChatSeparateSidebarMode(
         this.currentUser

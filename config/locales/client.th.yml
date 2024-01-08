@@ -239,16 +239,9 @@ th:
       our_admins: "แอดมินของเรา"
       our_moderators: "ผู้ดูแลของเรา"
       moderators: "ผู้ดูแล"
-      stat:
-        all_time: "ตลอดเวลา"
-        last_day: "24 ชั่วโมงที่ผ่านมา"
-        last_7_days: "7 วันที่ผ่านมา"
-        last_30_days: "30 วันที่ผ่านมา"
       like_count: "ถูกใจ"
       topic_count: "กระทู้"
       post_count: "โพสต์"
-      active_user_count: "ผู้ใช้ที่ใช้งานอยู่"
-      contact: "ติดต่อเรา"
       contact_info: "ในกรณีที่เกิดเหตุฉุกเฉินหรือประเด็นสำคัญที่ส่งผลต่อเว็บไซต์นี้ กรุณาติดต่อเราที่ %{contact_info}"
     bookmarked:
       title: "บุ๊กมาร์ก"
@@ -328,6 +321,9 @@ th:
         total: "ทั้งหมด"
         trust_level_bonus:
           name: "ระดับความไว้ใจ"
+      revise_and_reject_post:
+        reason: "เหตุผล"
+        optional: "ทางเลือก"
       awaiting_approval: "กำลังรอการยืนยัน"
       delete: "ลบ"
       settings:
@@ -851,8 +847,6 @@ th:
       second_factor_backup:
         disable: "ปิดใช้งาน"
       second_factor:
-        forgot_password: "ลืมรหัสผ่านใช่ไหม"
-        confirm_password_description: "กรุณายืนยันรหัสผ่านเพื่อดำเนินการต่อ"
         name: "ชื่อ"
         disable: "ปิดใช้งาน"
         delete: "ลบ"
@@ -861,6 +855,10 @@ th:
         security_key:
           register: "ลงทะเบียน"
           save: "บันทึก"
+      passkeys:
+        save: "บันทึก"
+        added_prefix: "เพิ่ม"
+        last_used_prefix: "ใช้ครั้งล่าสุด"
       change_about:
         title: "เปลี่ยนข้อมูลเกี่ยวกับฉัน"
         error: "เกิดความผิดพลาดในการแก้ไขค่านี้"
@@ -921,14 +919,13 @@ th:
         confirm_modal_title: "เชื่อมต่อ%{provider}บัญชี"
       name:
         title: "ชื่อ"
-        instructions: "ชื่อเต็มของคุณ (ไม่บังคับ)"
-        instructions_required: "ชื่อเต็มของคุณ"
+        instructions: "ชื่อเต็มของคุณ (ไม่บังคับ)."
+        instructions_required: "ชื่อเต็มของคุณ."
         required: "กรุณากรอกชื่อ"
         too_short: "ชื่อของคุณสั้นไป"
         ok: "ชื่อของคุณเหมาะสม"
       username:
         title: "ชื่อผู้ใช้"
-        instructions: "ไม่เหมือนใคร, ไม่มีช่องว่าง, สั้น"
         short_instructions: "ผู้คนสามารถกล่าวถึงคุณโดย @%{username}"
         available: "ชื่อผู้ใช้ของคุณสามารถใช้ได้"
         not_available: "ใช้งานไม่ได้ กรุณาลอง%{suggestion}"
@@ -1063,7 +1060,7 @@ th:
         same_as_username: "รหัสผ่านเหมือนกับชื่อผู้ใช้ของคุณ"
         same_as_email: "รหัสผ่านเหมือนกับอีเมลของคุณ"
         ok: "รหัสผ่านของคุณเหมาะสม"
-        instructions: "อย่างน้อย %{count} ตัวอักษร"
+        instructions: "อย่างน้อย %{count} ตัวอักษร."
         required: "กรุณากรอกรหัสผ่าน"
       summary:
         title: "สรุปภาพรวม"
@@ -1461,6 +1458,7 @@ th:
         private_message: '%{username}ได้ส่งข้อความส่วนตัวไปหาคุณใน "%{topic}"-%{site_title}'
         linked: '%{username} ลิงค์โพสของคุณจาก "%{topic}" - %{site_title}'
         watching_first_post: '%{username}ได้สร้างกระทู้ใหม่ "%{topic}"-%{site_title}'
+        watching_category_or_tag: '%{username} โพสท์ใน "%{topic}" - %{site_title}'
         confirm_title: "เปิดการแจ้งเตือนแล้ว - %{site_title}"
         confirm_body: "สำเร็จแล้ว! การแจ้งเตือนถูกเปิดใช้งาน"
         custom: "การแจ้งเตือนจาก %{username} บน %{site_title}"
@@ -1650,6 +1648,7 @@ th:
       options: "ตัวเลือกกระทู้"
       show_links: "แสดงลิงก์ในกระทู้นี้"
       unread_indicator: "ยังไม่มีสมาชิกอ่านโพสต์ล่าสุดของกระทู้นี้"
+      bumped_at: "ล่าสุด: %{date}"
       deleted: "กระทู้ถูกลบ"
       slow_mode_update:
         enable: "เปิดใช้งาน"
@@ -2322,7 +2321,6 @@ th:
       other_tags: "แท็กอื่น"
       selector_all_tags: "แท็กทั้งหมด"
       selector_no_tags: "ไม่มีแท็ก"
-      changed: "เปลี่ยนแท็ก:"
       tags: "แท็ก"
       choose_for_topic: "แท็กทางเลือก"
       info: "ข้อมูล"
@@ -2333,7 +2331,6 @@ th:
       add_synonyms: "เพิ่ม"
       delete_tag: "ลบแท็ก"
       delete_confirm_no_topics: "คุณแน่ใจหรือว่าต้องการลบแท็กนี้"
-      description: "รายละเอียด"
       sort_by: "เรียงโดย:"
       sort_by_count: "นับ"
       sort_by_name: "ชื่อ"
@@ -2450,10 +2447,25 @@ th:
               content: "รีวิว"
     until: "จนถึง:"
     form_templates:
+      upload_field:
+        upload: "อัปโหลด"
+        uploading: "กำลังอัปโหลด"
       errors:
         typeMismatch:
           default: "กรอกค่าที่ถูกต้อง"
           email: "กรุณาใส่อีเมลที่ถูกต้อง."
+    table_builder:
+      modal:
+        help:
+          enter_key: "เอ็นเทอร์"
+      edit:
+        modal:
+          cancel: "ยกเลิก"
+          create: "บันทึก"
+          reason: "ทำไมคุณถึงแก้ไข"
+      spreadsheet:
+        show: "แสดง"
+        about: "เกี่ยวกับ"
   admin_js:
     admin:
       title: "ผู้ดูแลระบบดิสคอส"
@@ -2472,8 +2484,7 @@ th:
         installed_version: "ติดตั้งแล้ว"
         latest_version: "ล่าสุด"
         new_features:
-          dismiss: "ซ่อน"
-          learn_more: "เรียนรู้เพิ่มเติม"
+          learn_more: "เรียนรู้เพิ่มเติม..."
         last_checked: "ตรวจล่าสุด"
         refresh_problems: "รีเฟรช"
         no_problems: "ไม่พบปัญหา"
@@ -2603,6 +2614,8 @@ th:
         is_enabled: "Y"
         not_enabled: "N"
         change_settings_short: "การตั้งค่า"
+        author: "โดย %{author}"
+        learn_more: "เรียนรู้เพิ่มเติม"
       backups:
         title: "สำรอง"
         menu:
@@ -2658,6 +2671,7 @@ th:
           preview: "แสดงตัวอย่าง"
           add_all_themes: "เพิ่มธีมทั้งหมด"
           inactive_themes: "ธีมที่ไม่ได้ใช้งาน:"
+          cancel: "ยกเลิก"
           and_x_more: "และอีก%{count}"
           collapse: ย่อ
           uploads: "อัปโหลด"
@@ -3086,6 +3100,8 @@ th:
           navigation: "การนำทาง"
         default_categories:
           modal_yes: "ใช่"
+        file_types_list:
+          add_image_types: "รูปภาพ"
       badges:
         title: เหรียญ
         new_badge: เหรียญใหม่
@@ -3126,7 +3142,6 @@ th:
             with_post_time: <span class="username">%{username}</span> สำหรับโพสต์ใน %{link} เมื่อ <span class="time">%{time}</span>
             with_time: <span class="username">%{username}</span> เมื่อ <span class="time">%{time}</span>
         badge_intro:
-          emoji: "อีโมจินักเรียนหญิง"
           what_are_badges_title: "เหรียญคืออะไร"
         mass_award:
           replace_owners: ลบเหรียญจากผู้ใช้ก่อนหน้านี้

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Jobs::Chat::ChannelDelete do
-  fab!(:chat_channel) { Fabricate(:chat_channel) }
+  fab!(:chat_channel)
   fab!(:user1) { Fabricate(:user) }
   fab!(:user2) { Fabricate(:user) }
   fab!(:user3) { Fabricate(:user) }
@@ -26,7 +26,7 @@ describe Jobs::Chat::ChannelDelete do
     Chat::Mention.create(
       user: user2,
       chat_message: messages.sample,
-      notification: Fabricate(:notification),
+      notifications: [Fabricate(:notification)],
     )
 
     @incoming_chat_webhook_id = Fabricate(:incoming_chat_webhook, chat_channel: chat_channel)

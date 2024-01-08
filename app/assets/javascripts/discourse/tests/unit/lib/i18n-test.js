@@ -1,8 +1,11 @@
+import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
-import I18n from "I18n";
 import { withSilencedDeprecations } from "discourse-common/lib/deprecated";
+import I18n, { I18nMissingInterpolationArgument } from "discourse-i18n";
 
 module("Unit | Utility | i18n", function (hooks) {
+  setupTest(hooks);
+
   hooks.beforeEach(function () {
     this._locale = I18n.locale;
     this._fallbackLocale = I18n.fallbackLocale;
@@ -313,7 +316,7 @@ module("Unit | Utility | i18n", function (hooks) {
         I18n.t("with_multiple_interpolate_arguments", {
           username: "username",
         });
-      }, new I18n.missingInterpolationArgument(
+      }, new I18nMissingInterpolationArgument(
         "with_multiple_interpolate_arguments: [missing %{username2} value]"
       ));
     } finally {

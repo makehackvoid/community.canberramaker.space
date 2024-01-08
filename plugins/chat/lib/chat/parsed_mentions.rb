@@ -51,7 +51,9 @@ module Chat
     end
 
     def group_mentions
-      chat_users.includes(:groups).joins(:groups).where(groups: mentionable_groups)
+      group_ids = groups_to_mention.pluck(:id)
+      group_user_ids = GroupUser.where(group_id: group_ids).pluck(:user_id)
+      chat_users.where(id: group_user_ids)
     end
 
     def here_mentions
@@ -63,7 +65,11 @@ module Chat
     end
 
     def groups_to_mention
-      @groups_to_mention = mentionable_groups - groups_with_too_many_members
+      @groups_to_mention ||=
+        mentionable_groups.where(
+          "user_count <= ?",
+          SiteSetting.max_users_notified_per_group_mention,
+        )
     end
 
     def groups_with_disabled_mentions
@@ -83,7 +89,7 @@ module Chat
     private
 
     def channel_members
-      chat_users.where(
+      chat_users.includes(:user_chat_channel_memberships).where(
         user_chat_channel_memberships: {
           following: true,
           chat_channel_id: @message.chat_channel.id,
@@ -92,13 +98,7 @@ module Chat
     end
 
     def chat_users
-      User
-        .includes(:user_chat_channel_memberships, :group_users)
-        .distinct
-        .joins("LEFT OUTER JOIN user_chat_channel_memberships uccm ON uccm.user_id = users.id")
-        .joins(:user_option)
-        .real
-        .where(user_options: { chat_enabled: true })
+      User.distinct.joins(:user_option).real.where(user_options: { chat_enabled: true })
     end
 
     def mentionable_groups
@@ -107,11 +107,19 @@ module Chat
     end
 
     def parse_mentions(message)
-      Nokogiri::HTML5.fragment(message.cooked).css(".mention").map(&:text)
+      cooked_stripped(message).css(".mention").map(&:text)
     end
 
     def parse_group_mentions(message)
-      Nokogiri::HTML5.fragment(message.cooked).css(".mention-group").map(&:text)
+      cooked_stripped(message).css(".mention-group").map(&:text)
+    end
+
+    def cooked_stripped(message)
+      cooked = Nokogiri::HTML5.fragment(message.cooked)
+      cooked.css(
+        ".chat-transcript .mention, .chat-transcript .mention-group, aside.quote .mention, aside.quote .mention-group",
+      ).remove
+      cooked
     end
 
     def normalize(mentions)

@@ -1,3 +1,7 @@
+import { getOwner } from "@ember/application";
+import { setupTest } from "ember-qunit";
+import { module, test } from "qunit";
+import sinon from "sinon";
 import {
   allowsAttachments,
   allowsImages,
@@ -8,11 +12,7 @@ import {
   isImage,
   validateUploadedFiles,
 } from "discourse/lib/uploads";
-import I18n from "I18n";
-import sinon from "sinon";
-import { module, test } from "qunit";
-import { setupTest } from "ember-qunit";
-import { getOwner } from "discourse-common/lib/get-owner";
+import I18n from "discourse-i18n";
 
 module("Unit | Utility | uploads", function (hooks) {
   setupTest(hooks);

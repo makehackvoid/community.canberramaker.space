@@ -8,11 +8,16 @@ lt:
   js:
     admin:
       site_settings:
+        categories:
+          chat: Pokalbis
         chat_separate_sidebar_mode:
           always: "Visada"
           never: "Niekada"
     chat:
       deleted_chat_username: ištrintas
+      dates:
+        time_tiny: "h:mm"
+      bot: "botas"
       create: "Sukurti"
       cancel: "Atšaukti"
       channel_settings:
@@ -20,6 +25,10 @@ lt:
         add: "Pridėti"
         join: "Prisijungti"
         leave: "Palikti"
+      channel_archive:
+        retry: "Bandykite dar kartą"
+      channels_list_popup:
+        browse: "Naršyti kanalus"
       close: "Uždaryti"
       remove: "Pašalinti"
       delete: "Pašalinti"
@@ -61,11 +70,11 @@ lt:
       channel_info:
         back_to_channel: "Atgal"
         tabs:
-          about: Apie
           members: Nariai
           settings: Nustatymai
       new_message_modal:
         no_items: "Nėra elementų"
+        filter: "Filtruoti"
       direct_message_creator:
         title: Nauja žinutė
         prefix: "Kam:"
@@ -91,6 +100,10 @@ lt:
         saved: "Išsaugota"
         unfollow: "Palikti"
         admin_title: "Administratorius"
+        settings_title: "Nustatymai"
+        category_label: "Kategorija"
+        history_label: "Istorija"
+        members_label: "Nariai"
       incoming_webhooks:
         back: "Atgal"
         description: "Aprašymas"
@@ -111,6 +124,12 @@ lt:
           title: "Perkelti į esamą temą"
         new_message:
           title: "Pereiti prie naujos žinutės"
+      retention_reminders:
+        short:
+          one: "%{count} diena"
+          few: "%{count} dienos"
+          many: "%{count} dienų"
+          other: "%{count} dienų"
       emoji_picker:
         objects: "Objektai"
         activities: "Veikla"

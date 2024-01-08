@@ -145,6 +145,15 @@ class Group < ActiveRecord::Base
     @visibility_levels = Enum.new(public: 0, logged_on_users: 1, members: 2, staff: 3, owners: 4)
   end
 
+  def self.auto_groups_between(lower, upper)
+    lower_group = Group::AUTO_GROUPS[lower.to_sym]
+    upper_group = Group::AUTO_GROUPS[upper.to_sym]
+
+    return [] if lower_group.blank? || upper_group.blank?
+
+    (lower_group..upper_group).to_a & AUTO_GROUPS.values
+  end
+
   validates :mentionable_level, inclusion: { in: ALIAS_LEVELS.values }
   validates :messageable_level, inclusion: { in: ALIAS_LEVELS.values }
 
@@ -474,7 +483,7 @@ class Group < ActiveRecord::Base
     group_users
       .pluck(:user_id, :notification_level)
       .each do |user_id, notification_level|
-        next if user_id == -1
+        next if user_id == Discourse::SYSTEM_USER_ID
         next if user_id == topic.user_id
         next if ignore_existing && TopicUser.where(user_id: user_id, topic_id: topic.id).exists?
 

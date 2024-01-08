@@ -1,26 +1,26 @@
-import { cancel, schedule } from "@ember/runloop";
-import discourseLater from "discourse-common/lib/later";
-import DiscourseRoute from "discourse/routes/discourse";
-import DiscourseURL from "discourse/lib/url";
-import { ID_CONSTRAINT } from "discourse/models/topic";
 import { action, get } from "@ember/object";
-import { isEmpty } from "@ember/utils";
+import { cancel, schedule } from "@ember/runloop";
 import { inject as service } from "@ember/service";
-import { setTopicId } from "discourse/lib/topic-list-tracker";
-import showModal from "discourse/lib/show-modal";
-import TopicFlag from "discourse/lib/flag-targets/topic-flag";
-import PostFlag from "discourse/lib/flag-targets/post-flag";
-import HistoryModal from "discourse/components/modal/history";
-import PublishPageModal from "discourse/components/modal/publish-page";
-import EditSlowModeModal from "discourse/components/modal/edit-slow-mode";
+import { isEmpty } from "@ember/utils";
+import AddPmParticipants from "discourse/components/modal/add-pm-participants";
+import ChangeOwnerModal from "discourse/components/modal/change-owner";
 import ChangeTimestampModal from "discourse/components/modal/change-timestamp";
+import EditSlowModeModal from "discourse/components/modal/edit-slow-mode";
 import EditTopicTimerModal from "discourse/components/modal/edit-topic-timer";
 import FeatureTopicModal from "discourse/components/modal/feature-topic";
 import FlagModal from "discourse/components/modal/flag";
 import GrantBadgeModal from "discourse/components/modal/grant-badge";
+import HistoryModal from "discourse/components/modal/history";
 import MoveToTopicModal from "discourse/components/modal/move-to-topic";
+import PublishPageModal from "discourse/components/modal/publish-page";
 import RawEmailModal from "discourse/components/modal/raw-email";
-import AddPmParticipants from "discourse/components/modal/add-pm-participants";
+import PostFlag from "discourse/lib/flag-targets/post-flag";
+import TopicFlag from "discourse/lib/flag-targets/topic-flag";
+import { setTopicId } from "discourse/lib/topic-list-tracker";
+import DiscourseURL from "discourse/lib/url";
+import { ID_CONSTRAINT } from "discourse/models/topic";
+import DiscourseRoute from "discourse/routes/discourse";
+import discourseLater from "discourse-common/lib/later";
 
 const SCROLL_DELAY = 500;
 
@@ -28,6 +28,7 @@ const TopicRoute = DiscourseRoute.extend({
   composer: service(),
   screenTrack: service(),
   modal: service(),
+  router: service(),
 
   scheduledReplace: null,
   lastScrollPos: null,
@@ -226,17 +227,24 @@ const TopicRoute = DiscourseRoute.extend({
 
   @action
   changeOwner() {
-    showModal("change-owner", {
-      model: this.modelFor("topic"),
-      title: "topic.change_owner.title",
+    const topicController = this.controllerFor("topic");
+    this.modal.show(ChangeOwnerModal, {
+      model: {
+        deselectAll: topicController.deselectAll,
+        multiSelect: topicController.multiSelect,
+        selectedPostsCount: topicController.selectedPostsCount,
+        selectedPostIds: topicController.selectedPostIds,
+        selectedPostUsername: topicController.selectedPostsUsername,
+        toggleMultiSelect: topicController.toggleMultiSelect,
+        topic: this.modelFor("topic"),
+      },
     });
   },
 
   // Use replaceState to update the URL once it changes
   @action
   postChangedRoute(currentPost) {
-    // do nothing if we are transitioning to another route
-    if (this.isTransitioning || TopicRoute.disableReplaceState) {
+    if (TopicRoute.disableReplaceState) {
       return;
     }
 
@@ -270,11 +278,12 @@ const TopicRoute = DiscourseRoute.extend({
       cancel(this.scheduledReplace);
 
       this.setProperties({
-        lastScrollPos: parseInt($(document).scrollTop(), 10),
+        lastScrollPos: document.scrollingElement.scrollTop,
         scheduledReplace: discourseLater(
           this,
           "_replaceUnlessScrolling",
           postUrl,
+          topic.id,
           SCROLL_DELAY
         ),
       });
@@ -290,18 +299,28 @@ const TopicRoute = DiscourseRoute.extend({
   },
 
   @action
-  willTransition(transition) {
+  willTransition() {
     this._super(...arguments);
     cancel(this.scheduledReplace);
-    this.set("isTransitioning", true);
-    transition.catch(() => this.set("isTransitioning", false));
     return true;
   },
 
   // replaceState can be very slow on Android Chrome. This function debounces replaceState
   // within a topic until scrolling stops
-  _replaceUnlessScrolling(url) {
-    const currentPos = parseInt($(document).scrollTop(), 10);
+  _replaceUnlessScrolling(url, topicId) {
+    const { currentRouteName } = this.router;
+
+    const stillOnTopicRoute = currentRouteName.split(".")[0] === "topic";
+    if (!stillOnTopicRoute) {
+      return;
+    }
+
+    const stillOnSameTopic = this.modelFor("topic").id === topicId;
+    if (!stillOnSameTopic) {
+      return;
+    }
+
+    const currentPos = document.scrollingElement.scrollTop;
     if (currentPos === this.lastScrollPos) {
       DiscourseURL.replaceState(url);
       return;
@@ -313,6 +332,7 @@ const TopicRoute = DiscourseRoute.extend({
         this,
         "_replaceUnlessScrolling",
         url,
+        topicId,
         SCROLL_DELAY
       ),
     });
@@ -335,12 +355,8 @@ const TopicRoute = DiscourseRoute.extend({
 
   model(params, transition) {
     if (params.slug.match(ID_CONSTRAINT)) {
-      transition.abort();
-
-      DiscourseURL.routeTo(`/t/topic/${params.slug}/${params.id}`, {
-        replaceURL: true,
-      });
-
+      // URL with no slug - redirect to a URL with placeholder slug
+      this.router.transitionTo(`/t/-/${params.slug}/${params.id}`);
       return;
     }
 
@@ -357,11 +373,6 @@ const TopicRoute = DiscourseRoute.extend({
       topic = this.store.createRecord("topic", props);
       return this.setupParams(topic, queryParams);
     }
-  },
-
-  activate() {
-    this._super(...arguments);
-    this.set("isTransitioning", false);
   },
 
   deactivate() {
@@ -384,9 +395,6 @@ const TopicRoute = DiscourseRoute.extend({
   },
 
   setupController(controller, model) {
-    // In case we navigate from one topic directly to another
-    this.set("isTransitioning", false);
-
     controller.setProperties({
       model,
       editingTopic: false,

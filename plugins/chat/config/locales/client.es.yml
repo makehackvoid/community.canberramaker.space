@@ -24,11 +24,8 @@ es:
           descriptions:
             chat:
               create_message: "Crea un mensaje de chat en un canal especificado."
-    about:
-      chat_messages_count: "Mensajes de chat"
-      chat_channels_count: "Canales de chat"
-      chat_users_count: "Usuarios del chat"
     chat:
+      back_to_forum: "Foro"
       deleted_chat_username: eliminado
       dates:
         time_tiny: "h:mm"
@@ -243,7 +240,6 @@ es:
       save: "Guardar"
       select: "Seleccionar"
       return_to_list: "Volver a la lista de canales"
-      return_to_threads_list: "Volver a las discusiones en curso"
       unread_threads_count:
         one: "Tienes %{count} discusión sin leer"
         other: "Tienes %{count} discusiones sin leer"
@@ -300,7 +296,6 @@ es:
         back_to_all_channels: "Todos los canales"
         back_to_channel: "Atrás"
         tabs:
-          about: Acerca de
           members: Miembros
           settings: Ajustes
       new_message_modal:
@@ -311,9 +306,9 @@ es:
         default_search_placeholder: "#un-canal, @alguien o lo que sea"
         default_channel_search_placeholder: "#un-canal"
         default_user_search_placeholder: "@alguien"
-        user_search_placeholder: "...añadir más usuarios"
         disabled_user: "ha desactivado el chat"
         no_items: "No hay elementos"
+        filter: "Filtro"
       channel_edit_name_slug_modal:
         title: Editar canal
         input_placeholder: Añadir un nombre
@@ -381,18 +376,6 @@ es:
           topic: "Tema"
       reviewable:
         type: "Mensaje de chat"
-      reactions:
-        only_you: "Has reaccionado con :%{emoji}:"
-        you_and_single_user: "Tú y %{username} reaccionasteis con :%{emoji}:"
-        you_and_multiple_users: "Tú, %{commaSeparatedUsernames} y %{username} reaccionasteis con :%{emoji}:"
-        you_multiple_users_and_more:
-          one: "Tú, %{commaSeparatedUsernames} y otro reaccionasteis con :%{emoji}:"
-          other: "Tú, %{commaSeparatedUsernames} y %{count} personas más reaccionasteis con :%{emoji}:"
-        single_user: "%{username} reaccionó con :%{emoji}:"
-        multiple_users: "%{commaSeparatedUsernames} y %{username} reaccionaron con :%{emoji}:"
-        multiple_users_and_more:
-          one: "%{commaSeparatedUsernames} y otro reaccionaron con :%{emoji}:"
-          other: "%{commaSeparatedUsernames} y %{count} personas más reaccionaron con :%{emoji}:"
       composer:
         toggle_toolbar: "Alternar barra de herramientas"
         italic_text: "texto enfatizado"
@@ -402,6 +385,7 @@ es:
       quote:
         original_channel: 'Enviado originalmente en <a href="%{channelLink}">%{channel}</a>'
         copy_success: "Cita del chat copiada en el portapapeles"
+        default_thread_title: "Hilo"
       notification_levels:
         never: "Nunca"
         mention: "Solo para menciones"
@@ -430,6 +414,10 @@ es:
         saved: "Guardado"
         unfollow: "Abandonar"
         admin_title: "Administrador"
+        settings_title: "Ajustes"
+        category_label: "Categoría"
+        history_label: "Historial"
+        members_label: "Miembros"
       admin:
         title: "Chat"
         export_messages:
@@ -499,14 +487,9 @@ es:
           one: "%{commaSeparatedUsernames} y %{count} más está escribiendo"
           other: "%{commaSeparatedUsernames} y %{count} más están escribiendo"
       retention_reminders:
-        public_none: "El historial del canal se conserva indefinidamente."
-        public:
-          one: "El historial del canal se conserva durante %{count} día."
-          other: "El historial del canal se conserva durante %{count} días."
-        dm_none: "El historial personal de chat se conserva indefinidamente."
-        dm:
-          one: "El historial de chat personal se conserva durante %{count} día."
-          other: "El historial de chat personal se conserva durante %{count} días."
+        short:
+          one: "%{count} día"
+          other: "%{count} días"
       flags:
         off_topic: "Este mensaje no es relevante para la discusión actual, tal y como se define en el título del canal, y probablemente debería moverse a otro lugar."
         inappropriate: "Este mensaje tiene un contenido que una persona razonable consideraría ofensivo, abusivo o que viola las <a href=\"%{basePath}/guidelines\">directrices de nuestra comunidad</a>."
@@ -552,7 +535,6 @@ es:
           other: "+%{count}"
       threads:
         open: "Hilo abierto"
-        list: "Discusiones en curso"
         none: "No participas en ningún hilo de este canal."
       draft_channel_screen:
         header: "Nuevo mensaje"

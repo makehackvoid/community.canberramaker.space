@@ -280,16 +280,9 @@ sr:
       our_admins: "Naši admini"
       our_moderators: "Naši moderatori"
       moderators: "Moderatori"
-      stat:
-        all_time: "Sve vreme"
-        last_day: "Последња 24 сата"
-        last_7_days: "Последњих 7 дана"
-        last_30_days: "Последњих 30 дана"
       like_count: "Sviđanja"
       topic_count: "Teme"
       post_count: "Poruka"
-      active_user_count: "Aktivni korisnici"
-      contact: "Kontaktirajte nas"
       contact_info: "U trenutku kritičnog problema ili hitnog slučaja koji utiče na sajt, molimo vas kontaktirajte nas na %{contact_info}."
     bookmarked:
       title: "Markiraj"
@@ -391,6 +384,8 @@ sr:
           title: "Kada se član osoblja odluči da preduzme akciju, zastavi će biti dodeljen bonus."
         user_accuracy_bonus:
           name: "tačnost člana"
+      revise_and_reject_post:
+        reason: "Razlog"
       awaiting_approval: "Čeka odobrenje"
       delete: "Obriši"
       settings:
@@ -752,6 +747,8 @@ sr:
         edit: "Izmeni"
         security_key:
           save: "Sačuvaj"
+      passkeys:
+        save: "Sačuvaj"
       change_about:
         title: "Promijeni O meni"
       change_username:
@@ -787,13 +784,12 @@ sr:
         cancel: "Odustani"
       name:
         title: "Ime"
-        instructions: "vaše ime (opciono)"
-        instructions_required: "Vaše ime"
+        instructions: "Vaše ime (opciono)."
+        instructions_required: "Vaše ime."
         too_short: "Ime vam je prekratko"
         ok: "Vaše ime dobro izgleda"
       username:
         title: "Korisničko ime"
-        instructions: "jedinstveno, bez razmaka, kratko"
         short_instructions: "Ljudi vas mogu spominjati kao @%{username}"
         available: "Vaše korisničko ime slobodno"
         not_available: "Nije dostupno. Pokušajte %{suggestion}?"
@@ -884,7 +880,7 @@ sr:
         same_as_username: "Tvoja šifra je ista kao i tvoje korisničko ime."
         same_as_email: "Tvoja šifra je ista kao i tvoj email."
         ok: "Vaša šifra izgleda dobro."
-        instructions: "najmanje %{count} karaktera"
+        instructions: "Najmanje %{count} karaktera."
       summary:
         title: "Rezime"
         stats: "Statistike"
@@ -1526,9 +1522,6 @@ sr:
       title: "Hvala što pomažete u održavanju naše zajednice pristojnom."
       action: "Označi Poruku Zastavom"
       take_action_options:
-        default:
-          title: "Preduzmi Akciju"
-          details: "Dođite odmah do praga za zastave, umesto da čekate još zastava od zajednice."
         suspend:
           title: "Suspenduj Korisnika"
       notify_action: "Privatna poruka"
@@ -1537,7 +1530,6 @@ sr:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(sakriveno)"
       submit_tooltip: "Priložite privatnu zastavu."
-      take_action_tooltip: "Dođite odmah do praga za zastave, umesto da čekate još zastava od zajednice."
       cant: "Žao nam je, trenutno ne možete označiti ovu poruku zastavom."
       formatted_name:
         off_topic: "Van Teme je."
@@ -1745,7 +1737,6 @@ sr:
       download: "Preuzmi"
     tagging:
       add_synonyms: "Dodaj"
-      description: "Opis"
       sort_by_count: "broj"
       sort_by_name: "ime foruma"
       filters:
@@ -1838,10 +1829,22 @@ sr:
             my_posts:
               content: "Moje poruke"
     form_templates:
+      upload_field:
+        upload: "Upload"
+        uploading: "Uploading"
       errors:
         typeMismatch:
           default: "Molimo unesite validnu vrednost"
           email: "Molimo unesite validnu e-mail adresu."
+    table_builder:
+      edit:
+        modal:
+          cancel: "otkaži"
+          create: "Sačuvaj"
+          reason: "zašto izmenjujete?"
+      spreadsheet:
+        show: "Pokaži"
+        about: "O nama"
   admin_js:
     admin:
       title: "Administrator"
@@ -1863,8 +1866,7 @@ sr:
         installed_version: "Instalirano"
         latest_version: "Poslednje"
         new_features:
-          dismiss: "Одбаци"
-          learn_more: "Saznaj više"
+          learn_more: "Saznaj više..."
         last_checked: "Zadnje provereno"
         refresh_problems: "Osveži"
         no_problems: "Nisu pronađeni problemi."
@@ -1948,6 +1950,8 @@ sr:
         version: "Verzija"
         enabled: "Omgućeno"
         change_settings_short: "Podešavanje"
+        author: "Od %{author}"
+        learn_more: "Saznaj više"
       backups:
         title: "Sigurnosne kopije"
         menu:
@@ -2017,6 +2021,7 @@ sr:
           save: "Sačuvaj"
           edit: "Izmeni"
           settings: "Podešavanje"
+          cancel: "Odustani"
           upload: "Učitaj"
           discard: "Odbaci"
           installed: "Instalirano"
@@ -2442,6 +2447,8 @@ sr:
           navigation: "Navigacija"
         default_categories:
           modal_yes: "Da"
+        file_types_list:
+          add_image_types: "Slike"
       badges:
         title: Značke
         new_badge: Nova Značka

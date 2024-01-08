@@ -84,6 +84,10 @@ module PageObjects
           post_by_number(post).find(".bookmark.with-reminder").click
         when :reply
           post_by_number(post).find(".post-controls .reply").click
+        when :flag
+          post_by_number(post).find(".post-controls .create-flag").click
+        when :copy_link
+          post_by_number(post).find(".post-controls .post-action-menu__copy-link").click
         end
       end
 
@@ -92,12 +96,15 @@ module PageObjects
       end
 
       def click_post_admin_action_button(post, button)
-        element_klass = ".popup-menu-button"
+        element_klass = "[data-content][data-identifier='admin-post-menu']"
         case button
         when :grant_badge
-          element_klass += ".grant-badge"
+          element_klass += " .grant-badge"
+        when :change_owner
+          element_klass += " .change-owner"
         end
-        post_by_number(post).find(element_klass).click
+
+        find(element_klass).click
       end
 
       def click_topic_footer_button(button)
@@ -164,6 +171,14 @@ module PageObjects
 
       def fast_edit_input
         @fast_edit_component.fast_edit_input
+      end
+
+      def copy_quote_button_selector
+        ".quote-button .copy-quote"
+      end
+
+      def copy_quote_button
+        find(copy_quote_button_selector)
       end
 
       def click_mention(post, mention)

@@ -3,18 +3,16 @@
 
 RSpec.describe Topic do
   let(:now) { Time.zone.local(2013, 11, 20, 8, 0) }
-  fab!(:user) { Fabricate(:user) }
+  fab!(:user)
   fab!(:user1) { Fabricate(:user) }
   fab!(:whisperers_group) { Fabricate(:group) }
   fab!(:user2) { Fabricate(:user, groups: [whisperers_group]) }
-  fab!(:moderator) { Fabricate(:moderator) }
-  fab!(:coding_horror) { Fabricate(:coding_horror) }
-  fab!(:evil_trout) { Fabricate(:evil_trout) }
-  fab!(:admin) { Fabricate(:admin) }
-  fab!(:group) { Fabricate(:group) }
-  fab!(:trust_level_2) do
-    Fabricate(:user, trust_level: SiteSetting.min_trust_level_to_allow_invite)
-  end
+  fab!(:moderator)
+  fab!(:coding_horror)
+  fab!(:evil_trout)
+  fab!(:admin)
+  fab!(:group)
+  fab!(:trust_level_2) { Fabricate(:user, trust_level: 2, refresh_auto_groups: true) }
 
   it_behaves_like "it has custom fields"
 
@@ -736,7 +734,7 @@ RSpec.describe Topic do
       end
 
       context "with secure categories" do
-        fab!(:group) { Fabricate(:group) }
+        fab!(:group)
         fab!(:private_category) { Fabricate(:private_category, group: group) }
 
         before { topic.update!(category: private_category) }
@@ -1001,7 +999,7 @@ RSpec.describe Topic do
           end
 
           describe "when user does not have sufficient trust level" do
-            before { user.update!(trust_level: TrustLevel[1]) }
+            before { user.change_trust_level!(TrustLevel[1]) }
 
             it "should not create an invite" do
               expect do expect(topic.invite(user, "test@email.com")).to eq(nil) end.to_not change {
@@ -1105,7 +1103,7 @@ RSpec.describe Topic do
         end
 
         describe "when user can invite via email" do
-          before { user.update!(trust_level: SiteSetting.min_trust_level_to_allow_invite) }
+          before { user.change_trust_level!(TrustLevel[2]) }
 
           it "should create an invite" do
             Jobs.run_immediately!
@@ -1334,7 +1332,7 @@ RSpec.describe Topic do
   end
 
   describe "moderator posts" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
 
     it "creates a moderator post" do
       mod_post =
@@ -1595,7 +1593,7 @@ RSpec.describe Topic do
   end
 
   describe "banner" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
     fab!(:user) { topic.user }
     let(:banner) { { html: "<p>BANNER</p>", url: topic.url, key: topic.id } }
 
@@ -1705,50 +1703,8 @@ RSpec.describe Topic do
     end
   end
 
-  describe "meta data" do
-    fab!(:topic) { Fabricate(:topic, meta_data: { "hello" => "world" }) }
-
-    it "allows us to create a topic with meta data" do
-      expect(topic.meta_data["hello"]).to eq("world")
-    end
-
-    context "when updating" do
-      context "with existing key" do
-        before { topic.update_meta_data("hello" => "bane") }
-
-        it "updates the key" do
-          expect(topic.meta_data["hello"]).to eq("bane")
-        end
-      end
-
-      context "with a new key" do
-        before { topic.update_meta_data("city" => "gotham") }
-
-        it "adds the new key" do
-          expect(topic.meta_data["city"]).to eq("gotham")
-          expect(topic.meta_data["hello"]).to eq("world")
-        end
-      end
-
-      context "with a new key" do
-        before_all do
-          topic.update_meta_data("other" => "key")
-          topic.save!
-        end
-
-        it "can be loaded" do
-          expect(Topic.find(topic.id).meta_data["other"]).to eq("key")
-        end
-
-        it "is in sync with custom_fields" do
-          expect(Topic.find(topic.id).custom_fields["other"]).to eq("key")
-        end
-      end
-    end
-  end
-
   describe "after create" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
 
     it "is a regular topic by default" do
       expect(topic.archetype).to eq(Archetype.default)
@@ -1770,7 +1726,7 @@ RSpec.describe Topic do
   end
 
   describe "#change_category_to_id" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
     fab!(:user) { topic.user }
     fab!(:category) { Fabricate(:category_with_definition, user: user) }
 
@@ -2119,7 +2075,7 @@ RSpec.describe Topic do
 
     let(:closing_topic) { Fabricate(:topic_timer, execute_at: 5.hours.from_now).topic }
 
-    fab!(:trust_level_4) { Fabricate(:trust_level_4) }
+    fab!(:trust_level_4)
 
     it "can take a number of hours as an integer" do
       freeze_time now
@@ -2368,9 +2324,10 @@ RSpec.describe Topic do
         topic = Fabricate(:topic, category: category, created_at: 1.minute.ago)
         topic2 = Fabricate(:topic, category: category, created_at: 1.minute.ago)
         tag = Fabricate(:tag)
+        tag2 = Fabricate(:tag)
         Fabricate(:topic_tag, topic: topic, tag: tag)
 
-        SiteSetting.digest_suppress_tags = "#{tag.id}"
+        SiteSetting.digest_suppress_tags = "#{tag.name}|#{tag2.name}"
         topics = Topic.for_digest(user, 1.year.ago, top_order: true)
         expect(topics).to eq([topic2])
 
@@ -2604,7 +2561,7 @@ RSpec.describe Topic do
   end
 
   describe "trash!" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
 
     context "with category's topic count" do
       fab!(:category) { Fabricate(:category_with_definition) }
@@ -2654,7 +2611,7 @@ RSpec.describe Topic do
   end
 
   describe "recover!" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
 
     context "with category's topic count" do
       fab!(:category) { Fabricate(:category_with_definition) }
@@ -2724,7 +2681,7 @@ RSpec.describe Topic do
 
       freeze_time(start)
 
-      user = Fabricate(:user)
+      user = Fabricate(:user, refresh_auto_groups: true)
       topic_id = create_post(user: user).topic_id
 
       freeze_time(start + 10.minutes)
@@ -2744,7 +2701,7 @@ RSpec.describe Topic do
 
       freeze_time(start)
 
-      user = Fabricate(:user)
+      user = Fabricate(:user, refresh_auto_groups: true)
 
       freeze_time(start + 25.hours)
       topic_id = create_post(user: user).topic_id
@@ -2915,7 +2872,7 @@ RSpec.describe Topic do
 
   describe "featured link" do
     before { SiteSetting.topic_featured_link_enabled = true }
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
 
     it "can validate featured link" do
       topic.featured_link = " invalid string"
@@ -3170,7 +3127,7 @@ RSpec.describe Topic do
   end
 
   describe "#remove_allowed_user" do
-    fab!(:topic) { Fabricate(:topic) }
+    fab!(:topic)
     fab!(:private_topic) do
       Fabricate(
         :private_message_topic,
@@ -3458,7 +3415,7 @@ RSpec.describe Topic do
   end
 
   describe "#cannot_permanently_delete_reason" do
-    fab!(:post) { Fabricate(:post) }
+    fab!(:post)
     let!(:topic) { post.topic }
 
     before { freeze_time }

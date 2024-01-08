@@ -1,21 +1,21 @@
-import { INPUT_DELAY } from "discourse-common/config/environment";
+import Component from "@ember/component";
 import EmberObject, { computed, get } from "@ember/object";
+import { guidFor } from "@ember/object/internals";
+import Mixin from "@ember/object/mixin";
+import { bind, cancel, next, schedule, throttle } from "@ember/runloop";
+import { isEmpty, isNone, isPresent } from "@ember/utils";
+import { createPopper } from "@popperjs/core";
+import { Promise } from "rsvp";
+import { INPUT_DELAY } from "discourse-common/config/environment";
+import discourseDebounce from "discourse-common/lib/debounce";
+import deprecated from "discourse-common/lib/deprecated";
+import { makeArray } from "discourse-common/lib/helpers";
+import I18n from "discourse-i18n";
 import PluginApiMixin, {
   applyContentPluginApiCallbacks,
   applyOnChangePluginApiCallbacks,
 } from "select-kit/mixins/plugin-api";
-import { bind, cancel, next, schedule, throttle } from "@ember/runloop";
-import { isEmpty, isNone, isPresent } from "@ember/utils";
-import Component from "@ember/component";
-import I18n from "I18n";
-import Mixin from "@ember/object/mixin";
-import { Promise } from "rsvp";
 import UtilsMixin from "select-kit/mixins/utils";
-import { createPopper } from "@popperjs/core";
-import deprecated from "discourse-common/lib/deprecated";
-import discourseDebounce from "discourse-common/lib/debounce";
-import { guidFor } from "@ember/object/internals";
-import { makeArray } from "discourse-common/lib/helpers";
 
 export const MAIN_COLLECTION = "MAIN_COLLECTION";
 export const ERRORS_COLLECTION = "ERRORS_COLLECTION";
@@ -75,7 +75,7 @@ export default Component.extend(
       this.set(
         "selectKit",
         EmberObject.create({
-          uniqueID: this.attrs?.id?.value || this.attrs?.id || guidFor(this),
+          uniqueID: this.id || guidFor(this),
           valueProperty: this.valueProperty,
           nameProperty: this.nameProperty,
           labelProperty: this.labelProperty,
@@ -1128,15 +1128,14 @@ export default Component.extend(
 
     _deprecateMutations() {
       this.actions ??= {};
-      this.attrs ??= {};
 
-      if (!this.attrs.onChange && !this.actions.onChange) {
+      if (!this.onChange && !this.actions.onChange) {
         this._deprecated(
           "Implicit mutation has been deprecated, please use `onChange` handler"
         );
 
         this.actions.onChange =
-          this.attrs.onSelect ||
+          this.onSelect ||
           this.actions.onSelect ||
           ((value) => this.set("value", value));
       }

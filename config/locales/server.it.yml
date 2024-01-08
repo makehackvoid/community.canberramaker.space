@@ -202,7 +202,6 @@ it:
       default_tags_already_selected: "Non è possibile selezionare un'etichetta utilizzata in un altro elenco."
       s3_upload_bucket_is_required: "Non è possibile attivare i caricamenti su S3 a meno che non imposti l'opzione 's3_upload_bucket'."
       enable_s3_uploads_is_required: "Non puoi abilitare l'uso dell'inventario su S3 se non hai abilitato i caricamenti S3."
-      page_publishing_requirements: "La pubblicazione di pagine non può essere attivata se sono attivati i supporti sicuri."
       s3_backup_requires_s3_settings: "Non è possibile utilizzare S3 per i backup a meno che non sia stato fornito '%{setting_name}'."
       s3_bucket_reused: "Non puoi usare lo stesso bucket per 's3_upload_bucket' e 's3_backup_bucket'. Scegli un bucket differente, o un percorso diverso per ciascun bucket."
       secure_uploads_requirements: "I caricamenti e gli ACL S3 devono essere abilitati prima di abilitare i caricamenti sicuri."
@@ -259,6 +258,7 @@ it:
       discourse_connect_enabled: "Gli inviti sono disabilitati perché è abilitato DiscourseConnect."
       invalid_access: "Non hai il permesso di visualizzare la risorsa richiesta."
     requires_groups: "L'invito non è stato salvato perché l'argomento specificato non è accessibile. Aggiungi uno dei seguenti gruppi: %{groups}."
+    max_invite_emails_limit_exceeded: "Richiesta non riuscita perché il numero di email ha superato il massimo (%{max})."
     domain_not_allowed: "La tua email non può essere usata per riscattare l’invito."
     max_redemptions_allowed_one: "per gli inviti via e-mail dovrebbe essere 1."
     redemption_count_less_than_max: "deve essere minore di %{max_redemptions_allowed}."
@@ -307,6 +307,7 @@ it:
   delete_topic_failed: "Si è verificato un errore durante l'eliminazione di questo argomento. Si prega di contattare l'amministratore del sito."
   reading_time: "Tempo di lettura"
   likes: "Mi piace"
+  action_already_performed: "Ops! Hai già eseguito questa azione. Puoi provare ad aggiornare la pagina?"
   too_many_replies:
     one: "Spiacenti, ma i nuovi utenti possono temporaneamente inserire solo %{count} risposta nello stesso argomento."
     other: "Spiacenti, ma i nuovi utenti possono temporaneamente inserire solo %{count} risposte nello stesso argomento."
@@ -570,7 +571,8 @@ it:
             name:
               same_as_password: "è uguale alla tua password."
             ip_address:
-              signup_not_allowed: "L'iscrizione non è permessa da questo account."
+              blocked: "Le nuove iscrizioni non sono consentite dal tuo indirizzo IP."
+              max_new_accounts_per_registration_ip: "Le nuove iscrizioni non sono consentite dal tuo indirizzo IP (limite massimo raggiunto). Contatta un membro dello staff."
         user_profile:
           attributes:
             featured_topic_id:
@@ -1407,7 +1409,7 @@ it:
     unreachable_themes: "Non è stato possibile verificare la presenza di aggiornamenti per i seguenti temi:"
     watched_word_regexp_error: "L'espressione regolare per le parole osservate %{action} non è valida. Per favore verifica le tue <a href='%{base_path}/admin/customize/watched_words'>Impostazioni sulle Parole Osservate</a>, o disabilita l'impostazione del sito 'watched words regular expressions'."
     v3_analytics_deprecated: "Il tuo Discourse utilizza attualmente Google Analytics 3, che non sarà più supportato dopo luglio 2023. <a href='https://meta.discourse.org/t/260498'>Passa a Google Analytics 4</a> ora per continuare a ricevere preziose informazioni e analisi per le prestazioni del tuo sito web."
-    legacy_navigation_menu_deprecated: "Il tuo Discourse sta attualmente utilizzando il menu di navigazione \"legacy\" che <a href='https://meta.discourse.org/t/removing-the-legacy-hamburger-navigation-menu-option/265274'>verrà rimosso nella prima versione beta di Discourse 3.2</a>. Passa al nuovo menu di navigazione aggiornando la tua impostazione <a href='%{base_path}/admin/site_settings/category/all_results?filter=navigation_menu'>del sito del menu di navigazione</a> su \"barra laterale\" o \"elenco a discesa dell'intestazione\"."
+    category_style_deprecated: "Your Discourse utilizza attualmente uno stile di categoria deprecato che verrà rimosso prima della versione beta finale di Discourse 3.2. Fare riferimento a <a href='https://meta.discourse.org/t/282441'>Passaggio a un'impostazione del sito con stile di categoria singola</a> per istruzioni su come mantenere lo stile di categoria selezionato."
   site_settings:
     allow_bulk_invite: "Consenti inviti di massa caricando un file CSV"
     disabled: "disabilitato"
@@ -1418,9 +1420,6 @@ it:
     allow_user_locale: "Permetti agli utenti di personalizzare la lingua dell'interfaccia"
     set_locale_from_accept_language_header: "imposta la lingua dell'interfaccia per gli utenti anonimi dalla intestazione lingue del loro browser web"
     support_mixed_text_direction: "Supporto misto di direzioni del testo da sinistra a destra e da destra a sinistra."
-    min_post_length: "Lunghezza minima dei messaggi in caratteri"
-    min_first_post_length: "Lunghezza minima del primo messaggio (corpo del testo), in caratteri"
-    min_personal_message_post_length: "Lunghezza minima in caratteri per i messaggi"
     max_post_length: "Lunghezza massima dei messaggi in caratteri"
     topic_featured_link_enabled: "Abilita la pubblicazione di collegamenti con gli argomenti."
     show_topic_featured_link_in_digest: "Mostra i collegamenti in primo piano dell'argomento nella email riepilogativa."
@@ -1506,7 +1505,6 @@ it:
     email_custom_headers: "Una lista di intestazioni email personalizzate delimitata da una barra verticale (pipe |)"
     email_subject: "Formato oggetto personalizzabile per e-mail standard. Vedi <a href='https://meta.discourse.org/t/customize-subject-format-for-standard-emails/20801' target='_blank'>https://meta.discourse.org/t/customize-subject-format-for-standard-emails/20801</a>"
     detailed_404: "Fornisce maggiori dettagli agli utenti sul perché non possono accedere a un argomento specifico. Nota: questo metodo è meno sicuro perché gli utenti sapranno se un URL si collega a un argomento valido."
-    enforce_second_factor: "Impone agli utenti di abilitare l'autenticazione a due fattori. Seleziona \"all\" per applicarlo a tutti gli utenti. Seleziona \"staff\" per applicarlo solo agli utenti staff."
     force_https: "Forza il tuo sito ad usare solo HTTPS. ATTENZIONE: NON abilitare questa opzione finché non hai verificato che HTTPS è pienamente configurato e sta funzionando ovunque! Hai verificato il tuo CDN, tutti gli accessi ai social ed ogni logo esterno / dipendenze per essere sicuro che sono anch'essi tutti compatibili con HTTPS?"
     same_site_cookies: "Utilizza gli stessi cookie del sito. In tal modo si eliminano tutti i vettori Cross Site Request Forgery nei browser supportati (Lax o Strict). Avviso: Strict funzionerà solo su siti che richiedono l'accesso e utilizzano un metodo di autenticazione esterno."
     summary_score_threshold: "Il punteggio minimo richiesto affinché un messaggio sia incluso in 'Riassumi Questo Argomento'"
@@ -1540,7 +1538,7 @@ it:
     tl2_additional_flags_per_day_multiplier: "Aumenta il limite giornaliero di segnalazioni per gli utenti con livello di attendibilità 2 (Membro), moltiplicandolo per questo numero"
     tl3_additional_flags_per_day_multiplier: "Aumenta il limite giornaliero di segnalazioni per gli utenti con livello di attendibilità 3 (Assiduo) moltiplicandolo per questo numero"
     tl4_additional_flags_per_day_multiplier: "Aumenta il limite giornaliero di segnalazioni per gli utenti con livello di attendibilità 4 (veterano), moltiplicandolo per questo numero"
-    num_users_to_silence_new_user: "Se i messaggi di un nuovo utente ricevono num_spam_flags_to_silence_new_user segnalazioni di spam da così tanti utenti diversi, nascondi tutti i suoi messaggi e impediscigli ulteriori invii. 0 per disabilitare. "
+    num_users_to_silence_new_user: "Se i post di un nuovo utente superano l'impostazione hide_post_sensitivity e ricevono flag di spam da questo numero di utenti diversi, nascondi tutti i suoi post e impedisci la pubblicazione futura. 0 per disabilitare."
     num_tl3_flags_to_silence_new_user: "Se i messaggi di un nuovo utente ricevono questo numero di segnalazioni da num_tl3_users_to_silence_new_user differenti utenti a livello di attendibilità 3, nascondi tutti i messaggi e previenine la futura pubblicazione. 0 per disabilitare."
     num_tl3_users_to_silence_new_user: "Se i messaggi di un nuovo utente ricevono num_tl3_flags_to_silence_new_user segnalazioni da questo numero di utenti a livello di attendibilità 3, nascondi tutti i messaggi e previenine la futura pubblicazione. 0 per disabilitare."
     notify_mods_when_user_silenced: "Se un utente è silenziato automaticamente, manda un messaggio ai moderatori."
@@ -1554,7 +1552,7 @@ it:
     must_approve_users: "Lo staff deve approvare tutti i nuovi account utente prima che essi possano accedere al sito."
     invite_code: "L'utente deve digitare questo codice per consentire la registrazione dell'account (senza distinzione tra maiuscole e minuscole), se lasciato vuoto sarà ignorato"
     approve_suspect_users: "Aggiungi utenti sospetti alla coda di revisione. Gli utenti sospetti sono quelli che hanno inserito una biografia o un sito web ma non svolgono attività di lettura."
-    review_every_post: "Tutti i messaggi devono essere revisionati. ATTENZIONE! NON CONSIGLIATO PER SITI MOLTO ATTIVI."
+    review_every_post: "Invia ogni nuovo messaggio alla coda di revisione per la moderazione. I messaggi vengono comunque pubblicati immediatamente e sono visibili a tutti gli utenti. AVVERTIMENTO! Non consigliato per siti ad alto traffico a causa del potenziale volume di messaggi che necessitano di revisione."
     pending_users_reminder_delay_minutes: "Notifica i moderatori se nuovi utenti sono in attesa di approvazione per più di questo numero di minuti. Imposta il valore a -1 per disabilitare le notifiche."
     persistent_sessions: "Gli utenti rimarranno connessi alla chiusura del browser"
     maximum_session_age: "L'utente resterà connesso per n ore dall'ultima visita"
@@ -1562,7 +1560,6 @@ it:
     ga_universal_tracking_code: "ID del codice di monitoraggio di Google Universal Analytics, ad esempio: UA-12345678-9; vedi <a href='https://google.com/analytics' target='_blank'>https://google.com/analytics</a>"
     ga_universal_domain_name: "Nome del dominio di Google Universal Analytics, ad esempio: mysite.com; vedi <a href='https://google.com/analytics' target='_blank'>https://google.com/analytics</a>"
     ga_universal_auto_link_domains: "Abilita il monitoraggio tra domini di Google Universal Analytics. I collegamenti in uscita verso questi domini avranno l'ID del client aggiunto. Vedi <a href='https://support.google.com/analytics/answer/1034342?hl=it' target='_blank'>Impostare il monitoraggio tra domini.</a>"
-    gtm_container_id: "ID del contenitore di Google Tag Manager. ad esempio: GTM-ABCDEF. <br/>Nota: potrebbe essere necessario inserire l'abilitazione degli script di terze parti caricati da GTM in \"Content Security Policy Script src\"."
     enable_escaped_fragments: "Tornare all'API Ajax-Crawling di Google se non viene rilevato alcun webcrawler. Vedi <a href='https://developers.google.com/webmasters/ajax-crawling/docs/learn-more' target='_blank'>https://developers.google.com/webmasters/ajax-crawling/docs/learn-more</a>"
     moderators_manage_categories_and_groups: "Permetti ai moderatori di creare e gestire categorie e gruppi"
     moderators_change_post_ownership: "Consenti ai moderatori di modificare la proprietà del messaggio"
@@ -1584,8 +1581,6 @@ it:
     invalidate_inactive_admin_email_after_days: "Gli account amministratore che non hanno visitato il sito in questo numero di giorni dovranno riconvalidare il proprio indirizzo email prima di accedere. Impostare su 0 per disabilitare."
     include_secure_categories_in_tag_counts: "Se abilitato, il conteggio degli argomenti per un tag includerà gli argomenti che si trovano nelle categorie con restrizioni di lettura per tutti gli utenti. Se disabilitato, agli utenti normali viene mostrato solo un conteggio degli argomenti per un tag in cui tutti gli argomenti sono nelle categorie pubbliche."
     display_personal_messages_tag_counts: "Se abilitato, verrà visualizzato il conteggio dei messaggi personali contrassegnati con un determinato tag."
-    top_menu: "Determina quali oggetti appaiono nella navigazione della pagina iniziale, e in quale ordine. Esempio latest|new|unread|categories|top|read|posted|bookmarks"
-    post_menu: "Determina quali elementi vengono mostrati nel menu del messaggio, e in quale ordine. Esempio like|edit|flag|delete|share|bookmark|reply"
     post_menu_hidden_items: "Le voci di menu da nascondere per impostazione predefinita nel menu di composizione del messaggio, a meno che non vengano premuti i punti di sospensione per espanderle."
     share_links: "Determina quali elementi appaiono nella finestra di condivisione e in quale ordine."
     allow_username_in_share_links: "Consenti ai nomi utente di essere inclusi nei link di condivisione. Questo permette di assegnare i distintivi in base ai visitatori unici."
@@ -1602,7 +1597,6 @@ it:
     topics_per_period_in_top_summary: "Numero di argomenti popolari mostrati nel riepilogo di default."
     topics_per_period_in_top_page: "Numero di argomenti popolari mostrati nella vista espansa 'Mostra Altro'"
     redirect_users_to_top_page: "Reindirizza automaticamente i nuovi utenti e quelli assenti da tempo sulla pagina degli argomenti popolari."
-    top_page_default_timeframe: "Intervallo di tempo predefinito per la pagina degli argomenti di punta."
     moderators_view_emails: "Consenti ai moderatori di visualizzare le email degli utenti"
     prioritize_username_in_ux: "Nella pagina utente mostra prima il nome utente, la sua scheda e i suoi messaggi (quando l'opzione è disabilitata viene mostrato prima il nome)"
     enable_rich_text_paste: "Abilita la conversione automatica da HTML a Markdown quando si incolla del testo nel composer. (Sperimentale)"
@@ -1802,7 +1796,9 @@ it:
     min_trust_level_to_allow_profile_background: "Il livello di attendibilità minimo richiesto per caricare uno sfondo del profilo"
     min_trust_level_to_allow_user_card_background: "Il livello di attendibilità minimo richiesto per caricare uno sfondo nella scheda utente"
     min_trust_level_to_allow_invite: "Il livello di attendibilità minimo richiesto per invitare gli utenti"
+    invite_allowed_groups: "Gruppi a cui è consentito invitare utenti."
     min_trust_level_to_allow_ignore: "Il livello di attendibilità minimo richiesto per ignorare utenti"
+    ignore_allowed_groups: "Gruppi a cui è consentito ignorare altri utenti."
     allowed_link_domains: "Domini che gli utenti possono collegare nei messaggi anche se non hanno il livello di attendibilità appropriato per pubblicare link"
     newuser_max_links: "Quanti collegamenti può aggiungere a un messaggio un nuovo utente ."
     newuser_max_embedded_media: "Quanti elementi multimediali incorporati un nuovo utente può aggiungere a un messaggio."
@@ -1815,6 +1811,7 @@ it:
     here_mention: "Nome utilizzato per una @menzione per consentire agli utenti privilegiati di avvisare fino a \"max_here_member\" persone che partecipano all'argomento. Non deve essere un nome utente esistente."
     max_here_mentioned: "Numero massimo di persone menzionate da @here."
     min_trust_level_for_here_mention: "Il livello di attendibilità minimo richiesto per menzionare @here."
+    here_mention_allowed_groups: "Gruppi a cui è consentito menzionare @qui."
     create_thumbnails: "Crea anteprime e lightbox delle immagini che sono troppo grandi per essere contenute in un messaggio."
     email_time_window_mins: "Aspetta (n) minuti prima di inviare email di notifica, per dare agli utenti la possibilità di modificare e completare i loro messaggi."
     personal_email_time_window_seconds: "Attendi (n) secondi prima di inviare qualsiasi email di notifica di messaggi personali, per dare agli utenti la possibilità di modificare e finalizzare i propri messaggi."
@@ -1830,14 +1827,8 @@ it:
     min_title_similar_length: "Lunghezza minima di un titolo che attiva il controllo su argomenti simili."
     desktop_category_page_style: "Stile visuale per la pagina /categorie."
     category_colors: "Un elenco di valori esadecimali di colori permessi per le categorie."
-    category_style: "Stile grafico dei distintivi relativi alle categorie."
     default_dark_mode_color_scheme_id: "Lo schema di colori usato in modalità scura."
     dark_mode_none: "Nessuno"
-    max_image_size_kb: "La dimensione massima di un'immagine caricata in KB. Deve essere configurato anche in nginx (client_max_body_size) / apache o proxy. Le immagini più grandi di questa e più piccole di client_max_body_size verranno ridimensionate per adattarsi al caricamento."
-    max_attachment_size_kb: "Dimensione massima dei file che gli utenti possono caricare, in kB. Configura il limite anche in nginx (client_max_body_size) / apache o nel proxy."
-    authorized_extensions: "Una lista di estensioni dei file che è permesso caricare (usa '*' per permettere tutti i tipi di file) "
-    authorized_extensions_for_staff: "Un elenco di estensioni di file consentite per il caricamento da parte dello staff in aggiunta all'elenco definito nell'impostazione del sito `authorized_extensions`. (usa '*' per abilitare tutti i tipi di file)"
-    theme_authorized_extensions: "Una lista di estensioni dei file permessi per i caricamenti dei temi (usa '*' per abilitare tutti i tipi di file)"
     max_similar_results: "Quanti argomenti simili mostrare sopra l'editor quando si scrive un nuovo argomento. Il paragone viene fatto sul titolo e sul corpo."
     max_image_megapixels: "Numero massimo di megapixel consentiti per un'immagine. Le immagini con un numero maggiore di megapixel verranno rifiutate."
     title_prettify: "Evita refusi ed errori comuni nei titoli, incluso il testo tutto maiuscolo, il primo carattere minuscolo, troppi caratteri ! e ?, puntini aggiuntivi alla fine della parola ecc."
@@ -1919,7 +1910,7 @@ it:
     always_show_trimmed_content: "Mostra sempre la parte tagliata delle email in arrivo. ATTENZIONE: potrebbe rivelare indirizzi email."
     trim_incoming_emails: "Taglia la parte delle email in arrivo che non è rilevante."
     private_email: "Non includere contenuti da messaggi o argomenti nel titolo o nel corpo dell'email. NOTA: disabilita anche le email riassuntive."
-    email_total_attachment_size_limit_kb: "Dimensione massima totale dei file allegati alle email in uscita in Kb. Impostare il valore a 0 per disabilitare l'invio di allegati."
+    email_total_attachment_size_limit_kb: "Dimensione massima dei files allegati alle email in uscita. Imposta a 0 per disabilitare l'invio di allegati."
     post_excerpts_in_emails: "Nelle emails di notifica, invia sempre un estratto invece del messaggio completo"
     raw_email_max_length: "Quanti caratteri devono essere memorizzati per i messaggi e-mail in arrivo."
     raw_rejected_email_max_length: "Quanti caratteri devono essere memorizzati per i messaggi e-mail in arrivo rifiutati."
@@ -1985,6 +1976,7 @@ it:
     allow_anonymous_posting: "Permetti agli utenti di passare alla modalità anonima"
     allow_anonymous_likes: "Consenti agli utenti anonimi di mettere mi piace ai messaggi"
     anonymous_posting_min_trust_level: "Livello di attendibilità minimo richiesto per abilitare la pubblicazione in modalità anonima"
+    anonymous_posting_allowed_groups: "Gruppi a cui è consentito abilitare la pubblicazione anonima"
     anonymous_account_duration_minutes: "Per proteggere l'anonimato creare un nuovo account anonimo ogni N minuti per ogni utente. Esempio: se impostato a 600, non appena passano 600 minuti dall'ultimo messaggio E l'utente passa in modalità anonima, viene creato un nuovo account anonimo."
     hide_user_profiles_from_public: "Disabilita schede utenti, profili utenti e directory utenti per gli utenti anonimi."
     allow_users_to_hide_profile: "Permetti agli utenti di nascondere il loro profilo e la loro presenza"
@@ -2033,16 +2025,14 @@ it:
     display_name_on_posts: "Mostra il nome completo dell'utente sui messaggi oltre allo @username."
     show_time_gap_days: "Se due messaggi vengono creati dopo tale numero di giorni, mostrare l'intervallo di tempo nell'argomento."
     short_progress_text_threshold: "Quando il numero di messaggi di un argomento supera questo valore, la barra di avanzamento mostrerà solo il numero di messaggi attuale. Se modifichi l'ampiezza della barra di avanzamento, potresti dover cambiare questo valore."
-    default_code_lang: "La modalità predefinita per evidenziare la sintassi del linguaggio di programmazione applicata nei blocchi di codice (auto, testo, ruby, python ecc.). Questo valore deve essere presente anche nell'impostazione del sito `Lingue evidenziate`."
     warn_reviving_old_topic_age: "Quando qualcuno inizia a rispondere ad un argomento in cui l'ultima risposta è più vecchia di tale numero di giorni, verrà visualizzato un avviso. Disabilita impostando su 0."
-    autohighlight_all_code: "Forza l'evidenziazione della sintassi del codice nei blocchi di testo preformattato, anche se non è stato specificato il linguaggio di programmazione. "
     highlighted_languages: "Regole di evidenziazione della sintassi incluse. (Attenzione: includere troppi linguaggi può influire sulle prestazioni) vedi: <a href='https://highlightjs.org/static/demo/' target='_blank'>https://highlightjs.org/static/demo</a> per una demo"
     show_copy_button_on_codeblocks: "Aggiungi un pulsante ai blocchi di codice per copiare il contenuto del blocco negli appunti dell'utente."
     embed_any_origin: "Consenti contenuti incorporabili indipendentemente dall'origine. Questa impostazione è richiesta dalle app mobili con HTML statico."
     embed_topics_list: "Supporta l'inclusione delle liste di argomenti nell'HTML"
     embed_set_canonical_url: "Imposta come URL canonico per gli argomenti incorporati l'URL del contenuto incorporato."
     embed_truncate: "Tronca i messaggi incorporati."
-    embed_unlisted: "Gli argomenti importati non saranno in elenco finché un utente non risponderà."
+    embed_unlisted: "Gli argomenti importati non saranno visibili fino a quando non ci sarà una risposta."
     embed_support_markdown: "Supporta la formattazione Markdown per i messaggi incorporati."
     allowed_embed_selectors: "Un elenco separato da virgole di elementi CSS consentiti negli incorporamenti."
     allowed_href_schemes: "Schemi consentiti nei collegamenti in aggiunta a http e https."
@@ -2068,6 +2058,7 @@ it:
     approve_new_topics_unless_trust_level: "I nuovi argomenti degli utenti al di sotto di questo livello di attendibilità devono essere approvati"
     approve_unless_staged: "Nuovi argomenti e messaggi per gli utenti temporanei devono essere approvati"
     notify_about_queued_posts_after: "Se ci sono messaggi che sono in attesa di essere revisionati per più di questo numero di ore, invia una notifica a tutti i moderatori. Impostare su 0 per disabilitare queste notifiche."
+    reviewable_revision_reasons: "Elenco di motivi che possono essere selezionati quando si rifiuta un messaggio in coda di revisione con una revisione. È sempre disponibile anche Altro, che consente di inserire un motivo personalizzato."
     auto_close_messages_post_count: "Numero massimo di messaggi consentiti in un messaggio privato prima di essere automaticamente chiuso (0 per disabilitare)"
     auto_close_topics_post_count: "Numero massimo di messaggi consentiti in un argomento prima di essere automaticamente chiuso (0 per disabilitare)"
     auto_close_topics_create_linked_topic: "Quando un argomento viene chiuso in base all'impostazione \"chiudi automaticamente argomenti per il numero dei post\", creane un altro collegato."
@@ -2123,14 +2114,16 @@ it:
     default_sidebar_switch_panel_position: "Posizione dei pulsanti della barra laterale"
     retain_web_hook_events_period_days: "Numero di giorni per mantenere i record degli eventi di web hook."
     retry_web_hook_events: "Riprova automaticamente gli eventi di hook Web falliti per 4 volte. Gli intervalli di tempo tra i tentativi sono 1, 5, 25 e 125 minuti."
-    revoke_api_keys_unused_days: "Numero di giorni prima che una chiave API non utilizzata sia revocata automaticamente (0 per non avere mai revoca)"
+    revoke_api_keys_unused_days: "Numero di giorni trascorsi dall'ultimo utilizzo di una chiave API prima che venga revocata automaticamente (0 per mai)"
+    revoke_api_keys_maxlife_days: "Numero di giorni prima che una chiave API sia revocata automaticamente (0 per mai)"
     allow_user_api_key_scopes: "Elenco di ambiti consentiti per le chiavi API utente"
     min_trust_level_for_user_api_key: |
       Livello di attendibilità richiesto per la generazione di chiavi API utente.<br>
       <b>AVVISO</b>: la modifica del livello di attendibilità impedirà agli utenti con un livello di attendibilità inferiore di accedere tramite Discourse Hub
     allowed_user_api_auth_redirects: "URL consentito per il reindirizzamento dell'autenticazione per le chiavi API utente. Il simbolo jolly * può essere utilizzato per abbinare qualsiasi parte di esso (ad esempio www.example.com/*)."
     allowed_user_api_push_urls: "URL consentiti per il push del server alle API utente"
-    revoke_user_api_keys_unused_days: "Numero di giorni prima che una chiave API utente scada automaticamente (0 per non avere scadenza)"
+    revoke_user_api_keys_unused_days: "Numero di giorni trascorsi dall'ultimo utilizzo di una chiave API utente prima che venga revocata automaticamente (0 per mai)"
+    revoke_user_api_keys_maxlife_days: "Numero di giorni prima che una chiave API utente venga revocata automaticamente (0 per mai)"
     tagging_enabled: "Abilitare le etichette per gli argomenti?"
     min_trust_to_create_tag: "Il livello di attendibilità minimo per creare un'etichetta."
     max_tags_per_topic: "Il numero massimo di etichette che si possono applicare ad un argomento."
@@ -2149,11 +2142,11 @@ it:
     force_lowercase_tags: "Forza tutte le nuove Etichette interamente in minuscolo."
     create_post_for_category_and_tag_changes: "Crea un piccolo post di azione quando la categoria o i tag di un argomento cambiano"
     watched_precedence_over_muted: "Inviami notifiche sugli argomenti nelle categorie o nei tag che sto osservando anche se appartengono a un oggetto silenziato"
-    company_name: "Nome azienda"
     governing_law: "Diritto applicabile"
     city_for_disputes: "Sede per eventuali controversie"
     shared_drafts_category: "Abilita la funzione Bozze Condivise designando una categoria per le bozze di argomento. Gli argomenti in questa categoria verranno eliminati dagli elenchi di argomenti per gli utenti dello staff."
     shared_drafts_min_trust_level: "Consenti agli utenti di visualizzare e modificare le bozze condivise."
+    shared_drafts_allowed_groups: "Consenti agli utenti in questi gruppi di visualizzare e modificare le bozze condivise."
     push_notifications_prompt: "Visualizza richiesta di consenso dell'utente."
     push_notifications_icon: "L'icona del distintivo che appare nell'angolo delle notifiche. Si consiglia un'immagine PNG monocromatica 96×96 con trasparenza."
     enable_desktop_push_notifications: "Abilita le notifiche push sul desktop"
@@ -2182,12 +2175,13 @@ it:
     navigation_menu: "Determina quale menu di navigazione utilizzare. La barra laterale e la navigazione dell'intestazione sono personalizzabili dagli utenti. L'opzione Compatibile è disponibile per la compatibilità con le versioni precedenti."
     default_navigation_menu_categories: "Le categorie selezionate appariranno, per impostazione predefinita, nella sezione Categorie del menu di navigazione."
     default_navigation_menu_tags: "Le etichette selezionate appariranno, per impostazione predefinita, nella sezione Etichette del menu di navigazione."
-    enable_experimental_hashtag_autocomplete: "SPERIMENTALE: utilizza il nuovo sistema di completamento automatico degli #hashtag per categorie ed etichette che rende l'elemento selezionato in modo diverso e con ricerca migliorata"
     experimental_new_new_view_groups: 'SPERIMENTALE: abilita un nuovo elenco di argomenti che combini argomenti non letti e nuovi e crea il link "Tutto" nella barra laterale ad esso.'
     enable_custom_sidebar_sections: "SPERIMENTALE: abilita le sezioni della barra laterale personalizzate"
     experimental_topics_filter: "SPERIMENTALE: abilita il percorso del filtro degli argomenti sperimentali in /filter"
     experimental_search_menu_groups: "SPERIMENTALE: attiva il nuovo menu di ricerca che è stato aggiornato per utilizzare glimmer."
     enable_experimental_lightbox: "SPERIMENTALE: sostituisci la lightbox dell'immagine predefinita con il design rinnovato."
+    experimental_form_templates: "SPERIMENTALE: abilita la funzionalità dei modelli di modulo. <b>Dopo l'abilitazione,</b> gestisci i modelli in <a href='%{base_path}/admin/customize/form-templates'>Personalizza / Modelli</a>."
+    enable_admin_sidebar_navigation: "SPERIMENTALE: abilita la navigazione della barra laterale per l'interfaccia di amministrazione, che sostituisce i pulsanti di navigazione dell'amministratore di livello superiore."
     page_loading_indicator: "Configura l'indicatore di caricamento che appare durante la navigazione delle pagine all'interno di Discourse. 'Spinner' come un indicatore a pagina intera. 'Slider' mostra una barra stretta nella parte superiore dello schermo."
     errors:
       invalid_css_color: "Colore non valido. Immettere un nome o un valore esadecimale per il colore."
@@ -2216,7 +2210,7 @@ it:
       reply_by_email_address_is_empty: "Devi impostare 'reply by email address' prima di attivare la risposta via email."
       email_polling_disabled: "È necessario abilitare il polling manuale POP3 o avere abilitato un poller di posta personalizzato prima di abilitare la risposta via email."
       user_locale_not_enabled: "Prima di attivare questa impostazione, devi abilitare 'allow user locale'."
-      personal_message_enabled_groups_invalid: "Devi specificare almeno un gruppo per questa impostazione. Se vuoi che nessuno al di fuori dello staff invii MP, scegli il gruppo dello staff."
+      at_least_one_group_required: "È necessario specificare almeno un gruppo per questa impostazione."
       invalid_regex: "Regex non è valido o non è consentito."
       invalid_regex_with_message: "La regex '%{regex}' contiene un errore: %{message}"
       email_editable_enabled: "Prima di attivare questa impostazione, devi disabilitare 'email editable'."
@@ -2365,6 +2359,7 @@ it:
     not_approved: "Il tuo account non è ancora stato approvato. Verrai avvertito via mail quando potrai collegarti."
     incorrect_username_email_or_password: "Nome utente, email o password errati"
     incorrect_password: "Password errata"
+    incorrect_password_or_passkey: "Password o passkey errata"
     wait_approval: "Grazie per esserti iscritto. Ti avvertiremo quando il tuo account sarà approvato."
     active: "Il tuo account è attivo e pronto all'uso."
     activate_email: "<p>Ci siamo quasi! Abbiamo mandato una email di attivazione a <b>%{email}</b>. Per favore segui le istruzioni contenute nell'email per attivare il tuo account.</p><p>Se l'email non ti arriva, controlla la tua cartella spam.</p>"
@@ -2458,9 +2453,6 @@ it:
       blocked: "non è permesso."
       revoked: "Non ti verranno inviate email a '%{email}' fino a %{date}."
       does_not_exist: "N/D"
-    ip_address:
-      blocked: "Le nuove iscrizioni non sono consentite dal tuo indirizzo IP."
-      max_new_accounts_per_registration_ip: "Le nuove iscrizioni non sono consentite dal tuo indirizzo IP (limite massimo raggiunto). Contatta un membro dello staff."
     website:
       domain_not_allowed: "Il sito web non è valido. I domini consentiti sono: %{domains}"
     auto_rejected: "Rifiutato automaticamente a causa dell'età. Vedi l'impostazione del sito auto_handle_queued_age."
@@ -2663,6 +2655,50 @@ it:
         Tuttavia, se il messaggio verrà nascosto dalla comunità una seconda volta, rimarrà nascosto fino a che non interverrà lo staff.
 
         Per ulteriori informazioni, fai riferimento alle nostre [linee guida della comunità](%{base_url}/guidelines).
+    reviewable_queued_post_revise_and_reject:
+      title: "Feedback sul tuo messaggio"
+      subject_template: "Feedback sul tuo messaggio in %{topic_title}"
+      text_body_template: |
+        Ciao %{username},
+
+        Abbiamo esaminato il tuo messaggio in [%{topic_title}](%{topic_url}) e abbiamo un feedback per te.
+
+        Motivo: %{reason}
+
+        Feedback: %{feedback}
+
+        Puoi modificare il tuo post originale qui sotto e riinviarlo con le modifiche suggerite, o rispondi a questo messaggio se hai domande.
+
+        --------
+
+        %{original_post}
+
+        --------
+
+        Grazie,
+        Moderatori%{site_name}
+    reviewable_queued_post_revise_and_reject_new_topic:
+      title: "Feedback sul tuo argomento"
+      subject_template: 'Feedback sul nuovo argomento intitolato "%{topic_title}"'
+      text_body_template: |
+        Ciao %{username},
+
+        Abbiamo esaminato il tuo messaggio in "%{topic_title}" e abbiamo un feedback per te.
+
+        Motivo: %{reason}
+
+        Feedback: %{feedback}
+
+        Puoi modificare il tuo messaggio originale qui sotto e reinviarlo con le modifiche suggerite, oppure rispondi a questo messaggio se hai domande in merito.
+
+        --------
+
+        %{original_post}
+
+        --------
+
+        Grazie,
+        I Moderatori di %{site_name}
     post_hidden_again:
       title: "Messaggio nascosto nuovamente"
       subject_template: "Messaggio nascosto dalle segnalazioni della comunità. Lo staff è stato informato"
@@ -4162,6 +4198,9 @@ it:
       automatic_revoked:
         one: "Revocata automaticamente, ultima attività più di %{count} giorno fa"
         other: "Revocata automaticamente, ultima attività più di %{count} giorni fa"
+      automatic_revoked_max_life:
+        one: "Revocata automaticamente, creata più di %{count} giorno fa"
+        other: "Revocata automaticamente, creata più di %{count} giorni fa"
       revoked: Revocata
       restored: Ripristinato
   reviewables:
@@ -4245,6 +4284,8 @@ it:
         title: "No"
       discard_post:
         title: "Annulla messaggio"
+      revise_and_reject_post:
+        title: "Revisiona il messaggio..."
       ignore:
         title: "Ignora"
       ignore_and_do_nothing:

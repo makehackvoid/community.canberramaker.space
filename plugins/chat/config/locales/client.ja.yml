@@ -24,11 +24,8 @@ ja:
           descriptions:
             chat:
               create_message: "特定のチャンネルでチャットメッセージを作成します。"
-    about:
-      chat_messages_count: "チャットメッセージ"
-      chat_channels_count: "チャットチャンネル"
-      chat_users_count: "チャットユーザー"
     chat:
+      back_to_forum: "フォーラム"
       deleted_chat_username: 削除
       dates:
         time_tiny: "h:mm"
@@ -236,7 +233,6 @@ ja:
       save: "保存"
       select: "選択"
       return_to_list: "チャンネルリストに戻る"
-      return_to_threads_list: "進行中のディスカッションに戻る"
       unread_threads_count:
         other: "未読のディスカッションが %{count} 件あります"
       scroll_to_bottom: "一番下にスクロール"
@@ -291,7 +287,6 @@ ja:
         back_to_all_channels: "すべてのチャンネル"
         back_to_channel: "戻る"
         tabs:
-          about: 紹介
           members: メンバー
           settings: 設定
       new_message_modal:
@@ -302,9 +297,9 @@ ja:
         default_search_placeholder: "#a-channel、@somebody など"
         default_channel_search_placeholder: "#a-channel"
         default_user_search_placeholder: "@somebody"
-        user_search_placeholder: "...さらにユーザーを追加"
         disabled_user: "はチャットを無効にしました"
         no_items: "項目なし"
+        filter: "フィルタ"
       channel_edit_name_slug_modal:
         title: チャンネルを編集する
         input_placeholder: 名前を追加してください
@@ -361,16 +356,6 @@ ja:
           topic: "トピック"
       reviewable:
         type: "チャットメッセージ"
-      reactions:
-        only_you: ":%{emoji}: でリアクションしました"
-        you_and_single_user: "あなたと %{username} が :%{emoji}: でリアクションしました"
-        you_and_multiple_users: "あなた、%{commaSeparatedUsernames} と %{username} が :%{emoji}: でリアクションしました"
-        you_multiple_users_and_more:
-          other: "あなた、%{commaSeparatedUsernames} と他 %{count} 人が :%{emoji}: でリアクションしました"
-        single_user: "%{username} が :%{emoji}: でリアクションしました"
-        multiple_users: "%{commaSeparatedUsernames} と %{username} が :%{emoji}: でリアクションしました"
-        multiple_users_and_more:
-          other: "%{commaSeparatedUsernames} と他 %{count} 人が :%{emoji}: でリアクションしました"
       composer:
         toggle_toolbar: "ツールバーの切り替え"
         italic_text: "強調文字"
@@ -380,6 +365,7 @@ ja:
       quote:
         original_channel: '最初に <a href="%{channelLink}">%{channel}</a> で送信されました'
         copy_success: "チャットの引用をクリップボードにコピーしました"
+        default_thread_title: "スレッド"
       notification_levels:
         never: "なし"
         mention: "メンションのみ"
@@ -408,6 +394,10 @@ ja:
         saved: "保存済み"
         unfollow: "退出"
         admin_title: "管理者"
+        settings_title: "設定"
+        category_label: "カテゴリ"
+        history_label: "履歴"
+        members_label: "メンバー"
       admin:
         title: "チャット"
         export_messages:
@@ -473,12 +463,8 @@ ja:
         many_users:
           other: "%{commaSeparatedUsernames} と他 %{count} 人が入力中です"
       retention_reminders:
-        public_none: "チャンネル履歴は無期限に保持されます。"
-        public:
-          other: "チャンネル履歴は %{count} 日間保持されます。"
-        dm_none: "パーソナルチャット履歴は無期限に保持されます。"
-        dm:
-          other: "パーソナルチャット履歴は %{count} 日間保持されます。"
+        short:
+          other: "%{count} 日"
       flags:
         off_topic: "このメッセージは、チャンネルのタイトルで定義された現在のディスカッションとは関係がないため、おそらく別の場所に移動する必要があります。"
         inappropriate: "このメッセージには、合理的な人が攻撃的、虐待的、または<a href=\"%{basePath}/guidelines\">コミュニティーガイドライン</a>に違反すると見なすコンテンツが含まれます。"
@@ -522,7 +508,6 @@ ja:
           other: "+%{count} 件"
       threads:
         open: "スレッドを開く"
-        list: "進行中のディスカッション"
         none: "このチャンネルのどのスレッドにも参加していません。"
       draft_channel_screen:
         header: "新しいメッセージ"

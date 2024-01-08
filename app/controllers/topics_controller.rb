@@ -121,7 +121,7 @@ class TopicsController < ApplicationController
 
       deleted =
         guardian.can_see_topic?(ex.obj, false) ||
-          (!guardian.can_see_topic?(ex.obj) && ex.obj&.access_topic_via_group && ex.obj.deleted_at)
+          (!guardian.can_see_topic?(ex.obj) && ex.obj&.access_topic_via_group && ex.obj&.deleted_at)
 
       if SiteSetting.detailed_404
         if deleted
@@ -344,7 +344,7 @@ class TopicsController < ApplicationController
     topic = Topic.find_by(id: params[:id])
     guardian.ensure_can_edit!(topic)
 
-    category = Category.where(id: params[:category_id].to_i).first
+    category = Category.find_by(id: params[:category_id].to_i)
     guardian.ensure_can_publish_topic!(topic, category)
 
     row_count = SharedDraft.where(topic_id: topic.id).update_all(category_id: category.id)
@@ -975,7 +975,7 @@ class TopicsController < ApplicationController
     rescue Discourse::InvalidAccess => ex
       deleted =
         guardian.can_see_topic?(ex.obj, false) ||
-          (!guardian.can_see_topic?(ex.obj) && ex.obj&.access_topic_via_group && ex.obj.deleted_at)
+          (!guardian.can_see_topic?(ex.obj) && ex.obj&.access_topic_via_group && ex.obj&.deleted_at)
 
       raise Discourse::NotFound.new(
               nil,
@@ -1253,7 +1253,7 @@ class TopicsController < ApplicationController
       raise(SiteSetting.detailed_404 ? ex : Discourse::NotFound)
     end
 
-    opts = params.slice(:page, :print, :filter_top_level_replies)
+    opts = params.slice(:page, :print, :filter_top_level_replies, :preview_theme_id)
     opts.delete(:page) if params[:page] == 0
 
     url = topic.relative_url

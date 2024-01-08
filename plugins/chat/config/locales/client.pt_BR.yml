@@ -24,11 +24,8 @@ pt_BR:
           descriptions:
             chat:
               create_message: "Crie uma mensagem de chat em um canal especificado."
-    about:
-      chat_messages_count: "Mensagens de chat"
-      chat_channels_count: "Canais de chat"
-      chat_users_count: "Usuários do chat"
     chat:
+      back_to_forum: "Fórum"
       deleted_chat_username: excluído(a)
       dates:
         time_tiny: "h:mm"
@@ -243,7 +240,6 @@ pt_BR:
       save: "Salvar"
       select: "Selecionar"
       return_to_list: "Retornar para lista de canais"
-      return_to_threads_list: "Retornar às discussões em andamento"
       unread_threads_count:
         one: "Você tem %{count} discussão não lida"
         other: "Você tem %{count} discussões não lidas"
@@ -300,7 +296,6 @@ pt_BR:
         back_to_all_channels: "Todos os canais"
         back_to_channel: "Voltar"
         tabs:
-          about: Sobre
           members: Membros
           settings: Configurações
       new_message_modal:
@@ -311,9 +306,14 @@ pt_BR:
         default_search_placeholder: "#a-channel, @alguém ou alguma coisa"
         default_channel_search_placeholder: "#a-channel"
         default_user_search_placeholder: "@alguém"
-        user_search_placeholder: "... adicionar mais usuários"
+        user_search_placeholder: "... incluir mais membros"
         disabled_user: "desativou o chat"
         no_items: "Nenhum item"
+        create_group_placeholder: "Nome do Chat em grupo (opcional)"
+        new_group_chat: "Novo Chat em grupo"
+        filter: "Filtro"
+        cant_add_more_members: "Número máximo de membros atingido"
+        create_new_group_chat: "Criar Chat em grupo"
       channel_edit_name_slug_modal:
         title: Editar canal
         input_placeholder: Adicionar um nome
@@ -329,6 +329,7 @@ pt_BR:
         prefix: "Para:"
         no_results: Nenhum resultado
         selected_user_title: "Desmarcar %{username}"
+        group_name: "Nome do Chat em grupo (opcional)"
       channel:
         no_memberships: Este canal não tem membros
         no_memberships_found: Nenhum membro encontrado
@@ -381,18 +382,6 @@ pt_BR:
           topic: "Tópico"
       reviewable:
         type: "Mensagem de chat"
-      reactions:
-        only_you: "Você reagiu com :%{emoji}:"
-        you_and_single_user: "Você e %{username} reagiram com :%{emoji}:"
-        you_and_multiple_users: "Você, %{commaSeparatedUsernames} e %{username} reagiram com :%{emoji}:"
-        you_multiple_users_and_more:
-          one: "Você, %{commaSeparatedUsernames} e mais %{count} reagiram com :%{emoji}:"
-          other: "Você, %{commaSeparatedUsernames} e mais %{count} reagiram com :%{emoji}:"
-        single_user: "%{username} reagiu com :%{emoji}:"
-        multiple_users: "%{commaSeparatedUsernames} e %{username} reagiram com :%{emoji}:"
-        multiple_users_and_more:
-          one: "%{commaSeparatedUsernames} e mais %{count} reagiram com :%{emoji}:"
-          other: "%{commaSeparatedUsernames} e mais %{count} reagiram com :%{emoji}:"
       composer:
         toggle_toolbar: "Ativar/desativar barra de ferramentas"
         italic_text: "texto enfatizado"
@@ -402,6 +391,7 @@ pt_BR:
       quote:
         original_channel: 'Originalmente enviado em <a href="%{channelLink}">%{channel}</a>'
         copy_success: "Citação do chat copiada para área de transferência"
+        default_thread_title: "Tópico"
       notification_levels:
         never: "Nunca"
         mention: "Apenas para menções"
@@ -430,6 +420,10 @@ pt_BR:
         saved: "Salvou"
         unfollow: "Sair"
         admin_title: "Administrador(a)"
+        settings_title: "Configurações"
+        category_label: "Categoria"
+        history_label: "Histórico"
+        members_label: "Membros"
       admin:
         title: "Chat"
         export_messages:
@@ -499,14 +493,9 @@ pt_BR:
           one: "%{commaSeparatedUsernames} e mais %{count} estão digitando"
           other: "%{commaSeparatedUsernames} e mais %{count} estão digitando"
       retention_reminders:
-        public_none: "O histórico do canal é mantido indefinidamente."
-        public:
-          one: "O histórico do canal é mantido por %{count} dia."
-          other: "O histórico do canal é mantido por %{count} dias."
-        dm_none: "O histórico do chat pessoal é mantido indefinidamente."
-        dm:
-          one: "O histórico do chat pessoal é mantido por %{count} dia."
-          other: "O histórico do chat pessoal é mantido por %{count} dias."
+        short:
+          one: "%{count} dia"
+          other: "%{count} dias"
       flags:
         off_topic: "Esta mensagem não é relevante para a discussão atual, conforme definido pelo título do canal, e provavelmente deve ser movida para outro lugar."
         inappropriate: "Esta mensagem contém conteúdo que uma pessoa razoável consideraria ofensivo, abusivo ou uma violação de <a href=\"%{basePath}/guidelines\">nossas diretrizes da comunidade</a>."
@@ -552,7 +541,6 @@ pt_BR:
           other: "+%{count}"
       threads:
         open: "Tópico Aberto"
-        list: "Discussões em andamento"
         none: "Você não está participando de nenhum tópico neste canal."
       draft_channel_screen:
         header: "Novas mensagens"

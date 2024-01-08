@@ -258,15 +258,10 @@ ur:
       our_moderators: "ہمارے ماڈریٹرز"
       moderators: "ماڈریٹرز"
       stat:
-        all_time: "تمام اوقات"
-        last_day: "پچھلے 24 گھنٹے"
-        last_7_days: "پچھلے 7 دن"
-        last_30_days: "پچھلے 30 دن"
+        last_day: "24 گھنٹے"
       like_count: "لائیکس"
       topic_count: "ٹاپک"
       post_count: "پوسٹ"
-      active_user_count: "متحرک صارفین"
-      contact: "ہم سے رابطہ کریں"
       contact_info: "اس سائٹ کے بارے میں کسی اہم مسئلہ یا فوری معاملہ کی صورت میں، براہ مہربانی %{contact_info} پر رابطہ کریں۔"
     bookmarked:
       title: "بُک مارک"
@@ -387,6 +382,9 @@ ur:
         type_bonus:
           name: "قِسم بَونَس"
           title: "سٹاف کی طرف سے کچھ قابل تجدید اقسام کو بَونَس تفویض کیا جاسکتا ہے تاکہ ان کو اعلیٰ ترجیح بنایا جاسکے۔"
+      revise_and_reject_post:
+        reason: "وجہ"
+        optional: "اختیاری"
       stale_help: "اس نظر ثانی کا حل <b>%{username}</b>نے کیا ہے۔"
       claim_help:
         optional: "آپ اس چیز کو کََلیم کرسکتے ہیں کہ دوسروں کو اِسکا جائزہ لینے سے روکا جا سکے۔"
@@ -675,7 +673,6 @@ ur:
           imap_mailbox_not_selected: "آپ کو اس IMAP کنفیگریشن کے لیے ایک میل باکس کا انتخاب کرنا چاہیے ورنہ کوئی میل باکس مطابقت پذیر نہیں ہوگا!"
           prefill:
             title: "ترتیبات کے ساتھ پہلے سے بھریں:"
-            gmail: "جی میل"
           credentials:
             title: "شہادت"
             smtp_server: "SMTP سرور"
@@ -1149,7 +1146,6 @@ ur:
         success: "(اِی میل بھیج دی گئ)"
         in_progress: "(اِی میل بھیجی جا رہی ہے)"
         error: "(خرابی)"
-        emoji: "لاک ایموجی"
         action: "پاس ورڈ دوبارہ سیٹ کرنے کی اِی میل بھیجیں"
         set_password: "پاس ورڈ رکھیں"
         choose_new: "نیا پاس ورڈ منتخب کریں"
@@ -1177,8 +1173,6 @@ ur:
         title: "دو عنصری کی تصدیق"
         enable: "دو فیکٹر توثیق انتظام"
         disable_all: "سبھی کو غیر فعال کریں۔"
-        forgot_password: "پاس ورڈ بھول گئے؟"
-        confirm_password_description: "جاری رکھنے کیلئے براہ کرم اپنے پاسوَرڈ کی تصدیق کریں"
         name: "نام"
         label: "کَوڈ"
         rate_limit: "دوبارہ توثیقی کوڈ کی کوشش کرنے سے پہلے براہ کرم تھوڑا انتظار کریں۔"
@@ -1186,8 +1180,6 @@ ur:
           اِس QR کَوڈ کو کسی قابل اَیپ (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">اینڈرائڈ</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) میں اسکَین کریں اور اپنا توثیقی کَوڈ جمع کریں۔
         disable_description: "براہ مہربانی اپنی اَیپ میں سے توثیقی کَوڈ درج کریں"
         show_key_description: "دستی طور پر درج کریں"
-        short_description: |
-          ایک بار استعمال والے سیکورٹی کوڈز کے ساتھ اپنے اکاؤنٹ کی حفاظت کریں۔
         extended_description: |
           دو عنصر کی توثیق آپ کے اکاؤنٹ میں آپ کے پاس ورڈ کے علاوہ ون ٹائم ٹوکن کی ضرورت کے ذریعے اضافی سیکیورٹی کا اضافہ کرتی ہے۔ ٹوکنز <a href="https://www.google.com/search?q=authenticator+apps+for+android" target='_blank'>Android</a> اور <a href="https://www.google.com/search?q=authenticator+apps+for+ios">iOS</a> آلات پر بنائے جا سکتے ہیں۔
         oauth_enabled_warning: "براہ کرم نوٹ کریں کہ آپ کے اکاؤنٹ پر دو فیکٹر تصدیق کے فعال ہونے کے بعد سوشل لاگ ان کو غیر فعال کر دیا جائے گا۔"
@@ -1213,6 +1205,10 @@ ur:
           already_added_error: "آپ نے پہلے ہی یہ سسیکیورٹی کیز رجسٹر کرلی ہے۔ آپ کو اسے دوبارہ رجسٹر کرنے کی ضرورت نہیں ہے۔"
           save: "محفوظ کریں"
           name_required_error: "آپ کو اپنی سیکیورٹی کی کا نام دینا ضروری ہے۔"
+      passkeys:
+        save: "محفوظ کریں"
+        added_prefix: "شامل کر دیا گیا"
+        last_used_prefix: "آخری بار استعمال"
       change_about:
         title: "\"میرے بارے میں\" تبدیل کریں"
         error: "اِس چیز کو تبدیل کرنے میں ایک خرابی کا سامنا کرنا پڑا۔"
@@ -1291,14 +1287,13 @@ ur:
           generic: "آپ کا %{provider} اکاؤنٹ تصدیق کیلئے استعمال کیا جائے گا۔"
       name:
         title: "نام"
-        instructions: "آپ کا پورا نام (اختیاری)"
-        instructions_required: "آپ کا پورا نام"
+        instructions: "آپ کا پورا نام (اختیاری)."
+        instructions_required: "آپ کا پورا نام."
         required: "براہ کرم ایک نام درج کریں"
         too_short: "آپ کا نام بہت چھوٹا ہے"
         ok: "آپ کا نام صحیح لگ رہا ہے"
       username:
         title: "صارف کا نام"
-        instructions: "منفرد، کوئی خالی جگہ نہیں، مختصر"
         short_instructions: "لوگ آپ کا زکر @%{username} کے طور پر کر سکتے ہیں"
         available: "آپ کا صارف نام دستیاب ہے"
         not_available: "دستیاب نہیں۔ اِستعمال کریں %{suggestion}؟"
@@ -1491,8 +1486,9 @@ ur:
         same_as_username: "آپ کا پاسورڈ وہی ہے جو آپ کا صارف نام ہے۔"
         same_as_email: "آپ کا پاسورڈ وہی ہے جو آپ کا اِی میل ہے۔"
         ok: "آپ کا پاسورڈ صحیح لگ رہا ہے"
-        instructions: "کم از کم %{count} حروف"
+        instructions: "کم از کم %{count} حروف."
         required: "براہ کرم پاس ورڈ درج کریں"
+        confirm: "تصدیق کریں"
       summary:
         title: "خلاصہ"
         stats: "اعدادوشمار"
@@ -1669,7 +1665,6 @@ ur:
       link_label: "مجھے ایک لاگ اِن لِنک ای میل کریں"
       button_label: "ای میل کے ساتھ"
       login_link: "پاس ورڈ کو چھوڑ دیں؛ مجھے ایک لاگ ان لنک ای میل کریں"
-      emoji: "لاک ایموجی"
       complete_username: "اگر ایک اکاؤنٹ صارف نام <b>%{username}</b> سے میچ کرتا ہے، تو آپ کو جلد ہی لاگ اِن لِنک کے ساتھ ایک ای میل موصول ہو جانی چاہئے۔"
       complete_email: "اگر ایک اکاؤنٹ <b>%{email}</b> سے میچ کرتا ہے، تو آپ کو جلد ہی لاگ اِن لِنک کے ساتھ ایک ای میل موصول ہو جانی چاہئے۔"
       complete_username_found: "ہمیں ایک ایسا اکاؤنٹ مل گیا جو صارف نام <b>%{username}</b> سے میچ کرتا ہے، آپ کو جلد ہی لاگ اِن لِنک کے ساتھ ایک ای میل موصول ہو جانی چاہئے۔"
@@ -1741,7 +1736,6 @@ ur:
         security_key: "اس کے بجائے سیکیورٹی کی استعمال کریں۔"
     invites:
       accept_title: "دعوت نامہ"
-      emoji: "لفافہ اموجی"
       welcome_to: "%{site_name} پر خوش آمدید!"
       invited_by: "آپ کو جن کی طرف سے مدعو کیا گیا تھا:"
       social_login_available: "آپ اِس اِیمیل کا استعمال کرتے ہوئے کسی بھی سوشل لاگ اِن کے ساتھ سائن اِن بھی کرسکیں گے۔"
@@ -1776,12 +1770,6 @@ ur:
       topic_count:
         one: "اس زمرے میں %{count} موضوع"
         other: "اس زمرے میں %{count} موضوعات"
-      plus_subcategories_title:
-        one: "%{name} اور ایک ذیلی زمرہ"
-        other: "%{name} اور %{count} ذیلی زمرہ جات"
-      plus_subcategories:
-        one: "+ %{count} ذیلی زمرہ"
-        other: "+ %{count} ذیلی زمرہ جات"
     select_kit:
       delete_item: "%{name} مٹائیں"
       filter_by: "فلٹر بذریعہ: %{name}"
@@ -1843,9 +1831,6 @@ ur:
       group_mentioned_limit:
         one: "<b>انتباہ!</b> آپ نے <a href='%{group_link}'>%{group}</a>کا تذکرہ کیا، تاہم اس گروپ میں ایڈمنسٹریٹر کی تشکیل کردہ ذکر کی حد %{count} صارف سے زیادہ ہے۔ کسی کو اطلاع نہیں دی جائے گی۔"
         other: "<b>انتباہ!</b> آپ نے <a href='%{group_link}'>%{group}</a>کا تذکرہ کیا، تاہم اس گروپ میں ایڈمنسٹریٹر کی تشکیل کردہ ذکر کی حد %{count} صارفین سے زیادہ ہے۔ کسی کو اطلاع نہیں دی جائے گی۔"
-      group_mentioned:
-        one: "%{group} کا ذکر کر کہ، آپ <a href='%{group_link}'>%{count} شخص</a> کو مطلع کرنے لگے ہیں - کیا آپ واقعی یہ کرنا چاہتے ہیں؟"
-        other: "%{group} کا ذکر کر کہ، آپ <a href='%{group_link}'>%{count} لوگوں</a> کو مطلع کرنے لگے ہیں - کیا آپ واقعی یہ کرنا چاہتے ہیں؟"
       cannot_see_mention:
         category: "آپ نے @%{username} کا ذکر کیا ہے لیکن انہیں مطلع نہیں کیا جائے گا کیونکہ انہیں اس زمرے تک رسائی نہیں ہے۔ آپ کو انہیں ایسے گروپ میں شامل کرنے کی ضرورت ہوگی جسے اس زمرے تک رسائی حاصل ہو۔"
         private: "آپ نے @%{username} کا ذکر کیا ہے لیکن انہیں مطلع نہیں کیا جائے گا کیونکہ وہ اس ذاتی پیغام کو دیکھنے سے قاصر ہیں۔ آپ کو انہیں اس ذاتی پیغام میں مدعو کرنے کی ضرورت ہوگی۔"
@@ -2038,6 +2023,7 @@ ur:
         private_message: '%{username} نے "%{topic}" میں آپ کو زاتی پیغام بھیجا - %{site_title}'
         linked: '%{username} نے "%{topic}" سے آپ کی پوسٹ کو لنک کیا - %{site_title}'
         watching_first_post: '%{username} نے ایک نیا ٹاپک "%{topic}" بنایا - %{site_title}'
+        watching_category_or_tag: '%{username} نے "%{topic}" میں پوسٹ کیا - %{site_title}'
         confirm_title: "نوٹیفکیشن فعال - %{site_title}"
         confirm_body: "کامیابی! اطلاعات فعال ہوگئی ہیں۔"
         custom: "%{username} کی طرف سے %{site_title} پر اطلاعات"
@@ -2067,6 +2053,7 @@ ur:
         membership_request_consolidated: "نئی رکنیت کی درخواستیں"
         reaction: "نیا ردعمل"
         votes_released: "ووٹ جاری کر دیا گیا"
+        admin_problems: "آپ کی سائٹ ڈَیش بورڈ پر نیا مشورہ"
     upload_selector:
       uploading: "اَپ لوڈ کیا جا رہا ہے"
       processing: "پروسیسنگ اپ لوڈ"
@@ -2325,6 +2312,7 @@ ur:
       collapse_details: "موضوع کی تفصیلات کوسکیڑیں"
       expand_details: "موضوع کی تفصیلات کو پھیلائیں"
       unread_indicator: "کسی ممبر نے ابھی تک اِس ٹاپک کی آخری پوسٹ نہیں پڑھی ہے۔"
+      bumped_at: "تازہ ترین: %{date}"
       suggest_create_topic: <a href>نئی گفتگو شروع</a> کرنے کے لیے تیار ہیں؟
       deleted: "ٹاپک مٹادیا گیا ہے"
       slow_mode_update:
@@ -2661,9 +2649,7 @@ ur:
       deleted_by_author_simple: "(مضمون مصنف نے مٹایا ہے)"
     post:
       quote_reply: "اقتباس کریں"
-      quote_reply_shortcut: "یا q دبائیں"
       quote_edit: "ترمیم"
-      quote_edit_shortcut: "یا e دبائیں"
       quote_share: "شیئر"
       edit_reason: "وجہ: "
       post_number: "پوسٹ %{number}"
@@ -3018,8 +3004,7 @@ ur:
       action: "پوسٹ فلَیگ کریں"
       take_action_options:
         default:
-          title: "کارروائی کریں"
-          details: "بجائے مزید کمیونٹی کی طرف سے فلَیگز کا انتظارکرنے کے، فوری طور پرفلَیگز کی حد تک پہنچ جائیں"
+          title: "پوسٹ چھپائیں"
         suspend:
           title: "صارف معطل کریں"
           details: "نشان کی حد تک پہنچیں، اور صارف کو معطل کریں"
@@ -3036,7 +3021,6 @@ ur:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(مخفی)"
       submit_tooltip: "نجی فلَیگ جمع کریں"
-      take_action_tooltip: "بجائے مزید کمیونٹی کی طرف سے فلَیگز کا انتظارکرنے کے، فوری طور پرفلَیگز کی حد تک پہنچ جائیں"
       cant: "معذرت، آپ اِس وقت اِس پوسٹکو فلَیگ نہیں کر سکتے۔"
       notify_staff: "عملے کو نجی طور پر مطلع کریں"
       formatted_name:
@@ -3361,7 +3345,6 @@ ur:
       other_tags: "دیگر ٹیگز"
       selector_all_tags: "تمام ٹیگز"
       selector_no_tags: "کوئی ٹیگ نہیں"
-      changed: "تبدیل کیے گئے ٹیگ:"
       tags: "ٹیگز"
       choose_for_topic: "اختیاری ٹیگز"
       info: "معلومات"
@@ -3395,7 +3378,6 @@ ur:
         one: "اس کا مترادف بھی مٹادیا جائے گا۔"
         other: "اس کے %{count} مترادفات بھی مٹا دیے جائیں گے۔"
       edit_tag: "ٹیگ نام اور تفصیل میں ترمیم کریں"
-      description: "تفصیل"
       sort_by: "ترتیب بہ:"
       sort_by_count: "شمار"
       sort_by_name: "نام"
@@ -3586,10 +3568,25 @@ ur:
               content: "جائزہ لیں"
     until: "جب تک:"
     form_templates:
+      upload_field:
+        upload: "اَپ لوڈ"
+        uploading: "اَپ لوڈ کیا جا رہا ہے"
       errors:
         typeMismatch:
           default: "براہ کرم، ایک قابلِ قبول قدر درج کریں۔"
           email: "براہ کرم، ایک قابلِ قبول ایِ میل ایڈریس درج کریں."
+    table_builder:
+      modal:
+        help:
+          enter_key: "اَینٹر"
+      edit:
+        modal:
+          cancel: "منسوخ"
+          create: "محفوظ کریں"
+          reason: "آپ ترمیم کیوں کر رہے ہیں؟"
+      spreadsheet:
+        show: "دکھائیں"
+        about: "بارے میں"
   admin_js:
     type_to_filter: "کو فلٹر کرنے کے لیے ٹائپ کریں…"
     admin:
@@ -3618,9 +3615,7 @@ ur:
         latest_version: "تازہ ترین"
         problems_found: "آپ کی موجودہ سائٹ ترتیبات کے مطابق کچھ مشورے"
         new_features:
-          title: "\U0001F381 نئی خصوصیات"
-          dismiss: "بر خاست کریں"
-          learn_more: "مزید جانیں"
+          learn_more: "مزید جانیں..."
         last_checked: "آخری دفعہ چیک کیا گیا"
         refresh_problems: "رِیفریش"
         no_problems: "کوئی مسائل نہیں پائے گئے۔"
@@ -3869,39 +3864,8 @@ ur:
         groups_filter_instructions: "متعلقہ وَیب ھُوک٘س٘ صرف اُس صورت میں متحرک کیے جائیں گے اگر واقعہ مخصوص گروپوں کے ساتھ تعلق رکھتا ہے۔ تمام گروپوں کے لئے وَیب ھُوک٘س٘ متحرک کرنے کیلئے خالی چھوڑ دیں۔"
         groups_filter: "متحرک کیے گئے گروپ"
         delete_confirm: "اِس وَیب ھُوک کومٹائیں؟"
-        topic_event:
-          name: "ٹاپک واقعہ"
-          details: "جب ایک نیا ٹاپک، رِیوائز، تبدیل یا حذف کیا جائے۔"
-        post_event:
-          name: "پوسٹ واقعہ"
-          details: "جب ایک نیا جواب، ترمیم، حذف یا رِِیکور کیا جائے۔"
-        user_event:
-          name: "صارف واقعہ"
-          details: "جب کوئی صارف لاگ ان ہوتا ہے، لاگ آؤٹ ہوتا ہے، اپنے ای میل کی تصدیق کرتا ہے، تخلیق، منظور یا اپ ڈیٹ ہوتا ہے۔"
-        group_event:
-          name: "گروپ واقعہ"
-          details: "جب ایک گروپ بنایا، اَپ ڈیٹ یا ختم کیا جاتا ہے۔"
-        category_event:
-          name: "زُمرَہ واقعہ"
-          details: "جب ایک زُمرَہ بنایا، اَپ ڈیٹ یا ختم کیا جاتا ہے۔"
-        tag_event:
-          name: "ٹَیگ واقعہ"
-          details: "جب ایک ٹَیگ بنایا، اَپ ڈیٹ یا ختم کیا جاتا ہے۔"
-        reviewable_event:
-          name: "قابل تجدید واقعہ"
-          details: "جب ایک نئی چیز جائزہ کیلئے تیار ہو اور جب اُس کا اسٹیٹس اپ ڈیٹ کیا جائے۔"
-        notification_event:
-          name: "اطلاع واقعہ"
-          details: "جب صارف کو اپنی فِیڈ میں اطلاع موصول ہوتی ہے۔"
-        user_promoted_event:
-          name: "یوزر پروموٹڈ ایونٹ"
-          details: "جب کسی صارف کو ایک اعتماد کی سطح سے دوسری سطح پر ترقی دی جاتی ہے۔"
-        group_user_event:
-          name: "گروپ یوزر ایونٹ"
-          details: "جب کسی صارف کو گروپ میں شامل یا ہٹا دیا جاتا ہے۔"
         like_event:
-          name: "ایونٹ کی طرح"
-          details: "جب کوئی صارف کسی پوسٹ کو پسند کرتا ہے۔"
+          post_liked: "جب کوئی صارف کسی پوسٹ کو پسند کرتا ہے۔"
         delivery_status:
           title: "موصول ہونے کی آگاہی"
           inactive: "غیر فعال"
@@ -3940,7 +3904,8 @@ ur:
         not_enabled: "N"
         change_settings_short: "سیٹِنگ"
         howto: "میں پلَگ اِنز کیسے انسٹال کروں؟"
-        official: "آفیشل پلَگ اِن"
+        author: "%{author} کی طرف سے"
+        learn_more: "مزید جانیں"
       backups:
         title: "بیک اَپس"
         menu:
@@ -4040,7 +4005,6 @@ ur:
           theme_name: "تھیم نام"
           component_name: "جزو نام"
           themes_intro: " شروعات کیلئے، ایک موجودہ تھیم منتخب کریں یا ایک نئی انسٹال کریں"
-          themes_intro_emoji: "خاتون آرٹسٹ ایموجی"
           beginners_guide_title: "ڈسکورس تِھیمز کا استعمال کرنے کیلئے ابتدائی رہنمائی"
           developers_guide_title: "ڈسکورس تِھیمز کیلئے ڈویلپر رہنمائی"
           browse_themes: "کمیونٹی تِھیمز دیکھیں"
@@ -4087,6 +4051,7 @@ ur:
           convert_theme_tooltip: "اِس تِھیم کو کمپنَینٹ میں تبدیل کریں"
           inactive_themes: "غیر فعال تِھیمز:"
           inactive_components: "غیر استعمال شدہ کمپنَینٹ:"
+          cancel: "منسوخ"
           broken_theme_tooltip: "اِس تِھیم کے CSS، HTML یا YAML میں غلطیاں موجود ہیں"
           disabled_component_tooltip: "یہ کمپنَینٹ غیر فعال کردیا گیا ہے"
           default_theme_tooltip: "یہ تِھیم سائٹ کی ڈیفالٹ تِھیم ہے"
@@ -4961,6 +4926,8 @@ ur:
         json_schema:
           edit: ایڈیٹر لانچ کریں
           modal_title: "%{name}میں ترمیم"
+        file_types_list:
+          add_image_types: "تصاویر"
       badges:
         title: بَیج
         new_badge: نیا بَیج
@@ -5035,7 +5002,6 @@ ur:
             with_time: <span class="username">%{username}</span> <span class="time">%{time}</span> پر
         badge_intro:
           title: "شروعات کیلئے، ایک موجودہ بَیج منتخب کریں یا ایک نیا بنائیں"
-          emoji: "خاتون طالب علم ایموجی"
           what_are_badges_title: "بَیج کیا ہیں؟"
           badge_query_examples_title: "بَیج قُوَیری کی مثالیں"
         mass_award:

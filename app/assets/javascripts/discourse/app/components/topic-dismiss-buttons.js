@@ -1,9 +1,9 @@
-import { action } from "@ember/object";
-import discourseComputed from "discourse-common/utils/decorators";
-import I18n from "I18n";
 import Component from "@ember/component";
+import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import DismissReadModal from "discourse/components/modal/dismiss-read";
+import discourseComputed from "discourse-common/utils/decorators";
+import I18n from "discourse-i18n";
 
 export default Component.extend({
   tagName: "",
@@ -72,6 +72,7 @@ export default Component.extend({
       model: {
         title: dismissTitle,
         count: this.selectedTopics.length,
+        dismissRead: this.dismissRead,
       },
     });
   },

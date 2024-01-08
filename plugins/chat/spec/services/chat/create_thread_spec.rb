@@ -51,6 +51,12 @@ RSpec.describe Chat::CreateThread do
         expect(message.data["type"]).to eq("thread_created")
       end
 
+      it "triggers a discourse event `chat_thread_created`" do
+        event = DiscourseEvent.track_events(:chat_thread_created) { result }.first
+
+        expect(event[:params][0]).to eq(result.thread)
+      end
+
       it "sets the title when existing" do
         params[:title] = "Restaurant for Saturday"
         result
@@ -96,6 +102,20 @@ RSpec.describe Chat::CreateThread do
       before { channel_1.update!(threading_enabled: false) }
 
       it { is_expected.to fail_a_policy(:threading_enabled_for_channel) }
+    end
+
+    context "when a thread is already present" do
+      before do
+        Chat::CreateThread.call(
+          guardian: current_user.guardian,
+          original_message_id: message_1.id,
+          channel_id: channel_1.id,
+        )
+      end
+
+      it "uses the existing thread" do
+        expect { result }.not_to change { Chat::Thread.count }
+      end
     end
   end
 end

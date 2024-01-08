@@ -254,16 +254,9 @@ ca:
       our_admins: "Administradors"
       our_moderators: "Moderadors"
       moderators: "Moderadors"
-      stat:
-        all_time: "Sempre"
-        last_day: "Últimes 24 hores"
-        last_7_days: "Els darrers 7 dies"
-        last_30_days: "Els darrers 30 dies"
       like_count: "'M'agrada'"
       topic_count: "Temes"
       post_count: "Publicacions"
-      active_user_count: "Usuaris actius"
-      contact: "Contacta amb nosaltres"
       contact_info: "En cas d'una qüestió urgent o greu que afecti aquest lloc web, contacteu amb nosaltres en: %{contact_info}."
     bookmarked:
       title: "Preferit"
@@ -377,6 +370,9 @@ ca:
         type_bonus:
           name: "bonificació tipus"
           title: "El personal pot assignar una bonificació a certs tipus revisables perquè tinguin una prioritat més alta."
+      revise_and_reject_post:
+        reason: "Motiu"
+        optional: "opcional"
       claim_help:
         optional: "Podeu reclamar aquest element per a impedir que altres el revisin."
         required: "Heu de reclamar elements abans de poder revisar-los"
@@ -1015,8 +1011,6 @@ ca:
           title: "Codis de còpia de seguretat generats"
           description: "Cada un dels codis de còpia de seguretat es pot fer servir sols una vegada. Manteniu-los en algun lloc web segur però accessible. "
       second_factor:
-        forgot_password: "Heu oblidat la contrasenya?"
-        confirm_password_description: "Confirmeu la contrasenya per a continuar"
         name: "Nom"
         label: "Codi"
         rate_limit: "Espereu abans de provar un altre codi d'autenticació."
@@ -1024,8 +1018,6 @@ ca:
           Escanegeu aquest codi QR en una aplicació permesa (<a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> – <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a>) i introduïu el vostre codi d'autenticació.
         disable_description: "Introduïu el codi d'autenticació des de la vostra aplicació."
         show_key_description: "Introduïu-lo manualment"
-        short_description: |
-          Protegiu el vostre compte amb codis de seguretat d'un sol ús.
         use: "Utilitza l'aplicació Authenticator"
         disable: "Desactiva"
         delete: "Suprimeix"
@@ -1042,6 +1034,10 @@ ca:
           not_allowed_error: "El procés de registre de claus de seguretat ha arribat al límit de temps o s'ha cancel·lat. "
           already_added_error: "Ja heu registrat aquesta clau de seguretat. No cal que la registreu de nou."
           save: "Desa"
+      passkeys:
+        save: "Desa"
+        added_prefix: "Afegit"
+        last_used_prefix: "Darrer utilitzat"
       change_about:
         title: "Canvia Quant a mi"
         error: "Hi ha hagut un error en canviar aquest valor"
@@ -1108,13 +1104,12 @@ ca:
           generic: "El vostre compte %{provider} es farà servir per a l'autenticació."
       name:
         title: "Nom"
-        instructions: "el vostre nom complet (opcional)"
-        instructions_required: "El vostre nom complet"
+        instructions: "El vostre nom complet (opcional)."
+        instructions_required: "El vostre nom complet."
         too_short: "El vostre nom és massa curt"
         ok: "El vostre nom sona bé"
       username:
         title: "Nom d'usuari"
-        instructions: "únic, sense espais, breu"
         short_instructions: "La gent us pot mencionar com a @%{username}"
         available: "El nom d'usuari està disponible"
         not_available: "No està disponible. I si proveu amb %{suggestion}?"
@@ -1250,7 +1245,8 @@ ca:
         same_as_username: "La contrasenya és igual que el nom d'usuari."
         same_as_email: "La contrasenya és igual que el correu electrònic."
         ok: "La contrasenya té bon aspecte."
-        instructions: "com a mínim %{count} caràcters"
+        instructions: "Com a mínim %{count} caràcters."
+        confirm: "Confirma"
       summary:
         title: "Resum"
         stats: "Estadístiques"
@@ -1557,9 +1553,6 @@ ca:
       saved_local_draft_tip: "desat localment"
       drafts_offline: "esborranys fora de línia"
       edit_conflict: "edita el conflicte"
-      group_mentioned:
-        one: "Si mencioneu %{group}, ho notificareu a <a href='%{group_link}'>%{count}persona</a>. Esteu segur?"
-        other: "Si mencioneu %{group}, ho notificareu a <a href='%{group_link}'>%{count} persones</a>. Esteu segur?"
       duplicate_link: "Sembla que l'enllaç a <b>%{domain}</b> ja havia estat publicat en el tema per <b>@%{username}</b> en <a href='%{post_url}'>una resposta %{ago}</a>. Esteu segur que voleu publicar-lo una altra vegada?"
       reference_topic_title: "RE: %{title}"
       error:
@@ -1705,6 +1698,7 @@ ca:
         private_message: '%{username} us ha enviat un missatge personal en "%{topic}" - %{site_title}'
         linked: '%{username} ha enllaçat la vostra publicació en "%{topic}" - %{site_title}'
         watching_first_post: '%{username} ha creat un tema nou "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} publicat en "%{topic}" - %{site_title}'
         confirm_title: "Notificacions activades - %{site_title}"
         confirm_body: "Èxit! S'han habilitat les notificacions."
         custom: "Notificació de %{username} sobre %{site_title}"
@@ -1729,6 +1723,7 @@ ca:
         topic_reminder: "recordatori de tema"
         liked_consolidated: "nous 'm'agrada'"
         post_approved: "publicació aprovada"
+        admin_problems: "nou consell al tauler de control del vostre lloc web"
     upload_selector:
       uploading: "Carregant"
       select_file: "Tria un fitxer"
@@ -1918,6 +1913,7 @@ ca:
       options: "Opcions del tema"
       show_links: "mostra enllaços dins d'aquest tema"
       unread_indicator: "Cap membre encara no ha llegit la darrera publicació d'aquest tema."
+      bumped_at: "Més recent: %{date}"
       deleted: "El tema ha estat suprimit"
       slow_mode_update:
         enable: "Activa"
@@ -2451,8 +2447,7 @@ ca:
       action: "Marca la publicació amb bandera "
       take_action_options:
         default:
-          title: "Actua"
-          details: "Arriba al límit de banderes immediatament, més que no pas esperar més banderes de la comunitat"
+          title: "Amaga la publicació"
         suspend:
           title: "Suspèn l'usuari"
         silence:
@@ -2464,7 +2459,6 @@ ca:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(amagat)"
       submit_tooltip: "Envia la bandera privada"
-      take_action_tooltip: "Arriba al límit de banderes immediatament, més que no pas esperar més banderes de la comunitat"
       cant: "Ara com ara no podeu marcar amb bandera aquesta publicació."
       notify_staff: "Notifica l'equip responsable en privat"
       formatted_name:
@@ -2735,7 +2729,6 @@ ca:
       other_tags: "Altres etiquetes"
       selector_all_tags: "totes les etiquetes"
       selector_no_tags: "sense etiquetes"
-      changed: "etiquetes canviades:"
       tags: "Etiquetes"
       choose_for_topic: "etiquetes opcionals"
       add_synonyms: "Afegeix"
@@ -2744,7 +2737,6 @@ ca:
         one: "Esteu segur que voleu suprimir aquesta etiqueta i eliminar-la del tema %{count} al qual és assignada?"
         other: "Esteu segur que voleu suprimir aquesta etiqueta i eliminar-la dels %{count} temes als quals és assignada?"
       delete_confirm_no_topics: "Esteu segur que voleu suprimir aquesta etiqueta?"
-      description: "Descripció"
       sort_by: "Ordena per:"
       sort_by_count: "comptabilitza"
       sort_by_name: "nom"
@@ -2886,10 +2878,25 @@ ca:
               content: "Revisa"
     until: "Fins a:"
     form_templates:
+      upload_field:
+        upload: "Carrega"
+        uploading: "Carregant"
       errors:
         typeMismatch:
           default: "Introduïu un valor vàlid."
           email: "Introduïu una adreça vàlida de correu electrònic."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Retorn"
+      edit:
+        modal:
+          cancel: "cancel·la"
+          create: "Desa"
+          reason: "per què ho editeu?"
+      spreadsheet:
+        show: "Mostra"
+        about: "Quant a"
   admin_js:
     admin:
       title: "Administració de Discourse"
@@ -2917,8 +2924,7 @@ ca:
         latest_version: "Més recents"
         problems_found: "Uns quants consells basats en la configuració actual del lloc web."
         new_features:
-          dismiss: "Descarta-ho"
-          learn_more: "Per a saber-ne més"
+          learn_more: "Per a saber-ne més..."
         last_checked: "Comprovat per darrera vegada"
         refresh_problems: "Actualitza"
         no_problems: "No s'han trobat problemes."
@@ -3104,29 +3110,6 @@ ca:
         groups_filter_instructions: "Els webhook rellevants només funcionaran si l'esdeveniment està relacionat amb els grups especificats. Deixeu-ho en blanc per a activar els webhooks per a tots els grups."
         groups_filter: "Grups activats"
         delete_confirm: "Voleu suprimir el webhook?"
-        topic_event:
-          name: "Esdeveniment de tema"
-          details: "Quan hi ha un tema nou, revisat, canviat o suprimit."
-        post_event:
-          name: "Esdeveniment de publicació"
-          details: "Quan hi ha una resposta nova, editada, suprimida o recuperada."
-        user_event:
-          name: "Esdeveniment d'usuari"
-        group_event:
-          name: "Esdeveniment de grup"
-          details: "Quan un grup és creat, actualitzat o destruït"
-        category_event:
-          name: "Esdeveniment de categoria"
-          details: "Quan una categoria és creada, actualitzada o destruïda"
-        tag_event:
-          name: "Esdeveniment d'etiqueta"
-          details: "Quan una etiqueta és creada, actualitzada o destruïda."
-        reviewable_event:
-          name: "Esdeveniment revisable"
-          details: "Quan un nou element està a punt per a revisió i quan el seu estatus és actualitzat."
-        notification_event:
-          name: "Esdeveniment de notificació"
-          details: "Quan un usuari rep una notificació en el seu canal de continguts."
         delivery_status:
           title: "Estat de lliurament"
           inactive: "Inactiu"
@@ -3165,7 +3148,8 @@ ca:
         not_enabled: "N"
         change_settings_short: "Configuració"
         howto: "Com s'instal·len els connectors?"
-        official: "Connector (plugin) oficial"
+        author: "Per %{author}"
+        learn_more: "Per a saber-ne més"
       backups:
         title: "Còpies de seguretat"
         menu:
@@ -3300,6 +3284,7 @@ ca:
           convert_theme_tooltip: "Converteix l'aparença en component"
           inactive_themes: "Aparences inactives:"
           inactive_components: "Components no utilitzats:"
+          cancel: "Cancel·la"
           broken_theme_tooltip: "L'aparença té errors en CSS, HTML o YAML"
           disabled_component_tooltip: "Aquest component s'ha desactivat"
           default_theme_tooltip: "Aquesta aparença és l'aparença predeterminada del lloc web"
@@ -4035,6 +4020,9 @@ ca:
           modal_description: "Voleu aplicar històricament aquest canvi? Això canviarà les preferències per a %{count} usuaris existents."
           modal_yes: "Sí"
           modal_no: "No, aplica el canvi només en el futur"
+        file_types_list:
+          add_image_types: "Imatges"
+          add_audio_types: "Àudio"
       badges:
         title: Insígnies
         new_badge: Insígnia nova

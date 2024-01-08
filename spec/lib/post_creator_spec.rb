@@ -4,10 +4,10 @@ require "post_creator"
 require "topic_subtype"
 
 RSpec.describe PostCreator do
-  fab!(:user) { Fabricate(:user) }
-  fab!(:admin) { Fabricate(:admin) }
-  fab!(:coding_horror) { Fabricate(:coding_horror) }
-  fab!(:evil_trout) { Fabricate(:evil_trout) }
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
+  fab!(:admin) { Fabricate(:admin, refresh_auto_groups: true) }
+  fab!(:coding_horror) { Fabricate(:coding_horror, refresh_auto_groups: true) }
+  fab!(:evil_trout) { Fabricate(:evil_trout, refresh_auto_groups: true) }
   let(:topic) { Fabricate(:topic, user: user) }
 
   describe "new topic" do
@@ -22,9 +22,6 @@ RSpec.describe PostCreator do
     let(:creator) { PostCreator.new(user, basic_topic_params) }
     let(:creator_with_category) do
       PostCreator.new(user, basic_topic_params.merge(category: category.id))
-    end
-    let(:creator_with_meta_data) do
-      PostCreator.new(user, basic_topic_params.merge(meta_data: { hello: "world" }))
     end
     let(:creator_with_image_sizes) do
       PostCreator.new(user, basic_topic_params.merge(image_sizes: image_sizes))
@@ -96,6 +93,7 @@ RSpec.describe PostCreator do
           user,
           basic_topic_params.merge(topic_opts: { custom_fields: { hello: "world" } }),
         )
+
       expect(post.topic.custom_fields).to eq("hello" => "world")
     end
 
@@ -330,10 +328,6 @@ RSpec.describe PostCreator do
         expect(creator_with_category.create.topic.category).to eq(category)
       end
 
-      it "adds  meta data from the post" do
-        expect(creator_with_meta_data.create.topic.meta_data["hello"]).to eq("world")
-      end
-
       it "passes the image sizes through" do
         Post.any_instance.expects(:image_sizes=).with(image_sizes)
         creator_with_image_sizes.create
@@ -561,7 +555,7 @@ RSpec.describe PostCreator do
 
           context "when can create tags" do
             before do
-              SiteSetting.min_trust_to_create_tag = 0
+              SiteSetting.create_tag_allowed_groups = Group::AUTO_GROUPS[:trust_level_0]
               SiteSetting.min_trust_level_to_tag_topics = 0
             end
 
@@ -582,7 +576,7 @@ RSpec.describe PostCreator do
 
           context "when cannot create tags" do
             before do
-              SiteSetting.min_trust_to_create_tag = 4
+              SiteSetting.create_tag_allowed_groups = Group::AUTO_GROUPS[:trust_level_4]
               SiteSetting.min_trust_level_to_tag_topics = 0
             end
 
@@ -595,7 +589,7 @@ RSpec.describe PostCreator do
 
           context "when automatically tagging first posts" do
             before do
-              SiteSetting.min_trust_to_create_tag = 0
+              SiteSetting.create_tag_allowed_groups = Group::AUTO_GROUPS[:trust_level_0]
               SiteSetting.min_trust_level_to_tag_topics = 0
               Fabricate(:tag, name: "greetings")
               Fabricate(:tag, name: "hey")
@@ -1470,8 +1464,15 @@ RSpec.describe PostCreator do
       creator.create
       expect(creator.errors).to be_blank
       expect(TopicEmbed.where(embed_url: embed_url).exists?).to eq(true)
+    end
 
-      # If we try to create another topic with the embed url, should fail
+    it "does not create topics with the same embed url" do
+      PostCreator.create(
+        user,
+        embed_url: embed_url,
+        title: "Reviews of Science Ovens",
+        raw: "Did you know that you can use microwaves to cook your dinner? Science!",
+      )
       creator =
         PostCreator.new(
           user,
@@ -1482,6 +1483,22 @@ RSpec.describe PostCreator do
       result = creator.create
       expect(result).to be_present
       expect(creator.errors).to be_present
+    end
+
+    it "sets the embed content sha1" do
+      content = "Did you know that you can use microwaves to cook your dinner? Science!"
+      content_sha1 = Digest::SHA1.hexdigest(content)
+      creator =
+        PostCreator.new(
+          user,
+          embed_url: embed_url,
+          embed_content_sha1: content_sha1,
+          title: "Reviews of Science Ovens",
+          raw: content,
+        )
+      creator.create
+      expect(creator.errors).to be_blank
+      expect(TopicEmbed.where(content_sha1: content_sha1).exists?).to eq(true)
     end
   end
 
@@ -1561,7 +1578,7 @@ RSpec.describe PostCreator do
   end
 
   describe "staged users" do
-    fab!(:staged) { Fabricate(:staged) }
+    fab!(:staged) { Fabricate(:staged, refresh_auto_groups: true) }
 
     it "automatically watches all messages it participates in" do
       post =
@@ -2048,9 +2065,9 @@ RSpec.describe PostCreator do
   end
 
   describe "#create_post_notice" do
-    fab!(:user) { Fabricate(:user) }
-    fab!(:staged) { Fabricate(:staged) }
-    fab!(:anonymous) { Fabricate(:anonymous) }
+    fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
+    fab!(:staged) { Fabricate(:staged, refresh_auto_groups: true) }
+    fab!(:anonymous) { Fabricate(:anonymous, refresh_auto_groups: true) }
 
     it "generates post notices for new users" do
       post =
@@ -2097,7 +2114,7 @@ RSpec.describe PostCreator do
     end
   end
 
-  describe "secure uploads uploads" do
+  describe "secure uploads" do
     fab!(:image_upload) { Fabricate(:upload, secure: true) }
     fab!(:user2) { Fabricate(:user) }
     fab!(:public_topic) { Fabricate(:topic) }
@@ -2110,12 +2127,13 @@ RSpec.describe PostCreator do
     end
 
     it "links post uploads" do
-      _public_post =
+      public_post =
         PostCreator.create(
           user,
           topic_id: public_topic.id,
-          raw: "A public post with an image.\n![](#{image_upload.short_path})",
+          raw: "A public post with an image.\n![secure image](#{image_upload.short_path})",
         )
+      expect(public_post.reload.uploads.map(&:access_control_post_id)).to eq([public_post.id])
     end
   end
 

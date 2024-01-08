@@ -59,9 +59,10 @@ lv:
       channel_info:
         back_to_channel: "Atpakaļ"
         tabs:
-          about: Par
           members: Dalībnieki
           settings: Iestatījumi
+      new_message_modal:
+        filter: "Filtrs"
       direct_message_creator:
         title: Jauns ziņa
         prefix: "Kam:"
@@ -87,6 +88,10 @@ lv:
         saved: "Saglabāts"
         unfollow: "Iziet"
         admin_title: "Administrators"
+        settings_title: "Iestatījumi"
+        category_label: "Sadaļa"
+        history_label: "Vēsture"
+        members_label: "Dalībnieki"
       incoming_webhooks:
         back: "Atpakaļ"
         description: "Apraksts"
@@ -105,6 +110,11 @@ lv:
           title: "Pārvietot uz jaunu tēmu"
         existing_topic:
           title: "Pārvietot uz esošu tēmu"
+      retention_reminders:
+        short:
+          zero: "%{count} dienas"
+          one: "%{count} diena"
+          other: "%{count} dienas"
       emoji_picker:
         objects: "Priekšmeti"
         activities: "Aktivitātes"

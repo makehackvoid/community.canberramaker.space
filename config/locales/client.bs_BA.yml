@@ -267,13 +267,9 @@ bs_BA:
       our_admins: "Naši administratori"
       our_moderators: "Naši moderatori"
       moderators: "Moderators"
-      stat:
-        all_time: "Ukupno vrijeme"
       like_count: "Sviđanja"
       topic_count: "Tema"
       post_count: "Objave"
-      active_user_count: "Aktivnih korisnika"
-      contact: "Kontaktirajte nas"
       contact_info: "U slučaju da forum ne radi, molimo kontaktirajte nas na %{contact_info}."
     bookmarked:
       title: "Zabilješka"
@@ -384,6 +380,9 @@ bs_BA:
         type_bonus:
           name: "bonus tip"
           title: "Neki ocjenjivi tipovi mogu zaprimiti bonus od strane osoblja foruma kako bi tim tipovima podigli prioritet"
+      revise_and_reject_post:
+        reason: "Reason"
+        optional: "opciono"
       claim_help:
         optional: "Možete tražiti ova da sprijećite ostale da ga pregledaju"
         required: "VI morate tvrditi stavari prije ih morate cijeniti"
@@ -1036,7 +1035,6 @@ bs_BA:
         success: "(email poslat)"
         in_progress: "(šaljem email)"
         error: "(greška)"
-        emoji: "zaključavanje emotikona"
         action: "Pošalji Email za resetovanje šifre"
         set_password: "Namjesti šifru"
         choose_new: "Izaberite novu šifru"
@@ -1053,8 +1051,6 @@ bs_BA:
           title: "Generirani sigurnosni kodovi"
           description: "Svaki od ovih rezervnih kodova može se koristiti samo jednom. Držite ih na sigurnom, ali pristupačnom mjestu."
       second_factor:
-        forgot_password: "Zaboravili ste password?"
-        confirm_password_description: "Molimo vas da potvrdite šifru kako bi nastavili"
         name: "Ime"
         label: "Šifra"
         rate_limit: "Pričekajte prije pokušaja drugog koda za provjeru autentičnosti."
@@ -1062,8 +1058,6 @@ bs_BA:
           Skenirajte ovaj QR kod u podržanoj aplikaciji ( <a href="https://www.google.com/search?q=authenticator+apps+for+android" target="_blank">Android</a> - <a href="https://www.google.com/search?q=authenticator+apps+for+ios" target="_blank">iOS</a> ) i unesite kod za provjeru autentičnosti.
         disable_description: "Molimo da uneste kod za ovjeru autentičnosti sa vaše aplikacije"
         show_key_description: "Unesi manuelno"
-        short_description: |
-          Zaštitite svoj račun pomoću jednokratnih sigurnosnih kodova.
         use: "Koristi Authenticator app?"
         disable: "Onemogući"
         delete: "Obriši"
@@ -1081,6 +1075,10 @@ bs_BA:
           already_added_error: "Već ste registrirali ovaj sigurnosni ključ. Ne morate ga ponovno registrirati."
           save: "Sačuvaj"
           name_required_error: "Morate navesti ime za svoj sigurnosni ključ."
+      passkeys:
+        save: "Save"
+        added_prefix: "Doodano"
+        last_used_prefix: "Posljednji put korišten"
       change_about:
         title: "Promjeni O meni"
         error: "Desila se greška prilikom promjene."
@@ -1152,14 +1150,13 @@ bs_BA:
           generic: "Vaš %{provider} račun će biti korišten za prijavu."
       name:
         title: "Ime"
-        instructions: "vaše puno ime (opciono)"
-        instructions_required: "Vaše puno ime"
+        instructions: "Vaše puno ime (opciono)."
+        instructions_required: "Vaše puno ime."
         required: "Unesite ime"
         too_short: "Vaše ime je prekratko."
         ok: "Vaše ime izgleda ok."
       username:
         title: "Nadimak"
-        instructions: "unikatno, bez tipke praznog prostora, kratko"
         short_instructions: "Ljudi vas mogu spomenuti preko @%{username}."
         available: "Vaš nadimak je dostupan."
         not_available: "Nije dostupan. Pokušaj %{suggestion}?"
@@ -1306,7 +1303,7 @@ bs_BA:
         same_as_username: "Vaš pasword je isti kao vaše korisničko ime."
         same_as_email: "Vaš pasword je isti kao vaš email."
         ok: "Vaša lozinka dobro izgleda."
-        instructions: "minimalno %{count} karaktera"
+        instructions: "Minimalno %{count} karaktera."
         required: "Molimo unesite lozinku"
       summary:
         title: "Sumirano"
@@ -1476,7 +1473,6 @@ bs_BA:
     email_login:
       link_label: "Pošalji mi mejlom moj login link"
       button_label: "pomoću email-a"
-      emoji: "zaključaj emoji"
       complete_username: "Ukoliko korisnički račun se podudara sa <b>%{username}</b>, trebali bi uskoro dobiti email sa linkom za ulogovanje."
       complete_email: "Ukoliko korisnički račun se podudara sa <b>%{email}</b>, trebali bi uskoro dobiti email sa linkom za ulogovanje."
       complete_username_found: "Pronašli smo korisnički račun koji se podudara sa <b>%{username}</b>, trebali bi uskoro dobiti email sa linkom za ulogovanje."
@@ -1619,10 +1615,6 @@ bs_BA:
       saved_local_draft_tip: "sačuvano lokalno"
       drafts_offline: "skicirano lokalno"
       edit_conflict: "uredi sukob"
-      group_mentioned:
-        one: "Spominjući %{group}, obavijestiti će te %{count} korisnika – da li ste sigurni?"
-        few: "Spominjući %{group}, obavijestiti će te <a href='%{group_link}'>%{count} korisnika</a> – da li ste sigurni?"
-        other: "Spominjući %{group}, obavijestiti će te <a href='%{group_link}'>%{count} korisnika</a> – da li ste sigurni?"
       duplicate_link: "Izgleda da vaš link ka <b>%{domain}</b> je već objavljen u temi od strane <b>@%{username}</b> u<a href='%{post_url}'>odgovoru prije %{ago}</a> – da li ste sigurni da želite ponovno objaviti link?"
       reference_topic_title: "RE:%{title}"
       error:
@@ -1769,6 +1761,7 @@ bs_BA:
         private_message: '%{username} vam je poslao/la poruku u "%{topic}" - %{site_title}'
         linked: '%{username} je linkao/la vašu objavu "%{topic}" - %{site_title}'
         watching_first_post: '%{username} je kreirao novu temu "%{topic}" - %{site_title}'
+        watching_category_or_tag: '%{username} je objavio/la "%{topic}" - %{site_title}'
         confirm_title: "Obavijesti uključene - %{site_title}"
         confirm_body: "Uspješno! Obavijesti su sada uključene."
         custom: "Obavijest od %{username} na %{site_title}"
@@ -1989,6 +1982,7 @@ bs_BA:
       back_to_list: "Vrati se na Listu Tema"
       options: "Opcije Teme"
       show_links: "pokaži linkove unutar ove teme"
+      bumped_at: "Zadnje: %{date}"
       deleted: "Ova tema je obrisana"
       slow_mode_update:
         enable: "Omogući"
@@ -2542,9 +2536,6 @@ bs_BA:
       title: "Zašto prijavljujete ovaj post?"
       action: "Prijavi objavu"
       take_action_options:
-        default:
-          title: "Poduzmi Akciju"
-          details: "Dođite odmah do praga za oznake, umjesto da čekate još oznaka od zajednice."
         suspend:
           title: "Suspend User"
         silence:
@@ -2556,7 +2547,6 @@ bs_BA:
       ip_address_missing: "(N/A)"
       hidden_email_address: "(hidden)"
       submit_tooltip: "Predaj privatnu prijavu"
-      take_action_tooltip: "Dođite odmah do praga za oznake, umjesto da čekate još oznaka od zajednice."
       cant: "Nažalost, trenutno ne možete prijaviti ovu objavu"
       notify_staff: "Obavijesti privatno moderatora foruma"
       formatted_name:
@@ -2862,7 +2852,6 @@ bs_BA:
       other_tags: "Druge oznake"
       selector_all_tags: "sve oznake"
       selector_no_tags: "bez oznaka"
-      changed: "oznake  promijenjene:"
       tags: "Oznake"
       choose_for_topic: "neobavezne oznake"
       info: "Informacija"
@@ -2897,7 +2886,6 @@ bs_BA:
         one: "Pripadajući sinonim će također biti obrisan."
         few: "Pripadajućih %{count} sinonima će također biti obrisano."
         other: "Pripadajućih %{count} sinonima će također biti obrisano."
-      description: "Description"
       sort_by: "Sortiraj po:"
       sort_by_count: "brojenje"
       sort_by_name: "ime"
@@ -3047,9 +3035,24 @@ bs_BA:
               content: "Pregled"
     until: "Sve do:"
     form_templates:
+      upload_field:
+        upload: "Učitavanje"
+        uploading: "Učitavam"
       errors:
         typeMismatch:
           default: "Molim unesite ispravnu vrijednost."
+    table_builder:
+      modal:
+        help:
+          enter_key: "Naprijed"
+      edit:
+        modal:
+          cancel: "otkaži"
+          create: "Save"
+          reason: "zašto pravite izmjenu?"
+      spreadsheet:
+        show: "Show"
+        about: "O nama"
   admin_js:
     admin:
       title: "Discourse Admin"
@@ -3077,8 +3080,7 @@ bs_BA:
         latest_version: "Zadnje"
         problems_found: "Neki saveti na osnovu vaših trenutnih postavki sajta"
         new_features:
-          dismiss: "Odpusti"
-          learn_more: "Saznaj više"
+          learn_more: "Saznaj više..."
         last_checked: "Zadnje pogledani"
         refresh_problems: "Osvježi"
         no_problems: "No problems were found."
@@ -3268,26 +3270,6 @@ bs_BA:
         groups_filter_instructions: "Relevantne web-kuke će biti aktivirane samo ako je događaj povezan sa određenim grupama. Ostavite prazno da biste pokrenuli web-kuke za sve grupe."
         groups_filter: "Pokrenute grupe"
         delete_confirm: "Izbrisati ovaj webhook?"
-        topic_event:
-          name: "Teme dogadaj"
-          details: "Kada se stvori nova tema, revidirana, izmijenjena ili izbrisana."
-        post_event:
-          name: "Objavi doađaj"
-          details: "Kada postoji novi odgovor, uredite, obrišite ili oporavite."
-        user_event:
-          name: "Korisnički događaj"
-        group_event:
-          name: "Grupni događaj"
-          details: "Kada se grupa kreira, ažurira ili uništava."
-        category_event:
-          name: "Kategorija Događaj"
-          details: "Kada je kategorija stvorena, ažurirana ili uništena."
-        tag_event:
-          name: "Oznaći događaj"
-          details: "Kada se oznaka kreira, ažurira ili uništava."
-        reviewable_event:
-          name: "Eventable Event"
-          details: "Kada je nova stavka spremna za pregled i kada je njen status ažuriran."
         delivery_status:
           title: "Status isporuke"
           inactive: "Neaktivan"
@@ -3328,7 +3310,8 @@ bs_BA:
         not_enabled: "Ne"
         change_settings_short: "Postavke"
         howto: "Kako instaliram pluginove?"
-        official: "Officionalni Plugin"
+        author: "Od %{author}"
+        learn_more: "Saznaj više"
       backups:
         title: "Backups"
         menu:
@@ -3461,6 +3444,7 @@ bs_BA:
           convert_theme_tooltip: "Pretvorite ovu temu u komponentu"
           inactive_themes: "Neaktivne teme:"
           inactive_components: "Neiskorištene komponente:"
+          cancel: "Odustani"
           broken_theme_tooltip: "Ova tema ima greške u CSS-u, HTML-u ili YAML-u"
           disabled_component_tooltip: "Ova komponenta je onemogućena"
           default_theme_tooltip: "Ova tema je podrazumevana tema sajta"
@@ -4184,6 +4168,8 @@ bs_BA:
           invalid_input: "Polja za unos ne mogu biti prazna ili sadrže znak vertikalne trake."
         default_categories:
           modal_yes: "Da"
+        file_types_list:
+          add_image_types: "Images"
       badges:
         title: Bedž
         new_badge: Novi Bedž

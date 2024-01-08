@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 # name: chat
-# about: Chat inside Discourse
+# about: Adds chat functionality.
+# meta_topic_id: 230881
 # version: 0.4
 # authors: Kane York, Mark VanLandingham, Martin Brennan, Joffrey Jaffeux
 # url: https://github.com/discourse/discourse/tree/main/plugins/chat
 # transpile_js: true
+# meta_topic_id: 230881
 
 enabled_site_setting :chat_enabled
 
@@ -18,13 +20,13 @@ register_asset "stylesheets/mobile/index.scss", :mobile
 register_svg_icon "comments"
 register_svg_icon "comment-slash"
 register_svg_icon "lock"
+register_svg_icon "clipboard"
 register_svg_icon "file-audio"
 register_svg_icon "file-video"
 register_svg_icon "file-image"
 
 # route: /admin/plugins/chat
 add_admin_route "chat.admin.title", "chat"
-hide_plugin
 
 GlobalSetting.add_default(:allow_unsecure_chat_uploads, false)
 
@@ -215,8 +217,8 @@ after_initialize do
       .where(user_id: object.id)
       .order(updated_at: :desc)
       .limit(20)
-      .pluck(:chat_channel_id, :data)
-      .map { |row| { channel_id: row[0], data: row[1] } }
+      .pluck(:chat_channel_id, :data, :thread_id)
+      .map { |row| { channel_id: row[0], data: row[1], thread_id: row[2] } }
   end
 
   add_to_serializer(:user_option, :chat_enabled) { object.chat_enabled }
@@ -250,6 +252,12 @@ after_initialize do
   add_to_serializer(:current_user_option, :chat_separate_sidebar_mode) do
     object.chat_separate_sidebar_mode
   end
+
+  add_to_serializer(
+    :upload,
+    :thumbnail,
+    include_condition: -> { SiteSetting.chat_enabled && SiteSetting.create_thumbnails },
+  ) { object.thumbnail }
 
   RETENTION_SETTINGS_TO_USER_OPTION_FIELDS = {
     chat_channel_retention_days: :dismissed_channel_retention_reminder,
@@ -478,11 +486,18 @@ after_initialize do
 
   register_email_unsubscriber("chat_summary", EmailControllerHelper::ChatSummaryUnsubscriber)
 
-  register_about_stat_group("chat_messages", show_in_ui: true) { Chat::Statistics.about_messages }
+  register_stat("chat_messages", show_in_ui: true, expose_via_api: true) do
+    Chat::Statistics.about_messages
+  end
+  register_stat("chat_users", expose_via_api: true) { Chat::Statistics.about_users }
+  register_stat("chat_channels", expose_via_api: true) { Chat::Statistics.about_channels }
 
-  register_about_stat_group("chat_channels") { Chat::Statistics.about_channels }
-
-  register_about_stat_group("chat_users") { Chat::Statistics.about_users }
+  register_stat("chat_channel_messages") { Chat::Statistics.channel_messages }
+  register_stat("chat_direct_messages") { Chat::Statistics.direct_messages }
+  register_stat("chat_open_channels_with_threads_enabled") do
+    Chat::Statistics.open_channels_with_threads_enabled
+  end
+  register_stat("chat_threaded_messages") { Chat::Statistics.threaded_messages }
 
   # Make sure to update spec/system/hashtag_autocomplete_spec.rb when changing this.
   register_hashtag_data_source(Chat::ChannelHashtagDataSource)
@@ -490,6 +505,10 @@ after_initialize do
   register_hashtag_type_priority_for_context("category", "chat-composer", 100)
   register_hashtag_type_priority_for_context("tag", "chat-composer", 50)
   register_hashtag_type_priority_for_context("channel", "topic-composer", 10)
+
+  register_post_stripper do |nokogiri_fragment|
+    nokogiri_fragment.css(".chat-transcript .mention").remove
+  end
 
   Site.markdown_additional_options["chat"] = {
     limited_pretty_text_features: Chat::Message::MARKDOWN_FEATURES,

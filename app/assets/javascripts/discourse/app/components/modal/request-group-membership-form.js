@@ -1,17 +1,14 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
-import DiscourseURL from "discourse/lib/url";
-import I18n from "I18n";
 import { isEmpty } from "@ember/utils";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import DiscourseURL from "discourse/lib/url";
+import I18n from "discourse-i18n";
 
 export default class RequestGroupMembershipForm extends Component {
   @tracked loading = false;
-
-  get reason() {
-    return this.args.model.group.membership_request_template;
-  }
+  @tracked reason = this.args.model.group.membership_request_template;
 
   get title() {
     return I18n.t("groups.membership_request.title", {

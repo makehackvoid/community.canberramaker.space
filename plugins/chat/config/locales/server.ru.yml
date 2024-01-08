@@ -189,6 +189,7 @@ ru:
       inline_to_message: "Сообщение №%{message_id} от пользователя %{username} — №%{chat_channel}"
       inline_to_channel: "Чат №%{chat_channel}"
       inline_to_topic_channel: "Чат по теме %{topic_title}"
+      thread_title_connector: "в"
       x_members:
         one: "%{count} участник"
         few: "%{count} участника"
@@ -201,6 +202,8 @@ ru:
         other: "и ещё %{count}"
     summaries:
       no_targets: "За выбранный период сообщений не было."
+    transcript:
+      default_thread_title: "Цепочка"
   discourse_push_notifications:
     popup:
       chat_mention:

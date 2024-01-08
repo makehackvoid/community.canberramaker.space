@@ -24,11 +24,8 @@ ru:
           descriptions:
             chat:
               create_message: "Создать сообщение чата в указанном канале."
-    about:
-      chat_messages_count: "Сообщения чата"
-      chat_channels_count: "Каналы чата"
-      chat_users_count: "Пользователи чата"
     chat:
+      back_to_forum: "Форум"
       deleted_chat_username: удалён
       dates:
         time_tiny: "h:mm"
@@ -269,7 +266,6 @@ ru:
       save: "Сохранить"
       select: "Выбрать"
       return_to_list: "Вернуться к списку каналов"
-      return_to_threads_list: "Вернуться к текущим обсуждениям"
       unread_threads_count:
         one: "У вас %{count} непрочитанное обсуждение"
         few: "У вас %{count} непрочитанных обсуждения"
@@ -330,7 +326,6 @@ ru:
         back_to_all_channels: "Все каналы"
         back_to_channel: "Назад"
         tabs:
-          about: Информация
           members: Участники
           settings: Настройки
       new_message_modal:
@@ -341,9 +336,9 @@ ru:
         default_search_placeholder: "#канал, @пользователь или что-то другое"
         default_channel_search_placeholder: "#канал"
         default_user_search_placeholder: "@пользователь"
-        user_search_placeholder: "...добавить пользователей"
         disabled_user: "отключил(а) чат"
         no_items: "Нет компонентов"
+        filter: "Фильтр"
       channel_edit_name_slug_modal:
         title: Изменение канала
         input_placeholder: Укажите название
@@ -439,22 +434,6 @@ ru:
           topic: "Тема"
       reviewable:
         type: "Сообщение чата"
-      reactions:
-        only_you: "Вы отреагировали при помощи эмодзи :%{emoji}:"
-        you_and_single_user: "Вы и %{username} отреагировали при помощи эмодзи :%{emoji}:"
-        you_and_multiple_users: "Вы, %{commaSeparatedUsernames} и %{username} отреагировали при помощи эмодзи :%{emoji}:"
-        you_multiple_users_and_more:
-          one: "Вы, %{commaSeparatedUsernames} и еще %{count} пользователь отреагировали при помощи эмодзи :%{emoji}:"
-          few: "Вы, %{commaSeparatedUsernames} и еще %{count} пользователя отреагировали при помощи эмодзи :%{emoji}:"
-          many: "Вы, %{commaSeparatedUsernames} и еще %{count} пользователей отреагировали при помощи эмодзи :%{emoji}:"
-          other: "Вы, %{commaSeparatedUsernames} и еще %{count} пользователя отреагировали при помощи эмодзи :%{emoji}:"
-        single_user: "Пользователь %{username} отреагировал при помощи эмодзи :%{emoji}:"
-        multiple_users: "%{commaSeparatedUsernames} и %{username} отреагировали при помощи эмодзи :%{emoji}:"
-        multiple_users_and_more:
-          one: "%{commaSeparatedUsernames} и еще %{count} пользователь отреагировали при помощи эмодзи :%{emoji}:"
-          few: "%{commaSeparatedUsernames} и еще %{count} пользователя отреагировали при помощи эмодзи :%{emoji}:"
-          many: "%{commaSeparatedUsernames} и еще %{count} пользователей отреагировали при помощи эмодзи :%{emoji}:"
-          other: "%{commaSeparatedUsernames} и еще %{count} пользователя отреагировали при помощи эмодзи :%{emoji}:"
       composer:
         toggle_toolbar: "Переключить панель инструментов"
         italic_text: "текст, выделенный курсивом"
@@ -464,6 +443,7 @@ ru:
       quote:
         original_channel: 'Первоначально отправлено в <a href="%{channelLink}">%{channel}</a>'
         copy_success: "Цитата из чата скопирована в буфер обмена"
+        default_thread_title: "Цепочка"
       notification_levels:
         never: "Никогда"
         mention: "Только для упоминаний"
@@ -492,6 +472,10 @@ ru:
         saved: "Сохранено"
         unfollow: "Отписаться"
         admin_title: "Администрирование"
+        settings_title: "Настройки"
+        category_label: "Категория"
+        history_label: "История"
+        members_label: "Участники"
       admin:
         title: "Чат"
         export_messages:
@@ -569,18 +553,11 @@ ru:
           many: "Отвечают %{commaSeparatedUsernames} и ещё %{count} пользователей"
           other: "Отвечают %{commaSeparatedUsernames} и ещё %{count} пользователей"
       retention_reminders:
-        public_none: "История канала хранится неограниченное время."
-        public:
-          one: "История канала хранится %{count} день."
-          few: "История канала хранится %{count} дня."
-          many: "История канала хранится %{count} дней."
-          other: "История канала хранится %{count} дня."
-        dm_none: "История личного чата хранится неограниченное время."
-        dm:
-          one: "История личного чата хранится %{count} день."
-          few: "История личного чата хранится %{count} дня."
-          many: "История личного чата хранится %{count} дней."
-          other: "История личного чата хранится %{count} дня."
+        short:
+          one: "%{count} день"
+          few: "%{count} дней"
+          many: "%{count} дня"
+          other: "%{count} дня"
       flags:
         off_topic: "Это сообщение не имеет отношения к текущему обсуждению, как указано в названии канала, и, вероятно, его следует переместить в другое место."
         inappropriate: "Это сообщение содержит контент, который обоснованно можно считать оскорбительным или нарушающим <a href=\"%{basePath}/guidelines\">рекомендации для сообщества</a>."
@@ -630,7 +607,6 @@ ru:
           other: "+%{count}"
       threads:
         open: "Открыть цепочку"
-        list: "Текущие обсуждения"
         none: "Вы не участвуете ни в одной цепочке сообщений на этом канале."
       draft_channel_screen:
         header: "Новое сообщение"

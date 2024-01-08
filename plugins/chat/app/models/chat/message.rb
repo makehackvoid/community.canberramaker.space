@@ -30,11 +30,11 @@ module Chat
              dependent: :destroy,
              foreign_key: :chat_message_id
     has_many :bookmarks,
-             -> {
+             -> do
                unscope(where: :bookmarkable_type).where(
                  bookmarkable_type: Chat::Message.polymorphic_name,
                )
-             },
+             end,
              as: :bookmarkable,
              dependent: :destroy
     has_many :upload_references,
@@ -53,21 +53,21 @@ module Chat
              foreign_key: :chat_message_id
 
     scope :in_public_channel,
-          -> {
+          -> do
             joins(:chat_channel).where(
               chat_channel: {
                 chatable_type: Chat::Channel.public_channel_chatable_types,
               },
             )
-          }
+          end
     scope :in_dm_channel,
-          -> {
+          -> do
             joins(:chat_channel).where(
               chat_channel: {
                 chatable_type: Chat::Channel.direct_channel_chatable_types,
               },
             )
-          }
+          end
     scope :created_before, ->(date) { where("chat_messages.created_at < ?", date) }
     scope :uncooked, -> { where("cooked_version <> ? or cooked_version IS NULL", BAKED_VERSION) }
 
@@ -106,7 +106,7 @@ module Chat
       end
     end
 
-    def excerpt(max_length: 50)
+    def excerpt(max_length: 100)
       # just show the URL if the whole message is a URL, because we cannot excerpt oneboxes
       return message if UrlHelper.relaxed_parse(message).is_a?(URI)
 
@@ -114,10 +114,10 @@ module Chat
       return uploads.first.original_filename if cooked.blank? && uploads.present?
 
       # this may return blank for some complex things like quotes, that is acceptable
-      PrettyText.excerpt(cooked, max_length, strip_links: true)
+      PrettyText.excerpt(cooked, max_length, strip_links: true, keep_mentions: true)
     end
 
-    def censored_excerpt(max_length: 50)
+    def censored_excerpt(max_length: 100)
       WordWatcher.censor(excerpt(max_length: max_length))
     end
 
@@ -156,19 +156,8 @@ module Chat
 
     def rebake!(invalidate_oneboxes: false, priority: nil)
       ensure_last_editor_id
-
-      previous_cooked = self.cooked
-      new_cooked =
-        self.class.cook(
-          message,
-          invalidate_oneboxes: invalidate_oneboxes,
-          user_id: self.last_editor_id,
-        )
-      update_columns(cooked: new_cooked, cooked_version: BAKED_VERSION)
-      args = { chat_message_id: self.id }
+      args = { chat_message_id: self.id, invalidate_oneboxes: invalidate_oneboxes }
       args[:queue] = priority.to_s if priority && priority != :normal
-      args[:is_dirty] = true if previous_cooked != new_cooked
-
       Jobs.enqueue(Jobs::Chat::ProcessMessage, args)
     end
 
@@ -211,6 +200,7 @@ module Chat
       strikethrough
       blockquote
       emphasis
+      replacements
     ]
 
     def self.cook(message, opts = {})
@@ -257,19 +247,14 @@ module Chat
       end
     end
 
-    def create_mentions
-      insert_mentions(parsed_mentions.all_mentioned_users_ids)
-    end
-
-    def update_mentions
+    def upsert_mentions
       mentioned_user_ids = parsed_mentions.all_mentioned_users_ids
-
       old_mentions = chat_mentions.pluck(:user_id)
-      updated_mentions = mentioned_user_ids
-      mentioned_user_ids_to_drop = old_mentions - updated_mentions
-      mentioned_user_ids_to_add = updated_mentions - old_mentions
 
+      mentioned_user_ids_to_drop = old_mentions - mentioned_user_ids
       delete_mentions(mentioned_user_ids_to_drop)
+
+      mentioned_user_ids_to_add = mentioned_user_ids - old_mentions
       insert_mentions(mentioned_user_ids_to_add)
     end
 

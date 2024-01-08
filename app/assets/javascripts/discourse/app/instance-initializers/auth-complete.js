@@ -1,10 +1,10 @@
+import EmberObject from "@ember/object";
 import { next } from "@ember/runloop";
+import CreateAccount from "discourse/components/modal/create-account";
+import LoginModal from "discourse/components/modal/login";
 import cookie, { removeCookie } from "discourse/lib/cookie";
 import DiscourseUrl from "discourse/lib/url";
-import EmberObject from "@ember/object";
-import showModal from "discourse/lib/show-modal";
-import I18n from "I18n";
-import LoginModal from "discourse/components/modal/login";
+import I18n from "discourse-i18n";
 
 // This is happening outside of the app via popup
 const AuthErrors = [
@@ -37,8 +37,8 @@ export default {
     }
 
     if (lastAuthResult) {
-      const router = owner.lookup("router:main");
-      router.one("didTransition", () => {
+      const router = owner.lookup("service:router");
+      router.one("routeDidChange", () => {
         next(() => {
           const options = JSON.parse(lastAuthResult);
 
@@ -46,7 +46,7 @@ export default {
             return;
           }
 
-          if (router.currentPath === "invites.show") {
+          if (router.currentRouteName === "invites.show") {
             owner
               .lookup("controller:invites-show")
               .authenticationComplete(options);
@@ -55,16 +55,16 @@ export default {
             const siteSettings = owner.lookup("service:site-settings");
 
             const loginError = (errorMsg, className, properties, callback) => {
-              const applicationRouter = owner.lookup("route:application");
+              const applicationRoute = owner.lookup("route:application");
               const applicationController = owner.lookup(
                 "controller:application"
               );
               modal.show(LoginModal, {
                 model: {
                   showNotActivated: (props) =>
-                    applicationRouter.send("showNotActivated", props),
+                    applicationRoute.send("showNotActivated", props),
                   showCreateAccount: (props) =>
-                    applicationRouter.send("showCreateAccount", props),
+                    applicationRoute.send("showCreateAccount", props),
                   canSignUp: applicationController.canSignUp,
                   flash: errorMsg,
                   flashType: className || "success",
@@ -116,21 +116,17 @@ export default {
               return;
             }
 
-            const skipConfirmation = siteSettings.auth_skip_create_confirm;
-            owner.lookup("controller:createAccount").setProperties({
-              accountEmail: options.email,
-              accountUsername: options.username,
-              accountName: options.name,
-              authOptions: EmberObject.create(options),
-              skipConfirmation,
-            });
-
-            next(() => {
-              showModal("create-account", {
-                modalClass: "create-account",
-                titleAriaElementId: "create-account-title",
-              });
-            });
+            next(() =>
+              modal.show(CreateAccount, {
+                model: {
+                  accountEmail: options.email,
+                  accountUsername: options.username,
+                  accountName: options.name,
+                  authOptions: EmberObject.create(options),
+                  skipConfirmation: siteSettings.auth_skip_create_confirm,
+                },
+              })
+            );
           }
         });
       });

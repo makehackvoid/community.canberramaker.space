@@ -1,20 +1,22 @@
+import { setupTest } from "ember-qunit";
+import { module, test } from "qunit";
+import { SELECTORS } from "discourse/lib/lightbox/constants";
+import { processHTML } from "discourse/lib/lightbox/process-html";
 import {
-  LIGHTBOX_IMAGE_FIXTURES,
   generateImageUploaderMarkup,
   generateLightboxMarkup,
+  LIGHTBOX_IMAGE_FIXTURES,
 } from "discourse/tests/helpers/lightbox-helpers";
-import { module, test } from "qunit";
-
-import { SELECTORS } from "discourse/lib/lightbox/constants";
 import domFromString from "discourse-common/lib/dom-from-string";
-import { processHTML } from "discourse/lib/lightbox/process-html";
 
-module("Unit | lib | Experimental lightbox | processHTML()", function () {
+module("Unit | lib | Experimental lightbox | processHTML()", function (hooks) {
+  setupTest(hooks);
+
   const wrap = domFromString(generateLightboxMarkup())[0];
   const imageUploaderWrap = domFromString(generateImageUploaderMarkup())[0];
   const selector = SELECTORS.DEFAULT_ITEM_SELECTOR;
 
-  test("returns the correct object from the proccessed element", async function (assert) {
+  test("returns the correct object from the processed element", async function (assert) {
     const container = wrap.cloneNode(true);
 
     const { items, startingIndex } = await processHTML({
@@ -80,7 +82,7 @@ module("Unit | lib | Experimental lightbox | processHTML()", function () {
     assert.strictEqual(items.length, 3);
   });
 
-  test("fallsback to src when no href is defined for fullsizeURL", async function (assert) {
+  test("falls back to src when no href is defined for fullsizeURL", async function (assert) {
     const container = wrap.cloneNode(true);
 
     container.querySelector("a").removeAttribute("href");

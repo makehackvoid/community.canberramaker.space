@@ -12,6 +12,9 @@
   --d-button-border-radius: var(--d-border-radius);
   --d-input-border-radius: var(--d-border-radius);
   --d-content-background: initial;
+  --d-font-family--monospace: Consolas, Menlo, Monaco, "Lucida Console",
+    "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Courier New", monospace;
 }
 
 // --------------------------------------------------
@@ -114,6 +117,10 @@ img {
   vertical-align: middle;
 }
 
+.svg-icon {
+  color: inherit;
+}
+
 // Forms
 // --------------------------------------------------
 
@@ -180,7 +187,8 @@ input[type="submit"] {
   }
 
   > input[type="text"],
-  > input[type="search"] {
+  > input[type="search"],
+  > input[type="password"] {
     display: inline-flex;
     flex: 1;
   }
@@ -188,6 +196,7 @@ input[type="submit"] {
   > .select-kit,
   > input[type="text"],
   > input[type="search"],
+  > input[type="password"],
   > label,
   > .btn,
   > .d-date-input {
