@@ -1,29 +1,30 @@
 # community.canberramaker.space
 
-## Development environment
+Forked from [discourse/discourse](https://github.com/discourse/discourse)
 
-We have a forked version of discourse/discourse as NixOS has opinions around `/bin/bash`. 
-Fork differs from upstream in `bin/docker/*` scripts by replacing shebang with `#!/usr/bin/env bash`
+MHV note: we have a forked version of discourse/discourse as NixOS has opinions around `/bin/bash`. Fork differs from upstream in `bin/docker/*` scripts by replacing shebang with `#!/usr/bin/env bash`.
+
+## Running the development environment
 
 ```
-d/boot_dev --init
+# Install dependencies for backend and frontend
+./d/boot_dev --init
     # wait while:
     #   - dependencies are installed,
     #   - the database is migrated, and
     #   - an admin user is created (you'll need to interact with this)
 
-# In one terminal:
-d/rails s
+# Start the backend:
+./d/rails s
 
-# And in a separate terminal
-d/ember-cli
+# Start the frontend:
+./d/ember-cli
 ```
 
-ember-cli bootstrap may do strange things with node_modules permissions so 
-may require to chown:
+### Troubleshooting
+
+ember-cli bootstrap may do strange things with node_modules permissions so may require to chown:
 
 ```
-sudo chown -R $USER node_modules 
+sudo chown -R $USER node_modules
 ```
-
-https://github.com/discourse/discourse
