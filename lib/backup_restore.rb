@@ -132,6 +132,14 @@ module BackupRestore
       password = ENV["PGPASSWORD"]
     end
 
+    if Rails.env.development?
+      username = "discourse"
+      password = "discourse"
+      config["host"] = "localhost"
+      config["port"] = 5432
+      config["database"] = "discourse_development"
+    end
+
     DatabaseConfiguration.new(
       config["backup_host"] || config["host"],
       config["backup_port"] || config["port"],
